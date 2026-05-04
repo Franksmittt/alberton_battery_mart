@@ -1,0 +1,37 @@
+Product photography added — 4 May 2026
+========================================
+
+All files live in: public/images/
+
+1. eco-plus-658-car-battery-alberton.jpg
+   Product: Eco Plus 658 (lead acid), id 324
+
+2. power-plus-658-car-battery-alberton.jpg
+   Product: Power Plus 658 (lead acid), id 222
+
+3. power-plus-658-efb-car-battery-alberton.jpg
+   Product: Power Plus 658 EFB, id 231
+
+4. power-plus-658-agm-car-battery-alberton.jpg
+   Product: Power Plus 658 AGM, id 236
+
+5. power-plus-660-agm-car-battery-alberton.jpg
+   Product: Power Plus 660 AGM, id 237
+
+6. power-plus-668-efb-car-battery-alberton.jpg
+   Product: Power Plus 668 EFB, id 232
+
+7. power-plus-668-agm-car-battery-alberton.jpg
+   Product: Power Plus 668 AGM, id 238
+
+Web paths (as in products data): /images/<filename above>
+
+Updated retail prices (sellingPrice_OUTPUT)
+-------------------------------------------
+Eco Plus 658 (324): R 2 100.00
+Power Plus 658 lead acid (222): R 2 450.00
+Power Plus 658 EFB (231): R 3 450.00
+Power Plus 658 AGM (236): R 4 450.00
+Power Plus 660 AGM (237): R 4 950.00
+Power Plus 668 EFB (232): R 2 950.00
+Power Plus 668 AGM (238): R 3 800.00
