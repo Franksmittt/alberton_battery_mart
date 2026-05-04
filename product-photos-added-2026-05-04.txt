@@ -55,6 +55,14 @@ Batch B — this upload session (chat), 4 May 2026
     Product: Power Plus 657 (lead acid), id 221 — replaced placeholder image
     Source image: Generated Image May 04, 2026 - 11_37AM.jpg
 
+14. power-plus-652-agm-car-battery-alberton.jpg
+    Product: Power Plus 652 AGM, id 235 — replaced placeholder image
+    Source image: Generated Image May 04, 2026 - 11_48AM.jpg
+
+15. power-plus-u1-250-lawnmower-battery-alberton.jpg
+    Product: Power Plus U1-250 / SMFU-1 (lawnmower / utility), id 337 — NEW product (not in catalogue before)
+    Source image: Generated Image May 04, 2026 - 12_09PM.jpg
+
 
 Updated retail prices (sellingPrice_OUTPUT)
 -------------------------------------------
@@ -74,3 +82,5 @@ Eco Plus 669 lead acid (327): R 1 950.00
 Power Plus 669 lead acid (225): R 2 300.00
 Eco Plus 12V 70Ah VRLA cyclic (336): R 2 100.00
 Power Plus 657 lead acid (221): R 1 950.00
+Power Plus 652 AGM (235): R 3 580.00
+Power Plus U1-250 / SMFU-1 lawnmower (337): R 1 150.00

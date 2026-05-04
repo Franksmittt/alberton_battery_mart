@@ -1640,9 +1640,9 @@
     "ahCapacity": 70,
     "cca": 760,
     "warrantyMonths": 24,
-    "sellingPrice_OUTPUT": "R 3 650.00",
+    "sellingPrice_OUTPUT": "R 3 580.00",
     "isAGM": true,
-    "imagePath": "/images/power_plus_652_agm.png",
+    "imagePath": "/images/power-plus-652-agm-car-battery-alberton.jpg",
     "popularFits": "Hyundai Tucson, VW Tiguan (Start/Stop)",
     "isScrapPrice": true,
     "seoSubtitle": "Power Plus AGM Battery (70Ah)",
@@ -2490,5 +2490,22 @@
     "widthMm": 168,
     "heightMm": 212.5,
     "weightKg": 27
+  },
+  {
+    "id": 337,
+    "name": "Power Plus U1-250 / SMFU-1",
+    "sku": "U1-250",
+    "category": "Deep Cycle",
+    "brandName": "Power Plus",
+    "ahCapacity": 30,
+    "cca": 350,
+    "warrantyMonths": 24,
+    "sellingPrice_OUTPUT": "R 1 150.00",
+    "isAGM": false,
+    "imagePath": "/images/power-plus-u1-250-lawnmower-battery-alberton.jpg",
+    "popularFits": "Ride-on lawnmowers, light utility equipment",
+    "isScrapPrice": true,
+    "seoSubtitle": "Power Plus Lawnmower Battery (30Ah)",
+    "seoDescription": "Power Plus U1-250 / SMFU-1: 12V 30Ah lead acid with 350 CCA for ride-on mowers and light utility gear. LHP (left hand positive) with fat lug terminals for secure fitment. 24-Month Warranty."
   }
 ]
