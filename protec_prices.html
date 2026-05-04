@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protec pricing calculator – ÷0.70, round to R50</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    p { color: #555; margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem 0.6rem; text-align: left; }
+    th { background: #1a1a1a; color: #fff; font-weight: 600; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    .calc { font-weight: 600; color: #0a0; }
+    .range { font-weight: 600; color: #333; }
+    .hint { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
+    h2 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: #333; }
+  </style>
+</head>
+<body>
+  <h1>Protec pricing calculator</h1>
+  <p>Data from <strong>Protec Batteries Wholesale Price List</strong>. <strong>Counter</strong>: Price ÷ 0.70, rounded to nearest R50. <strong>Wholesale</strong>: Price ÷ 0.85, rounded to nearest R50. Profit = selling price − Price (Incl VAT); GP% = Profit ÷ selling price.</p>
+
+  <div id="tables"></div>
+
+  <p class="hint">Counter: ÷ 0.70 → round R50. Wholesale: ÷ 0.85 → round R50. Profit = selling price − cost; GP% = profit ÷ selling price. Prices from ProtecBatteriesWholesalePriceList.html (January 2025).</p>
+
+  <script>
+    function parsePrice(s) {
+      if (typeof s === 'number' && !Number.isNaN(s)) return s;
+      if (s === '' || s == null) return NaN;
+      var n = String(s).replace(/\s/g, '').replace(/R|,/g, function (m) { return m === ',' ? '.' : ''; });
+      return parseFloat(n) || NaN;
+    }
+
+    function roundToNearest50(value) {
+      var n = Number(value);
+      return Number.isNaN(n) ? NaN : Math.round(n / 50) * 50;
+    }
+
+    function calcColumn(priceInclVat) {
+      var raw = parsePrice(priceInclVat) / 0.70;
+      if (Number.isNaN(raw)) return '–';
+      return 'R ' + roundToNearest50(raw).toLocaleString('en-ZA');
+    }
+
+    function calcColumnValue(priceInclVat) {
+      var raw = parsePrice(priceInclVat) / 0.70;
+      return Number.isNaN(raw) ? NaN : roundToNearest50(raw);
+    }
+
+    function profitColumn(priceInclVat) {
+      var cost = parsePrice(priceInclVat);
+      var sell = calcColumnValue(priceInclVat);
+      if (Number.isNaN(cost) || Number.isNaN(sell)) return '–';
+      var p = sell - cost;
+      return 'R ' + Math.round(p).toLocaleString('en-ZA');
+    }
+
+    function gpPercentColumn(priceInclVat) {
+      var cost = parsePrice(priceInclVat);
+      var sell = calcColumnValue(priceInclVat);
+      if (Number.isNaN(cost) || Number.isNaN(sell) || sell === 0) return '–';
+      var profit = sell - cost;
+      var gp = (profit / sell) * 100;
+      return gp.toFixed(1) + '%';
+    }
+
+    function wholesalePriceColumn(priceInclVat) {
+      var raw = parsePrice(priceInclVat) / 0.85;
+      if (Number.isNaN(raw)) return '–';
+      return 'R ' + roundToNearest50(raw).toLocaleString('en-ZA');
+    }
+
+    function wholesalePriceValue(priceInclVat) {
+      var raw = parsePrice(priceInclVat) / 0.85;
+      return Number.isNaN(raw) ? NaN : roundToNearest50(raw);
+    }
+
+    function wholesaleProfitColumn(priceInclVat) {
+      var cost = parsePrice(priceInclVat);
+      var sell = wholesalePriceValue(priceInclVat);
+      if (Number.isNaN(cost) || Number.isNaN(sell)) return '–';
+      var p = sell - cost;
+      return 'R ' + Math.round(p).toLocaleString('en-ZA');
+    }
+
+    function wholesaleGpPercentColumn(priceInclVat) {
+      var cost = parsePrice(priceInclVat);
+      var sell = wholesalePriceValue(priceInclVat);
+      if (Number.isNaN(cost) || Number.isNaN(sell) || sell === 0) return '–';
+      var profit = sell - cost;
+      var gp = (profit / sell) * 100;
+      return gp.toFixed(1) + '%';
+    }
+
+    // Data from ProtecBatteriesWholesalePriceList.html – Price (Incl VAT) and CCA
+    var GOLD = [
+      { size: '612', priceIncl: 'R840,00', ah: 44, cca: 410 },
+      { size: '615', priceIncl: 'R720,00', ah: 36, cca: 335 },
+      { size: '616', priceIncl: 'R720,00', ah: 36, cca: 335 },
+      { size: '616B', priceIncl: 'R720,00', ah: 36, cca: 335 },
+      { size: '618', priceIncl: 'R780,00', ah: 40, cca: 380 },
+      { size: '621', priceIncl: 'R990,00', ah: 60, cca: 450 },
+      { size: '622', priceIncl: 'R990,00', ah: 60, cca: 450 },
+      { size: '628', priceIncl: 'R910,00', ah: 55, cca: 520 },
+      { size: '630', priceIncl: 'R830,00', ah: 45, cca: 350 },
+      { size: '631', priceIncl: 'R830,00', ah: 45, cca: 350 },
+      { size: '634', priceIncl: 'R830,00', ah: 45, cca: 350 },
+      { size: '634ST', priceIncl: 'R830,00', ah: 45, cca: 350 },
+      { size: '636', priceIncl: 'R830,00', ah: 45, cca: 350 },
+      { size: '636ST', priceIncl: 'R830,00', ah: 45, cca: 350 },
+      { size: '638', priceIncl: 'R1 100,00', ah: 70, cca: 600 },
+      { size: '639', priceIncl: 'R1 100,00', ah: 70, cca: 600 },
+      { size: '643', priceIncl: 'R990,00', ah: 60, cca: 550 },
+      { size: '646', priceIncl: 'R990,00', ah: 60, cca: 550 },
+      { size: '647/651', priceIncl: 'R1 100,00', ah: 65, cca: 600 },
+      { size: '650', priceIncl: 'R1 450,00', ah: 90, cca: 720 },
+      { size: '650S', priceIncl: 'R1 450,00', ah: 90, cca: 720 },
+      { size: '652', priceIncl: 'R1 190,00', ah: 72, cca: 620 },
+      { size: '657', priceIncl: 'R1 190,00', ah: 72, cca: 620 },
+      { size: '658', priceIncl: 'R1 550,00', ah: 98, cca: 690 },
+      { size: '659', priceIncl: 'R1 440,00', ah: 80, cca: 630 },
+      { size: '668', priceIncl: 'R1 440,00', ah: 80, cca: 650 },
+      { size: '669', priceIncl: 'R1 440,00', ah: 80, cca: 650 },
+      { size: '674 TERM', priceIncl: 'R1 830,00', ah: 105, cca: 850 },
+      { size: '674 STUD', priceIncl: 'R1 830,00', ah: 105, cca: 950 },
+      { size: '680/3', priceIncl: 'R2 210,00', ah: 120, cca: 800 },
+      { size: '681/2', priceIncl: 'R2 210,00', ah: 120, cca: 800 },
+      { size: '688', priceIncl: 'R3 390,00', ah: 200, cca: 1200 },
+      { size: '689', priceIncl: 'R2 700,00', ah: 160, cca: 950 },
+      { size: '696', priceIncl: 'R2 850,00', ah: 180, cca: 900 }
+    ];
+
+    var PLATINUM = [
+      { size: '612', priceIncl: 'R910,00', ah: 50, cca: 500 },
+      { size: '615', priceIncl: 'R820,00', ah: 36, cca: 360 },
+      { size: '616', priceIncl: 'R820,00', ah: 36, cca: 360 },
+      { size: '616B', priceIncl: 'R820,00', ah: 36, cca: 360 },
+      { size: '618', priceIncl: 'R890,00', ah: 40, cca: 420 },
+      { size: '621', priceIncl: 'R1 120,00', ah: 50, cca: 420 },
+      { size: '622', priceIncl: 'R1 120,00', ah: 50, cca: 420 },
+      { size: '628', priceIncl: 'R920,00', ah: 50, cca: 520 },
+      { size: '634', priceIncl: 'R940,00', ah: 45, cca: 330 },
+      { size: '634ST', priceIncl: 'R940,00', ah: 45, cca: 330 },
+      { size: '636', priceIncl: 'R940,00', ah: 45, cca: 330 },
+      { size: '636ST', priceIncl: 'R940,00', ah: 45, cca: 330 },
+      { size: '638', priceIncl: 'R1 270,00', ah: 60, cca: 600 },
+      { size: '639', priceIncl: 'R1 270,00', ah: 70, cca: 600 },
+      { size: '643', priceIncl: 'R1 090,00', ah: 55, cca: 470 },
+      { size: '646', priceIncl: 'R1 090,00', ah: 55, cca: 470 },
+      { size: '647/651', priceIncl: 'R1 290,00', ah: 65, cca: 600 },
+      { size: '650', priceIncl: 'R1 690,00', ah: 80, cca: 700 },
+      { size: '650S', priceIncl: 'R1 690,00', ah: 80, cca: 700 },
+      { size: '652', priceIncl: 'R1 390,00', ah: 70, cca: 600 },
+      { size: '657', priceIncl: 'R1 390,00', ah: 72, cca: 630 },
+      { size: '658', priceIncl: 'R1 780,00', ah: 90, cca: 770 },
+      { size: '659', priceIncl: 'R1 630,00', ah: 80, cca: 650 },
+      { size: '668', priceIncl: 'R1 630,00', ah: 80, cca: 630 },
+      { size: '669', priceIncl: 'R1 630,00', ah: 85, cca: 900 }
+    ];
+
+    var EFB_AGM = [
+      { size: '621 EFB', priceIncl: 'R1 480,00', ah: 65, cca: 600 },
+      { size: '639 EFB', priceIncl: 'R1 750,00', ah: 72, cca: 720 },
+      { size: '646 EFB', priceIncl: 'R1 410,00', ah: 60, cca: 600 },
+      { size: '650S EFB', priceIncl: 'R2 060,00', ah: 85, cca: 780 },
+      { size: '652 EFB', priceIncl: 'R1 690,00', ah: 70, cca: 720 },
+      { size: '658 EFB', priceIncl: 'R2 550,00', ah: 90, cca: 885 },
+      { size: '668 EFB', priceIncl: 'R2 160,00', ah: 80, cca: 780 },
+      { size: '695 EFB', priceIncl: 'R4 680,00', ah: 235, cca: 1350 },
+      { size: '646 AGM', priceIncl: 'R2 190,00', ah: 60, cca: 700 },
+      { size: '652 AGM', priceIncl: 'R2 550,00', ah: 70, cca: 760 },
+      { size: '658 AGM', priceIncl: 'R3 020,00', ah: 95, cca: 900 },
+      { size: '660 AGM', priceIncl: 'R3 490,00', ah: 105, cca: 1000 },
+      { size: '668 AGM', priceIncl: 'R2 720,00', ah: 80, cca: 850 },
+      { size: '695 AGM', priceIncl: 'R6 690,00', ah: 220, cca: 1500 }
+    ];
+
+    var VRLA = [
+      { size: '7.2 AH', priceIncl: 'R215,00', ah: 7.2, cca: 'N/A' },
+      { size: '9.0 AH', priceIncl: 'R250,00', ah: 9, cca: 'N/A' },
+      { size: '18.0 AH', priceIncl: 'R590,00', ah: 18, cca: 'N/A' }
+    ];
+
+    function row(r) {
+      var cca = r.cca === 'N/A' ? 'N/A' : r.cca;
+      var calc = calcColumn(r.priceIncl);
+      var profit = profitColumn(r.priceIncl);
+      var gp = gpPercentColumn(r.priceIncl);
+      var wholesalePrice = wholesalePriceColumn(r.priceIncl);
+      var wholesaleProfit = wholesaleProfitColumn(r.priceIncl);
+      var wholesaleGp = wholesaleGpPercentColumn(r.priceIncl);
+      return '<tr><td>' + r.size + '</td><td class="num">' + cca + '</td><td class="num">' + r.ah + '</td><td class="num">' + r.priceIncl + '</td><td class="num calc">' + calc + '</td><td class="num calc">' + profit + '</td><td class="num calc">' + gp + '</td><td class="num calc">' + wholesalePrice + '</td><td class="num calc">' + wholesaleProfit + '</td><td class="num calc">' + wholesaleGp + '</td></tr>';
+    }
+
+    function table(title, rows) {
+      var body = rows.map(row).join('');
+      return '<h2>' + title + '</h2><table><thead><tr><th>Size</th><th class="num">CCA (SAE)</th><th class="num">Ah</th><th class="num">Price (Incl VAT)</th><th class="num">Counter Price Incl VAT</th><th class="num">Counter Profit Incl VAT</th><th class="num">Counter GP%</th><th class="num">Wholesale Price Incl VAT</th><th class="num">Wholesale Profit Incl VAT</th><th class="num">Wholesale GP%</th></tr></thead><tbody>' + body + '</tbody></table>';
+    }
+
+    document.getElementById('tables').innerHTML =
+      table('GOLD RANGE (12 month warranty)', GOLD) +
+      table('PLATINUM RANGE (24 month warranty)', PLATINUM) +
+      table('EFB & AGM RANGE (24 month warranty)', EFB_AGM) +
+      table('VRLA RANGE (06 month warranty)', VRLA);
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Modern browsers only - removes 11KB of legacy polyfills
+# This targets browsers that support modern JavaScript features
+>0.2%
+not dead
+not op_mini all
+Chrome >= 90
+Firefox >= 88
+Safari >= 14
+Edge >= 90
+iOS >= 14

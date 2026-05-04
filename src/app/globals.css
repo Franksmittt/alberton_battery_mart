@@ -1,0 +1,377 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 10% 12%;       /* Dark Grey (Background) */
+    --foreground: 0 0% 100%;       /* White (Text/Foreground) */
+
+    --primary: 0 90% 48%;          /* Bright Red */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --card: 220 10% 18%;           /* Slightly lighter dark grey for cards */
+    --card-foreground: 0 0% 100%;
+
+    --secondary: 210 10% 40%;      /* Mid Grey */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 10% 25%;
+    --muted-foreground: 210 10% 70%;
+
+    --accent: 210 10% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 210 10% 30%;
+    --input: 210 10% 30%;
+    --ring: 0 90% 48%;
+
+    --radius: 0.5rem;
+    --chart-1: 0 90% 48%;
+  }
+
+  .dark {
+    /* Since the light mode is already dark, we use the same palette */
+    --background: 220 10% 12%;
+    --foreground: 0 0% 100%;
+
+    --primary: 0 90% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --card: 220 10% 18%;
+    --card-foreground: 0 0% 100%;
+
+    --secondary: 210 10% 40%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 210 10% 25%;
+    --muted-foreground: 210 10% 70%;
+
+    --accent: 210 10% 40%;
+    --accent-foreground: 0 0% 100%;
+  }
+}
+
+/* Base styles for h1, p, etc. */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Electric Energy Hover Effects */
+@layer utilities {
+  /* Electric glow animation */
+  @keyframes electricGlow {
+    0%, 100% {
+      box-shadow: 0 0 5px hsl(0 90% 48% / 0.3),
+                   0 0 10px hsl(0 90% 48% / 0.2),
+                   0 0 15px hsl(0 90% 48% / 0.1),
+                   inset 0 0 10px hsl(0 90% 48% / 0.1);
+    }
+    50% {
+      box-shadow: 0 0 10px hsl(0 90% 48% / 0.6),
+                   0 0 20px hsl(0 90% 48% / 0.4),
+                   0 0 30px hsl(0 90% 48% / 0.3),
+                   inset 0 0 15px hsl(0 90% 48% / 0.2);
+    }
+  }
+
+  /* Electric pulse animation */
+  @keyframes electricPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Electric spark animation */
+  @keyframes electricSpark {
+    0% {
+      opacity: 0;
+      transform: translateY(0) scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-10px) scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20px) scale(0);
+    }
+  }
+
+  /* Electric border animation */
+  @keyframes electricBorder {
+    0%, 100% {
+      border-color: hsl(0 90% 48% / 0.3);
+    }
+    25% {
+      border-color: hsl(0 90% 48% / 0.8);
+    }
+    50% {
+      border-color: hsl(0 90% 48% / 1);
+    }
+    75% {
+      border-color: hsl(0 90% 48% / 0.8);
+    }
+  }
+
+  /* Icon electric animation */
+  @keyframes iconElectric {
+    0%, 100% {
+      filter: drop-shadow(0 0 2px hsl(0 90% 48%)) drop-shadow(0 0 4px hsl(0 90% 48% / 0.5));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 0 6px hsl(0 90% 48%)) drop-shadow(0 0 12px hsl(0 90% 48% / 0.8));
+      transform: scale(1.1);
+    }
+  }
+
+  /* Lightning flash animation */
+  @keyframes lightningFlash {
+    0%, 100% {
+      opacity: 0;
+      filter: blur(8px);
+    }
+    5% {
+      opacity: 0.8;
+      filter: blur(2px);
+    }
+    10% {
+      opacity: 0.2;
+      filter: blur(6px);
+    }
+    15% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    40% {
+      opacity: 0;
+      filter: blur(8px);
+    }
+  }
+
+  /* Electric grid pulse */
+  @keyframes energyGridPulse {
+    0% {
+      opacity: 0.1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+
+  /* Electric bolt animation */
+  @keyframes electricBolt {
+    0% {
+      transform: scaleY(0) translateY(10px);
+      opacity: 0;
+    }
+    30% {
+      transform: scaleY(1.1) translateY(-10px);
+      opacity: 1;
+    }
+    60% {
+      transform: scaleY(0.8) translateY(-30px);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scaleY(0) translateY(-60px);
+      opacity: 0;
+    }
+  }
+
+  /* Electric card hover effect */
+  .electric-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card)) 100%);
+  }
+
+  .electric-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      hsl(0 90% 48% / 0.15) 50%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+  }
+
+  .electric-card:hover {
+    animation: electricGlow 1.5s ease-in-out infinite;
+    border-color: hsl(0 90% 48% / 0.8);
+    transform: translateY(-6px) scale(1.02);
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(220 10% 22%) 100%);
+  }
+
+  .electric-card:hover::before {
+    opacity: 1;
+    animation: electricSpark 0.8s ease-out;
+  }
+
+  .electric-card:hover .electric-icon {
+    animation: iconElectric 1s ease-in-out infinite;
+    color: hsl(0 90% 55%);
+  }
+
+  .electric-card:hover h3 {
+    color: hsl(0 90% 48%);
+    text-shadow: 0 0 8px hsl(0 90% 48% / 0.5);
+  }
+
+  /* Electric spark particles */
+  .electric-card::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 4px;
+    height: 4px;
+    background: hsl(0 90% 48%);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 
+      20px 30px 0 0 hsl(0 90% 48%),
+      -15px 25px 0 0 hsl(0 90% 48%),
+      25px -20px 0 0 hsl(0 90% 48%),
+      -20px -15px 0 0 hsl(0 90% 48%),
+      15px -25px 0 0 hsl(0 90% 48%),
+      -25px 15px 0 0 hsl(0 90% 48%);
+    transition: opacity 0.3s;
+  }
+
+  .electric-card:hover::after {
+    opacity: 1;
+    animation: electricSpark 1.2s ease-out infinite;
+  }
+
+  /* Additional electric energy lines */
+  .electric-card {
+    background-image: 
+      linear-gradient(0deg, transparent 0%, hsl(0 90% 48% / 0.03) 50%, transparent 100%),
+      linear-gradient(90deg, transparent 0%, hsl(0 90% 48% / 0.03) 50%, transparent 100%);
+    background-size: 100% 2px, 2px 100%;
+    background-position: 0 0, 0 0;
+    background-repeat: no-repeat;
+  }
+
+  .electric-card:hover {
+    background-image: 
+      linear-gradient(0deg, transparent 0%, hsl(0 90% 48% / 0.2) 50%, transparent 100%),
+      linear-gradient(90deg, transparent 0%, hsl(0 90% 48% / 0.2) 50%, transparent 100%);
+    animation: electricGlow 1.5s ease-in-out infinite, electricPulse 2s ease-in-out infinite;
+  }
+
+  /* Electric bolt elements inside cards */
+  .electric-bolt {
+    position: absolute;
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(180deg, hsl(0 90% 70%), hsl(0 90% 40%));
+    top: 10px;
+    right: 20px;
+    opacity: 0;
+    transform-origin: center;
+    box-shadow: 0 0 10px hsl(0 90% 48% / 0.7);
+  }
+
+  .electric-card:hover .electric-bolt {
+    opacity: 1;
+    animation: electricBolt 1s ease-out infinite;
+  }
+
+  .electric-card .electric-bolt:nth-child(2) {
+    right: auto;
+    left: 25px;
+    height: 60px;
+    animation-delay: 0.2s;
+  }
+
+  .electric-card .electric-bolt:nth-child(3) {
+    right: 50%;
+    height: 50px;
+    animation-delay: 0.4s;
+  }
+
+  /* Section level electric ambience */
+  .electric-section {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at top, hsl(0 90% 20% / 0.15), transparent 40%),
+                radial-gradient(circle at 20% 20%, hsl(200 50% 20% / 0.25), transparent 45%),
+                radial-gradient(circle at 80% 0%, hsl(0 100% 25% / 0.25), transparent 60%),
+                #020202;
+  }
+
+  .electric-section::before,
+  .electric-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .electric-section::before {
+    background-image: linear-gradient(120deg, transparent 0%, hsl(0 90% 40% / 0.08) 50%, transparent 100%);
+    mix-blend-mode: screen;
+    animation: lightningFlash 6s infinite;
+  }
+
+  .electric-section::after {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 40px,
+      hsl(0 0% 100% / 0.02) 40px,
+      hsl(0 0% 100% / 0.02) 41px
+    );
+    opacity: 0.2;
+    animation: energyGridPulse 5s infinite;
+  }
+
+  .electric-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, hsl(0 0% 100% / 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.2;
+    animation: energyGridPulse 8s ease-in-out infinite;
+  }
+
+  .electric-lightning {
+    position: absolute;
+    width: 2px;
+    height: 160px;
+    background: linear-gradient(180deg, hsl(0 0% 100% / 0.9), transparent);
+    filter: drop-shadow(0 0 10px hsl(0 90% 60% / 0.7));
+    opacity: 0;
+    animation: lightningFlash 7s infinite;
+  }
+
+  .electric-lightning.lightning-one { left: 20%; top: 10%; animation-delay: 0s; }
+  .electric-lightning.lightning-two { right: 25%; top: 5%; height: 200px; animation-delay: 1.5s; }
+  .electric-lightning.lightning-three { left: 55%; top: 15%; height: 140px; animation-delay: 3s; }
+}
