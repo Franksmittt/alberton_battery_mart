@@ -2,7 +2,7 @@
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { GTM_ID } from "@/lib/gtm-constants";
+import { GTM_ID, hasValidGtmId } from "@/lib/gtm-constants";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { MobileStickyFooter } from "@/components/layout/MobileStickyFooter";
@@ -154,6 +154,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const shouldLoadGtm = hasValidGtmId;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -166,15 +168,17 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        {/* --- NEW: Add GTM <noscript> tag --- */}
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        {/* --- GTM fallback for no-JS browsers --- */}
+        {shouldLoadGtm && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
 
         {/* --- Google Ads (gtag.js) - Deferred for performance --- */}
         <Script
@@ -191,18 +195,65 @@ export default function RootLayout({
         </Script>
 
         {/* --- Google Tag Manager - Deferred for performance --- */}
-        <Script id="google-tag-manager" strategy="lazyOnload">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${GTM_ID}');
-          `}
-        </Script>
+        {shouldLoadGtm && (
+          <Script id="google-tag-manager" strategy="lazyOnload">
+            {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `}
+          </Script>
+        )}
         <Script id="abm-log-context" strategy="afterInteractive">
           {`
             window.__abmEnv = '${ENVIRONMENT}';
+          `}
+        </Script>
+        <Script id="abm-link-click-tracking" strategy="afterInteractive">
+          {`
+            (function() {
+              if (typeof window === "undefined" || typeof document === "undefined") return;
+              window.dataLayer = window.dataLayer || [];
+
+              function push(eventName, href) {
+                window.dataLayer.push({
+                  event: eventName,
+                  href: href || "",
+                  page_path: window.location.pathname
+                });
+              }
+
+              document.addEventListener("click", function(event) {
+                var target = event.target;
+                if (!target || !target.closest) return;
+                var link = target.closest("a");
+                if (!link) return;
+
+                var href = link.getAttribute("href") || "";
+                if (!href) return;
+
+                if (href.indexOf("tel:") === 0) {
+                  push("phone_call_click", href);
+                  return;
+                }
+
+                if (href.indexOf("https://wa.me/") === 0 || href.indexOf("https://api.whatsapp.com/") === 0) {
+                  push("whatsapp_click", href);
+                  return;
+                }
+
+                if (href.indexOf("google.com/maps") !== -1 || href.indexOf("maps.google.com") !== -1) {
+                  push("map_directions_click", href);
+                  return;
+                }
+
+                if (href.indexOf("mailto:") === 0) {
+                  push("email_click", href);
+                }
+              }, true);
+            })();
           `}
         </Script>
 

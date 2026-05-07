@@ -1,132 +1,266 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Car, Search, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Simplified vehicle data - in production, this would come from ACES database
-const YEARS = Array.from({ length: 25 }, (_, i) => 2024 - i);
-const MAKES = [
-  'Toyota', 'Ford', 'Volkswagen', 'BMW', 'Mercedes-Benz', 'Audi',
-  'Nissan', 'Hyundai', 'Kia', 'Mazda', 'Honda', 'Suzuki', 'Opel',
-  'Renault', 'Peugeot', 'Land Rover', 'Jeep', 'Mitsubishi', 'Isuzu'
-];
-
-// Basic model mapping - in production, this would be a full ACES database
-const MODELS_BY_MAKE: Record<string, string[]> = {
-  'Toyota': ['Hilux', 'Fortuner', 'Corolla', 'Yaris', 'Land Cruiser', 'Prado', 'Rav4', 'Camry'],
-  'Ford': ['Ranger', 'Everest', 'Figo', 'EcoSport', 'Fiesta', 'Focus'],
-  'Volkswagen': ['Polo', 'Polo Vivo', 'Amarok', 'Golf', 'Tiguan', 'Passat'],
-  'BMW': ['3 Series', '5 Series', 'X3', 'X5', '1 Series'],
-  'Mercedes-Benz': ['C-Class', 'E-Class', 'GLC', 'GLE', 'A-Class'],
-  'Audi': ['A3', 'A4', 'Q3', 'Q5', 'Q7'],
-  'Nissan': ['NP200', 'Navara', 'X-Trail', 'Qashqai', 'Almera'],
-  'Hyundai': ['Grand i10', 'i20', 'Tucson', 'Creta', 'Kona'],
-  'Kia': ['Picanto', 'Rio', 'Sportage', 'Seltos'],
-  'Honda': ['Civic', 'Accord', 'CR-V', 'BR-V'],
-  'Suzuki': ['Swift', 'Vitara', 'Jimny', 'SX4'],
-  'Opel': ['Corsa', 'Astra', 'Crossland'],
-  'Renault': ['Clio', 'Sandero', 'Duster', 'Koleos'],
-  'Peugeot': ['208', '308', '3008'],
-  'Land Rover': ['Discovery', 'Range Rover Sport', 'Defender'],
-  'Jeep': ['Wrangler', 'Cherokee', 'Grand Cherokee'],
-  'Mitsubishi': ['Triton', 'Pajero', 'Outlander'],
-  'Isuzu': ['KB', 'D-Max', 'MU-X']
+type BatteryRecommendation = {
+  battery_code: string;
+  replacement_type: string;
+  technology: string;
+  description: string;
+  image_link: string;
+  brand_options?: BrandOption[];
 };
+
+type BrandOption = {
+  id: number;
+  name: string;
+  brand_name: string;
+  sku: string;
+  category: string;
+  price: string;
+  warranty_months: number;
+  ah_capacity: number;
+  cca: number;
+  technology: string;
+  product_url: string;
+  image_path: string;
+};
+
+const DEFAULT_VEHICLE_TYPES = [
+  'Passenger & SUV',
+  'Commercial',
+  'Light Commercial',
+  'Tractors',
+];
 
 interface YMMSearchWidgetProps {
   variant?: 'hero' | 'compact';
-  onVehicleSelect?: (vehicle: { year: string; make: string; model: string }) => void;
+  onVehicleSelect?: (vehicle: {
+    vehicleType: string;
+    manufacturer: string;
+    year: string;
+    model: string;
+  }) => void;
 }
 
 export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearchWidgetProps) {
-  const router = useRouter();
+  const [vehicleType, setVehicleType] = useState<string>('');
+  const [manufacturer, setManufacturer] = useState<string>('');
   const [year, setYear] = useState<string>('');
-  const [make, setMake] = useState<string>('');
   const [model, setModel] = useState<string>('');
-  const [availableModels, setAvailableModels] = useState<string[]>([]);
+  const [vehicleTypes, setVehicleTypes] = useState<string[]>([]);
+  const [manufacturers, setManufacturers] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
+  const [models, setModels] = useState<string[]>([]);
+  const [recommendations, setRecommendations] = useState<BatteryRecommendation[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [optionsLoading, setOptionsLoading] = useState(false);
+  const [error, setError] = useState<string>('');
 
-  const handleMakeChange = (selectedMake: string) => {
-    setMake(selectedMake);
-    setModel(''); // Reset model when make changes
-    setAvailableModels(MODELS_BY_MAKE[selectedMake] || []);
+  const fetchItems = async (url: string): Promise<string[]> => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed request: ${response.status}`);
+    const payload = await response.json();
+    return payload.items || [];
   };
 
-  const handleSearch = () => {
-    if (year && make && model) {
-      const vehicle = { year, make, model };
-      
-      // Store in sessionStorage for "My Garage" functionality
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('selectedVehicle', JSON.stringify(vehicle));
+  useEffect(() => {
+    setOptionsLoading(true);
+    fetchItems('/api/willard-fitment?level=vehicle-types')
+      .then((items) => {
+        setVehicleTypes(items.length ? items : DEFAULT_VEHICLE_TYPES);
+      })
+      .catch(() => {
+        setVehicleTypes(DEFAULT_VEHICLE_TYPES);
+        setError('Live fitment API failed. Using fallback vehicle types.');
+      })
+      .finally(() => setOptionsLoading(false));
+  }, []);
+
+  const handleVehicleTypeChange = async (value: string) => {
+    setVehicleType(value);
+    setManufacturer('');
+    setYear('');
+    setModel('');
+    setManufacturers([]);
+    setYears([]);
+    setModels([]);
+    setRecommendations([]);
+    setError('');
+    if (!value) return;
+    try {
+      setOptionsLoading(true);
+      const items = await fetchItems(
+        `/api/willard-fitment?level=manufacturers&vehicleType=${encodeURIComponent(value)}`
+      );
+      setManufacturers(items);
+      if (!items.length) {
+        setError(`No manufacturers loaded yet for "${value}".`);
       }
-      
-      // Call callback if provided
-      if (onVehicleSelect) {
-        onVehicleSelect(vehicle);
-      }
-      
-      // Navigate to vehicle-specific page or filtered results
-      const searchQuery = `${year} ${make} ${model}`;
-      router.push(`/products/results?q=${encodeURIComponent(searchQuery)}&vehicle=${encodeURIComponent(`${year}-${make}-${model}`)}`);
+    } catch {
+      setError('Could not load manufacturers for the selected vehicle type.');
+    } finally {
+      setOptionsLoading(false);
     }
   };
 
-  const isComplete = year && make && model;
+  const handleManufacturerChange = async (value: string) => {
+    setManufacturer(value);
+    setYear('');
+    setModel('');
+    setYears([]);
+    setModels([]);
+    setRecommendations([]);
+    setError('');
+    if (!value || !vehicleType) return;
+    try {
+      setOptionsLoading(true);
+      const items = await fetchItems(
+        `/api/willard-fitment?level=years&vehicleType=${encodeURIComponent(
+          vehicleType
+        )}&manufacturer=${encodeURIComponent(value)}`
+      );
+      setYears(items);
+    } catch {
+      setError('Could not load years for the selected manufacturer.');
+    } finally {
+      setOptionsLoading(false);
+    }
+  };
+
+  const handleYearChange = async (value: string) => {
+    setYear(value);
+    setModel('');
+    setModels([]);
+    setRecommendations([]);
+    setError('');
+    if (!value || !vehicleType || !manufacturer) return;
+    try {
+      setOptionsLoading(true);
+      const items = await fetchItems(
+        `/api/willard-fitment?level=models&vehicleType=${encodeURIComponent(
+          vehicleType
+        )}&manufacturer=${encodeURIComponent(manufacturer)}&year=${encodeURIComponent(value)}`
+      );
+      setModels(items);
+    } catch {
+      setError('Could not load models for the selected year.');
+    } finally {
+      setOptionsLoading(false);
+    }
+  };
+
+  const handleSearch = async () => {
+    if (vehicleType && manufacturer && year && model) {
+      const vehicle = { vehicleType, manufacturer, year, model };
+      setLoading(true);
+      setError('');
+      try {
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('selectedVehicle', JSON.stringify(vehicle));
+        }
+        if (onVehicleSelect) {
+          onVehicleSelect(vehicle);
+        }
+
+        const response = await fetch(
+          `/api/willard-fitment?level=batteries&vehicleType=${encodeURIComponent(
+            vehicleType
+          )}&manufacturer=${encodeURIComponent(manufacturer)}&year=${encodeURIComponent(
+            year
+          )}&model=${encodeURIComponent(model)}`
+        );
+        if (!response.ok) throw new Error('Failed to load recommendations');
+        const payload = await response.json();
+        setRecommendations(payload.items || []);
+      } catch {
+        setError('Could not load battery recommendations right now.');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const isComplete = vehicleType && manufacturer && year && model;
 
   if (variant === 'compact') {
     return (
       <Card className="w-full bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 text-white">
         <CardContent className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
             <div>
-              <label htmlFor="compact-year" className="sr-only">Vehicle Year</label>
+              <label htmlFor="compact-vt" className="sr-only">Vehicle Type</label>
+              <select
+                id="compact-vt"
+                value={vehicleType}
+                onChange={(e) => handleVehicleTypeChange(e.target.value)}
+                aria-label="Select vehicle type"
+                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
+              >
+                <option value="">Vehicle Type</option>
+                {vehicleTypes.map((item) => (
+                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div>
+              <label htmlFor="compact-manufacturer" className="sr-only">Manufacturer</label>
+              <select
+                id="compact-manufacturer"
+                value={manufacturer}
+                onChange={(e) => handleManufacturerChange(e.target.value)}
+                disabled={!vehicleType}
+                aria-label="Select manufacturer"
+                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
+              >
+                <option value="">
+                  {vehicleType ? 'Manufacturer' : 'Select Vehicle Type First'}
+                </option>
+                {manufacturers.map((item) => (
+                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
+                ))}
+              </select>
+            </div>
+            
+            <div>
+              <label htmlFor="compact-year" className="sr-only">Year Model</label>
               <select
                 id="compact-year"
                 value={year}
-                onChange={(e) => setYear(e.target.value)}
-                aria-label="Select vehicle year"
-                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
+                onChange={(e) => handleYearChange(e.target.value)}
+                disabled={!manufacturer}
+                aria-label="Select year model"
+                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full"
               >
-                <option value="">Year</option>
-                {YEARS.map(y => (
-                  <option key={y} value={y.toString()} className="bg-[#060606]">{y}</option>
+                <option value="">
+                  {manufacturer ? 'Year Model' : 'Select Manufacturer First'}
+                </option>
+                {years.map((item) => (
+                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
                 ))}
               </select>
             </div>
-            
+
             <div>
-              <label htmlFor="compact-make" className="sr-only">Vehicle Make</label>
-              <select
-                id="compact-make"
-                value={make}
-                onChange={(e) => handleMakeChange(e.target.value)}
-                aria-label="Select vehicle make"
-                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
-              >
-                <option value="">Make</option>
-                {MAKES.map(m => (
-                  <option key={m} value={m} className="bg-[#060606]">{m}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="compact-model" className="sr-only">Vehicle Model</label>
+              <label htmlFor="compact-model" className="sr-only">Model</label>
               <select
                 id="compact-model"
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
-                disabled={!make}
-                aria-label="Select vehicle model"
+                disabled={!year}
+                aria-label="Select model"
                 className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full"
               >
-                <option value="">Model</option>
-                {availableModels.map(m => (
-                  <option key={m} value={m} className="bg-[#060606]">{m}</option>
+                <option value="">
+                  {year ? 'Model' : 'Select Year Model First'}
+                </option>
+                {models.map((item) => (
+                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
                 ))}
               </select>
             </div>
@@ -139,7 +273,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               className="w-full h-12 font-bold"
             >
               <Search className="h-5 w-5 mr-2" />
-              Find Battery
+              {loading ? 'Loading...' : 'Find Battery'}
             </Button>
           </div>
         </CardContent>
@@ -162,39 +296,63 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
         </p>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-2">
-            <label htmlFor="hero-year" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
-              Year
+            <label htmlFor="hero-vt" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
+              Vehicle Type
             </label>
             <select
-              id="hero-year"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              aria-label="Select vehicle year"
+              id="hero-vt"
+              value={vehicleType}
+              onChange={(e) => handleVehicleTypeChange(e.target.value)}
+              aria-label="Select vehicle type"
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all"
             >
-              <option value="" className="bg-[#060606]">Select Year</option>
-              {YEARS.map(y => (
-                <option key={y} value={y.toString()} className="bg-[#060606]">{y}</option>
+              <option value="" className="bg-[#060606]">Select Vehicle Type</option>
+              {vehicleTypes.map((item) => (
+                <option key={item} value={item} className="bg-[#060606]">{item}</option>
               ))}
             </select>
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="hero-make" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
-              Make
+            <label htmlFor="hero-manufacturer" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
+              Manufacturer
             </label>
             <select
-              id="hero-make"
-              value={make}
-              onChange={(e) => handleMakeChange(e.target.value)}
-              aria-label="Select vehicle make"
+              id="hero-manufacturer"
+              value={manufacturer}
+              onChange={(e) => handleManufacturerChange(e.target.value)}
+              aria-label="Select manufacturer"
+              disabled={!vehicleType}
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all"
             >
-              <option value="" className="bg-[#060606]">Select Make</option>
-              {MAKES.map(m => (
-                <option key={m} value={m} className="bg-[#060606]">{m}</option>
+              <option value="" className="bg-[#060606]">
+                {vehicleType ? 'Select Manufacturer' : 'Select Vehicle Type First'}
+              </option>
+              {manufacturers.map((item) => (
+                <option key={item} value={item} className="bg-[#060606]">{item}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="hero-year" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
+              Year Model
+            </label>
+            <select
+              id="hero-year"
+              value={year}
+              onChange={(e) => handleYearChange(e.target.value)}
+              aria-label="Select year model"
+              disabled={!manufacturer}
+              className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <option value="" className="bg-[#060606]">
+                {manufacturer ? 'Select Year Model' : 'Select Manufacturer First'}
+              </option>
+              {years.map((item) => (
+                <option key={item} value={item} className="bg-[#060606]">{item}</option>
               ))}
             </select>
           </div>
@@ -207,20 +365,20 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               id="hero-model"
               value={model}
               onChange={(e) => setModel(e.target.value)}
-              disabled={!make}
+              disabled={!year}
               aria-label="Select vehicle model"
               className={cn(
                 "w-full h-14 px-4 rounded-lg border text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all",
-                !make 
+                !year
                   ? "border-white/10 bg-white/5 opacity-50 cursor-not-allowed" 
                   : "border-white/20 bg-white/5"
               )}
             >
               <option value="" className="bg-[#060606]">
-                {make ? 'Select Model' : 'Select Make First'}
+                {year ? 'Select Model' : 'Select Year Model First'}
               </option>
-              {availableModels.map(m => (
-                <option key={m} value={m} className="bg-[#060606]">{m}</option>
+              {models.map((item) => (
+                <option key={item} value={item} className="bg-[#060606]">{item}</option>
               ))}
             </select>
           </div>
@@ -234,8 +392,78 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
           className="w-full h-16 text-xl font-black shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Zap className="h-6 w-6 mr-3" />
-          Find My Battery
+          {loading ? 'Finding Batteries...' : 'Find My Battery'}
         </Button>
+
+        {error && (
+          <p className="text-red-400 text-sm font-medium">{error}</p>
+        )}
+
+        {optionsLoading && (
+          <p className="text-white/70 text-sm font-medium">Loading selector options...</p>
+        )}
+
+        {recommendations.length > 0 && (
+          <div className="space-y-3 pt-2">
+            <h3 className="text-xl font-bold text-white">Recommended Size & Brand Options</h3>
+            <div className="grid gap-3">
+              {recommendations.map((rec) => (
+                <div
+                  key={`${rec.battery_code}-${rec.replacement_type}-${rec.technology}`}
+                  className="rounded-lg border border-white/15 bg-white/5 p-4"
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-block rounded bg-battery/20 px-2 py-1 text-sm font-bold text-battery">
+                      {rec.battery_code}
+                    </span>
+                    {rec.replacement_type && (
+                      <span className="inline-block rounded bg-white/10 px-2 py-1 text-xs font-semibold text-white/90">
+                        {rec.replacement_type}
+                      </span>
+                    )}
+                    {rec.technology && (
+                      <span className="inline-block rounded bg-white/10 px-2 py-1 text-xs font-semibold text-white/90">
+                        {rec.technology}
+                      </span>
+                    )}
+                  </div>
+                  {rec.description && (
+                    <p className="text-sm text-white/80 mt-3">{rec.description}</p>
+                  )}
+
+                  {rec.brand_options && rec.brand_options.length > 0 && (
+                    <div className="mt-4 space-y-2">
+                      <p className="text-sm font-semibold text-white/90">
+                        Available brands for size {rec.battery_code}:
+                      </p>
+                      <div className="grid gap-2">
+                        {rec.brand_options.map((option) => (
+                          <a
+                            key={`${rec.battery_code}-${option.id}`}
+                            href={option.product_url}
+                            className="block rounded border border-white/15 bg-white/5 px-3 py-2 hover:border-battery/60 transition-colors"
+                          >
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-sm font-bold text-battery">{option.brand_name}</span>
+                                <span className="text-sm text-white/90">{option.sku}</span>
+                                <span className="text-xs text-white/70">{option.technology}</span>
+                              </div>
+                              <span className="text-sm font-semibold text-white">{option.price}</span>
+                            </div>
+                            <p className="text-xs text-white/65 mt-1">
+                              {option.ah_capacity}Ah | {option.cca} CCA | {option.warranty_months} month warranty
+                            </p>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         
         <div className="flex items-center justify-center gap-6 pt-2 text-sm text-white/60">
           <div className="flex items-center gap-2">

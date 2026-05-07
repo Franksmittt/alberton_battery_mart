@@ -1,4 +1,5 @@
-// C:\Users\User1\abm2\src\lib\gtm-constants.ts
+// src/lib/gtm-constants.ts
+// Set NEXT_PUBLIC_GTM_ID in your deployment environment.
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-XXXXXXX";
 
-// IMPORTANT: Replace GTM-XXXXXXX with your actual Google Tag Manager ID
-export const GTM_ID = 'GTM-XXXXXXX';
+export const hasValidGtmId = GTM_ID !== "GTM-XXXXXXX";

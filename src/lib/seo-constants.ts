@@ -35,5 +35,21 @@ export const DEFAULT_OPENING_HOURS = [
   },
 ];
 
-export const SERVICE_AREAS = ["Alberton", "New Redruth", "Meyersdal"];
+export const SERVICE_AREAS = [
+  "Alberton",
+  "Alberton Central",
+  "New Redruth",
+  "Meyersdal",
+  "Brackenhurst",
+  "Brackendowns",
+  "Verwoerdpark",
+  "Randhart",
+  "Florentia",
+  "Raceview",
+  "South Crest",
+  "Alberante",
+  "Alrode",
+  "Mayberry Park",
+  "General Alberts Park",
+];
 

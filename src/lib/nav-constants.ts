@@ -12,6 +12,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Batteries" },
+  { href: "/local", label: "Service Areas" },
   { href: "/golf-cart-batteries", label: "Golf Cart Batteries" },
   { href: "/services", label: "Fitment & Testing" },
   { href: "/contact", label: "Contact Us" },

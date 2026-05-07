@@ -46,6 +46,7 @@ export function MobileStickyFooter() {
             variant="battery"
             size="sm"
             className="flex-1 h-12 font-bold"
+            trackingId="mobile-sticky-call"
           >
             <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center">
               <Phone className="h-5 w-5 mr-2" />
@@ -59,6 +60,7 @@ export function MobileStickyFooter() {
             variant="secondary"
             size="sm"
             className="flex-1 h-12 bg-green-600 hover:bg-green-700 text-white font-bold"
+            trackingId="mobile-sticky-whatsapp"
           >
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER_LINK}?text=Hi, I need help with a battery.`}
@@ -77,6 +79,7 @@ export function MobileStickyFooter() {
             variant="outline"
             size="sm"
             className="flex-1 h-12 border-white/20 bg-white/5 text-white hover:bg-white/10"
+            trackingId="mobile-sticky-map"
           >
             <a
               href={googleMapsUrl}

@@ -24,6 +24,8 @@ const Footer = () => {
         { href: "/products/type/deep-cycle", label: "Deep Cycle & Solar" }, 
         { href: "/golf-cart-batteries", label: "Golf Cart Batteries" },
         { href: "/services", label: "Mobile Fitment" },
+        { href: "/local", label: "All Service Areas" },
+        { href: "/services/mobile-battery-replacement/brackenhurst", label: "Brackenhurst Dispatch" },
         { href: "/testing", label: "Free Battery Testing" },
       ],
     },
@@ -115,7 +117,7 @@ const Footer = () => {
               <span>{ADDRESS}</span>
             </p>
 
-            <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white shadow-lg">
+            <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white shadow-lg" trackingId="footer-whatsapp">
               <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2">
                 <MessageSquare className="h-5 w-5" />
                 <span>Send WhatsApp</span>

@@ -46,7 +46,7 @@ const Header = () => {
             <SearchSheetTrigger />
 
             {/* Call Us Button */}
-            <Button asChild variant="battery" size="sm">
+            <Button asChild variant="battery" size="sm" trackingId="header-call">
               <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center space-x-2">
                  <Phone className="h-4 w-4" />
                 <span>Call Us</span> 
@@ -54,7 +54,7 @@ const Header = () => {
             </Button>
 
             {/* WhatsApp Button */}
-            <Button asChild variant="secondary" size="sm" className="bg-green-600 hover:bg-green-700 text-white">
+            <Button asChild variant="secondary" size="sm" className="bg-green-600 hover:bg-green-700 text-white" trackingId="header-whatsapp">
                <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
                 <MessageSquare className="h-4 w-4" />
                 <span>WhatsApp</span>

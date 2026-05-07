@@ -5,6 +5,7 @@ import { ALL_POSTS } from '@/data/blog-posts'
 import { getAllProductSlugs } from '@/data/product-detail'
 import { getAllVehicleSlugs } from '@/data/vehicle-fitment'
 import { getAllServicePages } from '@/data/service-pages'
+import { getAllLocalAreas } from '@/data/local-areas'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
@@ -27,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/testing',
     '/fitment',
     '/deep-cycle', // This is the old deep-cycle page, let's keep it
+    '/local',
     '/local/alberton-central',
     '/local/meyersdal',
     '/local/new-redruth',
@@ -109,6 +111,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  const localAreaPages = getAllLocalAreas().map((area) => ({
+    url: `${baseUrl}/local/${area.slug}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   return [
     ...staticPages,
     ...productPages,
@@ -118,5 +127,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...productDetailPages,
     ...vehiclePages,
     ...servicePages,
+    ...localAreaPages,
   ];
 }

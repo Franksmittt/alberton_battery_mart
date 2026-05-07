@@ -1,5 +1,6 @@
 // src/data/service-pages.ts
 import { BASE_URL, SERVICE_AREAS } from "@/lib/seo-constants";
+import { getAllLocalAreas } from "@/data/local-areas";
 
 export type ServiceCTA = {
   label: string;
@@ -39,6 +40,98 @@ export type ServicePageContent = {
   relatedVehicles?: { label: string; slug: string }[];
   relatedProducts?: { label: string; slug: string }[];
 };
+
+const LOCAL_MOBILE_SERVICE_SLUGS = [
+  "brackenhurst",
+  "brackendowns",
+  "randhart",
+  "verwoerdpark",
+  "alberante",
+  "mayberry-park",
+  "eden-park",
+];
+
+const generatedLocalMobileServicePages: ServicePageContent[] = getAllLocalAreas()
+  .filter((area) => LOCAL_MOBILE_SERVICE_SLUGS.includes(area.slug))
+  .map((area) => ({
+    serviceSlug: "mobile-battery-replacement",
+    areaSlug: area.slug,
+    heroEyebrow: `Suburb Dispatch: ${area.name}`,
+    title: `Mobile Battery Replacement in ${area.name}`,
+    description: `On-site battery replacement, alternator checks, and dispatch support across ${area.name}. Typical response window: ${area.responseWindow}.`,
+    keywords: [
+      ...area.focusKeywords,
+      `battery replacement ${area.name}`,
+      `mobile battery ${area.name}`,
+      `car battery near me ${area.name}`,
+    ],
+    intro: `Our mobile team covers ${area.name} with suburb-specific dispatch routing and on-site diagnostics. We confirm battery failure first, then fit the correct replacement to keep you moving.`,
+    coverage: [
+      `Typical response window in ${area.name}: ${area.responseWindow}`,
+      `Frequent routes: ${area.roads.join(", ")}`,
+      `Landmark zones serviced: ${area.landmarks.join(", ")}`,
+    ],
+    benefits: [
+      {
+        title: "Fast Local Dispatch",
+        description:
+          "Suburb-aware routing reduces wait time and helps us reach high-priority no-start incidents quickly.",
+      },
+      {
+        title: "Diagnostics Before Replacement",
+        description:
+          "Every callout includes battery and charging-system checks to avoid unnecessary replacements.",
+      },
+      {
+        title: "On-Site Fitment + Warranty",
+        description:
+          "We fit on location, verify charging health, and provide proper warranty documentation immediately.",
+      },
+    ],
+    process: [
+      {
+        title: "01 / Booking",
+        description:
+          "Share your vehicle details and suburb location so we dispatch with the right battery spec.",
+      },
+      {
+        title: "02 / Arrival & Testing",
+        description:
+          "Our technician runs a load test and charging-system check before final replacement.",
+      },
+      {
+        title: "03 / Fitment & Handover",
+        description:
+          "Battery is fitted, terminals secured, system verified, and warranty details handed over.",
+      },
+    ],
+    faqs: area.faq,
+    ctas: [
+      {
+        label: `Call for ${area.name} Dispatch`,
+        href: "tel:0101096211",
+      },
+      {
+        label: "WhatsApp Your Location",
+        href: `https://wa.me/27823046926?text=Hi,%20I%20need%20battery%20help%20in%20${encodeURIComponent(area.name)}.`,
+        variant: "secondary",
+      },
+    ],
+    schema: {
+      serviceType: `Mobile Battery Replacement ${area.name}`,
+      offers: "On-site battery diagnostics and replacement fitment",
+      serviceAreas: [area.name],
+    },
+    relatedVehicles: [
+      { label: "Toyota Hilux battery support", slug: "toyota/hilux-3-0-d4d" },
+      { label: "Ford Ranger battery support", slug: "ford/ranger-2-2-tdci" },
+      { label: "VW Polo Vivo battery support", slug: "volkswagen/polo-vivo" },
+    ],
+    relatedProducts: [
+      { label: "Willard 652", slug: "willard-652" },
+      { label: "Exide 668P", slug: "exide-668p" },
+    ],
+  }));
 
 const SERVICES: ServicePageContent[] = [
   {
@@ -523,6 +616,7 @@ const SERVICES: ServicePageContent[] = [
       { label: "Willard 658", slug: "willard-658" },
     ],
   },
+  ...generatedLocalMobileServicePages,
 ];
 
 export function getServicePage(serviceSlug: string, areaSlug: string) {

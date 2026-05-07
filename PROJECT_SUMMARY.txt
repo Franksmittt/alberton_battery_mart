@@ -6,7 +6,7 @@ Project Name: Alberton Battery Mart (abm2)
 Framework: Next.js 14 (App Router)
 Language: TypeScript
 Styling: Tailwind CSS with shadcn/ui components
-Status: Production Ready - 100% Front-End Complete
+Status: Active Development - SEO + Fitment Enhancements (May 2026)
 
 ================================================================================
                               PROJECT OVERVIEW
@@ -22,31 +22,110 @@ Key Business Details:
 - WhatsApp: 27823046926
 - Address: 28 St Columb Rd, New Redruth, Alberton, 1450
 - Hours: Mon-Fri 08:00 AM - 5:00 PM, Sat 08:00 AM - 12:00 PM
-- Service Areas: Alberton, New Redruth, Meyersdal
+- Service Areas: Alberton + expanded suburb coverage (dynamic local pages)
 
 RECENT UPDATES:
 
-1. Google Ads Optimization (Completed):
-   - Added /products/size/[code] route for battery size filtering
-   - Added /vehicles/[make] route for vehicle make index pages
-   - Added /emergency-battery-replacement route for conversion-focused landing page
+1. Willard Fitment Selector Integration (May 2026):
+   - Added CSV-driven API route: /api/willard-fitment
+   - Implemented 4-step cascading selector on homepage (Vehicle Type -> Manufacturer -> Year -> Model)
+   - Added robust CSV parsing, in-memory index cache, and file mtime-based refresh logic
+   - Added fallback selector behavior and loading/error states for better UX during partial data availability
 
-2. Golf Cart Battery Section (NEW - January 2025):
-   - Added /golf-cart-batteries main landing page
-   - Added /golf-cart-batteries/lithium-conversion page
-   - Added /golf-cart-batteries/lead-acid page
-   - Integrated into header navigation, footer, and homepage service grid
-   - Comprehensive content focusing on Trojan and Enertec brands
-   - Full SEO optimization with FAQ schemas, breadcrumbs, and structured data
+2. Multi-Brand Match Results by Battery Size (May 2026):
+   - Selector now maps fitment battery code (e.g., 621) to in-catalog product options
+   - Returns brand options with pricing/spec snippets (currently based on available catalog entries)
+   - Supports mixed options such as Standard/EFB/AGM where present in product catalog
+   - Front-end now displays "Recommended Size & Brand Options" instead of raw single-line output
 
-3. Complete SEO Overhaul (January 2025):
-   - Added Twitter cards to ALL pages (100% coverage)
-   - Added structured data (Service, Organization, ContactPage, ProductCollection schemas)
-   - Added BreadcrumbList schemas to all major pages
-   - Enhanced Open Graph with locale (en_ZA) and siteName on all pages
-   - Standardized ProductCollection schemas on category pages
-   - SEO rating improved from 7.5/10 to 9.5/10
-   - Build status: ✅ PASSING (261 static pages generated)
+3. Local SEO Expansion (May 2026):
+   - Added dynamic local hub route: /local
+   - Added dynamic suburb route: /local/[area]
+   - Created structured local-area data source for suburb-specific content generation
+   - Expanded service area targeting across Alberton suburbs and linked coverage in sitemap/nav/footer
+
+4. GTM + Conversion Event Instrumentation (May 2026):
+   - GTM loading now controlled via NEXT_PUBLIC_GTM_ID with safe defaults
+   - Added standardized CTA tracking via Button trackingId
+   - Added click tracking events for phone, WhatsApp, map directions, and email actions
+
+5. Technical SEO/Indexation Controls (May 2026):
+   - Updated sitemap generation to include new local routes
+   - Updated robots rules to reduce crawl waste on parameterized URLs
+   - Added keyword-to-route execution map documentation for content/internal linking rollout
+
+TODAY'S SEO IMPLEMENTATION LOG (MAY 2026 - COMPLETE):
+
+A) Local Programmatic SEO Build-Out:
+   - Added new data model file: src/data/local-areas.ts
+   - Implemented dynamic local route: src/app/local/[area]/page.tsx
+   - Implemented local hub route: src/app/local/page.tsx
+   - Added internal nearby-area linking between suburb pages
+   - Added local page metadata generation with suburb-specific titles/descriptions
+   - Added local page JSON-LD:
+     * LocalBusiness schema
+     * Service schema
+     * FAQPage schema
+     * BreadcrumbList schema
+     * ItemList schema (hub)
+
+B) Suburb Coverage Expansion:
+   - Expanded service-area targeting list in src/lib/seo-constants.ts
+   - Added/targeted Alberton suburb coverage including:
+     Alberton, Alberton Central, New Redruth, Meyersdal, Brackenhurst,
+     Brackendowns, Verwoerdpark, Randhart, Florentia, Raceview,
+     South Crest, Alberante, Alrode, Mayberry Park, General Alberts Park
+   - Routing + sitemap now aligned with expanded suburb strategy
+
+C) Services SEO Route Depth:
+   - Updated src/app/services/page.tsx to strengthen areaServed schema usage
+   - Added direct links to suburb service routes:
+     /services/mobile-battery-replacement/[suburb]
+   - Improved internal-link architecture from services -> local/suburb intent pages
+
+D) Navigation + Crawl Path Improvements:
+   - Added "Service Areas" entry to main navigation via src/lib/nav-constants.ts
+   - Updated Header/Footer to expose local pages and service-area routes
+   - Improved discoverability for deep local pages from global layout components
+
+E) Indexation + Crawl Budget Controls:
+   - Updated src/app/sitemap.ts to include /local and /local/[area] pages
+   - Updated src/app/robots.ts disallow rules for low-value parameterized URLs:
+     * /*?sort=*
+     * /*?filter=*
+     * /*?page=*
+     * /*?utm_*
+
+F) Analytics + Conversion Tracking Instrumentation:
+   - GTM environment support in src/lib/gtm-constants.ts:
+     * NEXT_PUBLIC_GTM_ID usage
+     * hasValidGtmId guard
+   - Conditional GTM script + noscript injection in src/app/layout.tsx
+   - Added click-event tracking hooks for:
+     * phone_call_click (tel:)
+     * whatsapp_click (wa.me)
+     * map_directions_click (google maps links)
+     * email_click (mailto:)
+   - Added CTA-level event tracking in src/components/ui/button.tsx:
+     * event: cta_click
+     * tracking_id payload support
+
+G) Fitment Selector SEO/CRO Support:
+   - Added data-backed fitment API: src/app/api/willard-fitment/route.ts
+   - Added cascading YMM UX in src/components/content/YMMSearchWidget.tsx
+   - Added multi-brand result mapping by matched battery code (e.g., 621 family)
+   - Improved UX state messaging (loading/errors/fallbacks) for lower abandonment
+
+H) SEO Ops Documentation Added:
+   - SEO_KEYWORD_ROUTE_MAP.md (keyword -> route execution matrix)
+   - Updated README.md with current architecture, route structure, and GTM setup notes
+   - Added WILLARD_SCRAPER_USAGE.md to operationalize fitment-data refresh workflow
+
+I) Current Operational Notes:
+   - Dev server may auto-shift ports if 3000 is occupied (e.g., localhost:3006)
+   - /api/willard-fitment must be tested against active dev port
+   - Multi-brand output depends on SKU coverage in product catalog dataset
+   - GTM production activation still requires real NEXT_PUBLIC_GTM_ID value
 
 ================================================================================
                                   PAGES
@@ -135,9 +214,8 @@ CORE PAGES (Public-Facing):
    - /blog/[slug] - Individual blog post pages
 
 9. LOCAL PAGES (Location-Based SEO)
-   - /local/alberton-central - Alberton Central location page
-   - /local/new-redruth - New Redruth location page
-   - /local/meyersdal - Meyersdal location page
+   - /local - Service area hub page
+   - /local/[area] - Dynamic suburb location pages (expanded Alberton coverage)
 
 10. FITMENT PAGE (/fitment)
     - Vehicle fitment information
@@ -194,6 +272,7 @@ API ROUTES:
 - /api/feeds/local.xml - Local XML feed
 - /api/feeds/primary.xml - Primary XML feed
 - /api/products - Products API endpoint
+- /api/willard-fitment - Vehicle fitment selector API (CSV + cache + indexed lookups)
 - /api/revalidate - Revalidation endpoint
 
 UTILITY PAGES:
@@ -1115,10 +1194,10 @@ BREAKDOWN BY CATEGORY:
 ================================================================================
 
 Generated: 2024
-Last Updated: January 2025 (Golf Cart Section + Complete SEO Overhaul)
+Last Updated: May 2026 (Fitment Selector + Multi-Brand Mapping + Local SEO Expansion)
 Project: Alberton Battery Mart (abm2)
 Framework: Next.js 14.2.3 App Router
-Status: Production Ready - 100% Complete
-Build Status: ✅ PASSING (261 static pages)
-SEO Rating: 9.5/10
+Status: Active Development - Production Site with Ongoing Enhancements
+Build Status: ✅ Lint passing on current branch (existing legacy warning in admin hook dependency)
+SEO Rating: 9.5/10+ trajectory (local coverage + route depth expanded)
 

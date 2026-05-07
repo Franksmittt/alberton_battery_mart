@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import { SERVICE_AREAS } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -74,20 +75,10 @@ export default function ServicesPage() {
       "telephone": "+27101096211",
       "url": "https://www.albertonbatterymart.co.za"
     },
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Alberton"
-      },
-      {
-        "@type": "City",
-        "name": "New Redruth"
-      },
-      {
-        "@type": "City",
-        "name": "Meyersdal"
-      }
-    ],
+    "areaServed": SERVICE_AREAS.map((name) => ({
+      "@type": "City",
+      name,
+    })),
     "description": "Fast mobile battery replacement and fitment service in Alberton, New Redruth, and Meyersdal. Free alternator testing with every callout.",
     "offers": {
       "@type": "Offer",
@@ -116,6 +107,11 @@ export default function ServicesPage() {
             <span>Call Us: {EMERGENCY_PHONE_DISPLAY}</span> 
           </a>
         </Button>
+        <div>
+          <Button asChild variant="secondary">
+            <Link href="/local">View suburb service pages</Link>
+          </Button>
+        </div>
       </div>
 
       {/* SECTION 2: MOBILE SERVICE LOGISTICS (Logistical USP) */}
@@ -145,7 +141,7 @@ export default function ServicesPage() {
 
           <div className="flex items-center space-x-3 text-lg font-semibold text-foreground">
             <MapPin className="h-5 w-5 text-battery" />
-            <p>Focused Callout Zones: New Redruth, Meyersdal, Alberton Central.</p>
+            <p>Focused Callout Zones: New Redruth, Meyersdal, Alberton Central, Brackenhurst, Brackendowns, Randhart, Verwoerdpark, and Alrode.</p>
           </div>
           <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white">
              <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer">
@@ -179,6 +175,39 @@ export default function ServicesPage() {
       <Separator className="bg-border" />
 
       <AtomicAnswers variant="services" />
+
+      <Separator className="bg-border" />
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold text-foreground text-center">
+          Suburb dispatch pages
+        </h2>
+        <p className="text-center text-muted-foreground max-w-3xl mx-auto">
+          Explore suburb-specific service pages for faster booking and locally relevant
+          support details.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { name: "Brackenhurst", slug: "brackenhurst" },
+            { name: "Brackendowns", slug: "brackendowns" },
+            { name: "Randhart", slug: "randhart" },
+            { name: "Verwoerdpark", slug: "verwoerdpark" },
+            { name: "Alberante", slug: "alberante" },
+            { name: "Mayberry Park", slug: "mayberry-park" },
+            { name: "Eden Park", slug: "eden-park" },
+          ].map((suburb) => (
+            <Link
+              key={suburb.slug}
+              href={`/services/mobile-battery-replacement/${suburb.slug}`}
+              className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+            >
+              <p className="font-semibold text-foreground">
+                Mobile battery replacement in {suburb.name}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* SECTION 3: DIAGNOSTICS & WARRANTY (Authority) */}
       <div className="grid lg:grid-cols-12 gap-10">

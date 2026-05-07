@@ -121,6 +121,31 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
         }
       : null;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: BASE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${BASE_URL}/services`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: entry.title,
+        item: `${BASE_URL}/services/${entry.serviceSlug}/${entry.areaSlug}`,
+      },
+    ],
+  };
+
   const atomicAnswers = [
     {
       question: "How fast can you reach me?",
@@ -143,6 +168,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
     <div className="container py-16 space-y-16">
       {schema && <JsonLd data={schema} id="service-schema" />}
       {faqSchema && <JsonLd data={faqSchema} id="service-faq-schema" />}
+      <JsonLd data={breadcrumbSchema} id="service-breadcrumb-schema" />
 
       <section className="text-center space-y-4">
         {entry.heroEyebrow && (

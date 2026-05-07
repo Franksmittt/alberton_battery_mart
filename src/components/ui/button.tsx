@@ -52,6 +52,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     if (trackingId && typeof window !== "undefined") {
       const log = () => {
+        ;(window as any).dataLayer = (window as any).dataLayer || []
+        ;(window as any).dataLayer.push({
+          event: "cta_click",
+          tracking_id: trackingId,
+        })
         if ((window as any).__abmEnv === "development") {
           console.info("[button-click]", trackingId)
         }
