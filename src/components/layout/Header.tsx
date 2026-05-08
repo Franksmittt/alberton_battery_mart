@@ -1,71 +1,194 @@
-// C:\Users\User1\abm2\src\components\layout\Header.tsx
+"use client";
+
 import Link from "next/link";
-import { Battery, Phone, MessageSquare } from "lucide-react";
+import { ChevronDown, Menu, Phone, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "@/components/layout/MobileNav";
-import SearchSheetTrigger from "@/components/layout/SearchSheetTrigger";
-// --- FIX: Import navItems from the central constants file ---
-import { navItems } from "@/lib/nav-constants";
+import { useState } from "react";
 
 const Header = () => {
-  // FINAL VERIFIED CONTACT DETAILS & FORMATTING
-  const PRIMARY_PHONE = "010 109 6211"; // Formatted for display
-  const WHATSAPP_NUMBER_LINK = "27823046926"; // Unformatted for wa.me link
+  const PRIMARY_PHONE_LINK = "0101096211";
+  const WHATSAPP_NUMBER_LINK = "27823046926";
+  const DIRECTIONS_LINK =
+    "https://www.google.com/maps/dir/?api=1&destination=28+St+Columb+Rd,+New+Redruth,+Alberton,+1450";
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    // FIX: Ensure 'fixed' position and high 'z-50' stacking context
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
-      <div className="container flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-
-        {/* Logo and Brand Name */}
-        <Link href="/" className="flex items-center space-x-3">
-          <Battery className="h-6 w-6 text-battery-foreground bg-battery rounded-full p-1" />
-          <span className="text-xl font-extrabold tracking-tight text-foreground">
-             ALBERTON <span className="text-battery">BATTERY MART</span>
-          </span>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex space-x-6">
-          {/* --- FIX: Links are now mapped from the imported array --- */}
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-foreground transition-colors hover:text-battery font-medium"
-            >
-              {item.label}
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-white shadow-sm">
+      <div className="hidden lg:block">
+        <div className="bg-[#121212] text-white">
+          <div className="container h-16 grid grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-8">
+            <Link href="/" className="flex items-center font-black text-xl tracking-tight whitespace-nowrap">
+              Alberton{" "}
+              <span className="battery-neon mx-1" data-text="Battery">
+                Battery
+              </span>{" "}
+              Mart
             </Link>
-          ))}
-        </nav>
 
-        {/* Desktop CTAs and Search Trigger */}
-        <div className="hidden md:flex items-center space-x-3">
-            
-            {/* Search Trigger */}
-            <SearchSheetTrigger />
+            <p className="justify-self-center text-white/85 text-sm xl:text-base font-extrabold uppercase tracking-[0.12em] whitespace-nowrap">
+              Mobile Fitment. Honest Testing. Warranty Backed.
+            </p>
 
-            {/* Call Us Button */}
-            <Button asChild variant="battery" size="sm" trackingId="header-call">
-              <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center space-x-2">
-                 <Phone className="h-4 w-4" />
-                <span>Call Us</span> 
-              </a>
-            </Button>
+            <div className="justify-self-end flex items-center gap-2 relative">
+              <Button
+                asChild
+                size="sm"
+                trackingId="header-call-top"
+                className="h-8 min-w-[92px] bg-red-600 hover:bg-red-700 text-white font-extrabold"
+              >
+                <a href={`tel:${PRIMARY_PHONE_LINK}`}>Call</a>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                trackingId="header-whatsapp-top"
+                className="h-8 min-w-[92px] bg-[#25D366] text-white border border-[#25D366] hover:bg-[#1ebe5a] font-extrabold"
+              >
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                trackingId="header-directions-top"
+                className="h-8 min-w-[92px] bg-white text-red-600 border border-red-600 hover:bg-red-50 font-extrabold"
+              >
+                <a
+                  href={DIRECTIONS_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Directions
+                </a>
+              </Button>
+              <button
+                type="button"
+                aria-label="Open search"
+                onClick={() => setIsSearchOpen((prev) => !prev)}
+                className="h-8 w-8 rounded-md border border-white/20 bg-white/5 text-white inline-flex items-center justify-center hover:bg-white/10 transition-colors"
+              >
+                <Search className="h-4 w-4" />
+              </button>
 
-            {/* WhatsApp Button */}
-            <Button asChild variant="secondary" size="sm" className="bg-green-600 hover:bg-green-700 text-white" trackingId="header-whatsapp">
-               <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-                <MessageSquare className="h-4 w-4" />
-                <span>WhatsApp</span>
-              </a>
-            </Button>
+              {isSearchOpen && (
+                <div className="absolute right-0 top-[calc(100%+10px)] z-[70]">
+                  <form
+                    action="/products/results"
+                    method="get"
+                    className="w-[360px] rounded-xl border border-white/20 bg-[#171717] p-2 shadow-2xl"
+                  >
+                    <div className="flex items-center gap-2">
+                      <input
+                        autoFocus
+                        type="search"
+                        name="q"
+                        placeholder="Search by model, size or brand..."
+                        className="h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 text-sm text-white placeholder:text-white/60 outline-none focus:border-white/35"
+                      />
+                      <button
+                        type="submit"
+                        className="h-10 px-4 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm font-bold"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
+
+          </div>
         </div>
 
-        {/* Mobile Navigation Trigger */}
-         <div className="md:hidden flex items-center space-x-2">
-            <SearchSheetTrigger />
+        <div className="bg-slate-100 border-t border-slate-800/30">
+          <div className="container h-12 px-4 sm:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-6">
+            <div className="justify-self-start relative group">
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 font-bold text-slate-900 hover:text-red-600 text-sm"
+                aria-haspopup="menu"
+              >
+                <Menu className="h-4 w-4" />
+                All Categories
+                <ChevronDown className="h-4 w-4" />
+              </button>
+
+              <div className="absolute left-0 top-full mt-2 w-[680px] rounded-xl border border-slate-200 bg-white p-5 shadow-2xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150">
+                <div className="grid grid-cols-3 gap-6 text-sm">
+                  <div className="space-y-2">
+                    <p className="font-black text-slate-900 uppercase text-xs tracking-wide">Shop By Type</p>
+                    <Link href="/products/type/automotive" className="block text-slate-700 hover:text-red-600">Automotive Batteries</Link>
+                    <Link href="/products/type/performance" className="block text-slate-700 hover:text-red-600">Start/Stop AGM & EFB</Link>
+                    <Link href="/products/type/truck-commercial" className="block text-slate-700 hover:text-red-600">Commercial & Fleet</Link>
+                    <Link href="/products/type/deep-cycle" className="block text-slate-700 hover:text-red-600">Deep Cycle & Solar</Link>
+                    <Link href="/products/type/motorcycle" className="block text-slate-700 hover:text-red-600">Motorcycle Batteries</Link>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-black text-slate-900 uppercase text-xs tracking-wide">Popular Sizes</p>
+                    <Link href="/products/size/621" className="block text-slate-700 hover:text-red-600">Size 621</Link>
+                    <Link href="/products/size/646" className="block text-slate-700 hover:text-red-600">Size 646</Link>
+                    <Link href="/products/size/652" className="block text-slate-700 hover:text-red-600">Size 652</Link>
+                    <Link href="/products/size/658" className="block text-slate-700 hover:text-red-600">Size 658</Link>
+                    <Link href="/products/size/668" className="block text-slate-700 hover:text-red-600">Size 668</Link>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-black text-slate-900 uppercase text-xs tracking-wide">Services</p>
+                    <Link href="/services/mobile-battery-replacement/alberton" className="block text-slate-700 hover:text-red-600">Mobile Replacement</Link>
+                    <Link href="/services/free-battery-testing/alberton" className="block text-slate-700 hover:text-red-600">Free Battery Testing</Link>
+                    <Link href="/services/emergency-jump-start/alberton" className="block text-slate-700 hover:text-red-600">Emergency Jump Start</Link>
+                    <Link href="/local" className="block text-slate-700 hover:text-red-600">Service Areas</Link>
+                    <Link href="/products" className="block font-bold text-red-600 hover:text-red-700">View Full Catalog</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <nav className="justify-self-center flex items-center gap-6 text-sm font-medium text-slate-700">
+              <Link href="/products/type/automotive" className="hover:text-red-600">Automotive Batteries</Link>
+              <Link href="/products/type/truck-commercial" className="hover:text-red-600">Commercial & Fleet</Link>
+              <Link href="/products/type/performance" className="hover:text-red-600">Start/Stop (AGM)</Link>
+              <Link href="/products" className="hover:text-red-600">Accessories</Link>
+            </nav>
+
+            <div className="justify-self-end flex items-center gap-4 text-sm font-semibold text-slate-700">
+              <Link href="/products/brand/power-plus" className="hover:text-red-600">
+                PowerPlus
+              </Link>
+              <Link href="/products/brand/eco-plus" className="hover:text-red-600">
+                Ecoplus
+              </Link>
+              <Link href="/products/brand/exide" className="hover:text-red-600">
+                Exide
+              </Link>
+              <Link href="/products/brand/willard" className="hover:text-red-600">
+                Willard
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:hidden">
+        <div className="container h-16 px-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center font-black text-lg text-slate-900 tracking-tight">
+            ABM
+          </Link>
+          <div className="flex items-center gap-2">
+            <a
+              href={`tel:${PRIMARY_PHONE_LINK}`}
+              className="inline-flex items-center gap-1 rounded-md bg-red-600 px-3 py-2 text-xs font-bold text-white"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              Call
+            </a>
             <MobileNav />
+          </div>
         </div>
       </div>
     </header>

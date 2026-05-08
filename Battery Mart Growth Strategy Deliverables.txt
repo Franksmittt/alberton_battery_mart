@@ -1,0 +1,834 @@
+﻿Conversion and Operations Intelligence Report for Alberton Battery Mart
+Executive Summary
+The South African automotive battery aftermarket operates within a highly volatile intersection of macroeconomic pressures, critical infrastructure failures, and acute consumer anxiety. Sustained grid instability and rolling blackouts—colloquially known as load shedding—have fundamentally altered battery lifecycle dynamics. The inability of standard lead-acid batteries to achieve full recharge cycles between outages drastically accelerates capacity loss, reducing the traditional three-to-five-year lifespan and driving an unprecedented volume of premature failures.1 Concurrently, the operational geography of Alberton, Gauteng, presents severe security challenges. Key logistical arteries, including the N12, R59, and Swartkoppies Road off-ramps, are documented hijacking hotspots.5 Consequently, a roadside breakdown in these areas elevates consumer intent from a mere commercial transaction to a critical safety emergency.
+For Alberton Battery Mart, achieving category leadership and maximizing gross margin efficiency requires an operational pivot. The digital infrastructure cannot function merely as a passive retail catalog; it must operate as a high-velocity, conversion-first dispatch terminal. This transformation demands a precise synthesis of local search engine optimization (SEO), conversion rate optimization (CRO), and rigorous margin-aware inventory management.7 With prominent national competitors such as AutoZone entering business rescue proceedings 9, a strategic vacuum exists for an agile, highly localized operator to dominate the East Rand market nodes of Meyersdal, Alrode, New Redruth, and Brackenhurst.10
+This exhaustive intelligence report details five implementation-grade deliverables engineered for immediate deployment within a modern Next.js and Tailwind CSS technology stack, tracked via Google Analytics 4 (GA4) and Google Tag Manager (GTM). Every architectural recommendation, data schema, and psychological trigger outlined herein is directly tethered to increasing conversion rates, elevating lead quality, compressing first-response speed, and expanding gross margins per dispatch. By leveraging localized search intent, institutional trust signaling through Retail Motor Industry (RMI) and Tyre Equipment Parts Association (TEPA) accreditations 13, and dynamic margin-preservation logic, Alberton Battery Mart will establish an unassailable competitive moat.
+DELIVERABLE 1: operations_sla.csv Specification
+To execute dynamic dispatch optimization and inject honest, real-time Estimated Time of Arrival (ETA) messaging into the frontend Next.js architecture, Alberton Battery Mart requires a rigorous operational data schema. The operations_sla.csv framework functions as the central nervous system for Service Level Agreement (SLA) monitoring. By ingesting this data into a centralized warehouse, the marketing engine can autonomously adjust Google Local Services Ads (LSA) bidding based on real-time fleet availability, ensuring marketing spend is never wasted on leads that cannot be serviced within a safe, conversion-optimal timeframe.
+Schema Definition and Data Quality Rules
+The database schema is designed to capture every inflection point in the customer journey, from initial digital contact to final physical fitment. This granular tracking is essential for calculating operational friction and revenue velocity.
+
+
+Field Name
+	Data Type
+	Description and Business Logic
+	Data Quality Rule and Constraints
+	lead_id
+	UUID
+	Cryptographic unique identifier for the conversion event.
+	Must be unique, non-null, and universally compliant.
+	datetime_received
+	TIMESTAMP
+	Exact time the lead entered the system (Africa/Johannesburg timezone).
+	Must be valid ISO 8601 format to ensure correct chronologies.
+	suburb
+	VARCHAR
+	Localized territory designation (e.g., Meyersdal, Alrode, Brackenhurst).10
+	Must strictly match a predefined Alberton geographical taxonomy.
+	source_channel
+	VARCHAR
+	The digital origin of the lead triggering the interaction.
+	Enum restricted to: whatsapp, call, form, gmb, lsa.
+	intent_type
+	VARCHAR
+	The psychological and situational state of the user at the moment of contact.
+	Enum restricted to: emergency, research, fleet.
+	first_response_seconds
+	INTEGER
+	Time elapsed from initial receipt to human or automated acknowledgment.
+	Must be   . Null if the lead was completely unresponded.
+	dispatch_assigned_seconds
+	INTEGER
+	Time elapsed from initial receipt to the physical allocation of a technician.
+	Must be   . Null if a vehicle was never dispatched.
+	arrival_seconds
+	INTEGER
+	Time elapsed from initial receipt to the vehicle arriving at the customer location.
+	Must be   . Null if the technician failed to arrive.
+	job_completed
+	BOOLEAN
+	Binary indicator of a successful fitment and processed payment.
+	True/False binary flag.
+	conversion_outcome
+	VARCHAR
+	The final commercial status of the generated lead.
+	Enum restricted to: won, lost, no_show, cancelled.
+	revenue_zar
+	DECIMAL(10,2)
+	Total invoice value including the callout fee, battery price, and VAT.
+	Must be   .
+	gross_margin_zar
+	DECIMAL(10,2)
+	Total revenue minus the landed cost of the battery unit and direct dispatch fuel.
+	Can be negative if the job was a loss leader or failed.
+	failure_reason
+	VARCHAR
+	Categorical reason for a lost conversion or failed fitment job.
+	Enum: price, eta_too_long, alternator_issue, no_stock, null.
+	technician_id
+	VARCHAR
+	Unique string identifier for the dispatched staff member.
+	Must be a valid foreign key linking to the HR personnel table.
+	vehicle_used
+	VARCHAR
+	Unique string identifier for the specific dispatch unit (e.g., Unit-1-Bakkie).
+	Must be a valid foreign key linking to the fleet management table.
+	after_hours
+	BOOLEAN
+	Flag indicating if the lead occurred outside standard 08:00–17:00 operating hours.
+	True/False binary flag.
+	Realistic Sample Rows for the Alberton Territory
+The following dataset provides twenty realistic operational scenarios representing the diverse demands of the Alberton territory. This includes retail emergency roadside assistance at critical intersections, residential callouts in affluent suburbs like Meyersdal, and heavy commercial fleet intent in the Alrode industrial basin.12
+lead_id
+	datetime_received
+	suburb
+	source_channel
+	intent_type
+	first_response_seconds
+	dispatch_assigned_seconds
+	arrival_seconds
+	job_completed
+	conversion_outcome
+	revenue_zar
+	gross_margin_zar
+	failure_reason
+	technician_id
+	vehicle_used
+	after_hours
+	L-001
+	2026-05-01 08:15:00
+	Meyersdal
+	whatsapp
+	emergency
+	45
+	120
+	1800
+	TRUE
+	won
+	2400.00
+	850.00
+	null
+	T-04
+	Unit-1
+	FALSE
+	L-002
+	2026-05-01 09:30:00
+	Alrode
+	call
+	fleet
+	15
+	300
+	2400
+	TRUE
+	won
+	6700.00
+	2100.00
+	null
+	T-02
+	Unit-2
+	FALSE
+	L-003
+	2026-05-01 10:45:00
+	Brackenhurst
+	form
+	research
+	900
+	null
+	null
+	FALSE
+	lost
+	0.00
+	0.00
+	price
+	null
+	null
+	FALSE
+	L-004
+	2026-05-01 11:20:00
+	New Redruth
+	call
+	emergency
+	10
+	90
+	1200
+	TRUE
+	won
+	2950.00
+	1100.00
+	null
+	T-04
+	Unit-1
+	FALSE
+	L-005
+	2026-05-01 13:05:00
+	Brackendowns
+	whatsapp
+	emergency
+	60
+	150
+	2100
+	TRUE
+	won
+	2000.00
+	650.00
+	null
+	T-01
+	Unit-3
+	FALSE
+	L-006
+	2026-05-01 14:15:00
+	Alberton North
+	gmb
+	research
+	120
+	null
+	null
+	FALSE
+	lost
+	0.00
+	0.00
+	eta_too_long
+	null
+	null
+	FALSE
+	L-007
+	2026-05-01 15:30:00
+	Randhart
+	whatsapp
+	emergency
+	30
+	180
+	1950
+	TRUE
+	won
+	4700.00
+	1800.00
+	null
+	T-02
+	Unit-2
+	FALSE
+	L-008
+	2026-05-01 17:45:00
+	Swartkoppies
+	call
+	emergency
+	15
+	60
+	900
+	TRUE
+	won
+	2400.00
+	850.00
+	null
+	T-04
+	Unit-1
+	TRUE
+	L-009
+	2026-05-02 07:10:00
+	Meyersdal
+	form
+	research
+	3600
+	null
+	null
+	FALSE
+	lost
+	0.00
+	0.00
+	price
+	null
+	null
+	TRUE
+	L-010
+	2026-05-02 08:30:00
+	Raceview
+	whatsapp
+	emergency
+	40
+	200
+	2200
+	TRUE
+	won
+	3450.00
+	1300.00
+	null
+	T-01
+	Unit-3
+	FALSE
+	L-011
+	2026-05-02 09:15:00
+	Alrode
+	call
+	fleet
+	10
+	120
+	1500
+	TRUE
+	won
+	13400.00
+	4200.00
+	null
+	T-02
+	Unit-2
+	FALSE
+	L-012
+	2026-05-02 11:00:00
+	Florentia
+	gmb
+	emergency
+	25
+	90
+	1350
+	TRUE
+	won
+	2100.00
+	700.00
+	null
+	T-04
+	Unit-1
+	FALSE
+	L-013
+	2026-05-02 12:45:00
+	South Crest
+	whatsapp
+	research
+	180
+	null
+	null
+	FALSE
+	lost
+	0.00
+	0.00
+	no_stock
+	null
+	null
+	FALSE
+	L-014
+	2026-05-02 14:20:00
+	Brackenhurst
+	call
+	emergency
+	12
+	150
+	2600
+	FALSE
+	cancelled
+	0.00
+	-150.00
+	alternator_issue
+	T-01
+	Unit-3
+	FALSE
+	L-015
+	2026-05-02 16:10:00
+	Alberante
+	whatsapp
+	emergency
+	35
+	110
+	1400
+	TRUE
+	won
+	4400.00
+	1650.00
+	null
+	T-02
+	Unit-2
+	FALSE
+	L-016
+	2026-05-02 18:30:00
+	New Redruth
+	call
+	emergency
+	20
+	80
+	1100
+	TRUE
+	won
+	2950.00
+	1100.00
+	null
+	T-04
+	Unit-1
+	TRUE
+	L-017
+	2026-05-03 08:00:00
+	Meyersdal
+	gmb
+	research
+	45
+	null
+	null
+	FALSE
+	lost
+	0.00
+	0.00
+	price
+	null
+	null
+	FALSE
+	L-018
+	2026-05-03 09:45:00
+	Brackendowns
+	call
+	emergency
+	15
+	140
+	1900
+	TRUE
+	won
+	2400.00
+	850.00
+	null
+	T-01
+	Unit-3
+	FALSE
+	L-019
+	2026-05-03 11:30:00
+	Alrode
+	form
+	fleet
+	1200
+	300
+	2100
+	TRUE
+	won
+	8700.00
+	2800.00
+	null
+	T-02
+	Unit-2
+	FALSE
+	L-020
+	2026-05-03 13:15:00
+	Randhart
+	whatsapp
+	emergency
+	50
+	180
+	2000
+	FALSE
+	cancelled
+	0.00
+	-50.00
+	eta_too_long
+	T-04
+	Unit-1
+	FALSE
+	Key Performance Indicator (KPI) Formulas and Operational Implications
+The true value of the operations_sla.csv dataset lies in the derivation of actionable intelligence. These ten KPI formulas are designed to be visualized in a live operations dashboard, triggering automated adjustments in GTM logic and LSA bid modifiers based on real-world constraints.
+1. SLA Hit Rate (< 45 Min Arrival) Formula: COUNT(arrival_seconds <= 2700) / COUNT(arrival_seconds IS NOT NULL) The SLA Hit Rate measures the operational integrity of the "under 45 minutes" marketing promise. In high-crime zones like the R59 highway 5, arriving within this window is not merely a convenience; it is a critical safety parameter. If this metric dips below 85%, automated rules should instantly pause high-funnel LSA campaigns to prevent catastrophic brand damage caused by stranding vulnerable clients.
+2. First-Response Velocity (Emergency Intent)
+Formula: MEDIAN(first_response_seconds) WHERE intent_type = 'emergency'
+High-arousal states demand instant gratification. Customers utilizing the WhatsApp or Call channels while stranded will rapidly dial competitors if acknowledgment is delayed. If the first-response velocity exceeds 60 seconds, lead abandonment increases exponentially. Monitoring this KPI ensures dispatchers are aggressively triaging emergency intents over casual pricing inquiries.
+3. Conversion Rate by Suburb
+Formula: COUNT(conversion_outcome = 'won') / COUNT(lead_id) GROUP BY suburb
+This spatial analysis identifies localized price sensitivity and demand elasticity. For example, data may reveal that commercial fleet operators in Alrode convert at higher rates for premium brands, whereas residential clients in Alberton North exhibit extreme price sensitivity. This intelligence directly informs programmatic SEO efforts and geo-targeted Next.js landing pages.
+4. Dispatch Friction Index
+Formula: AVG(dispatch_assigned_seconds - first_response_seconds)
+The Dispatch Friction Index quantifies the internal operational lag between securing a lead and committing a physical vehicle. High friction indicates inadequate internal communication, complex diagnostic triage, or severe stock localization issues within the warehouse. By aggressively reducing this delta, the operation can compress overall arrival times without requiring technicians to drive at unsafe speeds.
+5. Average Revenue Per Dispatch (ARPD)
+Formula: SUM(revenue_zar) / COUNT(job_completed = TRUE)
+ARPD determines the top-line efficiency of the fleet. Understanding the baseline revenue generated per physical movement is essential for calculating the maximum viable Cost Per Acquisition (CPA) on Google Ads. If ARPD trends downward due to a higher mix of lower-tier battery sales (e.g., standard lead-acid over AGM), marketing budgets must be dynamically throttled to preserve profitability.
+6. Gross Margin Velocity (ZAR/Hour)
+Formula: SUM(gross_margin_zar) / SUM(arrival_seconds / 3600)
+While absolute margin is important, the speed at which that margin is realized dictates fleet utilization efficiency. This KPI evaluates which suburbs or specific battery categories yield the highest financial return relative to the driving time consumed. Dispatch algorithms can be trained to prioritize routes and intents that maximize ZAR/Hour during periods of peak demand.
+7. False-Positive Dispatch Rate Formula: COUNT(failure_reason = 'alternator_issue') / COUNT(dispatch_assigned_seconds IS NOT NULL) Dispatching a mobile unit only to discover a faulty alternator rather than a dead battery incurs severe operational waste.16 A high False-Positive Dispatch Rate necessitates the implementation of rigorous pre-dispatch triage scripts on WhatsApp. Technicians must be trained to ask diagnostic questions (e.g., "Did the battery warning light illuminate while driving?") to prevent wasted fuel and lost opportunity costs.
+8. After-Hours Yield Premium
+Formula: (AVG(gross_margin_zar) WHERE after_hours = TRUE) - (AVG(gross_margin_zar) WHERE after_hours = FALSE)
+This calculation quantifies the exact profitability of running a dedicated night shift or weekend emergency roster. Due to reduced competitor availability, after-hours leads typically convert at higher margins. If the yield premium is substantial, LSA campaigns should be explicitly uncapped and bid modifiers aggressively increased between 17:00 and 22:00.
+9. Channel Lead Quality Ratio
+Formula: COUNT(conversion_outcome = 'won') / COUNT(lead_id) GROUP BY source_channel
+Not all digital channels yield identical intent. Form submissions generally reflect lower urgency research behavior, whereas direct phone calls and WhatsApp messages indicate immediate transactional intent. By tracking conversion rates across channels, marketing expenditure can be reallocated to the platforms generating the highest quality leads, optimizing the overall return on ad spend (ROAS).
+10. ETA Accuracy Variance
+Formula: AVG(ABS(arrival_seconds - PREDICTED_ETA_SECONDS))
+The accuracy of the initial ETA communicated to the client heavily influences post-transaction reviews. Wide variances between the promised and actual arrival times destroy local word-of-mouth equity and generate negative Google Maps reviews. Tracking this variance allows the dispatch software to continuously refine its predictive models based on real-time traffic conditions in Alberton.
+DELIVERABLE 2: sku_margin_stock_matrix.xlsx Specification
+To protect gross margins while maintaining high conversion rates in a price-sensitive market, inventory presentation must be highly strategic. The automotive battery market in South Africa is heavily influenced by the scrap value of old batteries 18 and the technological demands of modern vehicles, particularly those requiring Absorbent Glass Mat (AGM) or Enhanced Flooded Battery (EFB) chemistries for start-stop systems.20 The sku_margin_stock_matrix.xlsx serves as the architectural blueprint for margin-aware catalog decisioning, enabling dynamic Next.js frontend rendering based on real-time stock levels and exact South African battery dimensions.
+Sheet Tabs Structure
+The matrix is divided into four interconnected operational tabs:
+1. Live_Catalog: The master integration view synthesizing real-time pricing, margin percentages, and physical stock levels. This sheet serves as the primary API endpoint for the Next.js frontend.
+2. Substitution_Engine: Complex lookup tables for cross-referencing highly compatible group sizes. This engine dictates safe substitution logic (e.g., safely upgrading a Willard 652 standard to an Exide 652 PS) without risking fitment failures.20
+3. Margin_Sim: A financial sandbox for testing price elasticity and modeling fluctuations in scrap-value trade-ins. With current lead-acid scrap prices averaging R18 to R22 per kilogram in local areas like Germiston and Alberton 18, this sheet calculates the exact financial impact of honoring trade-in discounts.
+4. Warranty_Tracking: Historical data repository tracking failure rates by brand and chemistry. This informs future wholesale procurement decisions and identifies brands with unacceptably high return rates.
+Matrix Schema and Logic
+The following fields define the relational structure necessary to execute intelligent catalog rendering and margin protection.
+
+
+Field Name
+	Description and Excel Formula / Business Rule
+	sku
+	Unique identifier concatenating brand and size (e.g., WIL-652-STD).
+	brand
+	Core supplier nomenclature: Willard, Exide, Eco Plus, Power Plus, Sabat, Varta, Deltec.8
+	chemistry
+	Standard Lead-Acid, EFB, AGM. AGM strictly enforced for Start-Stop vehicles to prevent rapid degradation.22
+	group_size_code
+	Industry standard dimensions: 619, 628, 646, 652, 658, 668.20
+	fitment_compatibility_class
+	Defines broad vehicle classes (e.g., Hatch/Sedan, SUV/Bakkie, Commercial) to guide non-technical users.
+	landed_cost
+	Base wholesale cost procured from the distributor (strictly excluding VAT).
+	sell_price
+	The final retail price displayed to the user on the Next.js frontend (implicitly including the scrap exchange deduction).
+	gross_margin_pct
+	=([@sell_price] - [@landed_cost]) / [@sell_price]
+	warranty_months
+	Contractual coverage period: 12, 24, 25, or 36 months. Willard and Sabat generally offer 25 months; AGM variants often extend to 36 months.20
+	stock_on_hand
+	Current physical units available in the Alberton warehouse or loaded onto dispatch vehicles.
+	stock_cover_days
+	=[@stock_on_hand] / AVERAGE(Daily_Sales_Last_30_Days)
+	return_rate_pct
+	Historical defect rate. A critical quality control metric.
+	warranty_claim_rate_pct
+	The percentage of units requiring replacement within the warranty period.7
+	preferred_substitute_sku
+	VLOOKUP querying the Substitution_Engine to match exact group size and terminal layouts during stockouts.
+	substitute_confidence_score
+	0-100% rating based on dimensional parity, Amp-Hour (Ah) equivalence, and Cold Cranking Amps (CCA) matching.
+	promo_eligibility
+	Boolean flag indicating if the SKU can be discounted without violating supplier MAP (Minimum Advertised Price) policies.
+	strategic_priority
+	=IF([@stock_cover_days]>30, "Clearance", IF([@gross_margin_pct]>0.35, "Margin", "Traffic"))
+	Conditional Formatting Logic and Next.js State Management
+To prevent human error during rapid dispatch operations, the matrix relies on strict conditional formatting, which translates into state warnings on the Next.js dashboard.
+The gross_margin_pct utilizes a rigid color scale: Red for anything below 20%, Yellow for acceptable 20-30% margins, and Green for highly lucrative >30% yields. The stock_cover_days metric acts as a real-time tripwire; if the value drops below 3 days, the row highlights in Bright Orange. This imminent stockout risk triggers an immediate API call to the Next.js frontend to initiate the substitution protocol, removing the out-of-stock SKU and replacing it with the preferred_substitute_sku. Furthermore, if the return_rate_pct exceeds 3%, the cell turns Dark Red with White text, alerting procurement managers to quarantine the batch and halt further sales to protect brand trust.
+Decision Rules for Good/Better/Best Pricing Presentations
+When a consumer searches for a specific battery size (e.g., a 652), bombarding them with ten different options creates analysis paralysis, severely depressing conversion rates. The Next.js frontend must dynamically query the matrix to present a highly curated, three-tiered Good/Better/Best option per group size.
+1. Good (Traffic/Budget Anchor): This tier features the lowest sell_price and standard lead-acid chemistry. Brands like Eco Plus or Power Plus typically occupy this slot.21 The target margin ranges between 20-25%. The primary purpose of this tier is to capture highly price-sensitive traffic and establish a competitive baseline. The marketing copy should emphasize a respectable 12-to-24-month warranty.
+2. Better (Margin/Volume Optimizer): This is the operational sweet spot, balancing competitive pricing with robust profitability. Brands such as Willard or Exide PS dominate this tier.20 The target margin elevates to 30-35%. The psychological framing focuses on South African manufacturing heritage, reliability under load shedding conditions 1, and the superior 24-to-25-month warranty periods.25
+3. Best (Performance/Premium): Reserved for vehicles with demanding electrical loads or start-stop technologies. This tier features the highest CCA and Ah ratings, predominantly populated by Varta or Exide AGM units.20 The target margin exceeds 35%. Marketing copy must fiercely emphasize the 36-month warranty, start-stop compatibility, and deep cycling resilience—crucial traits for mitigating the degradation caused by Eskom's load shedding schedules.2
+Substitution Rules for Preserving Trust and Margin
+When a primary SKU (such as a Willard 652) is out of stock, offering a substitute must be handled delicately to prevent bait-and-switch anxiety—a prevalent fear in the South African automotive aftermarket. Substitution logic must adhere to absolute dimensional parity; a 652 chassis must only be substituted with another 652 to guarantee a flawless physical fitment. Secondly, a strict CCA/Ah floor must be maintained. The substitute battery must provide equal or greater Cold Cranking Amps and Amp-Hours. For instance, safely substituting a Willard 652 (70Ah, 590 CCA) with an Exide 652PS (75Ah, 660 CCA) represents a functional upgrade for the consumer.20
+Crucially, warranty equivalence is non-negotiable. The system must never substitute a 25-month warranty product with a 12-month product without an explicit, bolded price reduction alert displayed prominently on the frontend. Finally, to protect the business, margin preservation rules dictate that if upgrading a customer for free due to inventory mismanagement, the substitute's landed_cost must not compress the net job margin below an absolute floor of 15%.
+DELIVERABLE 3: competitor_serp_snapshot.md
+Dominating the local Search Engine Results Pages (SERP) within the Alberton radius requires a surgical understanding of intent matching. The local market relies heavily on immediate, trust-verified solutions due to the inherent safety risks associated with roadside breakdowns.5 Generic, non-localized landing pages suffer massive bounce rates when deployed against hyper-urgent search queries.
+SERP Intelligence Framework by Query Cluster
+This framework categorizes the highest-volume query clusters, mapping them directly to optimized landing page architectures, Tailwind-styled Conversion Rate Optimization (CRO) angles, and schema.org JSON-LD structures.
+
+
+Query Cluster
+	Likely Intent
+	Ideal Landing Page Type
+	Recommended Title / Meta Pattern
+	Schema Recommendation
+	CTR Angle
+	Conversion Angle
+	Local Proof Angle
+	"car battery alberton"
+	Navigational / Urgent
+	Location Pillar Page
+	Title: Car Battery Alberton | Mobile Fitment in 45 Mins
+
+
+Meta: Stranded in Alberton? We dispatch mobile battery units to Meyersdal, Alrode & Brackenhurst instantly. RMI certified.
+	LocalBusiness, ServiceArea
+	Emphasize raw dispatch speed (45 mins).
+	Sticky "Call/WhatsApp for Dispatch" header.
+	Mentioning highly specific local nodes like Meyersdal.10
+	"mobile battery replacement alberton"
+	Urgent / Transactional
+	Emergency Dispatch Page
+	Title: Mobile Battery Replacement Alberton | We Come To You
+
+
+Meta: Don't wait for a tow. Fast mobile battery testing and replacement in Alberton. No hidden callout fees with purchase.
+	Service, Offer
+	Highlight safety and convenience to bypass towing fears.17
+	Live ETA widget ("Current wait time: 32 mins").
+	Showcasing branded fleet vehicles operating in Alberton.
+	"battery fitment alberton"
+	Informational / Commercial
+	Workshop / Service Page
+	Title: Expert Battery Fitment Alberton | Free Testing & Coding
+
+
+Meta: Professional battery fitment centre. Free alternator testing and BMS coding for start-stop vehicles. Walk-ins welcome.
+	AutoRepair
+	Highlight "Free Testing" to capture top-of-funnel users.
+	Online booking calendar for non-urgent weekend fitments.
+	Customer photos of the physical workshop in Alberton.
+	"652 battery price"
+	Commercial Investigation
+	Category / Pricing Matrix
+	Title: 652 Battery Prices | Willard, Exide & AGM Options
+
+
+Meta: Compare 652 battery prices. View our Good, Better, Best range for 652 sizes. Prices include scrap trade-in.
+	Product (AggregateOffer)
+	Include the lowest starting price directly in the Title.
+	Clear "Scrap Trade-in" deduction calculator (e.g., Save R350).18
+	Verifiable pricing that matches local distributor rates.
+	"exide 652 agm"
+	High-Intent Transactional
+	Single Product Page (PDP)
+	Title: Exide 652 AGM Battery | Start-Stop Ready | Alberton
+
+
+Meta: Buy the Exide 652 AGM (70Ah, 760 CCA). Ideal for start-stop vehicles. Includes 36-month warranty and free local fitment.
+	Product (with reviews)
+	Exact specs (70Ah, 760 CCA) immediately visible.20
+	Prominent "In Stock in Alberton" inventory badge.
+	Granular reviews mentioning the specific Exide model.27
+	"willard battery alberton"
+	Brand Preference
+	Brand Collection Page
+	Title: Willard Batteries Alberton | Official Stockist & Mobile Fit
+
+
+Meta: Need a Willard battery? We carry the full range with 25-month warranties. Delivered and fitted anywhere in Alberton.
+	CollectionPage, Brand
+	"Official Stockist" and "25-Month Warranty".25
+	Brand-specific trust seals and warranty portals.
+	Logos of local businesses using Willard fleets.
+	"battery near me" (Localized)
+	Hyper-Urgent
+	Dynamic Geo-Targeted Page
+	Title: Car Battery Near You | Alberton Rapid Dispatch
+
+
+Meta: Dead battery? Our mobile units are circling the East Rand. Get a new battery fitted at your home or roadside now.
+	LocalBusiness (GeoCoordinates)
+	Proximity signaling ("Circling the East Rand").
+	Auto-detect location via browser API for instant ETA routing.
+	Dynamic map showing dispatch unit locations.
+	Competitor Scoring Rubric (0-10)
+An analysis of the current Alberton and broader Gauteng competitive landscape reveals significant gaps in digital execution and operational transparency.
+
+
+Competitor
+	UX/CRO
+	SEO
+	Trust/Proof
+	Speed (SLA/Web)
+	Crucial Misses in the Local Market
+	Mobile Mechanic Alberton 16
+	4/10
+	6/10
+	5/10
+	5/10
+	Suffers from heavy text blocks and a generic design. Crucially lacks a clear, filterable catalog and transparent pricing structures.
+	Michanic 28
+	7/10
+	8/10
+	8/10
+	6/10
+	Exhibits good UX, but the positioning is overly broad (general mechanics). They are not laser-focused on the unique psychology of battery emergencies.
+	Battery Fix 29
+	3/10
+	5/10
+	4/10
+	4/10
+	Features a cluttered UI with confusing "with/without old battery" pricing permutations.29 Poor mobile responsiveness heavily penalizes emergency roadside users.
+	Deltec Energy 24
+	6/10
+	7/10
+	9/10
+	5/10
+	Presents a corporate B2B feel. It lacks urgent roadside assistance CRO and relies on complex navigation, frustrating a stranded, panicked user.
+	Alberton Battery Mart (Target)
+	9/10
+	9/10
+	10/10
+	9/10
+	(Projected post-implementation). Focused on hyper-local trust, millisecond load speeds via Next.js, and extreme operational transparency.
+	The "Attack Plan": 15 High-Leverage Execution Opportunities
+To unseat established competitors, the following fifteen strategies must be hardcoded into the Next.js frontend and GTM architecture.
+1. Dynamic ETA Injection: Utilize the operations_sla.csv data to inject real-time ETAs directly into the hero section (e.g., "Average dispatch to Meyersdal today: 28 mins"). This instantly neutralizes anxiety.
+2. Scrap Battery Trade-In Calculator UI: South African consumers are fiercely price-sensitive. Implement an interactive React toggle that explicitly visualizes the R300-R400 discount applied when trading in the old battery, based on the current R18-R22/kg scrap rate.18
+3. Hijacking Hotspot Assurance Protocol: For users geolocated or searching near the N12, R59, or Swartkoppies 5, feature a visually distinct "Priority Emergency Routing" button that triggers immediate human-operated WhatsApp escalation, bypassing standard chatbots.
+4. Loadshedding Contextual Copywriting: Explicitly acknowledge that stage 4+ load shedding degrades batteries faster.1 Position AGM and deep-cycle options not just as premium products, but as essential "Loadshedding Resilient" investments.2
+5. Exact Spec Matching Architecture: Display Amp-Hour (Ah) and Cold Cranking Amps (CCA) prominently in large typography. South African buyers cross-reference specs intensely. Explicitly state, for example, that the Exide 646 AGM delivers 60Ah and 680 CCA.20
+6. BMS Coding Transparency: Dedicate a section to clarifying that start-stop vehicles (e.g., late-model BMWs and Audis) receive proper Battery Management System (BMS) coding during fitment, neutralizing a major fear of modern car owners.27
+7. Transparent Callout Fee Policy: Explicitly clarify the callout fee structure above the fold (e.g., "Free callout with battery purchase, R250 standalone diagnostic") to prevent on-site friction and build trust.30
+8. Hyper-Local Suburb Landing Pages: Deploy programmatic SEO pages using Next.js dynamic routing for all 19 Alberton suburbs (e.g., /mobile-battery-meyersdal, /battery-fitment-alrode).10
+9. Visual Proof of Mobile Units: Display high-quality WebP images of branded Alberton Battery Mart bakkies (trucks) to signal professional infrastructure, distancing the brand from informal, fly-by-night operators.
+10. RMI/TEPA Trust Badges Integration: Place Retail Motor Industry (RMI) and Tyre Equipment Parts Association (TEPA) vector certification badges directly above the fold and immediately adjacent to the checkout/booking CTA.13
+11. One-Click WhatsApp Payload Encoding: The primary WhatsApp button must auto-populate a structured URL-encoded message payload: "Hi, I need a battery in. My car is a [Make/Model]." This reduces cognitive load for panicked users.
+12. POPIA-Compliant Review Streaming: Integrate a real-time review widget that filters 5-star Google Maps reviews, specifically highlighting mentions of "speed," "Alberton," and "professionalism" 27, while strictly masking personally identifiable information.
+13. Alternator Diagnostic Guarantee: Alleviate post-purchase anxiety by promising a free alternator and starter test prior to fitment, ensuring the battery is the actual root cause of the breakdown.17
+14. Dedicated Fleet/B2B Portal: Create a secure portal for Alrode industrial park logistics managers offering streamlined 30-day accounts, bulk fitment requests, and dedicated commercial SLA monitoring.
+15. Sticky Mobile Footer Navigation: Implement a persistent bottom navigation bar in Tailwind (fixed bottom-0 w-full) containing only two maximalist actions: "Call Now" (styled in Emergency Red) and "WhatsApp" (styled in Brand Green), maximizing thumb-accessibility during panic states.
+DELIVERABLE 4: trust_assets_pack Specification
+In the highly localized, service-based automotive sector, institutional and social trust is the primary currency. A vehicular breakdown induces a severe psychological state of vulnerability. The following visual assets are engineered to systematically dismantle skepticism and provide security reassurance, while operating in absolute strict adherence to South Africa's Protection of Personal Information Act (POPIA).31
+Asset Specifications, Legal Constraints, and Placement Map
+Every asset must be optimized for WebP delivery to ensure the Next.js application maintains sub-second rendering speeds, even on degraded mobile networks commonly experienced during load shedding.
+
+
+Asset Type
+	Filename Convention & Standard
+	Legal/POPIA Constraints
+	Page Placement
+	Psychological Impact on User State
+	Technician Identity Proof
+	tech-profile-[firstname].webp
+
+
+Minimum 800x800px, uniformed, smiling, branded background.
+	Must secure signed employee consent forms specifically for web usage. Only first names are displayed to protect staff privacy.34
+	Dispatch confirmation page; WhatsApp automated profile pictures.
+	Panic State: Radically reduces stranger danger. The customer knows exactly who is arriving at their location.
+	Vehicle Verification
+	fleet-unit-[number]-alberton.webp
+
+
+High-contrast imagery, clean branding, emergency lights visible.
+	Actual license plates must be cryptographically blurred or replaced with generic "UNIT 1" overlay plates to prevent vehicle cloning risks.
+	Homepage Hero section; "About Us" page; Live dispatch tracking page.
+	Protective State: Signals robust corporate legitimacy, separating the service from informal, high-risk operators.
+	Payment/Security Proof
+	payment-methods-yoco-zapper.svg
+
+
+Clean vector graphics of trusted local SA gateways (Yoco, SnapScan, PayGate, PayJustNow).21
+	Financial data must never be stored locally; rely entirely on PCI-DSS compliant iframe integrations.
+	Floating persistently near all price tags; Footer; Cart checkout page.
+	Analytical State: Assures customers they do not need to carry dangerous amounts of cash to pay the driver.
+	Certification Proof
+	rmi-tepa-accredited-badge.svg
+
+
+Official, high-resolution vectors linking to compliance databases.13
+	Display valid MIBCO/RMI registration numbers publicly to verify authenticity and prevent fraud accusations.
+	Site-wide global header; Footer; Positioned directly beside product warranties.
+	Skeptical State: Provides a perception of legal recourse. Proves strict adherence to national safety standards.
+	Warranty Artifacts
+	willard-25-month-warranty-seal.svg
+
+
+exide-24-month-seal.svg
+
+
+Clear typography, utilizing recognizable brand colors.26
+	Warranty terms (T&Cs) must be easily accessible, detailing specific exclusions (e.g., deep discharge from loadshedding).36
+	Directly embedded on SKU cards; Single Product Pages; Checkout summary.
+	Analytical State: Rationally justifies price premiums. Mitigates the potent fear of buying "duds" or refurbished units.
+	Customer Proof (Reviews)
+	customer-job-[id]-proof.webp
+
+
+Close-up photo of the installed battery within the engine bay, with a text overlay.
+	Crucial: Do not capture customer faces, residential backgrounds, or vehicle license plates without explicit, written opt-in consent.34
+	"Our Work" masonry gallery; Interspersed dynamically between SKU product grids.
+	Analytical State: Provides tangible social proof. Visually validates the technical competence of the fitment process.
+	Local Presence Proof
+	alberton-map-service-area.svg
+
+
+Custom stylized topographical map of the East Rand highlighting covered suburbs.
+	None required.
+	Homepage mid-section; Dedicated Contact page; Global Footer.
+	Panic State: Instantly reassures the customer that the dispatch unit is geographically nearby, not dispatching from a distant hub.
+	DELIVERABLE 5: customer_language_bank.txt
+Deploying the correct localized vernacular dictates the precise difference between an immediate bounce and a high-margin conversion. South African motorists utilize highly specific phrasing, and their cognitive processing capabilities vary drastically based on their situational intent. This Voice-of-Customer (VoC) framework categorizes and prescribes exact lexical patterns to be hardcoded into the Next.js frontend and utilized in LSA ad copy.
+Taxonomy of Emotional Phrases by User State
+Understanding the psychological context of the search allows for dynamic copy rendering based on the user's inferred intent.
+* Panic (Emergency Roadside)
+   * Context: The user is stranded at a dangerous intersection or known hijacking hotspot in Alberton.5 The situation is urgent, fearful, and cognitively overwhelming.
+   * Phrases: "Car just died", "Stuck at the robot", "Middle of nowhere", "Need someone now", "Kids are in the car".
+* Skeptical/Protective (Trust-Deficient)
+   * Context: The user has been burned by unscrupulous mechanics in the past and is highly guarded against hidden fees or substandard parts.
+   * Phrases: "Is the callout fee extra?", "Are these second-hand?", "Will this void my motorplan?", "Do you take away the old battery?"
+* Analytical/Comparison (Value-Driven)
+   * Context: The user is safely at home; the battery is sluggish but functional. They have the luxury of time to rigorously compare prices and specifications.
+   * Phrases: "What's the difference between EFB and AGM?", "How much for a 652?", "Does it come with a 24 or 25-month warranty?".25
+* Fleet/Delegation (B2B)
+   * Context: A logistics manager operating out of Alrode; focused entirely on minimizing operational downtime and streamlining administrative overhead.
+   * Phrases: "Need a VAT invoice", "Can you fit on-site at the depot?", "Do you hold 668 commercial sizes in bulk?"
+Phrase Mining Templates for Continuous Optimization
+To ensure the language bank remains culturally relevant and highly converting, operators must continuously mine customer interactions. By utilizing regular expressions (Regex) within GTM, specific GA4 audience segments can be triggered.
+* WhatsApp Chats: Search chat logs using /\b(how long|how much|callout|stuck|dead|won't start)\b/i. Monitor the time delta between the customer's first message utilizing these words and their final decision to dispatch.
+* Call Transcripts: Mine audio transcripts for verbal hesitations and objections: "So wait, does that include...", "Is there a guarantee...", "Are you guys actually based in Alberton?"
+* Reviews: Extract verbatim praise to feed back into the landing page copy 27: "absolute life-saver," "arrived under 30 minutes," "didn't push the most expensive option."
+"Exact Phrase to Copy Block" UI Mapping
+This table maps the mined vernacular directly to specific Next.js/Tailwind UI components to ensure maximum resonance.
+
+
+UI Element
+	Target Psychological State
+	Recommended Copy Block Implementation
+	Headline (Hero Component)
+	Panic / Local
+	"Dead Battery in Alberton? We Dispatch Mobile Units in Minutes."
+	Sub-headline (Hero)
+	Skeptical
+	"Expert mobile battery replacement. No hidden callout fees. RMI-certified fitment at your home, office, or roadside."
+	Primary CTA Button
+	Panic
+	"WhatsApp for Instant Dispatch" (Tailwind Utility: bg-emergency-red text-white font-bold)
+	Secondary CTA Button
+	Analytical
+	"View Battery Prices & Specs" (Tailwind Utility: bg-dark-charcoal text-white)
+	Objection Handler Block 1
+	Skeptical
+	"Prices displayed include your old scrap battery trade-in. No nasty surprises." 18
+	Objection Handler Block 2
+	Skeptical
+	"Free alternator and starter test included to ensure the battery is the real issue." 17
+	Reassurance Microcopy
+	All States
+	"Secure card facilities available on-site with all our mobile technicians."
+	High-Converting Lexical Patterns (South African Context)
+To establish authentic local rapport, the copywriting must seamlessly integrate South African automotive terminology. Failure to do so signals to the consumer that the website is a generic, internationally templated lead-generation front.
+* Use: "Bakkie" (instead of truck or van).
+* Use: "Robot" (instead of traffic light or intersection).
+* Use: "Callout" (instead of dispatch fee or service charge).
+* Use: "Start-Stop" and "BMS Coding" (Signaling this high technical competence is vital for owners of modern European cars who fear electrical damage).27
+* Use: "Loadshedding-ready" (Positions premium AGM batteries not as a luxury, but as a necessary solution to grid-related degradation).1
+Words to Avoid (Brand Toxins)
+Conversely, certain words carry highly negative connotations in the South African aftermarket and must be strictly blacklisted from all marketing collateral.
+* Avoid: "Cheap" -> In this market, cheap reeks of low-quality, unbranded imports that will fail within months. Use "Cost-effective" or "Budget-friendly."
+* Avoid: "Reconditioned" or "Second-hand" -> This is a massive trust killer in the battery market unless a customer explicitly requests it for a scrap vehicle. Always emphasize "Brand New, Factory Sealed."
+* Avoid: "We try to be there..." -> Vague language induces anxiety in stranded motorists. Use definitive SLA parameters: "Average arrival time: 35 minutes."
+* Avoid: "Tow" -> Customers deeply fear the exorbitant costs and logistical hassle of tow trucks.17 Relentlessly emphasize "We come to you."
+Missing Data Checklist
+To fully parameterize the recommended operational matrices and frontend systems, the operation must urgently gather the following missing data points:
+* [ ] Historical Average Arrival Times: Segmented granularly by suburb (e.g., Meyersdal vs. Alrode) and time of day (Rush hour vs. Off-peak) to inform the initial ETA injection algorithms.
+* [ ] Distributor Landed Costs: Exact wholesale pricing for Willard, Exide, Eco Plus, and Power Plus for the current financial quarter to finalize the Margin_Sim sheet and Good/Better/Best logic.
+* [ ] Current Scrap Metal Yield: The exact ZAR/kg rate currently negotiated with local Germiston/Alberton scrap recyclers to finalize the automated trade-in discount UI.18
+* [ ] Fleet Telematics Integration Capabilities: The technical ability to pull live GPS pings from the dispatch vehicles to power the "Dynamic ETA Injection" via a secure API.
+* [ ] Employee POPIA Consent Forms: Legal clearance documentation required to legally utilize technician profile images on the dispatch tracking page.34
+Next 14-Day Action Plan
+1. Days 1-3 (Data Foundation): Implement the operations_sla.csv schema within the current CRM or dispatch software. Standardize the data entry protocols for all incoming WhatsApps and calls to eliminate data gaps.
+2. Days 4-6 (Catalog Engineering): Populate the sku_margin_stock_matrix.xlsx with highly accurate landed costs. Establish the Good/Better/Best logic and program the strict substitution rules for all group sizes from 619 to 668.
+3. Days 7-9 (Asset Collection & Legal Framework): Photograph technicians and fleet vehicles according to the asset specification. Execute all necessary POPIA consent forms. Digitize RMI and TEPA certificates into responsive vector SVGs.
+4. Days 10-12 (Frontend Integration & UI): Hand over the SERP attack plan and Language Bank to the Next.js/Tailwind developers. Update all H1s, Meta titles, and CTA copy blocks. Implement the interactive Scrap Trade-in Calculator UI.
+5. Days 13-14 (Analytics Deployment & QA): Deploy GA4 and GTM event tracking on all CTA clicks, form submissions, and WhatsApp payloads. Run simulated dispatch drills to test the accuracy of the First-Response and ETA formulas. Rigorously ensure the Next.js site achieves >90 scores on Google Lighthouse for mobile speed to guarantee performance during load shedding.
+Works cited
+1. News: Why load shedding is affecting your UPS battery life - Pinnacle, accessed May 7, 2026, https://www.pinnacle.co.za/news-why-load-shedding-is-affecting-your-ups-battery-life-new
+2. Load Shedding – Why is it affecting my signal and what can I do to fix it?, accessed May 7, 2026, https://www.boltontechnical.co.za/blogs/news/load-shedding-why-is-it-affecting-my-signal-and-what-can-i-do-to-fix-it
+3. What Causes Load Shedding in South Africa? - EcoFlow, accessed May 7, 2026, https://www.ecoflow.com/za/blog/what-causes-load-shedding-in-south-africa
+4. Car Battery FAQs – Everything You Need to Know - Deltec Energy Solutions, accessed May 7, 2026, https://www.deltecenergysolutions.co.za/car-battery-faqs-everything-you-need-to-know/
+5. [GALLERY + VIDEO]: Off-ramps are hijacking hot spots | Alberton Record - The Citizen, accessed May 7, 2026, https://www.citizen.co.za/alberton-record/news-headlines/2019/07/12/off-ramps-are-hijacking-hot-spots/
+6. ALBERTON... the DEADLIEST town on the EAST RAND, South Africa - YouTube, accessed May 7, 2026, https://www.youtube.com/watch?v=Vx7dQf2DONw
+7. South Africa Automotive Batteries Market Competition Benchmarking - Ken Research, accessed May 7, 2026, https://www.kenresearch.com/competition-benchmarking/south-africa-automotive-batteries-market
+8. Examining Car Battery Prices South Africa - Deltec Energy Solutions, accessed May 7, 2026, https://www.deltecenergysolutions.co.za/examining-car-battery-prices-in-south-africa-finding-quality-and-value/
+9. Metair – Initiation, accessed May 7, 2026, https://www.metair.co.za/wp-content/uploads/2025/03/MTA-1024-Initiation.pdf
+10. accessed May 7, 2026, https://www.natrent.co.za/area-profiles/alberton/#:~:text=Over%20the%20years%20development%20sprawled,Palm%20Ridge%2C%20Randhart%2C%20Raceview%2C
+11. Alberton Area Info | NatRent, accessed May 7, 2026, https://www.natrent.co.za/area-profiles/alberton/
+12. Alberton Area Profile | Century 21 South Africa, accessed May 7, 2026, https://www.century21.co.za/area-profiles/alberton/
+13. Application for accreditation | RMI, accessed May 7, 2026, https://rmi.org.za/wp-content/uploads/sites/12/2021/07/Application-Form-TEPA.pdf
+14. TEPA ACCREDITATION APPLICATION | TEPA South Africa, accessed May 7, 2026, https://tepa.org.za/tepa-accreditation-application/
+15. Join the RMI - Retail Motor Industry Organisation, accessed May 7, 2026, https://www.rmi.org.za/about-the-rmi/join-the-rmi/
+16. Battery Replacement Alberton | Car Battery Service, accessed May 7, 2026, https://mobilemechanicalberton.co.za/services/battery
+17. How Mobile Battery Fitment Works: Convenience at Your Fingertips, accessed May 7, 2026, https://sabatbatteryxpress.co.za/how-mobile-battery-fitment-works-convenience-at-your-fingertips/
+18. Sell Lithium-Ion & Gel Batteries Germiston: Lead-Acid & Gel, accessed May 7, 2026, https://scrapmetalgermiston.co.za/sell-lithium-ion-gel-batteries-germiston/
+19. 2025 Battery Scrap Market Data, Insights, Latest Trends and Growth Forecast to 2034, accessed May 7, 2026, https://www.oganalysis.com/industry-reports/battery-scrap-market
+20. All Batteries for Sale in Alberton | Alberton Battery Mart | Alberton ..., accessed May 7, 2026, https://www.albertonbatterymart.co.za/products/all
+21. 652 AGM 12VOLT 70AH 720A - Atlas Battery, accessed May 7, 2026, https://atlasbattery.co.za/product/652-agm-12volt-70ah-720a/
+22. AGM & EFB Start/Stop Batteries in Alberton, accessed May 7, 2026, https://www.albertonbatterymart.co.za/products/type/performance
+23. Vehicle Battery Listings, accessed May 7, 2026, https://www.mrbattery.co.za/wp-content/uploads/2018/09/2017-FNB_catelogue_2017.pdf
+24. Deltec 652 Battery | BHG POWER STORAGE SOLUTIONS, accessed May 7, 2026, https://bhgpower.co.za/product/deltec-652-battery/
+25. Which batteries have the best warranties? - Buying a Car - AutoTrader, accessed May 7, 2026, https://www.autotrader.co.za/cars/news-and-advice/buying-a-car/which-batteries-have-the-best-warranties/191
+26. Warranty - Willard Batteries, accessed May 7, 2026, https://willard.co.za/warranty/
+27. Alberton Battery Mart | Mobile Battery Replacement & Fitment Service, accessed May 7, 2026, https://www.albertonbatterymart.co.za/
+28. Get Top Rated Mobile Mechanics In Alberton, accessed May 7, 2026, https://www.michanic.co.za/locations/top-rated-mobile-mechanics-in-alberton/
+29. Auto - VARTA 652 - AGM Battery 12 Volt 70Ah, accessed May 7, 2026, https://www.batteryfix.co.za/product/bb038-auto-varta-652-agm-battery-12-volt-70ah-with-old-battery-plus-r350-without-old-battery/
+30. Car Batteries | Call-Out Service | Johannesburg Region, accessed May 7, 2026, https://pacefleet.co.za/battery-centre/
+31. South Africa POPIA Compliance Services - VeraSafe, accessed May 7, 2026, https://verasafe.com/advisory-and-audit/popia-compliance/
+32. South Africa's Protection of Personal Information Act (POPIA) Explained - Termly, accessed May 7, 2026, https://termly.io/resources/articles/south-africas-protection-of-personal-information-act/
+33. POPIA: Compliance with South Africa's Data Protection Law - Cookiebot, accessed May 7, 2026, https://www.cookiebot.com/en/popia/
+34. The Complete POPIA Compliance Guide for South African Websites (2026), accessed May 7, 2026, https://www.popiaready.co.za/popia-compliance-guide
+35. 652 AGM 12VOLT 70AH 720A - Atlas Battery PE, accessed May 7, 2026, https://atlasbatterype.co.za/product/652-agm-12volt-70ah-720a/
+36. BATTERY REPLACEMENT GUIDE, accessed May 7, 2026, https://www.sabat.co.za/wp-content/uploads/2021/07/SABAT_BATTERY_SELECTION_GUIDE_2019_WEB.pdf

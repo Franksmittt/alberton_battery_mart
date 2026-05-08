@@ -263,7 +263,7 @@ export default function RootLayout({
           enableSystem
         >
           <Header />
-          <div className="pt-20 pb-20 md:pb-0">
+          <div className="pt-16 md:pt-28 pb-20 md:pb-0">
             {children}
           </div>
           <Footer />

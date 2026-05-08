@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Car, Search, Zap } from 'lucide-react';
+import { Car, ChevronDown, Search, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type BatteryRecommendation = {
@@ -189,95 +189,102 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
 
   if (variant === 'compact') {
     return (
-      <Card className="w-full bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 text-white">
-        <CardContent className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-            <div>
-              <label htmlFor="compact-vt" className="sr-only">Vehicle Type</label>
-              <select
-                id="compact-vt"
-                value={vehicleType}
-                onChange={(e) => handleVehicleTypeChange(e.target.value)}
-                aria-label="Select vehicle type"
-                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
-              >
-                <option value="">Vehicle Type</option>
-                {vehicleTypes.map((item) => (
-                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="compact-manufacturer" className="sr-only">Manufacturer</label>
-              <select
-                id="compact-manufacturer"
-                value={manufacturer}
-                onChange={(e) => handleManufacturerChange(e.target.value)}
-                disabled={!vehicleType}
-                aria-label="Select manufacturer"
-                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
-              >
-                <option value="">
-                  {vehicleType ? 'Manufacturer' : 'Select Vehicle Type First'}
-                </option>
-                {manufacturers.map((item) => (
-                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="compact-year" className="sr-only">Year Model</label>
-              <select
-                id="compact-year"
-                value={year}
-                onChange={(e) => handleYearChange(e.target.value)}
-                disabled={!manufacturer}
-                aria-label="Select year model"
-                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full"
-              >
-                <option value="">
-                  {manufacturer ? 'Year Model' : 'Select Manufacturer First'}
-                </option>
-                {years.map((item) => (
-                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="compact-model" className="sr-only">Model</label>
-              <select
-                id="compact-model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-                disabled={!year}
-                aria-label="Select model"
-                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full"
-              >
-                <option value="">
-                  {year ? 'Model' : 'Select Year Model First'}
-                </option>
-                {models.map((item) => (
-                  <option key={item} value={item} className="bg-[#060606]">{item}</option>
-                ))}
-              </select>
-            </div>
-            
-            <Button
-              onClick={handleSearch}
-              disabled={!isComplete}
-              variant="battery"
-              size="lg"
-              className="w-full h-12 font-bold"
+      <div className="w-full rounded-2xl overflow-hidden border border-red-500/40 bg-[rgba(18,18,18,0.7)] backdrop-blur-[15px] shadow-[0_15px_35px_rgba(0,0,0,0.4),inset_0_0_15px_rgba(229,57,53,0.1)] max-[800px]:rounded-lg max-[800px]:p-4">
+        <div className="flex items-center max-[800px]:flex-col max-[800px]:items-stretch">
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-red-500/20 relative">
+            <label htmlFor="compact-vt" className="sr-only">Vehicle Type</label>
+            <select
+              id="compact-vt"
+              value={vehicleType}
+              onChange={(e) => handleVehicleTypeChange(e.target.value)}
+              aria-label="Select vehicle type"
+              className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8"
             >
-              <Search className="h-5 w-5 mr-2" />
-              {loading ? 'Loading...' : 'Find Battery'}
-            </Button>
+              <option value="" className="bg-[#121212]">1. Select Type</option>
+              {vehicleTypes.map((item) => (
+                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+              ))}
+            </select>
+            <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
           </div>
-        </CardContent>
-      </Card>
+
+          <div className="w-px h-10 bg-red-500/30 max-[800px]:hidden" />
+
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-red-500/20 relative">
+            <label htmlFor="compact-manufacturer" className="sr-only">Manufacturer</label>
+            <select
+              id="compact-manufacturer"
+              value={manufacturer}
+              onChange={(e) => handleManufacturerChange(e.target.value)}
+              disabled={!vehicleType}
+              aria-label="Select manufacturer"
+              className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
+            >
+              <option value="" className="bg-[#121212]">
+                {vehicleType ? '2. Select Make' : '2. Select Make'}
+              </option>
+              {manufacturers.map((item) => (
+                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+              ))}
+            </select>
+            <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
+          </div>
+
+          <div className="w-px h-10 bg-red-500/30 max-[800px]:hidden" />
+
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-red-500/20 relative">
+            <label htmlFor="compact-year" className="sr-only">Year Model</label>
+            <select
+              id="compact-year"
+              value={year}
+              onChange={(e) => handleYearChange(e.target.value)}
+              disabled={!manufacturer}
+              aria-label="Select year model"
+              className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
+            >
+              <option value="" className="bg-[#121212]">
+                {manufacturer ? '3. Select Year' : '3. Select Year'}
+              </option>
+              {years.map((item) => (
+                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+              ))}
+            </select>
+            <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
+          </div>
+
+          <div className="w-px h-10 bg-red-500/30 max-[800px]:hidden" />
+
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 relative">
+            <label htmlFor="compact-model" className="sr-only">Model</label>
+            <select
+              id="compact-model"
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              disabled={!year}
+              aria-label="Select model"
+              className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
+            >
+              <option value="" className="bg-[#121212]">
+                {year ? '4. Select Model' : '4. Select Model'}
+              </option>
+              {models.map((item) => (
+                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+              ))}
+            </select>
+            <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
+          </div>
+
+          <Button
+            onClick={handleSearch}
+            disabled={!isComplete}
+            variant="battery"
+            size="lg"
+            className="rounded-none h-[65px] px-12 text-lg font-extrabold uppercase tracking-wide max-[800px]:w-full max-[800px]:rounded-lg max-[800px]:h-[55px] max-[800px]:mt-4"
+          >
+            {loading ? 'Loading...' : 'Search'}
+          </Button>
+        </div>
+      </div>
     );
   }
 

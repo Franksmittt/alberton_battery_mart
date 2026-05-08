@@ -144,8 +144,8 @@ const Footer = () => {
             </a>.
           </div>
           <div className="text-xs text-muted-foreground pt-2">
-            <Link href="/admin/login" className="hover:text-battery transition-colors">
-              Staff Login
+            <Link href="/login" className="hover:text-battery transition-colors">
+              Login
             </Link>
           </div>
         </div>

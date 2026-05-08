@@ -374,4 +374,112 @@
   .electric-lightning.lightning-one { left: 20%; top: 10%; animation-delay: 0s; }
   .electric-lightning.lightning-two { right: 25%; top: 5%; height: 200px; animation-delay: 1.5s; }
   .electric-lightning.lightning-three { left: 55%; top: 15%; height: 140px; animation-delay: 3s; }
+
+  @keyframes batteryNeonStartup {
+    0% {
+      opacity: 0.28;
+      text-shadow: none;
+      filter: brightness(0.72);
+    }
+    4% {
+      opacity: 1;
+      text-shadow: 0 0 3px rgba(229, 57, 53, 0.6), 0 0 7px rgba(229, 57, 53, 0.3);
+      filter: brightness(0.95);
+    }
+    8% {
+      opacity: 0.3;
+      text-shadow: none;
+      filter: brightness(0.74);
+    }
+    12% {
+      opacity: 0.92;
+      text-shadow: 0 0 4px rgba(229, 57, 53, 0.68), 0 0 9px rgba(229, 57, 53, 0.36);
+      filter: brightness(0.98);
+    }
+    16% {
+      opacity: 0.38;
+      text-shadow: none;
+      filter: brightness(0.76);
+    }
+    20% {
+      opacity: 1;
+      text-shadow: 0 0 4px rgba(229, 57, 53, 0.72), 0 0 10px rgba(229, 57, 53, 0.38);
+      filter: brightness(1);
+    }
+    86.7% {
+      opacity: 0.96;
+      text-shadow: 0 0 4px rgba(229, 57, 53, 0.65), 0 0 9px rgba(229, 57, 53, 0.33);
+      filter: brightness(0.96);
+    }
+    92% {
+      opacity: 0.45;
+      text-shadow: 0 0 2px rgba(229, 57, 53, 0.3);
+      filter: brightness(0.78);
+    }
+    97% {
+      opacity: 0.22;
+      text-shadow: none;
+      filter: brightness(0.68);
+    }
+    100% {
+      opacity: 0.28;
+      text-shadow: none;
+      filter: brightness(0.72);
+    }
+  }
+
+  .battery-neon {
+    position: relative;
+    display: inline-block;
+    color: #e53935;
+    will-change: opacity, text-shadow, filter;
+    animation: batteryNeonStartup 6s ease-in-out infinite;
+  }
+
+  @keyframes brandFlipUp {
+    0% {
+      opacity: 0;
+      transform: translateY(12px) rotateX(-65deg);
+    }
+    40% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+  }
+
+  .brand-flip-up {
+    transform-origin: 50% 100%;
+    backface-visibility: hidden;
+    animation: brandFlipUp 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes headerTextSheen {
+    0% {
+      background-position: -180% 50%;
+    }
+    100% {
+      background-position: 220% 50%;
+    }
+  }
+
+  .header-cool-text {
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(255, 255, 255, 0.85) 35%,
+      rgba(229, 57, 53, 0.95) 50%,
+      rgba(255, 255, 255, 0.85) 65%,
+      rgba(255, 255, 255, 0.62) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: headerTextSheen 5s linear infinite;
+    white-space: nowrap;
+  }
 }

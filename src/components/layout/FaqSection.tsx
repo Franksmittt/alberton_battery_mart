@@ -1,6 +1,4 @@
 // src/components/layout/FaqSection.tsx
-import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [
@@ -39,78 +37,58 @@ const faqItems = [
 ];
 
 const FaqSection = () => {
-  // Split the 8 questions into two arrays of 4 each
   const firstColumn = faqItems.slice(0, 4);
   const secondColumn = faqItems.slice(4, 8);
 
   return (
-    // --- THEME FIX: Changed bg-white to bg-card and added border-y for visual separation ---
-    <section className="w-full bg-card border-y border-border py-20"> 
+    <section className="w-full bg-[#121212] border-y border-[#2A2A2A] py-20">
       <div className="container px-4 md:px-6 lg:px-8">
-        
-        <div className="text-center mb-12">
-          {/* --- THEME FIX: Changed text-black to text-foreground --- */}
-          <h2 className="text-4xl font-extrabold tracking-tight text-foreground">
-            Questions & Answers
+        <div className="text-center mb-16">
+          <h2 className="text-[clamp(2.2rem,4.5vw,3rem)] font-black tracking-[-1.5px] text-white">
+            Frequently Asked Questions
           </h2>
-          {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
-          <p className="text-xl text-muted-foreground mt-3">
-            Your instant answers to the most common battery problems.
+          <p className="text-[#A0A0A0] text-[1.05rem] md:text-[1.15rem] leading-relaxed mt-4 max-w-3xl mx-auto">
+            Everything you need to know about our mobile fitment process, warranties, and technical capabilities.
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          {/* Main Grid for 2 Columns (4 rows deep) */}
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
-            
-            {/* Column 1 */}
-            <Accordion type="single" collapsible className="w-full">
-             {firstColumn.map((item, index) => (
-                // --- THEME FIX: Changed border-gray-300 to border-border ---
-                <AccordionItem key={index} value={`item-${index}`} className="border-b border-border"> 
-                  {/* --- THEME FIX: Changed text-black to text-foreground --- */}
-                  <AccordionTrigger className="text-lg font-semibold text-foreground hover:text-battery">
-                    {item.question}
-                  </AccordionTrigger>
-                   {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
-                   <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+          <div className="grid md:grid-cols-2 gap-x-12 xl:gap-x-20 gap-y-0">
+            <div className="w-full">
+              {firstColumn.map((item, index) => (
+                <details key={`left-${index}`} className="group border-b border-[#2A2A2A] hover:border-[#444444] transition-colors duration-300">
+                  <summary className="list-none cursor-pointer py-8 text-[1.1rem] md:text-[1.2rem] font-semibold text-white flex items-center justify-between gap-4 tracking-[-0.3px] group-open:text-[#A0A0A0] group-open:pb-6">
+                    <span>{item.question}</span>
+                    <span className="relative block h-6 w-6 shrink-0 ml-8">
+                      <span className="absolute left-1/2 top-1/2 h-[2px] w-full -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] transition-colors duration-300" />
+                      <span className="absolute left-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] group-open:rotate-45 transition-all duration-300" />
+                    </span>
+                  </summary>
+                  <div className="pb-10 text-[#A0A0A0] text-[1rem] md:text-[1.05rem] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
                     {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                  </div>
+                </details>
               ))}
-            </Accordion>
-             
-            {/* Column 2 */}
-            <Accordion type="single" collapsible className="w-full">
-              {secondColumn.map((item, index) => (
-                // --- THEME FIX: Changed border-gray-300 to border-border ---
-                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-border"> 
-                  {/* --- THEME FIX: Changed text-black to text-foreground --- */}
-                  <AccordionTrigger className="text-lg font-semibold text-foreground hover:text-battery">
-                    {item.question}
-                  </AccordionTrigger>
-                  {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
-                  <AccordionContent className="text-muted-foreground text-base leading-relaxed">
-                    {item.answer}
-                  </AccordionContent>
-                 </AccordionItem>
-              ))}
-            </Accordion>
+            </div>
 
+            <div className="w-full">
+              {secondColumn.map((item, index) => (
+                <details key={`right-${index}`} className="group border-b border-[#2A2A2A] hover:border-[#444444] transition-colors duration-300">
+                  <summary className="list-none cursor-pointer py-8 text-[1.1rem] md:text-[1.2rem] font-semibold text-white flex items-center justify-between gap-4 tracking-[-0.3px] group-open:text-[#A0A0A0] group-open:pb-6">
+                    <span>{item.question}</span>
+                    <span className="relative block h-6 w-6 shrink-0 ml-8">
+                      <span className="absolute left-1/2 top-1/2 h-[2px] w-full -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] transition-colors duration-300" />
+                      <span className="absolute left-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] group-open:rotate-45 transition-all duration-300" />
+                    </span>
+                  </summary>
+                  <div className="pb-10 text-[#A0A0A0] text-[1rem] md:text-[1.05rem] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
+                    {item.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
-        
-        {/* Lead Generation Hook: CTA after FAQ */}
-        <div className="text-center pt-10">
-          {/* --- THEME FIX: Changed text-black to text-foreground --- */}
-          <p className="text-lg text-foreground mb-4">
-             Still have questions? Talk directly to a certified technician:
-          </p>
-          <Button asChild size="lg" variant="battery" className="shadow-lg">
-            <a href="tel:0101096211">Call Us Now for Expert Advice</a>
-          </Button>
-        </div>
-
       </div>
     </section>
   );
