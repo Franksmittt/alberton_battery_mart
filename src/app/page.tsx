@@ -12,8 +12,6 @@ export const dynamic = 'auto';
 
 // Lazy-load all components below the fold
 const FaqSection = dynamicImport(() => import('@/components/layout/FaqSection'));
-const ContactForm = dynamicImport(() => import('@/components/content/ContactForm'));
-const ThinCta = dynamicImport(() => import('@/components/layout/ThinCta'));
 
 // --- SEO: Homepage Metadata with Open Graph ---
 export const metadata: Metadata = {
@@ -561,22 +559,6 @@ export default function Home() {
       
       {/* 2. EXPERTISE & FAQ: Overcomes customer objections and builds expert status. */}
       <FaqSection />
-
-      {/* 3. DIRECT LEAD CAPTURE: A full contact form for non-urgent/bulk inquiries. */}
-      <section className="container py-16 max-w-4xl mx-auto">
-        <div className="text-center space-y-3 mb-10">
-            <h2 className="text-4xl font-extrabold text-foreground">
-              Have a Specific Inquiry?
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              For bulk orders, solar quotes, or non-urgent questions, send us a message.
-            </p>
-        </div>
-        <ContactForm />
-      </section>
-
-      {/* 4. FINAL CTA: The final, unmissable call to action. */}
-      <ThinCta />
     </main>
   );
 }
