@@ -11,15 +11,9 @@ import { ALL_PRODUCTS, type ProductCardData } from "@/data/products";
 export const dynamic = 'auto';
 
 // Lazy-load all components below the fold
-const TrustAuthoritySection = dynamicImport(() => import('@/components/layout/TrustAuthoritySection'));
-const ServiceGrid = dynamicImport(() => import('@/components/layout/ServiceGrid'));
-const ProductSpotlight = dynamicImport(() => import('@/components/content/ProductSpotlight'));
-const StorefrontCTA = dynamicImport(() => import('@/components/layout/StorefrontCTA'));
-const TestimonialSection = dynamicImport(() => import('@/components/layout/TestimonialSection'));
 const FaqSection = dynamicImport(() => import('@/components/layout/FaqSection'));
 const ContactForm = dynamicImport(() => import('@/components/content/ContactForm'));
 const ThinCta = dynamicImport(() => import('@/components/layout/ThinCta'));
-const AtomicAnswers = dynamicImport(() => import('@/components/seo/AtomicAnswers'));
 
 // --- SEO: Homepage Metadata with Open Graph ---
 export const metadata: Metadata = {
@@ -565,28 +559,10 @@ export default function Home() {
         </div>
       </section>
       
-      {/* 2. TRUST & AUTHORITY: Instantly builds trust and authority. Answers "Why you?" */}
-      <TrustAuthoritySection />
-
-      {/* 3. CORE SERVICES: Shows what you do. (Car, Truck, Solar, etc.) */}
-      <ServiceGrid /> 
-
-      {/* 3b. Atomic answers for AI + Helpful Content */}
-      <AtomicAnswers />
-      
-      {/* 4. PRODUCT SPOTLIGHT: Shows what you sell. (FIXED to 3 products) */}
-      <ProductSpotlight count={3} /> 
-      
-      {/* 5. LOCAL SEO & PHYSICAL PROOF: Cements your local presence. "We are a real store." */}
-      <StorefrontCTA />
-      
-      {/* 6. SOCIAL PROOF: Builds trust with user reviews. */}
-      <TestimonialSection /> 
-
-      {/* 7. EXPERTISE & FAQ: Overcomes customer objections and builds expert status. */}
+      {/* 2. EXPERTISE & FAQ: Overcomes customer objections and builds expert status. */}
       <FaqSection />
 
-      {/* 8. DIRECT LEAD CAPTURE: A full contact form for non-urgent/bulk inquiries. */}
+      {/* 3. DIRECT LEAD CAPTURE: A full contact form for non-urgent/bulk inquiries. */}
       <section className="container py-16 max-w-4xl mx-auto">
         <div className="text-center space-y-3 mb-10">
             <h2 className="text-4xl font-extrabold text-foreground">
@@ -599,7 +575,7 @@ export default function Home() {
         <ContactForm />
       </section>
 
-      {/* 9. FINAL CTA: The final, unmissable call to action. */}
+      {/* 4. FINAL CTA: The final, unmissable call to action. */}
       <ThinCta />
     </main>
   );
