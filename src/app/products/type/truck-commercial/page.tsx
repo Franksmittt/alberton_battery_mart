@@ -110,7 +110,7 @@ export default async function TruckBatteriesPage() {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
     })),
   };
 
@@ -130,7 +130,7 @@ export default async function TruckBatteriesPage() {
         {/* --- EDUCATIONAL SECTION: Understanding Commercial Batteries --- */}
         <div className="max-w-5xl mx-auto space-y-8">
           {/* What Makes Commercial Batteries Different */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-6">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-6">
             <div className="flex items-center gap-3">
               <Building className="h-8 w-8 text-battery" />
               <h2 className="text-3xl font-black text-white">
@@ -163,7 +163,7 @@ export default async function TruckBatteriesPage() {
           </div>
 
           {/* Fleet & B2B Solutions */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border-2 border-battery/30 rounded-2xl p-8 space-y-6">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border-2 border-battery/30 rounded-2xl p-8 space-y-6">
             <div className="flex items-center gap-3">
               <Building className="h-10 w-10 text-battery flex-shrink-0" />
               <h2 className="text-3xl font-black text-white">
@@ -202,7 +202,7 @@ export default async function TruckBatteriesPage() {
           </div>
 
           {/* Common Applications */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-4">
             <h3 className="text-2xl font-black text-white flex items-center gap-3">
               <Truck className="h-6 w-6 text-battery" />
               Common Commercial Applications

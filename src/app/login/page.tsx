@@ -110,7 +110,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#111] text-white py-8 px-4">
+    <main className="min-h-screen bg-[var(--brand-bg)] text-white py-8 px-4">
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="editor-panel">
           <div className="layout-selectors">

@@ -17,7 +17,7 @@ function generateXML(products: ProductCardData[]): string {
     // If the data is missing (undefined), 'N/A' or an empty string is used as fallback.
     const imagePath = product.imagePath ?? 'N/A';
     const productTitle = product.name ?? 'Battery Product';
-    const link = `${SITE_URL}/product/${product.id}`;
+    const link = `${SITE_URL}/products/id/${product.id}`;
     const price = product.sellingPrice_OUTPUT.replace('R', 'ZAR').replace(' ', '');
 
     xml += '<entry>\n';

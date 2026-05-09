@@ -28,6 +28,18 @@
 
     --radius: 0.5rem;
     --chart-1: 0 90% 48%;
+
+    --brand-bg: #121212;
+    --brand-bg-soft: #171717;
+    --brand-bg-elevated: #1e1e1e;
+    --brand-border: #2a2a2a;
+    --brand-muted: #a0a0a0;
+    --brand-muted-2: #888888;
+    --brand-muted-3: #555555;
+    --brand-accent: #e53935;
+    --brand-accent-hover: #c62828;
+    --brand-success: #25d366;
+    --brand-success-hover: #1ebe5a;
   }
 
   .dark {
@@ -49,6 +61,18 @@
 
     --accent: 210 10% 40%;
     --accent-foreground: 0 0% 100%;
+
+    --brand-bg: #121212;
+    --brand-bg-soft: #171717;
+    --brand-bg-elevated: #1e1e1e;
+    --brand-border: #2a2a2a;
+    --brand-muted: #a0a0a0;
+    --brand-muted-2: #888888;
+    --brand-muted-3: #555555;
+    --brand-accent: #e53935;
+    --brand-accent-hover: #c62828;
+    --brand-success: #25d366;
+    --brand-success-hover: #1ebe5a;
   }
 }
 
@@ -64,6 +88,25 @@
 
 /* Electric Energy Hover Effects */
 @layer utilities {
+  /* Theme compatibility layer: remap legacy hardcoded Tailwind arbitrary colors */
+  .bg-\[\#121212\] { background-color: var(--brand-bg) !important; }
+  .bg-\[\#171717\] { background-color: var(--brand-bg-soft) !important; }
+  .bg-\[\#1E1E1E\] { background-color: var(--brand-bg-elevated) !important; }
+  .bg-\[\#0a0a0a\] { background-color: var(--brand-bg-soft) !important; }
+
+  .border-\[\#2A2A2A\], .border-\[\#2a2a2a\] { border-color: var(--brand-border) !important; }
+  .text-\[\#A0A0A0\], .text-\[\#a0a0a0\] { color: var(--brand-muted) !important; }
+  .text-\[\#888888\] { color: var(--brand-muted-2) !important; }
+
+  .bg-\[\#E53935\] { background-color: var(--brand-accent) !important; }
+  .text-\[\#E53935\] { color: var(--brand-accent) !important; }
+  .border-\[\#E53935\] { border-color: var(--brand-accent) !important; }
+  .hover\:bg-\[\#c62828\]:hover, .hover\:bg-\[\#C62828\]:hover { background-color: var(--brand-accent-hover) !important; }
+  .hover\:text-\[\#E53935\]:hover, .hover\:text-\[\#C62828\]:hover { color: var(--brand-accent) !important; }
+
+  .bg-\[\#25D366\] { background-color: var(--brand-success) !important; }
+  .hover\:bg-\[\#1ebe5a\]:hover { background-color: var(--brand-success-hover) !important; }
+
   /* Electric glow animation */
   @keyframes electricGlow {
     0%, 100% {
@@ -431,7 +474,7 @@
   .battery-neon {
     position: relative;
     display: inline-block;
-    color: #e53935;
+    color: var(--brand-accent);
     will-change: opacity, text-shadow, filter;
     animation: batteryNeonStartup 6s ease-in-out infinite;
   }

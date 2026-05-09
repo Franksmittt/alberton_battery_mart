@@ -143,7 +143,7 @@ export default function ProductsBasePage() {
             <h2 className="text-3xl font-bold text-foreground text-center">3. Shop by Brand</h2>
             <div className="flex flex-wrap justify-center gap-6">
                 {filterLinks.brand.map((item, index) => (
-                    <Card key={index} className="hover:border-battery transition-colors shadow-lg w-full max-w-[200px]">
+                    <Card key={index} className="hover:border-battery transition-colors shadow-lg w-full sm:max-w-[200px]">
                         <Link href={item.href}>
                             <CardContent className="flex flex-col items-center justify-center p-6 text-center h-full">
                                 <item.icon className="h-8 w-8 text-battery mb-3" />

@@ -11,6 +11,10 @@ import ProductSpotlight from "@/components/content/ProductSpotlight";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 import { getAllLocalAreas, getLocalAreaBySlug, getNearbyLocalAreas } from "@/data/local-areas";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+import FaqSchema from "@/components/seo/FaqSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import IntentLinks from "@/components/seo/IntentLinks";
 
 type Params = {
   area: string;
@@ -31,34 +35,16 @@ export async function generateMetadata({
   const area = getLocalAreaBySlug(params.area);
   if (!area) return {};
 
-  const url = `${BASE_URL}/local/${area.slug}`;
   const title = `Mobile Battery Replacement ${area.name} | Alberton Battery Mart`;
   const description = `Fast mobile battery replacement in ${area.name}. ${area.responseWindow} response window, on-site testing, and professional fitment.`;
 
-  return {
+  return buildPageMetadata({
     title,
     description,
+    path: `/local/${area.slug}`,
     keywords: [...area.focusKeywords, `${area.name} car battery`, `battery service ${area.name}`],
-    openGraph: {
-      title,
-      description,
-      url,
-      type: "website",
-      locale: "en_ZA",
-      siteName: "Alberton Battery Mart",
-      images: [
-        {
-          url: "/images/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: `Battery replacement ${area.name}`,
-        },
-      ],
-    },
-    alternates: {
-      canonical: url,
-    },
-  };
+    imageAlt: `Battery replacement ${area.name}`,
+  });
 }
 
 export default function LocalAreaPage({ params }: { params: Params }) {
@@ -113,50 +99,19 @@ export default function LocalAreaPage({ params }: { params: Params }) {
     },
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: area.faq.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: BASE_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Service Areas",
-        item: `${BASE_URL}/local`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: area.name,
-        item: `${BASE_URL}/local/${area.slug}`,
-      },
-    ],
-  };
-
   return (
     <div className="space-y-16">
       <JsonLd data={localBusinessSchema} id={`local-schema-${area.slug}`} />
       <JsonLd data={serviceSchema} id={`local-service-schema-${area.slug}`} />
-      <JsonLd data={faqSchema} id={`local-faq-schema-${area.slug}`} />
-      <JsonLd data={breadcrumbSchema} id={`local-breadcrumb-schema-${area.slug}`} />
+      <FaqSchema id={`local-faq-schema-${area.slug}`} items={area.faq} />
+      <BreadcrumbSchema
+        id={`local-breadcrumb-schema-${area.slug}`}
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Service Areas", item: "/local" },
+          { name: area.name, item: `/local/${area.slug}` },
+        ]}
+      />
 
       <section className="bg-card border-b border-border py-20">
         <div className="container text-center max-w-4xl space-y-6">
@@ -265,6 +220,30 @@ export default function LocalAreaPage({ params }: { params: Params }) {
             question: item.question,
             answer: item.answer,
           }))}
+        />
+      </section>
+
+      <Separator />
+
+      <section className="container">
+        <IntentLinks
+          title={`Related service pages for ${area.name}`}
+          description="Use these suburb-specific pages to compare service options and response windows."
+          columnsClassName="md:grid-cols-3"
+          links={[
+            {
+              href: `/services/mobile-battery-replacement/${area.slug}`,
+              label: `Mobile battery replacement in ${area.name}`,
+            },
+            {
+              href: `/services/free-battery-testing/${area.slug}`,
+              label: `Free battery testing in ${area.name}`,
+            },
+            {
+              href: `/services/emergency-jump-start/${area.slug}`,
+              label: `Emergency jump-start in ${area.name}`,
+            },
+          ]}
         />
       </section>
 

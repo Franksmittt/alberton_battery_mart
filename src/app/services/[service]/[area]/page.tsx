@@ -8,14 +8,22 @@ import {
   getServicePage,
   getAllServicePages,
 } from "@/data/service-pages";
+import { getProductDetail } from "@/data/product-detail";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import { Phone, MapPin, Zap, ShieldCheck } from "lucide-react";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import IntentLinks from "@/components/seo/IntentLinks";
 
 type Params = {
   service: string;
   area: string;
 };
+
+function canonicalProductHref(productSlug: string): string {
+  const product = getProductDetail(productSlug);
+  return product ? `/products/id/${product.id}` : `/products/${productSlug}`;
+}
 
 export async function generateStaticParams() {
   return getAllServicePages().map((service) => ({
@@ -35,38 +43,15 @@ export async function generateMetadata({
     return {};
   }
 
-  const url = `${BASE_URL}/services/${entry.serviceSlug}/${entry.areaSlug}`;
-
-  return {
+  return buildPageMetadata({
     title: `${entry.title} | Alberton Battery Mart`,
     description: entry.description,
+    path: `/services/${entry.serviceSlug}/${entry.areaSlug}`,
     keywords: entry.keywords,
-    openGraph: {
-      title: entry.title,
-      description: entry.description,
-      url,
-      type: "article",
-      images: [
-        {
-          url: entry.ogImage || `${BASE_URL}/images/og-image.jpg`,
-          width: 1200,
-          height: 630,
-          alt: entry.title,
-        },
-      ],
-      locale: 'en_ZA',
-      siteName: 'Alberton Battery Mart',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: entry.title,
-      description: entry.description,
-      images: [entry.ogImage || `${BASE_URL}/images/og-image.jpg`],
-    },
-    alternates: {
-      canonical: url,
-    },
-  };
+    type: "article",
+    imagePath: entry.ogImage || "/images/og-image.jpg",
+    imageAlt: entry.title,
+  });
 }
 
 export default function ServiceDetailPage({ params }: { params: Params }) {
@@ -163,6 +148,29 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
         "Yes. We accept card payments via mobile terminals and register the manufacturer warranty immediately, so you leave with documentation in hand.",
     },
   ];
+
+  const intentLinks = [
+    {
+      href: `/local/${entry.areaSlug}`,
+      label: `Battery support in ${entry.areaSlug.replace(/-/g, " ")}`,
+    },
+    {
+      href: "/services",
+      label: "All mobile battery services in Alberton",
+    },
+    {
+      href: "/products",
+      label: "Browse in-stock batteries by category",
+    },
+    ...((entry.relatedVehicles || []).map((vehicle) => ({
+      href: `/vehicles/${vehicle.slug}`,
+      label: `${vehicle.label} fitment guide`,
+    }))),
+    ...((entry.relatedProducts || []).map((product) => ({
+      href: canonicalProductHref(product.slug),
+      label: `${product.label} battery details`,
+    }))),
+  ].slice(0, 6);
 
   return (
     <div className="container py-16 space-y-16">
@@ -276,6 +284,14 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
 
       <Separator className="bg-border" />
 
+      <IntentLinks
+        title="High-intent next steps"
+        description="Compare compatible batteries, verify fitment, and book service faster."
+        links={intentLinks}
+      />
+
+      <Separator className="bg-border" />
+
       <section className="space-y-6">
         <div className="flex items-center gap-3">
           <ShieldCheck className="h-8 w-8 text-battery" />
@@ -332,7 +348,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
                   {entry.relatedProducts.map((product) => (
                     <li key={product.slug}>
                       <a
-                        href={`/products/${product.slug}`}
+                        href={canonicalProductHref(product.slug)}
                         className="text-foreground hover:text-battery font-medium"
                       >
                         {product.label}

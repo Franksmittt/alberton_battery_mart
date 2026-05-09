@@ -1,9 +1,13 @@
 'use client';
 
+import dynamic from "next/dynamic";
 import { Phone, MessageSquare, Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import CodeLookup from '@/components/content/CodeLookup';
+
+const CodeLookup = dynamic(() => import("@/components/content/CodeLookup"), {
+  loading: () => <div className="p-4 text-sm text-muted-foreground">Loading search...</div>,
+});
 
 const PRIMARY_PHONE = "010 109 6211";
 const WHATSAPP_NUMBER_LINK = "27823046926";
@@ -13,19 +17,19 @@ export function MobileStickyFooter() {
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-border bg-background/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
-      <div className="container px-2 py-2">
-        <div className="flex items-center justify-between gap-2">
+    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-[var(--brand-border)] bg-[var(--brand-bg)]/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+      <div className="container px-1 py-1.5">
+        <div className="mx-auto w-full max-w-[360px] grid grid-cols-[auto_1fr_1fr_auto] items-center gap-1">
           {/* Search Button */}
           <Sheet>
             <SheetTrigger asChild>
               <Button
                 variant="outline"
                 size="sm"
-                className="flex-1 h-12 border-white/20 bg-white/5 text-white hover:bg-white/10"
+                className="h-11 w-11 border-white/20 bg-white/5 px-0 text-white hover:bg-white/10"
+                aria-label="Open search"
               >
-                <Search className="h-5 w-5 mr-2" />
-                <span className="text-xs font-semibold">Search</span>
+                <Search className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="bottom" className="h-[80vh] overflow-y-auto">
@@ -45,12 +49,12 @@ export function MobileStickyFooter() {
             asChild
             variant="battery"
             size="sm"
-            className="flex-1 h-12 font-bold"
+            className="h-11 px-2 font-bold"
             trackingId="mobile-sticky-call"
           >
             <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center">
-              <Phone className="h-5 w-5 mr-2" />
-              <span className="text-xs">Call</span>
+              <Phone className="h-4 w-4 mr-1.5" />
+              <span className="text-xs">Call Now</span>
             </a>
           </Button>
 
@@ -59,7 +63,7 @@ export function MobileStickyFooter() {
             asChild
             variant="secondary"
             size="sm"
-            className="flex-1 h-12 bg-green-600 hover:bg-green-700 text-white font-bold"
+            className="h-11 px-2 bg-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] text-white font-bold"
             trackingId="mobile-sticky-whatsapp"
           >
             <a
@@ -68,8 +72,8 @@ export function MobileStickyFooter() {
               rel="noopener noreferrer"
               className="flex items-center justify-center"
             >
-              <MessageSquare className="h-5 w-5 mr-2" />
-              <span className="text-xs">WhatsApp</span>
+              <MessageSquare className="h-4 w-4 mr-1.5" />
+              <span className="text-xs">WA Quote</span>
             </a>
           </Button>
 
@@ -78,7 +82,7 @@ export function MobileStickyFooter() {
             asChild
             variant="outline"
             size="sm"
-            className="flex-1 h-12 border-white/20 bg-white/5 text-white hover:bg-white/10"
+            className="h-11 w-11 border-white/20 bg-white/5 px-0 text-white hover:bg-white/10"
             trackingId="mobile-sticky-map"
           >
             <a
@@ -86,9 +90,9 @@ export function MobileStickyFooter() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
+              aria-label="Open map directions"
             >
-              <MapPin className="h-5 w-5 mr-2" />
-              <span className="text-xs font-semibold">Map</span>
+              <MapPin className="h-5 w-5" />
             </a>
           </Button>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,25 +19,7 @@ export default function AdminPage() {
   const [formData, setFormData] = useState<Partial<ProductCardData>>({});
   const router = useRouter();
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    try {
-      const res = await fetch('/api/admin/check');
-      const data = await res.json();
-      if (!data.authenticated) {
-        router.push('/admin/login');
-        return;
-      }
-      loadProducts();
-    } catch (error) {
-      router.push('/admin/login');
-    }
-  };
-
-  const loadProducts = async () => {
+  const loadProducts = useCallback(async () => {
     try {
       const res = await fetch('/api/admin/products');
       if (res.status === 401) {
@@ -50,7 +33,25 @@ export default function AdminPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  const checkAuth = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/check');
+      const data = await res.json();
+      if (!data.authenticated) {
+        router.push('/admin/login');
+        return;
+      }
+      await loadProducts();
+    } catch (error) {
+      router.push('/admin/login');
+    }
+  }, [loadProducts, router]);
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   const handleLogout = async () => {
     await fetch('/api/admin/logout', { method: 'POST' });

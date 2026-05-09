@@ -2,7 +2,7 @@
 "use client";
 import { useState } from 'react';
 import Link from "next/link";
-import { Menu, Battery } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 // --- FIX: Import navItems from the central constants file ---
@@ -19,45 +19,56 @@ const MobileNav = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Menu className="h-6 w-6 text-foreground" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-11 w-11 rounded-md border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+        >
+          <Menu className="h-6 w-6 text-[var(--brand-accent)]" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full bg-background border-l border-border sm:max-w-xs">
-        <SheetHeader className="pb-6">
-          <SheetTitle>
-             <Link href="/" className="flex items-center space-x-2" onClick={() => setIsOpen(false)}>
-              <Battery className="h-6 w-6 text-battery-foreground bg-battery rounded-full p-1" />
-              <span className="text-lg font-extrabold tracking-tight text-foreground">
-                ALBERTON <span className="text-battery">BATTERY MART</span>
-              </span>
-             </Link>
-          </SheetTitle>
-        </SheetHeader>
-        <nav className="flex flex-col space-y-4 pt-4">
-          {/* --- FIX: Links are now mapped from the imported array --- */}
-          {allMobileItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-xl font-medium ${item.isCta ? 'text-battery hover:text-battery/80' : 'text-foreground hover:text-battery'} transition-colors`}
-              onClick={() => setIsOpen(false)} 
-            >
-              {item.label}
-            </Link>
-          ))}
-          
-          {/* Mobile CTAs for immediate contact */}
-           <div className="flex flex-col space-y-3 pt-6">
-            <Button asChild variant="battery" size="lg">
+      <SheetContent side="right" className="w-full border-l border-[var(--brand-border)] bg-[var(--brand-bg)] p-0 text-white sm:max-w-sm">
+        <div className="flex h-full flex-col">
+          <SheetHeader className="border-b border-[var(--brand-border)] px-6 py-5 text-left">
+            <SheetTitle className="text-left">
+              <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
+                <span className="text-lg font-extrabold tracking-tight text-white">
+                  Alberton <span className="text-[var(--brand-accent)]">Battery</span> Mart
+                </span>
+              </Link>
+            </SheetTitle>
+            <p className="pt-2 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-muted)]">
+              Mobile Fitment. Honest Testing.
+            </p>
+          </SheetHeader>
+
+          <nav className="flex-1 space-y-2 overflow-y-auto px-6 py-6">
+            {allMobileItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`block rounded-xl border px-4 py-3 text-base font-extrabold uppercase tracking-[0.05em] transition-colors ${
+                  item.isCta
+                    ? "border-[var(--brand-accent)]/60 bg-[var(--brand-accent)]/15 text-[var(--brand-accent)] hover:bg-[var(--brand-accent)]/25"
+                    : "border-[var(--brand-border)] bg-white/[0.03] text-white hover:border-[var(--brand-accent)]/40 hover:text-[var(--brand-accent)]"
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="space-y-3 border-t border-[var(--brand-border)] px-6 py-6">
+            <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-accent)] text-white hover:bg-[var(--brand-accent-hover)] font-extrabold">
               <a href={`tel:${PRIMARY_PHONE}`}>Call Us: {PRIMARY_PHONE}</a>
             </Button>
-            <Button asChild variant="secondary" size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+            <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-success)] text-white hover:bg-[var(--brand-success-hover)] font-extrabold">
               <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
-             </Button>
+            </Button>
           </div>
-        </nav>
+        </div>
       </SheetContent>
     </Sheet>
   );

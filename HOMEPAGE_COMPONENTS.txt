@@ -1,0 +1,112 @@
+HOMEPAGE COMPONENT MAP
+Project: Alberton Battery Mart
+Homepage route: src/app/page.tsx
+
+==================================================
+1) GLOBAL LAYOUT COMPONENTS (render with homepage)
+==================================================
+- src/app/layout.tsx
+  - ThemeProvider (src/components/theme-provider.tsx)
+  - Header (src/components/layout/Header.tsx)
+    - MobileNav (src/components/layout/MobileNav.tsx)
+  - Footer (src/components/layout/Footer.tsx)
+  - MobileStickyFooter (src/components/layout/MobileStickyFooter.tsx)
+    - Sheet / SheetContent / SheetTrigger (src/components/ui/sheet.tsx)
+    - CodeLookup (src/components/content/CodeLookup.tsx)
+
+=========================================
+2) DIRECT HOMEPAGE IMPORTS (src/app/page.tsx)
+=========================================
+- next/link (Link)
+- next/image (Image)
+- lucide-react icons:
+  - CheckCircle2
+  - Clock3
+  - MapPin
+  - Navigation
+  - Phone
+  - Search
+  - ShieldCheck
+- YMMSearchWidget (src/components/content/YMMSearchWidget.tsx)
+- MobileTrustRotator (src/components/layout/MobileTrustRotator.tsx)
+- FaqSection (src/components/layout/FaqSection.tsx) [dynamic import]
+- Product data:
+  - ALL_PRODUCTS
+  - ProductCardData
+  - (from src/data/products)
+
+=====================================
+3) HOMEPAGE SECTIONS IN RENDER ORDER
+=====================================
+1. Hero search section
+   - Main search form (text input + search button)
+   - Trending links chips
+
+2. Trust signals strip
+   - Desktop: 3 trust items in one row
+   - Mobile: MobileTrustRotator (1 item at a time, auto-rotate)
+
+3. Battery Finder section
+   - YMMSearchWidget variant="compact"
+
+4. Seamless Mobile Fitment process section
+   - 3-step process timeline
+
+5. Trending Fitments products section
+   - Curated 4 products from ALL_PRODUCTS
+
+6. Motorcycle/Enertec section
+   - Two-column marketing + feature list block
+
+7. Testimonials section
+   - 3 testimonial cards
+
+8. Storefront/contact + map section
+   - CTA buttons (Directions, Call)
+   - Embedded Google Maps iframe
+
+9. FAQ section
+   - FaqSection component (dynamic-loaded)
+
+=========================================
+4) KEY NESTED COMPONENTS USED BY HOMEPAGE
+=========================================
+- src/components/content/YMMSearchWidget.tsx
+  - Uses Card UI components from src/components/ui/card.tsx
+  - Uses Button from src/components/ui/button.tsx
+  - Uses cn from src/lib/utils.ts
+  - Calls /api/willard-fitment endpoint
+  - Supports variants: "hero", "compact"
+
+- src/components/layout/MobileTrustRotator.tsx
+  - Rotates trust messages every 5 seconds
+  - Mobile-only display
+
+- src/components/layout/FaqSection.tsx
+  - Static FAQ list with details/summary accordions
+
+======================================================
+5) HOMEPAGE-RELEVANT MOBILE UX COMPONENTS IN LAYOUT
+======================================================
+- src/components/layout/Header.tsx
+  - Desktop nav + top utility actions
+  - Mobile top bar with MobileNav trigger
+
+- src/components/layout/MobileNav.tsx
+  - Slide-out Sheet menu
+  - Mobile nav links + call/whatsapp CTAs
+
+- src/components/layout/MobileStickyFooter.tsx
+  - Sticky bottom action bar (search, call, whatsapp, map)
+  - Search opens Sheet with CodeLookup
+
+====================================
+6) HOMEPAGE METADATA (in page.tsx)
+====================================
+- title/description
+- keywords
+- openGraph data
+- twitter card data
+- canonical URL
+
+End of homepage component inventory.

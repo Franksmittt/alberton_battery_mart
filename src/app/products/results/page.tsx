@@ -1,7 +1,6 @@
 // src/app/products/results/page.tsx
 import { getAllProducts, ProductCardData, ALL_PRODUCTS } from "@/data/products";
 import ProductListPage from "@/components/layout/ProductListPage";
-import { notFound } from 'next/navigation';
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from 'next';
@@ -31,9 +30,20 @@ export async function generateMetadata({ searchParams }: ResultsPageProps): Prom
     title = `Batteries from ${searchParams.minAh || '0'}Ah to ${searchParams.maxAh || '...'}Ah`;
   }
   
-  const url = `${BASE_URL}/products/results${searchParams.q ? `?q=${encodeURIComponent(searchParams.q)}` : ''}${searchParams.brand ? `?brand=${encodeURIComponent(searchParams.brand)}` : ''}`;
+  const params = new URLSearchParams();
+  if (searchParams.q) params.set("q", searchParams.q);
+  if (searchParams.brand) params.set("brand", searchParams.brand);
+  if (searchParams.minAh) params.set("minAh", searchParams.minAh);
+  if (searchParams.maxAh) params.set("maxAh", searchParams.maxAh);
+
+  const queryString = params.toString();
+  const url = `${BASE_URL}/products/results${queryString ? `?${queryString}` : ""}`;
   
   return {
+    robots: {
+      index: false,
+      follow: true,
+    },
     title: `${title} | Alberton Battery Mart`,
     description: `Find ${title} at Alberton Battery Mart. We stock all car, truck, and solar batteries with free fitment.`,
     keywords: [
@@ -58,7 +68,7 @@ export async function generateMetadata({ searchParams }: ResultsPageProps): Prom
       ],
     },
     alternates: {
-      canonical: url,
+      canonical: `${BASE_URL}/products/results`,
     },
   };
 }

@@ -189,9 +189,9 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
 
   if (variant === 'compact') {
     return (
-      <div className="w-full rounded-2xl overflow-hidden border border-red-500/40 bg-[rgba(18,18,18,0.7)] backdrop-blur-[15px] shadow-[0_15px_35px_rgba(0,0,0,0.4),inset_0_0_15px_rgba(229,57,53,0.1)] max-[800px]:rounded-lg max-[800px]:p-4">
+      <div className="w-full rounded-2xl overflow-hidden border border-[var(--brand-accent)]/40 bg-[rgba(18,18,18,0.7)] backdrop-blur-[15px] shadow-[0_15px_35px_rgba(0,0,0,0.4),inset_0_0_15px_rgba(229,57,53,0.1)] max-[800px]:rounded-lg max-[800px]:p-4">
         <div className="flex items-center max-[800px]:flex-col max-[800px]:items-stretch">
-          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-red-500/20 relative">
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-[var(--brand-accent)]/20 relative">
             <label htmlFor="compact-vt" className="sr-only">Vehicle Type</label>
             <select
               id="compact-vt"
@@ -200,17 +200,17 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               aria-label="Select vehicle type"
               className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8"
             >
-              <option value="" className="bg-[#121212]">1. Select Type</option>
+              <option value="" className="bg-[var(--brand-bg)]">1. Select Type</option>
               {vehicleTypes.map((item) => (
-                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg)]">{item}</option>
               ))}
             </select>
             <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
           </div>
 
-          <div className="w-px h-10 bg-red-500/30 max-[800px]:hidden" />
+          <div className="w-px h-10 bg-[var(--brand-accent)]/30 max-[800px]:hidden" />
 
-          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-red-500/20 relative">
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-[var(--brand-accent)]/20 relative">
             <label htmlFor="compact-manufacturer" className="sr-only">Manufacturer</label>
             <select
               id="compact-manufacturer"
@@ -220,19 +220,19 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               aria-label="Select manufacturer"
               className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
             >
-              <option value="" className="bg-[#121212]">
+              <option value="" className="bg-[var(--brand-bg)]">
                 {vehicleType ? '2. Select Make' : '2. Select Make'}
               </option>
               {manufacturers.map((item) => (
-                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg)]">{item}</option>
               ))}
             </select>
             <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
           </div>
 
-          <div className="w-px h-10 bg-red-500/30 max-[800px]:hidden" />
+          <div className="w-px h-10 bg-[var(--brand-accent)]/30 max-[800px]:hidden" />
 
-          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-red-500/20 relative">
+          <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-[var(--brand-accent)]/20 relative">
             <label htmlFor="compact-year" className="sr-only">Year Model</label>
             <select
               id="compact-year"
@@ -242,17 +242,17 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               aria-label="Select year model"
               className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
             >
-              <option value="" className="bg-[#121212]">
+              <option value="" className="bg-[var(--brand-bg)]">
                 {manufacturer ? '3. Select Year' : '3. Select Year'}
               </option>
               {years.map((item) => (
-                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg)]">{item}</option>
               ))}
             </select>
             <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
           </div>
 
-          <div className="w-px h-10 bg-red-500/30 max-[800px]:hidden" />
+          <div className="w-px h-10 bg-[var(--brand-accent)]/30 max-[800px]:hidden" />
 
           <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 relative">
             <label htmlFor="compact-model" className="sr-only">Model</label>
@@ -264,11 +264,11 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               aria-label="Select model"
               className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
             >
-              <option value="" className="bg-[#121212]">
+              <option value="" className="bg-[var(--brand-bg)]">
                 {year ? '4. Select Model' : '4. Select Model'}
               </option>
               {models.map((item) => (
-                <option key={item} value={item} className="bg-[#121212]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg)]">{item}</option>
               ))}
             </select>
             <ChevronDown className="h-4 w-4 text-white absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none max-[800px]:right-1" />
@@ -290,7 +290,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
 
   // Hero variant - full featured
   return (
-    <Card className="w-full max-w-4xl mx-auto border border-white/10 bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] text-white shadow-[0_12px_35px_rgba(0,0,0,0.45)]">
+    <Card className="w-full max-w-4xl mx-auto border border-white/10 bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] text-white shadow-[0_12px_35px_rgba(0,0,0,0.45)]">
       <CardHeader className="text-center pb-4">
         <div className="flex items-center justify-center gap-3 mb-2">
           <Car className="h-8 w-8 text-battery" />
@@ -315,9 +315,9 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               aria-label="Select vehicle type"
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all"
             >
-              <option value="" className="bg-[#060606]">Select Vehicle Type</option>
+              <option value="" className="bg-[var(--brand-bg-soft)]">Select Vehicle Type</option>
               {vehicleTypes.map((item) => (
-                <option key={item} value={item} className="bg-[#060606]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg-soft)]">{item}</option>
               ))}
             </select>
           </div>
@@ -334,11 +334,11 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               disabled={!vehicleType}
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all"
             >
-              <option value="" className="bg-[#060606]">
+              <option value="" className="bg-[var(--brand-bg-soft)]">
                 {vehicleType ? 'Select Manufacturer' : 'Select Vehicle Type First'}
               </option>
               {manufacturers.map((item) => (
-                <option key={item} value={item} className="bg-[#060606]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg-soft)]">{item}</option>
               ))}
             </select>
           </div>
@@ -355,11 +355,11 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
               disabled={!manufacturer}
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <option value="" className="bg-[#060606]">
+              <option value="" className="bg-[var(--brand-bg-soft)]">
                 {manufacturer ? 'Select Year Model' : 'Select Manufacturer First'}
               </option>
               {years.map((item) => (
-                <option key={item} value={item} className="bg-[#060606]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg-soft)]">{item}</option>
               ))}
             </select>
           </div>
@@ -381,11 +381,11 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
                   : "border-white/20 bg-white/5"
               )}
             >
-              <option value="" className="bg-[#060606]">
+              <option value="" className="bg-[var(--brand-bg-soft)]">
                 {year ? 'Select Model' : 'Select Year Model First'}
               </option>
               {models.map((item) => (
-                <option key={item} value={item} className="bg-[#060606]">{item}</option>
+                <option key={item} value={item} className="bg-[var(--brand-bg-soft)]">{item}</option>
               ))}
             </select>
           </div>

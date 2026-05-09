@@ -167,7 +167,7 @@ export default function RootLayout({
         <JsonLd data={organizationSchema} id="organization-schema" />
       </head>
 
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-clip`}>
         {/* --- GTM fallback for no-JS browsers --- */}
         {shouldLoadGtm && (
           <noscript>
@@ -217,10 +217,13 @@ export default function RootLayout({
               if (typeof window === "undefined" || typeof document === "undefined") return;
               window.dataLayer = window.dataLayer || [];
 
-              function push(eventName, href) {
+              function push(eventName, payload) {
+                var details = payload || {};
                 window.dataLayer.push({
                   event: eventName,
-                  href: href || "",
+                  href: details.href || "",
+                  form_action: details.form_action || "",
+                  form_id: details.form_id || "",
                   page_path: window.location.pathname
                 });
               }
@@ -235,22 +238,41 @@ export default function RootLayout({
                 if (!href) return;
 
                 if (href.indexOf("tel:") === 0) {
-                  push("phone_call_click", href);
+                  push("phone_call_click", { href: href });
                   return;
                 }
 
                 if (href.indexOf("https://wa.me/") === 0 || href.indexOf("https://api.whatsapp.com/") === 0) {
-                  push("whatsapp_click", href);
+                  push("whatsapp_click", { href: href });
                   return;
                 }
 
                 if (href.indexOf("google.com/maps") !== -1 || href.indexOf("maps.google.com") !== -1) {
-                  push("map_directions_click", href);
+                  push("map_directions_click", { href: href });
                   return;
                 }
 
                 if (href.indexOf("mailto:") === 0) {
-                  push("email_click", href);
+                  push("email_click", { href: href });
+                }
+              }, true);
+
+              document.addEventListener("submit", function(event) {
+                var form = event.target;
+                if (!form || form.tagName !== "FORM") return;
+
+                var action = form.getAttribute("action") || window.location.pathname;
+                var formId = form.getAttribute("id") || "";
+                push("form_submit", {
+                  form_action: action,
+                  form_id: formId
+                });
+
+                if (action.indexOf("/products/results") !== -1) {
+                  push("search_form_submit", {
+                    form_action: action,
+                    form_id: formId
+                  });
                 }
               }, true);
             })();
@@ -263,7 +285,7 @@ export default function RootLayout({
           enableSystem
         >
           <Header />
-          <div className="pt-16 md:pt-28 pb-20 md:pb-0">
+          <div className="pt-16 md:pt-28 pb-20 md:pb-0 overflow-x-clip">
             {children}
           </div>
           <Footer />

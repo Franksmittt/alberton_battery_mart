@@ -52,9 +52,9 @@ const CategoryFilterSidebar: React.FC<CategoryFilterSidebarProps> = ({
     }
     
   return (
-    <aside className="w-full border-r-0 border-[#2a2a2a] border-b-2 lg:w-[300px] lg:flex-shrink-0 lg:border-r-2 lg:border-b-0 bg-[#121212] p-8 space-y-10">
+    <aside className="w-full border-r-0 border-[var(--brand-border)] border-b-2 lg:w-[300px] lg:flex-shrink-0 lg:border-r-2 lg:border-b-0 bg-[var(--brand-bg)] p-8 space-y-10">
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#888888]">Now Viewing</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-muted-2)]">Now Viewing</p>
         <h3 className="text-2xl font-black text-white">{currentCategory}</h3>
       </div>
 
@@ -68,15 +68,15 @@ const CategoryFilterSidebar: React.FC<CategoryFilterSidebarProps> = ({
               onClick={() => handleBrandFilter(brand)}
               className={`inline-flex rounded-full border-2 px-4 py-2 text-[0.85rem] font-bold transition-colors ${
                 index === 0
-                  ? "border-white bg-white text-[#0a0a0a]"
-                  : "border-[#2a2a2a] text-[#888888] hover:border-white hover:text-white"
+                  ? "border-white bg-white text-[var(--brand-bg-soft)]"
+                  : "border-[var(--brand-border)] text-[var(--brand-muted-2)] hover:border-white hover:text-white"
               }`}
             >
               {brand}
             </button>
           ))}
         </div>
-        <Link href="/products" className="inline-flex text-sm font-semibold text-[#E53935] hover:text-[#C62828]">
+        <Link href="/products" className="inline-flex text-sm font-semibold text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)]">
           View All Categories
         </Link>
       </div>
@@ -91,8 +91,8 @@ const CategoryFilterSidebar: React.FC<CategoryFilterSidebarProps> = ({
               onClick={() => handleCapacityFilter(filter.label, filter.min, filter.max)}
               className={`inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
                 activeCapacity === filter.label
-                  ? "border-white bg-white text-[#0a0a0a]"
-                  : "border-[#2a2a2a] text-[#888888] hover:border-[#444444] hover:text-white"
+                  ? "border-white bg-white text-[var(--brand-bg-soft)]"
+                  : "border-[var(--brand-border)] text-[var(--brand-muted-2)] hover:border-[var(--brand-muted-3)] hover:text-white"
               }`}
             >
               {filter.label}
@@ -109,13 +109,13 @@ const CategoryFilterSidebar: React.FC<CategoryFilterSidebarProps> = ({
               key={size}
               type="button"
               onClick={() => handleSkuFilter(size)}
-              className="inline-flex rounded-full border border-[#2a2a2a] px-3 py-1.5 text-xs font-semibold text-[#888888] transition-colors hover:border-[#444444] hover:text-white"
+              className="inline-flex rounded-full border border-[var(--brand-border)] px-3 py-1.5 text-xs font-semibold text-[var(--brand-muted-2)] transition-colors hover:border-[var(--brand-muted-3)] hover:text-white"
             >
               {size}
             </button>
           ))}
         </div>
-        <p className="text-xs text-[#666666]">Common codes: 619, 652, EFB.</p>
+        <p className="text-xs text-[var(--brand-muted-3)]">Common codes: 619, 652, EFB.</p>
       </div>
     </aside>
   );

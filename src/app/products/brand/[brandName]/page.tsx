@@ -195,7 +195,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
       category: product.category,
     })),
   };
@@ -214,7 +214,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
     })),
   };
 

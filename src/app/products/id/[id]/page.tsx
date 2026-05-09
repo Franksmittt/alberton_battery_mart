@@ -14,6 +14,10 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { TrackViewItem } from "@/components/analytics/TrackViewItem";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+import ProductSchema from "@/components/seo/ProductSchema";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import IntentLinks from "@/components/seo/IntentLinks";
 
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
@@ -45,11 +49,10 @@ export async function generateMetadata({
     product.popularFits ? `Fits: ${product.popularFits}.` : ""
   } Free fitment, testing, and 24-month warranty. Call 010 109 6211.`;
 
-  const url = `https://www.albertonbatterymart.co.za/products/${product.id}`;
-
-  return {
+  return buildPageMetadata({
     title,
     description,
+    path: `/products/id/${product.id}`,
     keywords: [
       `${product.name} Alberton`,
       `${product.brandName} battery`,
@@ -63,30 +66,9 @@ export async function generateMetadata({
             .map((fit) => `${fit.trim()} battery`)
         : []),
     ],
-    openGraph: {
-      title,
-      description,
-      url,
-      type: "website",
-      images: [
-        {
-          url: `https://www.albertonbatterymart.co.za${product.imagePath}`,
-          width: 800,
-          height: 600,
-          alt: `${product.name} - ${product.seoSubtitle}`,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`https://www.albertonbatterymart.co.za${product.imagePath}`],
-    },
-    alternates: {
-      canonical: url,
-    },
-  };
+    imagePath: product.imagePath || "/images/og-image.jpg",
+    imageAlt: `${product.name} - ${product.seoSubtitle}`,
+  });
 }
 
 export async function generateStaticParams() {
@@ -114,82 +96,58 @@ export default function ProductDetailPage({
     { label: "Warranty", value: `${product.warrantyMonths} Months` },
   ];
 
-  const productSchema = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    name: product.name,
-    image: `https://www.albertonbatterymart.co.za${product.imagePath}`,
-    description: `Get the ${product.name} ${
-      product.seoSubtitle
-    } at Alberton Battery Mart. Free fitment, testing, and ${
-      product.warrantyMonths
-    }-month warranty.`,
-    sku: product.sku,
-    mpn: product.sku,
-    brand: {
-      "@type": "Brand",
-      name: product.brandName,
-    },
-    category: product.category,
-    offers: {
-      "@type": "Offer",
-      url: `https://www.albertonbatterymart.co.za/products/${product.id}`,
-      priceCurrency: "ZAR",
-      price: parsePrice(product.sellingPrice_OUTPUT),
-      availability: "https://schema.org/InStock",
-      itemCondition: "https://schema.org/NewCondition",
-      priceValidUntil: new Date(
-        Date.now() + 365 * 24 * 60 * 60 * 1000
-      )
-        .toISOString()
-        .split("T")[0],
-      seller: {
-        "@type": "LocalBusiness",
-        name: "Alberton Battery Mart",
-        url: "https://www.albertonbatterymart.co.za",
-      },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "127",
-    },
-  };
+  const sameSizeAlternatives = ALL_PRODUCTS.filter(
+    (item) => item.id !== product.id && item.sku === product.sku
+  ).slice(0, 4);
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.albertonbatterymart.co.za",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Products",
-        item: "https://www.albertonbatterymart.co.za/products",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: product.name,
-        item: `https://www.albertonbatterymart.co.za/products/${product.id}`,
-      },
-    ],
-  };
+  const sameBrandAlternatives = ALL_PRODUCTS.filter(
+    (item) =>
+      item.id !== product.id &&
+      item.brandName === product.brandName &&
+      item.category === product.category
+  ).slice(0, 4);
+
+  const quickFaqs = [
+    {
+      question: `Will this ${product.sku} battery fit my vehicle?`,
+      answer:
+        "Fitment depends on tray size, terminal layout, and electrical requirements. We confirm compatibility before installation using your vehicle details.",
+    },
+    {
+      question: "Is alternator testing included?",
+      answer:
+        "Yes. Every replacement includes battery and charging-system diagnostics to confirm the alternator and starter are healthy.",
+    },
+    {
+      question: `What warranty do I get on this ${product.name}?`,
+      answer: `This battery includes a ${product.warrantyMonths}-month warranty when professionally fitted and registered.`,
+    },
+  ];
 
   return (
     <div className="container py-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, '\\u003c') }}
+      <ProductSchema
+        scriptId="product-schema"
+        name={product.name}
+        description={`Get the ${product.name} ${
+          product.seoSubtitle
+        } at Alberton Battery Mart. Free fitment, testing, and ${
+          product.warrantyMonths
+        }-month warranty.`}
+        sku={product.sku}
+        brand={product.brandName}
+        image={product.imagePath}
+        url={`/products/id/${product.id}`}
+        price={parsePrice(product.sellingPrice_OUTPUT)}
+        aggregateRating={{ ratingValue: "4.8", reviewCount: "127" }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }}
+      <BreadcrumbSchema
+        id="product-breadcrumb-schema"
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Products", item: "/products" },
+          { name: product.name, item: `/products/id/${product.id}` },
+        ]}
       />
 
       <div className="grid lg:grid-cols-2 gap-12">
@@ -199,6 +157,7 @@ export default function ProductDetailPage({
               src={product.imagePath}
               alt={`${product.name} - ${product.seoSubtitle}`}
               fill
+              quality={75}
               style={{ objectFit: "contain" }}
               sizes="(max-width: 768px) 100vw, 50vw"
               className="p-4"
@@ -323,6 +282,59 @@ export default function ProductDetailPage({
             "Passenger cars, SUVs, 4x4s, trucks, and leisure batteries."}
         </p>
       </div>
+
+      <Separator className="my-12" />
+
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-foreground">Compatibility and fitment guidance</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="border border-border rounded-lg p-5 bg-card">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Common fitment profile</h3>
+            <p className="text-muted-foreground">{product.popularFits || "Passenger cars, SUVs, 4x4s, and light commercial vehicles."}</p>
+          </div>
+          <div className="border border-border rounded-lg p-5 bg-card">
+            <h3 className="text-lg font-semibold text-foreground mb-2">Installation notes</h3>
+            <ul className="list-disc pl-5 text-muted-foreground space-y-1">
+              <li>Battery tray and hold-down points are checked before fitment.</li>
+              <li>Terminal orientation and cable reach are verified on-site.</li>
+              <li>Charging-system health is tested before warranty registration.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <Separator className="my-12" />
+
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-foreground">FAQ</h2>
+        <div className="space-y-4">
+          {quickFaqs.map((faq) => (
+            <div key={faq.question} className="border border-border rounded-lg p-5 bg-card">
+              <p className="font-semibold text-foreground">{faq.question}</p>
+              <p className="mt-2 text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Separator className="my-12" />
+
+      {(sameSizeAlternatives.length > 0 || sameBrandAlternatives.length > 0) && (
+        <IntentLinks
+          title="Related products by brand and size"
+          description="Compare same-size alternatives and same-brand options before you book."
+          links={[
+            ...sameSizeAlternatives.map((item) => ({
+              href: `/products/id/${item.id}`,
+              label: `${item.name} ${item.sku} alternative - ${item.sellingPrice_OUTPUT}`,
+            })),
+            ...sameBrandAlternatives.map((item) => ({
+              href: `/products/id/${item.id}`,
+              label: `${product.brandName} ${item.sku} option - ${item.sellingPrice_OUTPUT}`,
+            })),
+          ].slice(0, 8)}
+        />
+      )}
     </div>
   );
 }

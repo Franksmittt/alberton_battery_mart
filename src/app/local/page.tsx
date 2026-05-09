@@ -154,6 +154,77 @@ export default function LocalAreasHubPage() {
           </div>
         </Link>
       </section>
+
+      <Separator />
+
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-foreground text-center">
+          Service landing pages by suburb
+        </h2>
+        <p className="text-center text-muted-foreground max-w-3xl mx-auto">
+          Jump straight to high-intent service pages for diagnostics, emergency support, and mobile replacement.
+        </p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {areas.map((area) => (
+            <div key={`service-links-${area.slug}`} className="rounded-lg border border-border bg-card p-4 space-y-2">
+              <p className="font-semibold text-foreground">{area.name}</p>
+              <div className="flex flex-wrap gap-2 text-sm">
+                <Link href={`/services/mobile-battery-replacement/${area.slug}`} className="text-battery hover:underline">
+                  Mobile replacement
+                </Link>
+                <Link href={`/services/free-battery-testing/${area.slug}`} className="text-battery hover:underline">
+                  Free testing
+                </Link>
+                <Link href={`/services/emergency-jump-start/${area.slug}`} className="text-battery hover:underline">
+                  Emergency jump-start
+                </Link>
+              </div>
+            </div>
+          ))}
+          <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+            <p className="font-semibold text-foreground">Alberton Central</p>
+            <div className="flex flex-wrap gap-2 text-sm">
+              <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline">
+                Mobile replacement
+              </Link>
+              <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline">
+                Free testing
+              </Link>
+              <Link href="/services/emergency-jump-start/alberton" className="text-battery hover:underline">
+                Emergency jump-start
+              </Link>
+            </div>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+            <p className="font-semibold text-foreground">Meyersdal</p>
+            <div className="flex flex-wrap gap-2 text-sm">
+              <Link href="/services/battery-fitment/meyersdal" className="text-battery hover:underline">
+                Premium fitment
+              </Link>
+              <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline">
+                Free testing
+              </Link>
+              <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline">
+                Mobile replacement
+              </Link>
+            </div>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 space-y-2">
+            <p className="font-semibold text-foreground">New Redruth</p>
+            <div className="flex flex-wrap gap-2 text-sm">
+              <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline">
+                Mobile replacement
+              </Link>
+              <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline">
+                Free testing
+              </Link>
+              <Link href="/services/emergency-jump-start/alberton" className="text-battery hover:underline">
+                Emergency jump-start
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -8,9 +8,11 @@ import {
   getVehicleFitment,
   getAllVehicleSlugs,
 } from "@/data/vehicle-fitment";
+import { getProductDetail } from "@/data/product-detail";
 import { BASE_URL } from "@/lib/seo-constants";
 import { MapPin, AlertTriangle, ShieldCheck } from "lucide-react";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import Link from "next/link";
 
 type Params = {
   make: string;
@@ -19,6 +21,11 @@ type Params = {
 
 function buildSlug(make: string, model: string) {
   return `${make}/${model}`;
+}
+
+function canonicalProductHref(productSlug: string): string {
+  const product = getProductDetail(productSlug);
+  return product ? `/products/id/${product.id}` : `/products/${productSlug}`;
 }
 
 export async function generateStaticParams() {
@@ -84,9 +91,9 @@ export default function VehicleFitmentPage({ params }: { params: Params }) {
       itemOffered: {
         "@type": "Product",
         name: product.title,
-        url: `${BASE_URL}/products/${product.slug}`,
+        url: `${BASE_URL}${canonicalProductHref(product.slug)}`,
       },
-      url: `${BASE_URL}/products/${product.slug}`,
+      url: `${BASE_URL}${canonicalProductHref(product.slug)}`,
     })),
   };
 
@@ -185,7 +192,7 @@ export default function VehicleFitmentPage({ params }: { params: Params }) {
                 variant="outline"
                 asChild
               >
-                <a href={`/products/${product.slug}`}>View specs</a>
+                <a href={canonicalProductHref(product.slug)}>View specs</a>
               </Button>
             </div>
           ))}
@@ -238,6 +245,28 @@ export default function VehicleFitmentPage({ params }: { params: Params }) {
               </Button>
             </div>
           ))}
+        </div>
+      </section>
+
+      <Separator className="bg-border" />
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold text-foreground">
+          Local fitment hotspots
+        </h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          <Link href="/local/new-redruth" className="border border-border rounded-lg p-5 bg-card hover:border-battery transition-colors">
+            <p className="font-semibold text-foreground">New Redruth fitment support</p>
+            <p className="text-sm text-muted-foreground mt-2">Closest workshop access and rapid dispatch.</p>
+          </Link>
+          <Link href="/local/meyersdal" className="border border-border rounded-lg p-5 bg-card hover:border-battery transition-colors">
+            <p className="font-semibold text-foreground">Meyersdal mobile battery service</p>
+            <p className="text-sm text-muted-foreground mt-2">Premium suburb support with on-site diagnostics.</p>
+          </Link>
+          <Link href="/local/alberton-central" className="border border-border rounded-lg p-5 bg-card hover:border-battery transition-colors">
+            <p className="font-semibold text-foreground">Alberton Central emergency coverage</p>
+            <p className="text-sm text-muted-foreground mt-2">Fast response for no-start incidents.</p>
+          </Link>
         </div>
       </section>
 

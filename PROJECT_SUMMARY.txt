@@ -1190,14 +1190,81 @@ BREAKDOWN BY CATEGORY:
 - Content Quality: 9/10
 
 ================================================================================
+               EXECUTION UPDATE - MAY 2026 (SEO + CRO + THEME SYSTEM)
+================================================================================
+
+Date: May 2026 (latest sprint)
+Status: ✅ COMPLETE - sections 1 through 11 executed in-repo
+
+MAJOR EXECUTION OUTCOMES:
+
+1) SEO IMPLEMENTATION CHECKLIST EXECUTION:
+   - Sections 1-11 in SEO_REPO_IMPLEMENTATION_CHECKLIST.md were implemented and marked complete.
+   - Technical SEO foundation, schema system, service-area scaling, fitment/product SEO,
+     internal linking engine, homepage conversion improvements, CWV/mobile hardening,
+     content production system, weekly operating rhythm, and risk controls all shipped.
+
+2) CANONICAL + URL CONSOLIDATION:
+   - Canonical product route standardized to /products/id/[id].
+   - Legacy/overlap product routes now redirect and are de-index guarded where applicable.
+   - Internal links across services/vehicles/blog templates updated toward canonical product IDs.
+
+3) METADATA + SCHEMA MODERNIZATION:
+   - Reusable metadata builder and reusable JSON-LD components integrated across templates.
+   - Breadcrumb, Product, and FAQ schema standardized through reusable components.
+   - Service/local/blog/product template coverage improved for search appearance consistency.
+
+4) SITEMAP + ROBOTS:
+   - Segmented sitemap sources implemented and canonical-only product entries enforced.
+   - Robots controls refined for admin/API and parameterized crawl-waste patterns.
+   - Indexation behavior now explicit on sensitive/utility routes.
+
+5) HOMEPAGE CONVERSION SEO:
+   - Hero copy testing framework added (control/urgency/trust variants).
+   - Strong proof elements placed near high-intent CTAs.
+   - Mobile sticky footer CTA labels refined for conversion intent.
+   - Lead tracking coverage expanded to include form submission events.
+
+6) CORE WEB VITALS + MOBILE QA HARDENING:
+   - Multiple image components tuned with quality/sizing improvements.
+   - Overflow/tap-target/stacking hardening applied (mobile nav/footer/sheets).
+   - Product spotlight refactored to server-rendered deterministic output to reduce CLS.
+
+7) CONTENT PRODUCTION SYSTEM:
+   - Reusable high-intent blog block component added:
+     src/components/blog/HighIntentTemplateBlock.tsx
+   - Blog template now enforces money-page linkage pattern per post:
+     * 1 service-area page
+     * 1 product or fitment page
+     * 1 local page
+
+8) WEEKLY OPERATING RHYTHM OPERATIONALIZED:
+   - Added execution SOP: SEO_WEEKLY_OPERATING_RHYTHM.md
+   - Includes Monday-Friday workflow, scorecard, QA gate, and KPI tracking structure.
+
+9) THEME + UI/UX UNIFICATION (SITE-WIDE DIRECTION):
+   - Added centralized brand token layer in globals.css.
+   - Updated key shared shell components (Header, Footer, MobileNav, MobileStickyFooter).
+   - Added compatibility mapping layer so legacy hardcoded color classes inherit brand tokens.
+   - Per-template cleanup applied to high-impact pages/components (FAQ section, product cards,
+     automotive/performance/truck/motorcycle category templates, hero CTA surfaces).
+   - Fixed footer local link mismatch: /local/alrode-south -> /local/alrode.
+
+10) BUILD/RELEASE READINESS:
+   - Production build validated repeatedly with next build.
+   - Admin layout duplicate export issue fixed.
+   - Admin API route runtime/dynamic handling stabilized.
+   - Current status: ✅ Build passing; lint/type checks passing on updated files.
+
+================================================================================
                               END OF SUMMARY
 ================================================================================
 
 Generated: 2024
-Last Updated: May 2026 (Fitment Selector + Multi-Brand Mapping + Local SEO Expansion)
+Last Updated: May 2026 (Full SEO checklist execution + theme/UX unification sprint)
 Project: Alberton Battery Mart (abm2)
 Framework: Next.js 14.2.3 App Router
-Status: Active Development - Production Site with Ongoing Enhancements
-Build Status: ✅ Lint passing on current branch (existing legacy warning in admin hook dependency)
-SEO Rating: 9.5/10+ trajectory (local coverage + route depth expanded)
+Status: Active Development - Production-ready SEO/CRO + ongoing UI polish
+Build Status: ✅ Production build passing (next build)
+SEO Rating: 9.5/10+ trajectory with full implementation baseline shipped
 

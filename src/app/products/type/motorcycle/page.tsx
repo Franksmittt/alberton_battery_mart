@@ -105,7 +105,7 @@ export default async function MotorcycleBatteriesPage() {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
     })),
   };
 
@@ -125,7 +125,7 @@ export default async function MotorcycleBatteriesPage() {
         {/* --- EDUCATIONAL SECTION: Understanding Motorcycle Batteries --- */}
         <div className="max-w-5xl mx-auto space-y-8">
           {/* What Makes Motorcycle Batteries Different */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-6">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-6">
             <div className="flex items-center gap-3">
               <Bike className="h-8 w-8 text-battery" />
               <h2 className="text-3xl font-black text-white">
@@ -158,7 +158,7 @@ export default async function MotorcycleBatteriesPage() {
           </div>
 
           {/* Types of Powersport Batteries */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-4">
             <h3 className="text-2xl font-black text-white flex items-center gap-3">
               <Bike className="h-6 w-6 text-battery" />
               Powersport Applications
@@ -186,7 +186,7 @@ export default async function MotorcycleBatteriesPage() {
           </div>
 
           {/* Important Considerations */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border-2 border-battery/30 rounded-2xl p-8 space-y-4">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border-2 border-battery/30 rounded-2xl p-8 space-y-4">
             <h3 className="text-2xl font-black text-white flex items-center gap-3">
               <ShieldCheck className="h-6 w-6 text-battery" />
               Important Considerations
@@ -227,7 +227,7 @@ export default async function MotorcycleBatteriesPage() {
             asChild
             size="xl"
             variant="secondary"
-            className="w-full bg-green-600 hover:bg-green-700 text-white"
+            className="w-full bg-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] text-white"
             trackingId="type-motorcycle-whatsapp"
           >
             <a

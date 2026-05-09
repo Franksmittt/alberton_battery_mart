@@ -22,7 +22,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
   const isAGM = product.isAGM;
   
   // Use product ID to create dynamic link path
-  const linkPath = `/product/${product.id}`;
+  const linkPath = `/products/id/${product.id}`;
 
   const badgeLabel = isAGM ? 'AGM / Start-Stop' : 'Standard Fitment';
 
@@ -33,7 +33,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
     >
       <Card
         className={cn(
-          'relative h-full overflow-hidden border border-white/5 bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] text-white',
+          'relative h-full overflow-hidden border border-white/5 bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] text-white',
           'shadow-[0_12px_35px_rgba(0,0,0,0.45)] transition-all duration-500 ease-out',
           'before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top,_rgba(192,0,0,0.15),_transparent)] before:opacity-0 before:transition-opacity before:duration-500',
           'after:absolute after:-top-1/2 after:left-1/2 after:w-64 after:h-64 after:bg-battery/40 after:blur-3xl after:opacity-0 after:-translate-x-1/2 after:transition-all after:duration-500',

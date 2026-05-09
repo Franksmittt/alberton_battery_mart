@@ -41,6 +41,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${BASE_URL}/testing`,
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const EMERGENCY_PHONE = "0101096211";

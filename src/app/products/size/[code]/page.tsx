@@ -1,7 +1,7 @@
 // src/app/products/size/[code]/page.tsx
 import Link from "next/link";
 import ProductListPage from "@/components/layout/ProductListPage";
-import { getAllProducts, ProductCardData, ALL_PRODUCTS } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import { notFound } from "next/navigation";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
@@ -11,13 +11,7 @@ import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
 
-// This function tells Next.js which battery codes to pre-build
-export async function generateStaticParams() {
-  const sizes = Array.from(new Set(ALL_PRODUCTS.map((p) => p.sku)));
-  return sizes.map((size) => ({
-    code: size.toLowerCase(),
-  }));
-}
+export const dynamic = "force-dynamic";
 
 // Props interface for the dynamic page
 interface SizePageProps {
@@ -116,7 +110,7 @@ export default async function SizePage({ params }: SizePageProps) {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
       brand: product.brandName,
       category: product.category,
     })),

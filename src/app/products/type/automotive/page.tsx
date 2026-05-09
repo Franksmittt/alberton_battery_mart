@@ -1,16 +1,13 @@
-// src/app/products/type/automotive/page.tsx
 import { getAllProducts, ProductCardData } from "@/data/products";
-import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Phone, Zap, ShieldCheck, Gauge, Car } from "lucide-react";
+import { Phone, MessageSquare, Zap, ShieldCheck } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+import AutomotiveCatalogExperience from "@/components/products/AutomotiveCatalogExperience";
 
-// Make this page dynamic so it can read updated prices from JSON
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const PAGE_TITLE = "Car Batteries in Alberton | Standard & AGM | Alberton Battery Mart";
 const PAGE_DESCRIPTION =
@@ -35,31 +32,25 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Car Batteries - Alberton Battery Mart',
+        alt: "Car Batteries - Alberton Battery Mart",
       },
     ],
-    locale: 'en_ZA',
-    siteName: 'Alberton Battery Mart',
+    locale: "en_ZA",
+    siteName: "Alberton Battery Mart",
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
-    images: ['/images/og-image.jpg'],
+    images: ["/images/og-image.jpg"],
   },
 };
 
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
-
-const getFilterOptions = (products: ProductCardData[]) => {
-    const brands = Array.from(new Set(products.map(p => p.brandName)));
-    const sizes = Array.from(new Set(products.map(p => p.sku)));
-    return { brands, sizes };
-};
 
 const SERVICE_LINKS = [
   {
@@ -75,7 +66,7 @@ const SERVICE_LINKS = [
   {
     label: "Premium Fitment - Meyersdal",
     href: "/services/battery-fitment/meyersdal",
-    description: "Boot battery projects for Audi, BMW, Mercedes.",
+    description: "Boot battery projects for Audi, BMW, and Mercedes.",
   },
 ];
 
@@ -88,10 +79,12 @@ const VEHICLE_LINKS = [
 
 export default async function StandardAutomotiveBatteriesPage() {
   const allProducts = await getAllProducts();
-  const AUTOMOTIVE_PRODUCTS = allProducts.filter((p: ProductCardData) => 
-    p.category === 'Standard Automotive' || p.category === 'Performance AGM/EFB'
-  );
-  const { brands, sizes } = getFilterOptions(AUTOMOTIVE_PRODUCTS);
+  const automotiveProducts = allProducts
+    .filter(
+      (p: ProductCardData) =>
+        p.category === "Standard Automotive" || p.category === "Performance AGM/EFB"
+    )
+    .sort((a, b) => a.brandName.localeCompare(b.brandName) || a.name.localeCompare(b.name));
 
   const productCollectionSchema = {
     "@context": "https://schema.org",
@@ -104,108 +97,129 @@ export default async function StandardAutomotiveBatteriesPage() {
       name: "Mobile Battery Replacement",
       url: `${BASE_URL}/services/mobile-battery-replacement/alberton`,
     },
-    hasPart: AUTOMOTIVE_PRODUCTS.slice(0, 20).map((product) => ({
+    hasPart: automotiveProducts.slice(0, 20).map((product) => ({
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
     })),
   };
 
   return (
-    <div className="container py-16 space-y-12">
+    <div className="container py-14 space-y-10">
       <JsonLd data={productCollectionSchema} id="automotive-collection-schema" />
-        
-        <div className="text-center space-y-3">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
-                <span className="text-battery">Car Battery</span> Catalog: Standard & Performance
+
+      <section className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-8 md:p-10">
+        <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+          <div className="space-y-5">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white leading-tight">
+              Automotive batteries, <span className="text-[var(--brand-accent)]">properly matched</span> to your vehicle
             </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-                 All certified maintenance-free batteries for your vehicle, including specialized EFB/AGM required for Start/Stop systems.
+            <p className="text-lg text-[var(--brand-muted)] max-w-3xl">
+              Premium daily-driver, bakkie, and Start/Stop battery options with diagnostics-first
+              fitment in Alberton.
             </p>
-        </div>
-        
-        {/* --- NEW SECTION: Bakkie/Workhorse Pillar Content --- */}
-        <div className="max-w-5xl mx-auto space-y-6 bg-card border border-border p-8 rounded-lg shadow-xl">
-          <div className="flex items-center space-x-3">
-            <Gauge className="h-10 w-10 text-battery flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-foreground">
-              For Bakkies, 4x4s, & Start/Stop Vehicles
-            </h2>
-          </div>
-          <p className="text-lg text-muted-foreground">
-            A modern bakkie like a **Toyota Hilux** or **Ford Ranger** is not just a "car." The high electrical demands and Start/Stop technology in new models require a specialized **EFB or AGM battery.**
-          </p>
-          <p className="text-lg text-muted-foreground">
-            Installing a standard "cheap" battery will lead to premature failure and system warnings. We stock the correct, warrantied batteries your bakkie or modern SUV needs.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6 pt-4">
-            <div className="flex items-start space-x-3">
-              <Zap className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">EFB for High Demand</h3>
-                <p className="text-muted-foreground">Enhanced Flooded Batteries (EFB) are the perfect upgrade for vehicles with high electrical loads or basic Start/Stop.</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-3">
-              <ShieldCheck className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">AGM for Peak Performance</h3>
-                <p className="text-muted-foreground">Absorbent Glass Mat (AGM) is mandatory for advanced Start/Stop, regenerative braking, and premium vehicles (BMW, Audi, Mercedes).</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* --- END NEW SECTION --- */}
-
-        {/* Primary CTA Button on this page (Fixed number display) */}
-        <div className="flex flex-col items-center gap-4 text-center max-w-md mx-auto">
-             <Button
-               asChild
-               size="xl"
-               variant="battery"
-               className="w-full shadow-lg"
-               trackingId="type-automotive-call"
-             >
-               <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex w-full items-center justify-center gap-3">
-                    <Phone className="h-6 w-6" />
-                    <span>Call Us: {EMERGENCY_PHONE_DISPLAY}</span>
+            <div className="flex flex-col sm:flex-row gap-3 pt-1">
+              <Button
+                asChild
+                size="lg"
+                variant="battery"
+                className="sm:w-auto"
+                trackingId="type-automotive-call"
+              >
+                <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="inline-flex items-center gap-2">
+                  <Phone className="h-5 w-5" />
+                  Call: {EMERGENCY_PHONE_DISPLAY}
                 </a>
-             </Button>
-             <Button
-               asChild
-               size="xl"
-               variant="secondary"
-               className="w-full bg-green-600 hover:bg-green-700 text-white"
-               trackingId="type-automotive-whatsapp"
-             >
-               <a
-                 href="https://wa.me/27823046926?text=Battery%20quote"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 className="flex w-full items-center justify-center gap-2"
-               >
-                 <Car className="h-5 w-5" />
-                 WhatsApp the workshop
-               </a>
-             </Button>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="sm:w-auto bg-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] text-white"
+                trackingId="type-automotive-whatsapp"
+              >
+                <a
+                  href="https://wa.me/27823046926?text=Hi%20ABM%2C%20I%20need%20an%20automotive%20battery%20quote."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
+                  <MessageSquare className="h-5 w-5" />
+                  WhatsApp the workshop
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-[var(--brand-border)] bg-[var(--brand-bg-elevated)] p-5 space-y-3">
+            <p className="text-xs uppercase tracking-[0.8px] font-semibold text-[var(--brand-muted)]">
+              Live catalog
+            </p>
+            <p className="text-3xl font-black text-white">{automotiveProducts.length}</p>
+            <p className="text-sm text-[var(--brand-muted-2)] leading-relaxed">
+              products in stock-ready range. Start with the first 6 cards below and load more as
+              needed.
+            </p>
+            <Link
+              href="#automotive-grid"
+              className="inline-flex text-sm font-semibold text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)]"
+            >
+              Jump to catalog
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <AutomotiveCatalogExperience products={automotiveProducts} />
+
+      <section className="space-y-6">
+        <div className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg-elevated)] p-7 md:p-8 space-y-6">
+          <h2 className="text-3xl font-bold text-white">
+            For Bakkies, 4x4s, and Start/Stop Vehicles
+          </h2>
+          <p className="text-[var(--brand-muted)] leading-relaxed">
+            A modern Toyota Hilux or Ford Ranger is not just a standard car application. High
+            electrical demand and Start/Stop systems require the correct battery chemistry for
+            reliability and warranty performance.
+          </p>
+          <p className="text-[var(--brand-muted)] leading-relaxed">
+            Installing the wrong battery often causes premature failure and warning lights. We fit
+            the correct spec from the start, then validate charging system health during fitment.
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <Zap className="h-5 w-5 text-[var(--brand-accent)]" />
+                <h3 className="text-lg font-semibold text-white">EFB for high demand</h3>
+              </div>
+              <p className="text-sm text-[var(--brand-muted-2)]">
+                Enhanced Flooded Batteries suit high accessory load and basic Start/Stop operation.
+              </p>
+            </div>
+            <div className="rounded-xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-5">
+              <div className="flex items-center gap-2 mb-2">
+                <ShieldCheck className="h-5 w-5 text-[var(--brand-accent)]" />
+                <h3 className="text-lg font-semibold text-white">AGM for peak performance</h3>
+              </div>
+              <p className="text-sm text-[var(--brand-muted-2)]">
+                AGM is required for advanced Start/Stop, regenerative braking, and premium models.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <Separator className="pt-4" />
-
-        <section className="grid md:grid-cols-3 gap-6">
+        <section className="grid md:grid-cols-3 gap-4">
           {SERVICE_LINKS.map((service) => (
             <div
               key={service.href}
-              className="p-6 rounded-2xl bg-secondary/20 border border-border space-y-3"
+              className="rounded-xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-5 space-y-3"
             >
-              <h3 className="text-xl font-semibold text-battery">
-                {service.label}
-              </h3>
-              <p className="text-muted-foreground">{service.description}</p>
+              <h3 className="text-lg font-semibold text-white">{service.label}</h3>
+              <p className="text-sm text-[var(--brand-muted-2)]">{service.description}</p>
               <Link
                 href={service.href}
-                className="text-sm font-semibold text-foreground hover:text-battery"
+                className="text-sm font-semibold text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)]"
               >
                 Explore →
               </Link>
@@ -213,129 +227,21 @@ export default async function StandardAutomotiveBatteriesPage() {
           ))}
         </section>
 
-        {VEHICLE_LINKS.length > 0 && (
-          <section className="bg-card/50 border border-border rounded-2xl p-8 space-y-4">
-            <h2 className="text-3xl font-bold text-foreground">
-              Vehicles we service daily
-            </h2>
-            <div className="grid md:grid-cols-4 gap-4">
-              {VEHICLE_LINKS.map((vehicle) => (
-                <Link
-                  key={vehicle.slug}
-                  href={`/vehicles/${vehicle.slug}`}
-                  className="p-4 rounded-xl bg-background border border-border hover:border-battery transition-colors"
-                >
-                  {vehicle.label}
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* --- BRUTALIST DIRECTORY: SIDEBAR + PRODUCT LIST VIEW --- */}
-        <section className="max-w-[1400px] mx-auto border-2 border-[#2a2a2a] bg-[#121212] grid lg:grid-cols-[300px_1fr] gap-0">
-          <aside className="border-r-0 lg:border-r-2 border-[#2a2a2a] border-b-2 lg:border-b-0 p-8 bg-[#121212] space-y-12">
-            <div className="space-y-6">
-              <h3 className="text-[1.4rem] font-black uppercase text-white">Application</h3>
-              <div className="flex flex-wrap gap-2">
-                <Link href="/products/type/automotive" className="inline-flex rounded-full border-2 border-white bg-white px-4 py-2 text-[0.85rem] font-bold text-[#0a0a0a]">
-                  Passenger
-                </Link>
-                <Link href="/products/type/performance" className="inline-flex rounded-full border-2 border-[#2a2a2a] px-4 py-2 text-[0.85rem] font-bold text-[#888888] hover:border-white hover:text-white transition-colors">
-                  Start/Stop (AGM)
-                </Link>
-                <Link href="/products/type/truck-commercial" className="inline-flex rounded-full border-2 border-[#2a2a2a] px-4 py-2 text-[0.85rem] font-bold text-[#888888] hover:border-white hover:text-white transition-colors">
-                  Heavy Duty
-                </Link>
-                <Link href="/products/type/deep-cycle" className="inline-flex rounded-full border-2 border-[#2a2a2a] px-4 py-2 text-[0.85rem] font-bold text-[#888888] hover:border-white hover:text-white transition-colors">
-                  Leisure
-                </Link>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h3 className="text-[1.4rem] font-black uppercase text-white">OEM Brand</h3>
-              <div className="flex flex-wrap gap-2">
-                {brands
-                  .filter((brand) => brand.toLowerCase() !== "varta")
-                  .map((brand, idx) => (
-                    <Link
-                      key={brand}
-                      href={`/products/results?brand=${encodeURIComponent(brand)}`}
-                      className={`inline-flex rounded-full border-2 px-4 py-2 text-[0.85rem] font-bold transition-colors ${
-                        idx === 0
-                          ? "border-white bg-white text-[#0a0a0a]"
-                          : "border-[#2a2a2a] text-[#888888] hover:border-white hover:text-white"
-                      }`}
-                    >
-                      {brand}
-                    </Link>
-                  ))}
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-[1.1rem] font-bold text-white">Quick Find by Size (SKU)</h3>
-              <div className="flex flex-wrap gap-2">
-                {sizes.slice(0, 18).map((size) => (
-                  <Link
-                    key={size}
-                    href={`/products/results?q=${encodeURIComponent(size)}`}
-                    className="inline-flex rounded-full border border-[#2a2a2a] px-3 py-1.5 text-xs font-semibold text-[#888888] hover:border-[#444] hover:text-white transition-colors"
-                  >
-                    {size}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          <main className="flex flex-col bg-[#121212]">
-            <div className="border-b-2 border-[#2a2a2a] px-8 py-6">
-              <h2 className="text-3xl font-black text-white">All Automotive Batteries</h2>
-              <p className="text-[#888888] mt-2">Displaying {AUTOMOTIVE_PRODUCTS.length} products ready for fitment.</p>
-            </div>
-
-            {AUTOMOTIVE_PRODUCTS.map((product) => (
-              <article
-                key={product.id}
-                className="grid grid-cols-1 md:grid-cols-[180px_1fr_auto] gap-6 md:gap-10 items-center p-8 border-b-2 border-[#2a2a2a] hover:bg-[#1e1e1e] transition-colors"
+        <section className="rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-bg)] p-6 space-y-3">
+          <h2 className="text-2xl font-bold text-white">Vehicles we service daily</h2>
+          <div className="grid md:grid-cols-4 gap-3">
+            {VEHICLE_LINKS.map((vehicle) => (
+              <Link
+                key={vehicle.slug}
+                href={`/vehicles/${vehicle.slug}`}
+                className="rounded-lg border border-[var(--brand-border)] bg-[var(--brand-bg-elevated)] p-4 text-sm text-[var(--brand-muted)] hover:border-[var(--brand-accent)] hover:text-white transition-colors"
               >
-                <Link
-                  href={`/products/id/${product.id}`}
-                  className="relative w-full h-[140px] rounded border border-dashed border-[#2a2a2a] bg-[#0a0a0a] overflow-hidden"
-                >
-                  <Image
-                    src={product.imagePath || "/images/stock-battery.jpg"}
-                    alt={product.name}
-                    fill
-                    sizes="180px"
-                    className="object-contain p-3"
-                  />
-                </Link>
-
-                <div className="space-y-3">
-                  <h3 className="text-[1.5rem] font-black tracking-[-0.5px] text-white">
-                    {product.name}
-                  </h3>
-                  <p className="text-[#888888] text-base leading-relaxed max-w-[560px]">
-                    {product.brandName} {product.category === "Performance AGM/EFB" ? "AGM/EFB" : "standard fitment"} battery with {product.ahCapacity}Ah capacity support and warranty-backed installation options for daily driving and fleet reliability.
-                  </p>
-                </div>
-
-                <div className="text-left md:text-right">
-                  <p className="text-[1.8rem] font-black text-white mb-4">{product.sellingPrice_OUTPUT}</p>
-                  <Link
-                    href={`/products/id/${product.id}`}
-                    className="inline-flex items-center justify-center border-2 border-[#E53935] px-8 py-3 text-[0.9rem] font-extrabold uppercase text-[#E53935] transition-colors hover:bg-[#E53935] hover:text-white"
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </article>
+                {vehicle.label}
+              </Link>
             ))}
-          </main>
+          </div>
         </section>
+      </section>
     </div>
   );
 }

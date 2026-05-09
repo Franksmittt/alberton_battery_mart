@@ -51,6 +51,19 @@ const LOCAL_MOBILE_SERVICE_SLUGS = [
   "eden-park",
 ];
 
+const PRIORITY_SERVICE_AREA_SLUGS = [
+  "brackenhurst",
+  "brackendowns",
+  "randhart",
+  "verwoerdpark",
+  "alberante",
+  "florentia",
+  "raceview",
+  "south-crest",
+  "mayberry-park",
+  "eden-park",
+];
+
 const generatedLocalMobileServicePages: ServicePageContent[] = getAllLocalAreas()
   .filter((area) => LOCAL_MOBILE_SERVICE_SLUGS.includes(area.slug))
   .map((area) => ({
@@ -133,7 +146,213 @@ const generatedLocalMobileServicePages: ServicePageContent[] = getAllLocalAreas(
     ],
   }));
 
-const SERVICES: ServicePageContent[] = [
+const generatedLocalFreeTestingPages: ServicePageContent[] = getAllLocalAreas()
+  .filter((area) => PRIORITY_SERVICE_AREA_SLUGS.includes(area.slug))
+  .map((area) => ({
+    serviceSlug: "free-battery-testing",
+    areaSlug: area.slug,
+    heroEyebrow: `Suburb Diagnostics: ${area.name}`,
+    title: `Free Battery Testing in ${area.name}`,
+    description: `Book a free battery, starter, and alternator test in ${area.name}. Typical response window: ${area.responseWindow}.`,
+    keywords: [
+      ...area.focusKeywords,
+      `free battery testing ${area.name}`,
+      `alternator test ${area.name}`,
+      `battery diagnostics ${area.name}`,
+    ],
+    intro: `Before replacing any battery in ${area.name}, we run diagnostics first. Our technicians test battery health, starter draw, and alternator charging output so you only spend where necessary.`,
+    coverage: [
+      `Typical diagnostics response in ${area.name}: ${area.responseWindow}`,
+      `High-demand routes covered: ${area.roads.join(", ")}`,
+      `Nearby service landmarks: ${area.landmarks.join(", ")}`,
+    ],
+    benefits: [
+      {
+        title: "No-Guesswork Diagnosis",
+        description:
+          "Load testing confirms whether your no-start issue is the battery, alternator, or starter circuit.",
+      },
+      {
+        title: "Report-Back Clarity",
+        description:
+          "You get a practical pass/fail result and clear replacement guidance for your exact vehicle.",
+      },
+      {
+        title: "Suburb-Specific Dispatch",
+        description:
+          "We route technicians by suburb to keep diagnostics turnaround times short during peak demand.",
+      },
+    ],
+    process: [
+      {
+        title: "01 / Symptom Intake",
+        description:
+          "We capture your no-start symptoms, battery age, and usage pattern before dispatch.",
+      },
+      {
+        title: "02 / Multi-Point Testing",
+        description:
+          "Battery, alternator, and starter checks are performed with digital test equipment.",
+      },
+      {
+        title: "03 / Next-Step Advice",
+        description:
+          "You receive a clear action plan: recharge, replace, or investigate charging-system faults.",
+      },
+    ],
+    faqs: [
+      ...area.faq,
+      {
+        question: `Can you do free battery testing at my address in ${area.name}?`,
+        answer:
+          `Yes. We provide on-site diagnostics in ${area.name} and can proceed with immediate replacement if the battery fails testing.`,
+      },
+    ],
+    ctas: [
+      {
+        label: `Call for ${area.name} Diagnostics`,
+        href: "tel:0101096211",
+      },
+      {
+        label: "WhatsApp for a Test Slot",
+        href: `https://wa.me/27823046926?text=Hi,%20I%20need%20a%20free%20battery%20test%20in%20${encodeURIComponent(area.name)}.`,
+        variant: "secondary",
+      },
+    ],
+    schema: {
+      serviceType: `Free Battery Testing ${area.name}`,
+      offers: "Free battery, starter, and alternator diagnostics",
+      serviceAreas: [area.name],
+    },
+    relatedVehicles: [
+      { label: "Toyota Hilux battery diagnostics", slug: "toyota/hilux-3-0-d4d" },
+      { label: "Ford Ranger alternator checks", slug: "ford/ranger-2-2-tdci" },
+      { label: "VW Polo Vivo battery health", slug: "volkswagen/polo-vivo" },
+    ],
+    relatedProducts: [
+      { label: "Willard 652", slug: "willard-652" },
+      { label: "Exide 668P", slug: "exide-668p" },
+    ],
+  }));
+
+const generatedLocalJumpStartPages: ServicePageContent[] = getAllLocalAreas()
+  .filter((area) => PRIORITY_SERVICE_AREA_SLUGS.includes(area.slug))
+  .map((area) => ({
+    serviceSlug: "emergency-jump-start",
+    areaSlug: area.slug,
+    heroEyebrow: `Rapid Start Support: ${area.name}`,
+    title: `Emergency Jump-Start in ${area.name}`,
+    description: `Dead battery support in ${area.name} with safe jump-starts, diagnostics, and on-site replacement options.`,
+    keywords: [
+      ...area.focusKeywords,
+      `jump-start ${area.name}`,
+      `car won't start ${area.name}`,
+      `emergency battery help ${area.name}`,
+    ],
+    intro: `If your vehicle will not start in ${area.name}, we dispatch with surge-protected equipment for a safe jump-start and immediate diagnostics. If the battery fails, we can replace it on-site.`,
+    coverage: [
+      `Typical emergency response in ${area.name}: ${area.responseWindow}`,
+      `Primary access roads: ${area.roads.join(", ")}`,
+      `Most requested zones: ${area.landmarks.join(", ")}`,
+    ],
+    benefits: [
+      {
+        title: "Safe Electronic Protection",
+        description:
+          "Surge-protected boosters reduce risk to ECUs and modern in-car electronics during jump-start procedures.",
+      },
+      {
+        title: "Immediate Root-Cause Check",
+        description:
+          "We test battery and charging output right after startup to prevent repeated breakdowns.",
+      },
+      {
+        title: "Replacement-Ready Response",
+        description:
+          "If the battery is beyond recovery, we can install a compatible unit immediately.",
+      },
+    ],
+    process: [
+      {
+        title: "01 / Location Confirmation",
+        description:
+          "Share your exact pin so we dispatch the nearest technician quickly.",
+      },
+      {
+        title: "02 / Safe Restart",
+        description:
+          "We perform a controlled jump-start using surge-protected equipment.",
+      },
+      {
+        title: "03 / Diagnostic Decision",
+        description:
+          "Battery and alternator test results guide whether to monitor, recharge, or replace.",
+      },
+    ],
+    faqs: [
+      ...area.faq,
+      {
+        question: `Can you jump-start my vehicle in ${area.name} and replace the battery immediately?`,
+        answer:
+          `Yes. We provide jump-start support in ${area.name} and can fit a replacement battery on-site when diagnostics confirm battery failure.`,
+      },
+    ],
+    ctas: [
+      {
+        label: `Call for ${area.name} Emergency Help`,
+        href: "tel:0101096211",
+      },
+      {
+        label: "Send Live Location on WhatsApp",
+        href: `https://wa.me/27823046926?text=Emergency%20jump-start%20needed%20in%20${encodeURIComponent(area.name)}.`,
+        variant: "secondary",
+      },
+    ],
+    schema: {
+      serviceType: `Emergency Jump Start ${area.name}`,
+      offers: "Rapid jump-start, diagnostics, and optional on-site replacement",
+      serviceAreas: [area.name],
+    },
+    relatedVehicles: [
+      { label: "Toyota Fortuner no-start support", slug: "toyota/fortuner-2-8-gd6" },
+      { label: "VW Polo Vivo jump-start support", slug: "volkswagen/polo-vivo" },
+      { label: "Ford Ranger emergency battery support", slug: "ford/ranger-2-2-tdci" },
+    ],
+    relatedProducts: [
+      { label: "Willard 652", slug: "willard-652" },
+      { label: "Willard 658", slug: "willard-658" },
+    ],
+  }));
+
+function normalizeForSimilarity(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function applyContentQualityGuards(pages: ServicePageContent[]): ServicePageContent[] {
+  const seenRouteKeys = new Set<string>();
+  const seenCopyKeys = new Set<string>();
+
+  return pages.filter((page) => {
+    const routeKey = `${page.serviceSlug}::${page.areaSlug}`;
+    if (seenRouteKeys.has(routeKey)) {
+      return false;
+    }
+    seenRouteKeys.add(routeKey);
+
+    const normalizedTitle = normalizeForSimilarity(page.title);
+    const normalizedDescription = normalizeForSimilarity(page.description);
+    const copyKey = `${normalizedTitle}::${normalizedDescription}`;
+    if (seenCopyKeys.has(copyKey)) {
+      return false;
+    }
+    seenCopyKeys.add(copyKey);
+
+    const hasMinimumCopy = normalizedDescription.length >= 80;
+    return hasMinimumCopy;
+  });
+}
+
+const RAW_SERVICES: ServicePageContent[] = [
   {
     serviceSlug: "free-battery-testing",
     areaSlug: "alberton",
@@ -617,7 +836,10 @@ const SERVICES: ServicePageContent[] = [
     ],
   },
   ...generatedLocalMobileServicePages,
+  ...generatedLocalFreeTestingPages,
+  ...generatedLocalJumpStartPages,
 ];
+const SERVICES: ServicePageContent[] = applyContentQualityGuards(RAW_SERVICES);
 
 export function getServicePage(serviceSlug: string, areaSlug: string) {
   return SERVICES.find(

@@ -107,6 +107,17 @@ export default function ServicesPage() {
             <span>Call Us: {EMERGENCY_PHONE_DISPLAY}</span> 
           </a>
         </Button>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto pt-3">
+          <div className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground">
+            4.8/5 local rating across fitment reviews
+          </div>
+          <div className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground">
+            Free alternator diagnostics with every fitment
+          </div>
+          <div className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground">
+            Warranty paperwork issued on completion
+          </div>
+        </div>
         <div>
           <Button asChild variant="secondary">
             <Link href="/local">View suburb service pages</Link>
@@ -203,6 +214,66 @@ export default function ServicesPage() {
             >
               <p className="font-semibold text-foreground">
                 Mobile battery replacement in {suburb.name}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold text-foreground text-center">
+          Free testing pages by suburb
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { name: "Brackenhurst", slug: "brackenhurst" },
+            { name: "Brackendowns", slug: "brackendowns" },
+            { name: "Randhart", slug: "randhart" },
+            { name: "Verwoerdpark", slug: "verwoerdpark" },
+            { name: "Alberante", slug: "alberante" },
+            { name: "Florentia", slug: "florentia" },
+            { name: "Raceview", slug: "raceview" },
+            { name: "South Crest", slug: "south-crest" },
+            { name: "Mayberry Park", slug: "mayberry-park" },
+            { name: "Eden Park", slug: "eden-park" },
+          ].map((suburb) => (
+            <Link
+              key={suburb.slug}
+              href={`/services/free-battery-testing/${suburb.slug}`}
+              className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+            >
+              <p className="font-semibold text-foreground">
+                Free battery testing in {suburb.name}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold text-foreground text-center">
+          Emergency jump-start pages by suburb
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { name: "Brackenhurst", slug: "brackenhurst" },
+            { name: "Brackendowns", slug: "brackendowns" },
+            { name: "Randhart", slug: "randhart" },
+            { name: "Verwoerdpark", slug: "verwoerdpark" },
+            { name: "Alberante", slug: "alberante" },
+            { name: "Florentia", slug: "florentia" },
+            { name: "Raceview", slug: "raceview" },
+            { name: "South Crest", slug: "south-crest" },
+            { name: "Mayberry Park", slug: "mayberry-park" },
+            { name: "Eden Park", slug: "eden-park" },
+          ].map((suburb) => (
+            <Link
+              key={suburb.slug}
+              href={`/services/emergency-jump-start/${suburb.slug}`}
+              className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+            >
+              <p className="font-semibold text-foreground">
+                Emergency jump-start in {suburb.name}
               </p>
             </Link>
           ))}

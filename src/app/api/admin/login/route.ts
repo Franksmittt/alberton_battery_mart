@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyCredentials } from '@/lib/auth';
 import { cookies } from 'next/headers';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json();
@@ -15,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     if (verifyCredentials(username, password)) {
       // Set a simple session cookie (in production, use a proper session token)
-      const cookieStore = await cookies();
+      const cookieStore = cookies();
       cookieStore.set('admin_session', 'authenticated', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',

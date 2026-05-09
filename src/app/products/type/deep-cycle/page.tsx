@@ -100,7 +100,7 @@ export default async function DeepCycleBatteriesPage() {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
     })),
   };
 

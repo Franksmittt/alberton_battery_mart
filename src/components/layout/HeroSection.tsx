@@ -69,9 +69,9 @@ const HeroSection = ({ variant = "control" }: HeroSectionProps) => {
           <div className="lg:col-span-3 space-y-4">
             <div className="sticky top-24 space-y-4">
               {/* Emergency Panic Button */}
-              <div className="bg-gradient-to-br from-red-600/20 to-red-700/20 border-2 border-red-500/50 rounded-xl p-6 space-y-4 shadow-[0_8px_30px_rgba(239,68,68,0.3)]">
+              <div className="bg-gradient-to-br from-[var(--brand-accent)]/20 to-[var(--brand-accent-hover)]/20 border-2 border-[var(--brand-accent)]/50 rounded-xl p-6 space-y-4 shadow-[0_8px_30px_rgba(239,68,68,0.3)]">
                 <div className="flex items-center gap-3">
-                  <AlertCircle className="h-6 w-6 text-red-400" />
+                  <AlertCircle className="h-6 w-6 text-[var(--brand-accent)]" />
                   <h3 className="text-xl font-black text-white">Dead Battery?</h3>
                 </div>
                 <p className="text-sm text-white/80">
@@ -80,7 +80,7 @@ const HeroSection = ({ variant = "control" }: HeroSectionProps) => {
                 <Button
                   asChild
                   size="lg"
-                  className="w-full h-14 bg-red-600 hover:bg-red-700 text-white font-black text-lg shadow-lg hover:shadow-xl transition-all"
+                  className="w-full h-14 bg-[var(--brand-accent)] hover:bg-[var(--brand-accent-hover)] text-white font-black text-lg shadow-lg hover:shadow-xl transition-all"
                 >
                   <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center gap-2">
                     <Phone className="h-6 w-6" />
@@ -93,7 +93,7 @@ const HeroSection = ({ variant = "control" }: HeroSectionProps) => {
               </div>
 
               {/* Alternative: Inverter/Solar Link */}
-              <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-xl p-6 space-y-4">
+              <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-xl p-6 space-y-4">
                 <h3 className="text-lg font-bold text-white">Need Inverter/Solar?</h3>
                 <p className="text-sm text-white/70">
                   Use our Load Calculator to find the perfect battery for your home backup system.

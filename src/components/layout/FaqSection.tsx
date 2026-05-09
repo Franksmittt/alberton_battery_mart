@@ -1,4 +1,5 @@
 // src/components/layout/FaqSection.tsx
+import FaqSchema from "@/components/seo/FaqSchema";
 
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [
@@ -41,13 +42,20 @@ const FaqSection = () => {
   const secondColumn = faqItems.slice(4, 8);
 
   return (
-    <section className="w-full bg-[#121212] border-y border-[#2A2A2A] py-20">
+    <section className="w-full bg-[var(--brand-bg)] border-y border-[var(--brand-border)] py-20">
+      <FaqSchema
+        id="homepage-faq-schema"
+        items={faqItems.map((item) => ({
+          question: item.question,
+          answer: item.answer,
+        }))}
+      />
       <div className="container px-4 md:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-[clamp(2.2rem,4.5vw,3rem)] font-black tracking-[-1.5px] text-white">
             Frequently Asked Questions
           </h2>
-          <p className="text-[#A0A0A0] text-[1.05rem] md:text-[1.15rem] leading-relaxed mt-4 max-w-3xl mx-auto">
+          <p className="text-[var(--brand-muted)] text-[1.05rem] md:text-[1.15rem] leading-relaxed mt-4 max-w-3xl mx-auto">
             Everything you need to know about our mobile fitment process, warranties, and technical capabilities.
           </p>
         </div>
@@ -56,15 +64,15 @@ const FaqSection = () => {
           <div className="grid md:grid-cols-2 gap-x-12 xl:gap-x-20 gap-y-0">
             <div className="w-full">
               {firstColumn.map((item, index) => (
-                <details key={`left-${index}`} className="group border-b border-[#2A2A2A] hover:border-[#444444] transition-colors duration-300">
-                  <summary className="list-none cursor-pointer py-8 text-[1.1rem] md:text-[1.2rem] font-semibold text-white flex items-center justify-between gap-4 tracking-[-0.3px] group-open:text-[#A0A0A0] group-open:pb-6">
+                <details key={`left-${index}`} className="group border-b border-[var(--brand-border)] hover:border-[var(--brand-muted-3)] transition-colors duration-300">
+                  <summary className="list-none cursor-pointer py-8 text-[1.05rem] md:text-[1.2rem] font-semibold text-white flex items-center justify-between gap-3 md:gap-4 tracking-[-0.3px] group-open:text-[var(--brand-muted)] group-open:pb-6">
                     <span>{item.question}</span>
-                    <span className="relative block h-6 w-6 shrink-0 ml-8">
-                      <span className="absolute left-1/2 top-1/2 h-[2px] w-full -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] transition-colors duration-300" />
-                      <span className="absolute left-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] group-open:rotate-45 transition-all duration-300" />
+                    <span className="relative block h-6 w-6 shrink-0 ml-3 md:ml-8">
+                      <span className="absolute left-1/2 top-1/2 h-[2px] w-full -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[var(--brand-accent)] group-open:bg-[var(--brand-accent)] transition-colors duration-300" />
+                      <span className="absolute left-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[var(--brand-accent)] group-open:bg-[var(--brand-accent)] group-open:rotate-45 transition-all duration-300" />
                     </span>
                   </summary>
-                  <div className="pb-10 text-[#A0A0A0] text-[1rem] md:text-[1.05rem] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
+                  <div className="pb-10 text-[var(--brand-muted)] text-[1rem] md:text-[1.05rem] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
                     {item.answer}
                   </div>
                 </details>
@@ -73,15 +81,15 @@ const FaqSection = () => {
 
             <div className="w-full">
               {secondColumn.map((item, index) => (
-                <details key={`right-${index}`} className="group border-b border-[#2A2A2A] hover:border-[#444444] transition-colors duration-300">
-                  <summary className="list-none cursor-pointer py-8 text-[1.1rem] md:text-[1.2rem] font-semibold text-white flex items-center justify-between gap-4 tracking-[-0.3px] group-open:text-[#A0A0A0] group-open:pb-6">
+                <details key={`right-${index}`} className="group border-b border-[var(--brand-border)] hover:border-[var(--brand-muted-3)] transition-colors duration-300">
+                  <summary className="list-none cursor-pointer py-8 text-[1.05rem] md:text-[1.2rem] font-semibold text-white flex items-center justify-between gap-3 md:gap-4 tracking-[-0.3px] group-open:text-[var(--brand-muted)] group-open:pb-6">
                     <span>{item.question}</span>
-                    <span className="relative block h-6 w-6 shrink-0 ml-8">
-                      <span className="absolute left-1/2 top-1/2 h-[2px] w-full -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] transition-colors duration-300" />
-                      <span className="absolute left-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[#E53935] group-open:bg-[#E53935] group-open:rotate-45 transition-all duration-300" />
+                    <span className="relative block h-6 w-6 shrink-0 ml-3 md:ml-8">
+                      <span className="absolute left-1/2 top-1/2 h-[2px] w-full -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[var(--brand-accent)] group-open:bg-[var(--brand-accent)] transition-colors duration-300" />
+                      <span className="absolute left-1/2 top-1/2 h-full w-[2px] -translate-x-1/2 -translate-y-1/2 bg-white group-hover:bg-[var(--brand-accent)] group-open:bg-[var(--brand-accent)] group-open:rotate-45 transition-all duration-300" />
                     </span>
                   </summary>
-                  <div className="pb-10 text-[#A0A0A0] text-[1rem] md:text-[1.05rem] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
+                  <div className="pb-10 text-[var(--brand-muted)] text-[1rem] md:text-[1.05rem] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
                     {item.answer}
                   </div>
                 </details>

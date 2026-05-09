@@ -148,6 +148,24 @@ export default async function VehicleMakePage({ params }: { params: Params }) {
     ],
   };
 
+  const makeFaqs = [
+    {
+      question: `Which ${make} battery should I choose?`,
+      answer:
+        "Start with your exact model page for battery size and technology requirements. We confirm tray fitment, CCA, and Start/Stop compatibility before install.",
+    },
+    {
+      question: `Do you provide mobile ${make} battery replacement in Alberton?`,
+      answer:
+        "Yes. We provide mobile fitment in Alberton, Meyersdal, Brackenhurst, and surrounding suburbs with diagnostics included.",
+    },
+    {
+      question: "Can you test alternator and starter issues first?",
+      answer:
+        "Yes. We run diagnostic checks before replacement so you do not replace a battery when the root cause is the charging or starting system.",
+    },
+  ];
+
   return (
     <div className="container py-16 space-y-16">
       <JsonLd data={makeSchema} id={`${makeSlug}-make-schema`} />
@@ -281,13 +299,29 @@ export default async function VehicleMakePage({ params }: { params: Params }) {
                   variant="outline"
                   asChild
                 >
-                  <a href={`/product/${product.id}`}>View details</a>
+                  <a href={`/products/id/${product.id}`}>View details</a>
                 </Button>
               </div>
             ))}
           </div>
         </section>
       )}
+
+      <Separator className="bg-border" />
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold text-foreground">
+          Quick FAQ for {make} battery replacement
+        </h2>
+        <div className="space-y-4">
+          {makeFaqs.map((faq) => (
+            <div key={faq.question} className="border border-border rounded-lg p-5 bg-card">
+              <p className="font-semibold text-foreground">{faq.question}</p>
+              <p className="mt-2 text-muted-foreground">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <Separator className="bg-border" />
 

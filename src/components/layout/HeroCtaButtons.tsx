@@ -51,7 +51,7 @@ export function HeroCtaButtons({ variant }: HeroCtaButtonsProps) {
         asChild
         size="default"
         variant="secondary"
-        className="bg-[#25D366] hover:bg-[#20BA5A] text-white w-full sm:w-auto sm:min-w-[200px] shadow-2xl shadow-[#25D366]/30 hover:shadow-[#25D366]/50 font-black text-sm md:text-base transition-all hover:scale-105 h-11 md:h-12"
+        className="bg-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] text-white w-full sm:w-auto sm:min-w-[200px] shadow-2xl shadow-[var(--brand-success)]/30 hover:shadow-[var(--brand-success)]/50 font-black text-sm md:text-base transition-all hover:scale-105 h-11 md:h-12"
       >
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}

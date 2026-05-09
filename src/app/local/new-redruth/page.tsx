@@ -167,6 +167,32 @@ export default function NewRedruthPage() {
 
       <Separator />
 
+      <section className="container space-y-5">
+        <h2 className="text-2xl font-bold text-foreground">Related service pages</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          <Link
+            href="/services/mobile-battery-replacement/alberton"
+            className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+          >
+            <p className="font-semibold text-foreground">Mobile battery replacement in New Redruth</p>
+          </Link>
+          <Link
+            href="/services/free-battery-testing/alberton"
+            className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+          >
+            <p className="font-semibold text-foreground">Free battery testing in New Redruth</p>
+          </Link>
+          <Link
+            href="/services/emergency-jump-start/alberton"
+            className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+          >
+            <p className="font-semibold text-foreground">Emergency jump-start support in New Redruth</p>
+          </Link>
+        </div>
+      </section>
+
+      <Separator />
+
       {/* --- 3. RE-USED PRODUCT SPOTLIGHT --- */}
       <ProductSpotlight count={3} />
 

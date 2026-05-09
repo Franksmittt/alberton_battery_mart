@@ -3,9 +3,12 @@ import { cookies } from 'next/headers';
 import { getProducts, saveProducts } from '@/lib/products-storage';
 import { ProductCardData } from '@/data/products';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // Check authentication
 async function isAuthenticated(): Promise<boolean> {
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   const session = cookieStore.get('admin_session');
   return session?.value === 'authenticated';
 }

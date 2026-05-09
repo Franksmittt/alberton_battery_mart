@@ -98,7 +98,7 @@ export default function PerformanceBatteriesPage() {
       "@type": "Product",
       name: product.name,
       sku: product.id,
-      url: `${BASE_URL}/product/${product.id}`,
+      url: `${BASE_URL}/products/id/${product.id}`,
     })),
   };
 
@@ -119,7 +119,7 @@ export default function PerformanceBatteriesPage() {
         {/* --- EDUCATIONAL SECTION: AGM vs EFB Explained --- */}
         <div className="max-w-5xl mx-auto space-y-8">
           {/* What are AGM/EFB Batteries */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-6">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-6">
             <div className="flex items-center gap-3">
               <Zap className="h-8 w-8 text-battery" />
               <h2 className="text-3xl font-black text-white">
@@ -134,7 +134,7 @@ export default function PerformanceBatteriesPage() {
           {/* Comparison Grid */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* EFB Section */}
-            <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+            <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 rounded-full bg-battery/20 flex items-center justify-center">
                   <Zap className="h-6 w-6 text-battery" />
@@ -170,7 +170,7 @@ export default function PerformanceBatteriesPage() {
             </div>
 
             {/* AGM Section */}
-            <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+            <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 rounded-full bg-battery/20 flex items-center justify-center">
                   <BrainCircuit className="h-6 w-6 text-battery" />
@@ -207,7 +207,7 @@ export default function PerformanceBatteriesPage() {
           </div>
 
           {/* When to Use Each */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border border-white/10 rounded-2xl p-8 space-y-4">
             <h3 className="text-2xl font-black text-white flex items-center gap-3">
               <ShieldCheck className="h-6 w-6 text-battery" />
               Which Battery Do You Need?
@@ -243,7 +243,7 @@ export default function PerformanceBatteriesPage() {
           </div>
 
           {/* Specialist Coding Section */}
-          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border-2 border-battery/30 rounded-2xl p-8 space-y-6">
+          <div className="bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-[var(--brand-bg-elevated)] border-2 border-battery/30 rounded-2xl p-8 space-y-6">
             <div className="flex items-center gap-3">
               <BrainCircuit className="h-10 w-10 text-battery flex-shrink-0" />
               <h2 className="text-3xl font-black text-white">
@@ -292,7 +292,7 @@ export default function PerformanceBatteriesPage() {
             asChild
             size="xl"
             variant="secondary"
-            className="w-full bg-green-600 hover:bg-green-700 text-white"
+            className="w-full bg-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] text-white"
             trackingId="type-performance-whatsapp"
           >
             <a
