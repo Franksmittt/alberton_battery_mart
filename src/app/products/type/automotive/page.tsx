@@ -1,12 +1,11 @@
 // src/app/products/type/automotive/page.tsx
-import ProductListPage from "@/components/layout/ProductListPage";
 import { getAllProducts, ProductCardData } from "@/data/products";
-import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Phone, Zap, ShieldCheck, Gauge, Car } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 
@@ -233,29 +232,110 @@ export default async function StandardAutomotiveBatteriesPage() {
           </section>
         )}
 
-        {/* --- MAIN LAYOUT: SIDEBAR + PRODUCT GRID --- */}
-        <div className="flex flex-col lg:flex-row gap-8">
-            
-            {/* Left Column: Filtering Sidebar */}
-            <div className="lg:w-64 lg:flex-shrink-0">
-                 <CategoryFilterSidebar
-                    currentCategory="Car Batteries"
-                    allBrands={brands}
-                    allSizes={sizes}
-                    // Note: This page uses the default capacity filters, which is correct
-                 />
+        {/* --- BRUTALIST DIRECTORY: SIDEBAR + PRODUCT LIST VIEW --- */}
+        <section className="max-w-[1400px] mx-auto border-2 border-[#2a2a2a] bg-[#121212] grid lg:grid-cols-[300px_1fr] gap-0">
+          <aside className="border-r-0 lg:border-r-2 border-[#2a2a2a] border-b-2 lg:border-b-0 p-8 bg-[#121212] space-y-12">
+            <div className="space-y-6">
+              <h3 className="text-[1.4rem] font-black uppercase text-white">Application</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link href="/products/type/automotive" className="inline-flex rounded-full border-2 border-white bg-white px-4 py-2 text-[0.85rem] font-bold text-[#0a0a0a]">
+                  Passenger
+                </Link>
+                <Link href="/products/type/performance" className="inline-flex rounded-full border-2 border-[#2a2a2a] px-4 py-2 text-[0.85rem] font-bold text-[#888888] hover:border-white hover:text-white transition-colors">
+                  Start/Stop (AGM)
+                </Link>
+                <Link href="/products/type/truck-commercial" className="inline-flex rounded-full border-2 border-[#2a2a2a] px-4 py-2 text-[0.85rem] font-bold text-[#888888] hover:border-white hover:text-white transition-colors">
+                  Heavy Duty
+                </Link>
+                <Link href="/products/type/deep-cycle" className="inline-flex rounded-full border-2 border-[#2a2a2a] px-4 py-2 text-[0.85rem] font-bold text-[#888888] hover:border-white hover:text-white transition-colors">
+                  Leisure
+                </Link>
+              </div>
             </div>
 
-            {/* Right Column: Product List */}
-            <div className="lg:flex-grow">
-                <ProductListPage
-                    title="All Automotive Batteries"
-                     description={`Displaying ${AUTOMOTIVE_PRODUCTS.length} products ready for fitment.`}
-                    products={AUTOMOTIVE_PRODUCTS}
-                />
+            <div className="space-y-6">
+              <h3 className="text-[1.4rem] font-black uppercase text-white">OEM Brand</h3>
+              <div className="flex flex-wrap gap-2">
+                {brands
+                  .filter((brand) => brand.toLowerCase() !== "varta")
+                  .map((brand, idx) => (
+                    <Link
+                      key={brand}
+                      href={`/products/results?brand=${encodeURIComponent(brand)}`}
+                      className={`inline-flex rounded-full border-2 px-4 py-2 text-[0.85rem] font-bold transition-colors ${
+                        idx === 0
+                          ? "border-white bg-white text-[#0a0a0a]"
+                          : "border-[#2a2a2a] text-[#888888] hover:border-white hover:text-white"
+                      }`}
+                    >
+                      {brand}
+                    </Link>
+                  ))}
+              </div>
             </div>
 
-        </div>
+            <div className="space-y-4">
+              <h3 className="text-[1.1rem] font-bold text-white">Quick Find by Size (SKU)</h3>
+              <div className="flex flex-wrap gap-2">
+                {sizes.slice(0, 18).map((size) => (
+                  <Link
+                    key={size}
+                    href={`/products/results?q=${encodeURIComponent(size)}`}
+                    className="inline-flex rounded-full border border-[#2a2a2a] px-3 py-1.5 text-xs font-semibold text-[#888888] hover:border-[#444] hover:text-white transition-colors"
+                  >
+                    {size}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          <main className="flex flex-col bg-[#121212]">
+            <div className="border-b-2 border-[#2a2a2a] px-8 py-6">
+              <h2 className="text-3xl font-black text-white">All Automotive Batteries</h2>
+              <p className="text-[#888888] mt-2">Displaying {AUTOMOTIVE_PRODUCTS.length} products ready for fitment.</p>
+            </div>
+
+            {AUTOMOTIVE_PRODUCTS.map((product) => (
+              <article
+                key={product.id}
+                className="grid grid-cols-1 md:grid-cols-[180px_1fr_auto] gap-6 md:gap-10 items-center p-8 border-b-2 border-[#2a2a2a] hover:bg-[#1e1e1e] transition-colors"
+              >
+                <Link
+                  href={`/products/id/${product.id}`}
+                  className="relative w-full h-[140px] rounded border border-dashed border-[#2a2a2a] bg-[#0a0a0a] overflow-hidden"
+                >
+                  <Image
+                    src={product.imagePath || "/images/stock-battery.jpg"}
+                    alt={product.name}
+                    fill
+                    sizes="180px"
+                    className="object-contain p-3"
+                  />
+                </Link>
+
+                <div className="space-y-3">
+                  <h3 className="text-[1.5rem] font-black tracking-[-0.5px] text-white">
+                    {product.name}
+                  </h3>
+                  <p className="text-[#888888] text-base leading-relaxed max-w-[560px]">
+                    {product.brandName} {product.category === "Performance AGM/EFB" ? "AGM/EFB" : "standard fitment"} battery with {product.ahCapacity}Ah capacity support and warranty-backed installation options for daily driving and fleet reliability.
+                  </p>
+                </div>
+
+                <div className="text-left md:text-right">
+                  <p className="text-[1.8rem] font-black text-white mb-4">{product.sellingPrice_OUTPUT}</p>
+                  <Link
+                    href={`/products/id/${product.id}`}
+                    className="inline-flex items-center justify-center border-2 border-[#E53935] px-8 py-3 text-[0.9rem] font-extrabold uppercase text-[#E53935] transition-colors hover:bg-[#E53935] hover:text-white"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </main>
+        </section>
     </div>
   );
 }

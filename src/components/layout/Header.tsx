@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronDown, Menu, Phone, Search } from "lucide-react";
+import { ChevronDown, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "@/components/layout/MobileNav";
 import { useState } from "react";
@@ -176,19 +176,10 @@ const Header = () => {
 
       <div className="lg:hidden">
         <div className="container h-16 px-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center font-black text-lg text-slate-900 tracking-tight">
-            ABM
+          <Link href="/" className="flex items-center font-black text-base sm:text-lg text-slate-900 tracking-tight whitespace-nowrap">
+            Alberton Battery Mart
           </Link>
-          <div className="flex items-center gap-2">
-            <a
-              href={`tel:${PRIMARY_PHONE_LINK}`}
-              className="inline-flex items-center gap-1 rounded-md bg-red-600 px-3 py-2 text-xs font-bold text-white"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              Call
-            </a>
-            <MobileNav />
-          </div>
+          <MobileNav />
         </div>
       </div>
     </header>
