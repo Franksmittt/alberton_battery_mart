@@ -181,13 +181,19 @@ export default function MeyersdalPage() {
             <p className="font-semibold text-foreground">Premium battery fitment in Meyersdal</p>
           </Link>
           <Link
-            href="/services/free-battery-testing/alberton"
+            href="/services/mobile-battery-replacement/meyersdal"
+            className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
+          >
+            <p className="font-semibold text-foreground">Mobile battery replacement in Meyersdal</p>
+          </Link>
+          <Link
+            href="/services/free-battery-testing/meyersdal"
             className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
           >
             <p className="font-semibold text-foreground">Free battery testing for Meyersdal drivers</p>
           </Link>
           <Link
-            href="/services/emergency-jump-start/alberton"
+            href="/services/emergency-jump-start/meyersdal"
             className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
           >
             <p className="font-semibold text-foreground">Emergency jump-start support near Meyersdal</p>

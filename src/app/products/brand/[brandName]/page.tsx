@@ -19,7 +19,7 @@ export const dynamic = 'force-dynamic';
 export function generateStaticParams() {
   const brands = Array.from(new Set(ALL_PRODUCTS.map((p) => p.brandName)));
   return brands.map((brand) => ({
-    brandName: brand.toLowerCase(),
+    brandName: toBrandSlug(brand),
   }));
 }
 
@@ -30,12 +30,22 @@ interface BrandPageProps {
   };
 }
 
+function toBrandSlug(brand: string): string {
+  return brand
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 // --- NEW: Dynamic Metadata for SEO ---
 export async function generateMetadata({
   params,
 }: BrandPageProps): Promise<Metadata> {
-  const brandName =
-    params.brandName.charAt(0).toUpperCase() + params.brandName.slice(1);
+  const brandName = params.brandName
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
   const url = `${BASE_URL}/products/brand/${params.brandName.toLowerCase()}`;
 
   const description = `Shop authentic ${brandName} batteries in Alberton with on-site testing, coding, and same-day fitment.`;
@@ -72,7 +82,7 @@ export async function generateMetadata({
 // Helper to filter products and capitalize the brand name
 const getBrandData = (allProducts: ProductCardData[], brandSlug: string) => {
   const products = allProducts.filter(
-    (p) => p.brandName.toLowerCase() === brandSlug.toLowerCase()
+    (p) => toBrandSlug(p.brandName) === brandSlug.toLowerCase()
   );
   const brandName = products.length > 0 ? products[0].brandName : brandSlug;
 

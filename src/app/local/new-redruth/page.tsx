@@ -171,19 +171,19 @@ export default function NewRedruthPage() {
         <h2 className="text-2xl font-bold text-foreground">Related service pages</h2>
         <div className="grid md:grid-cols-3 gap-4">
           <Link
-            href="/services/mobile-battery-replacement/alberton"
+            href="/services/mobile-battery-replacement/new-redruth"
             className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
           >
             <p className="font-semibold text-foreground">Mobile battery replacement in New Redruth</p>
           </Link>
           <Link
-            href="/services/free-battery-testing/alberton"
+            href="/services/free-battery-testing/new-redruth"
             className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
           >
             <p className="font-semibold text-foreground">Free battery testing in New Redruth</p>
           </Link>
           <Link
-            href="/services/emergency-jump-start/alberton"
+            href="/services/emergency-jump-start/new-redruth"
             className="rounded-lg border border-border bg-card p-4 hover:border-battery transition-colors"
           >
             <p className="font-semibold text-foreground">Emergency jump-start support in New Redruth</p>

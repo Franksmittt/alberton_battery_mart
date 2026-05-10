@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
 import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
 import { createItemListSchema } from "@/lib/seo/schema";
+import IntentLinks from "@/components/seo/IntentLinks";
 
 export const dynamic = "force-dynamic";
 
@@ -224,6 +225,38 @@ export default async function SizePage({ params }: SizePageProps) {
           />
         </div>
       </div>
+
+      <IntentLinks
+        title={`High-intent ${code} battery support`}
+        description="Move from size research to the closest service page for fitment, diagnostics, or suburb dispatch."
+        columnsClassName="md:grid-cols-3"
+        links={[
+          {
+            href: "/services/mobile-battery-replacement/alberton",
+            label: `${code} mobile battery replacement in Alberton`,
+          },
+          {
+            href: "/services/free-battery-testing/new-redruth",
+            label: `${code} battery testing at New Redruth`,
+          },
+          {
+            href: "/services/mobile-battery-replacement/meyersdal",
+            label: `${code} battery callout in Meyersdal`,
+          },
+          {
+            href: "/services/emergency-jump-start/alberton-central",
+            label: `${code} emergency battery help in Alberton Central`,
+          },
+          {
+            href: "/vehicles/toyota/hilux-3-0-d4d",
+            label: "Toyota Hilux battery fitment guide",
+          },
+          {
+            href: "/vehicles/ford/ranger-2-2-tdci",
+            label: "Ford Ranger battery fitment guide",
+          },
+        ]}
+      />
     </div>
   );
 }

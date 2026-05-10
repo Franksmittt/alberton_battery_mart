@@ -190,13 +190,13 @@ export default function LocalAreasHubPage() {
           <div className="rounded-lg border border-border bg-card p-4 space-y-2">
             <p className="font-semibold text-foreground">Alberton Central</p>
             <div className="flex flex-wrap gap-2 text-sm">
-              <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline">
+              <Link href="/services/mobile-battery-replacement/alberton-central" className="text-battery hover:underline">
                 Mobile replacement
               </Link>
-              <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline">
+              <Link href="/services/free-battery-testing/alberton-central" className="text-battery hover:underline">
                 Free testing
               </Link>
-              <Link href="/services/emergency-jump-start/alberton" className="text-battery hover:underline">
+              <Link href="/services/emergency-jump-start/alberton-central" className="text-battery hover:underline">
                 Emergency jump-start
               </Link>
             </div>
@@ -207,24 +207,27 @@ export default function LocalAreasHubPage() {
               <Link href="/services/battery-fitment/meyersdal" className="text-battery hover:underline">
                 Premium fitment
               </Link>
-              <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline">
+              <Link href="/services/free-battery-testing/meyersdal" className="text-battery hover:underline">
                 Free testing
               </Link>
-              <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline">
+              <Link href="/services/mobile-battery-replacement/meyersdal" className="text-battery hover:underline">
                 Mobile replacement
+              </Link>
+              <Link href="/services/emergency-jump-start/meyersdal" className="text-battery hover:underline">
+                Emergency jump-start
               </Link>
             </div>
           </div>
           <div className="rounded-lg border border-border bg-card p-4 space-y-2">
             <p className="font-semibold text-foreground">New Redruth</p>
             <div className="flex flex-wrap gap-2 text-sm">
-              <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline">
+              <Link href="/services/mobile-battery-replacement/new-redruth" className="text-battery hover:underline">
                 Mobile replacement
               </Link>
-              <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline">
+              <Link href="/services/free-battery-testing/new-redruth" className="text-battery hover:underline">
                 Free testing
               </Link>
-              <Link href="/services/emergency-jump-start/alberton" className="text-battery hover:underline">
+              <Link href="/services/emergency-jump-start/new-redruth" className="text-battery hover:underline">
                 Emergency jump-start
               </Link>
             </div>
