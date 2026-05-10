@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
     const description = product.seoSubtitle || `Buy ${product.name} in Alberton.`;
     
     // Create full, absolute URLs as required by Google
-    const productUrl = `${baseUrl}/products/${product.id}`;
+    const productUrl = `${baseUrl}/products/id/${product.id}`;
     const imageUrl = `${baseUrl}${product.imagePath}`;
 
     return `

@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllProducts } from "@/data/products";
 import { ALL_POSTS } from "@/data/blog-posts";
-import { getAllVehicleSlugs } from "@/data/vehicle-fitment";
+import { getAllVehicleMakeSlugs, getAllVehicleSlugs } from "@/data/vehicle-fitment";
 import { getAllServicePages } from "@/data/service-pages";
 import { getAllLocalAreas } from "@/data/local-areas";
 import { BASE_URL } from "@/lib/seo-constants";
@@ -101,7 +101,14 @@ export function getBlogSitemapEntries(): MetadataRoute.Sitemap {
 }
 
 export function getVehicleSitemapEntries(): MetadataRoute.Sitemap {
-  return getAllVehicleSlugs().map((slug) => buildEntry(`/vehicles/${slug}`, "monthly", 0.8));
+  const makePages = getAllVehicleMakeSlugs().map((slug) =>
+    buildEntry(`/vehicles/${slug}`, "monthly", 0.75)
+  );
+  const modelPages = getAllVehicleSlugs().map((slug) =>
+    buildEntry(`/vehicles/${slug}`, "monthly", 0.8)
+  );
+
+  return [...makePages, ...modelPages];
 }
 
 export function getServiceSitemapEntries(): MetadataRoute.Sitemap {

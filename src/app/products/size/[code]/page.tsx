@@ -11,6 +11,7 @@ import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
 import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 export const dynamic = "force-dynamic";
 
@@ -101,21 +102,15 @@ export default async function SizePage({ params }: SizePageProps) {
     products.reduce((sum, p) => sum + (p.cca || 0), 0) / products.length
   );
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: `${code} Size Batteries`,
     url: canonicalUrl,
     description: `All ${code} size batteries available at Alberton Battery Mart. Includes Willard, Exide, and Enertec brands.`,
-    hasPart: products.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: products.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.sku,
       url: `${BASE_URL}/products/id/${product.id}`,
-      brand: product.brandName,
-      category: product.category,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">

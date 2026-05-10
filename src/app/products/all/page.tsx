@@ -34,6 +34,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "All Batteries for Sale in Alberton | Alberton Battery Mart",
+    description: "Browse our complete inventory of car, truck, motorcycle, solar, and inverter batteries in Alberton.",
+    images: ['/images/og-image.jpg'],
+  },
   alternates: {
     canonical: `${BASE_URL}/products/all`,
   },

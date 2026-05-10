@@ -66,7 +66,7 @@ const PRODUCT_OR_FITMENT_LINKS: LinkItem[] = [
     description: "Vehicle-specific fitment and technology guidance.",
   },
   {
-    href: "/vehicles/mercedes-benz",
+    href: "/vehicles/mercedes",
     label: "Mercedes-Benz fitment guidance",
     description: "Battery selection and fitment support by model.",
   },

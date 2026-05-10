@@ -9,6 +9,7 @@ import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
 import Link from "next/link";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 const PAGE_TITLE =
   "Commercial & Powersport Batteries in Alberton | Alberton Battery Mart";
@@ -76,19 +77,15 @@ const SERVICE_LINKS = [
 ];
 
 export default function TruckMotorcycleBatteriesPage() {
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/truck-motorcycle`,
-    hasPart: TRUCK_MOTORCYCLE_PRODUCTS.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: TRUCK_MOTORCYCLE_PRODUCTS.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">

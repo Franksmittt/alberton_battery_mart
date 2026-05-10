@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL, DEFAULT_LOGO } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 // Make this page dynamic so it can read updated prices from JSON
 export const dynamic = 'force-dynamic';
@@ -191,32 +192,17 @@ export default async function BrandPage({ params }: BrandPageProps) {
     logo: DEFAULT_LOGO,
     description: positioningCopy,
     areaServed: "Gauteng",
-    makesOffer: products.slice(0, 12).map((product) => ({
-      "@type": "Product",
-      name: product.name,
-      sku: product.id,
-      url: `${BASE_URL}/products/id/${product.id}`,
-      category: product.category,
-    })),
   };
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: `${brandName} Batteries`,
     url: canonicalUrl,
-    isRelatedTo: {
-      "@type": "Brand",
-      name: brandName,
-      url: canonicalUrl,
-    },
-    hasPart: products.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    description: positioningCopy,
+    items: products.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">

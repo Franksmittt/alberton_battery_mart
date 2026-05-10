@@ -156,12 +156,6 @@ const Footer = () => {
                 </a>
                 .
               </span>
-              <Link
-                href="/login"
-                className="inline-flex items-center rounded border border-[var(--brand-border)] px-3 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.5px] text-[var(--brand-muted-2)] transition-colors hover:border-[var(--brand-muted-3)] hover:text-white"
-              >
-                Login
-              </Link>
             </div>
             <div className="flex items-center gap-6">
               <Link href="#" className="transition-colors hover:text-white">
