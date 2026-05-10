@@ -6,6 +6,7 @@ import { getAllServicePages } from "@/data/service-pages";
 import { getAllLocalAreas } from "@/data/local-areas";
 import { BASE_URL } from "@/lib/seo-constants";
 import { productSizeSlug } from "@/lib/product-size-slugs";
+import { getAllLocalProofStories } from "@/data/local-proof";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -35,6 +36,7 @@ export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
     "/faq",
     "/quote",
     "/fitment",
+    "/reviews",
     "/emergency-battery-replacement",
     "/deep-cycle",
     "/local",
@@ -119,4 +121,10 @@ export function getServiceSitemapEntries(): MetadataRoute.Sitemap {
 
 export function getLocalSitemapEntries(): MetadataRoute.Sitemap {
   return getAllLocalAreas().map((area) => buildEntry(`/local/${area.slug}`, "monthly", 0.8));
+}
+
+export function getLocalProofSitemapEntries(): MetadataRoute.Sitemap {
+  return getAllLocalProofStories().map((story) =>
+    buildEntry(`/proof/${story.slug}`, "monthly", 0.75)
+  );
 }

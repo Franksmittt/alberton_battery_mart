@@ -2,6 +2,7 @@
 import { MetadataRoute } from "next";
 import {
   getBlogSitemapEntries,
+  getLocalProofSitemapEntries,
   getLocalSitemapEntries,
   getProductSitemapEntries,
   getServiceSitemapEntries,
@@ -16,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const vehiclePages = getVehicleSitemapEntries();
   const servicePages = getServiceSitemapEntries();
   const localAreaPages = getLocalSitemapEntries();
+  const localProofPages = getLocalProofSitemapEntries();
 
   return [
     ...staticPages,
@@ -24,5 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...vehiclePages,
     ...servicePages,
     ...localAreaPages,
+    ...localProofPages,
   ];
 }

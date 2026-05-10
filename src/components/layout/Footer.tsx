@@ -104,6 +104,11 @@ const Footer = () => {
                     New Redruth
                   </Link>
                 </li>
+                <li>
+                  <Link href="/proof/toyota-hilux-battery-replacement-alberton" className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]">
+                    Local Proof
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -134,6 +139,15 @@ const Footer = () => {
                   >
                     28 St Columb Rd, Alberton
                   </a>
+                </li>
+                <li>
+                  <Link
+                    href="/reviews"
+                    data-track-event="footer_reviews_click"
+                    className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]"
+                  >
+                    Leave a Google Review
+                  </Link>
                 </li>
                 <li>
                   <span>Mon - Fri: 08:00 AM - 5:00 PM | Sat: 08:00 AM - 12:00 PM</span>
