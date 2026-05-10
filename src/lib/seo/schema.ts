@@ -35,9 +35,13 @@ type ProductSchemaInput = {
 };
 
 const markdownTokenPattern = /\*\*|__|`/g;
+const leadingQuestionNumberPattern = /^\s*\d+\.\s*/;
 
 function stripMarkdown(text: string): string {
-  return text.replace(markdownTokenPattern, "").trim();
+  return text
+    .replace(leadingQuestionNumberPattern, "")
+    .replace(markdownTokenPattern, "")
+    .trim();
 }
 
 export function createBreadcrumbSchema(items: BreadcrumbItemInput[]) {

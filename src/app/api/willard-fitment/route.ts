@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { getAllProducts } from "@/data/products";
+import { productSizeSlug } from "@/lib/product-size-slugs";
 
 type FitmentRow = {
   vehicle_type: string;
@@ -110,7 +111,7 @@ async function getBrandOptionsByBaseCode() {
       ah_capacity: product.ahCapacity,
       cca: product.cca,
       technology: extractTechnology(product.sku),
-      product_url: `/products/size/${product.sku.toLowerCase()}`,
+      product_url: `/products/size/${productSizeSlug(product.sku)}`,
       image_path: product.imagePath,
     };
     if (!map.has(baseCode)) map.set(baseCode, []);

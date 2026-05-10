@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
+import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export async function generateMetadata({
   params,
 }: SizePageProps): Promise<Metadata> {
   const code = params.code.toUpperCase();
-  const url = `${BASE_URL}/products/size/${params.code.toLowerCase()}`;
+  const url = `${BASE_URL}/products/size/${productSizeSlug(params.code)}`;
 
   const description = `Shop ${code} size batteries in Alberton. All brands available: Willard, Exide, Enertec. Free fitment and testing included.`;
 
@@ -62,7 +63,7 @@ export async function generateMetadata({
 // Helper to filter products by size/code
 const getSizeData = (allProducts: ProductCardData[], codeSlug: string) => {
   const products = allProducts.filter(
-    (p) => p.sku.toLowerCase() === codeSlug.toLowerCase()
+    (p) => productSizeMatchesSlug(p.sku, codeSlug)
   );
 
   const brands = Array.from(new Set(products.map((p) => p.brandName)));
@@ -90,7 +91,7 @@ export default async function SizePage({ params }: SizePageProps) {
   }
 
   const code = codeSlug.toUpperCase();
-  const canonicalUrl = `${BASE_URL}/products/size/${codeSlug.toLowerCase()}`;
+  const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(codeSlug)}`;
 
   // Get product specs for the first product (they should all be similar size)
   const avgCapacity = Math.round(
@@ -109,7 +110,7 @@ export default async function SizePage({ params }: SizePageProps) {
     hasPart: products.slice(0, 20).map((product) => ({
       "@type": "Product",
       name: product.name,
-      sku: product.id,
+      sku: product.sku,
       url: `${BASE_URL}/products/id/${product.id}`,
       brand: product.brandName,
       category: product.category,

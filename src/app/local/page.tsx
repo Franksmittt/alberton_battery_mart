@@ -1,19 +1,25 @@
-import { Metadata } from "next";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 
 import { getAllLocalAreas } from "@/data/local-areas";
 import { Separator } from "@/components/ui/separator";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Alberton Suburb Battery Services | Alberton Battery Mart",
   description:
     "Browse mobile battery replacement coverage across Alberton suburbs including Brackenhurst, Brackendowns, Randhart, Verwoerdpark, and Alrode.",
-  alternates: {
-    canonical: "https://www.albertonbatterymart.co.za/local",
-  },
-};
+  path: "/local",
+  keywords: [
+    "battery replacement Alberton suburbs",
+    "mobile battery service Alberton",
+    "car battery Brackenhurst",
+    "battery fitment Meyersdal",
+    "battery replacement New Redruth",
+  ],
+  imageAlt: "Alberton suburb mobile battery service coverage",
+});
 
 export default function LocalAreasHubPage() {
   const areas = getAllLocalAreas();

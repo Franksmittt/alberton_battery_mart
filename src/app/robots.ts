@@ -1,9 +1,8 @@
 // src/app/robots.ts
 import { MetadataRoute } from 'next'
+import { BASE_URL } from "@/lib/seo-constants";
  
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://www.albertonbatterymart.co.za';
-
   return {
     rules: [
       {
@@ -46,7 +45,12 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: [
+      `${BASE_URL}/sitemap.xml`,
+      `${BASE_URL}/sitemap-products.xml`,
+      `${BASE_URL}/sitemap-services.xml`,
+      `${BASE_URL}/sitemap-local.xml`,
+    ],
+    host: BASE_URL,
   }
 }
