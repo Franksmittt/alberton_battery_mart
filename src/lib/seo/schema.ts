@@ -15,6 +15,16 @@ type ProductPropertyInput = {
   value: string | number;
 };
 
+type ItemListInput = {
+  name: string;
+  description?: string;
+  url?: string;
+  items: Array<{
+    name: string;
+    url: string;
+  }>;
+};
+
 type ProductSchemaInput = {
   id?: string;
   name: string;
@@ -35,9 +45,13 @@ type ProductSchemaInput = {
 };
 
 const markdownTokenPattern = /\*\*|__|`/g;
+const leadingQuestionNumberPattern = /^\s*\d+\.\s*/;
 
 function stripMarkdown(text: string): string {
-  return text.replace(markdownTokenPattern, "").trim();
+  return text
+    .replace(leadingQuestionNumberPattern, "")
+    .replace(markdownTokenPattern, "")
+    .trim();
 }
 
 export function createBreadcrumbSchema(items: BreadcrumbItemInput[]) {
@@ -64,6 +78,22 @@ export function createFaqSchema(items: FaqItemInput[]) {
         "@type": "Answer",
         text: stripMarkdown(faq.answer),
       },
+    })),
+  };
+}
+
+export function createItemListSchema(input: ItemListInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: input.name,
+    ...(input.description ? { description: input.description } : {}),
+    ...(input.url ? { url: toAbsoluteUrl(input.url) } : {}),
+    itemListElement: input.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: toAbsoluteUrl(item.url),
     })),
   };
 }

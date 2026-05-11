@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
@@ -53,19 +54,15 @@ const DEEP_CYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) =>
   p.category === 'Deep Cycle'
 );
 
-const PRODUCT_COLLECTION_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "ProductCollection",
+const PRODUCT_COLLECTION_SCHEMA = createItemListSchema({
   name: "Solar, Inverter & Deep Cycle Batteries",
   description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
   url: `${BASE_URL}/deep-cycle`,
-  hasPart: DEEP_CYCLE_PRODUCTS.slice(0, 20).map((product) => ({
-    "@type": "Product",
+  items: DEEP_CYCLE_PRODUCTS.slice(0, 20).map((product) => ({
     name: product.name,
-    sku: product.id.toString(),
     url: `${BASE_URL}/products/id/${product.id}`,
   })),
-};
+});
 
 const BREADCRUMB_SCHEMA = {
   "@context": "https://schema.org",

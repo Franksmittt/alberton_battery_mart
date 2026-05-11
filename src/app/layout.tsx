@@ -224,6 +224,7 @@ export default function RootLayout({
                   href: details.href || "",
                   form_action: details.form_action || "",
                   form_id: details.form_id || "",
+                  tracking_label: details.tracking_label || "",
                   page_path: window.location.pathname
                 });
               }
@@ -236,6 +237,14 @@ export default function RootLayout({
 
                 var href = link.getAttribute("href") || "";
                 if (!href) return;
+
+                var customEvent = link.getAttribute("data-track-event");
+                if (customEvent) {
+                  push(customEvent, {
+                    href: href,
+                    tracking_label: link.textContent ? link.textContent.trim() : ""
+                  });
+                }
 
                 if (href.indexOf("tel:") === 0) {
                   push("phone_call_click", { href: href });
@@ -254,6 +263,11 @@ export default function RootLayout({
 
                 if (href.indexOf("mailto:") === 0) {
                   push("email_click", { href: href });
+                  return;
+                }
+
+                if (href.indexOf("writereview") !== -1 || href.indexOf("/reviews") !== -1) {
+                  push("review_intent_click", { href: href });
                 }
               }, true);
 

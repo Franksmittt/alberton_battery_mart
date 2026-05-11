@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL, DEFAULT_LOGO } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 // Make this page dynamic so it can read updated prices from JSON
 export const dynamic = 'force-dynamic';
@@ -18,7 +19,7 @@ export const dynamic = 'force-dynamic';
 export function generateStaticParams() {
   const brands = Array.from(new Set(ALL_PRODUCTS.map((p) => p.brandName)));
   return brands.map((brand) => ({
-    brandName: brand.toLowerCase(),
+    brandName: toBrandSlug(brand),
   }));
 }
 
@@ -29,12 +30,22 @@ interface BrandPageProps {
   };
 }
 
+function toBrandSlug(brand: string): string {
+  return brand
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 // --- NEW: Dynamic Metadata for SEO ---
 export async function generateMetadata({
   params,
 }: BrandPageProps): Promise<Metadata> {
-  const brandName =
-    params.brandName.charAt(0).toUpperCase() + params.brandName.slice(1);
+  const brandName = params.brandName
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
   const url = `${BASE_URL}/products/brand/${params.brandName.toLowerCase()}`;
 
   const description = `Shop authentic ${brandName} batteries in Alberton with on-site testing, coding, and same-day fitment.`;
@@ -71,7 +82,7 @@ export async function generateMetadata({
 // Helper to filter products and capitalize the brand name
 const getBrandData = (allProducts: ProductCardData[], brandSlug: string) => {
   const products = allProducts.filter(
-    (p) => p.brandName.toLowerCase() === brandSlug.toLowerCase()
+    (p) => toBrandSlug(p.brandName) === brandSlug.toLowerCase()
   );
   const brandName = products.length > 0 ? products[0].brandName : brandSlug;
 
@@ -191,32 +202,17 @@ export default async function BrandPage({ params }: BrandPageProps) {
     logo: DEFAULT_LOGO,
     description: positioningCopy,
     areaServed: "Gauteng",
-    makesOffer: products.slice(0, 12).map((product) => ({
-      "@type": "Product",
-      name: product.name,
-      sku: product.id,
-      url: `${BASE_URL}/products/id/${product.id}`,
-      category: product.category,
-    })),
   };
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: `${brandName} Batteries`,
     url: canonicalUrl,
-    isRelatedTo: {
-      "@type": "Brand",
-      name: brandName,
-      url: canonicalUrl,
-    },
-    hasPart: products.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    description: positioningCopy,
+    items: products.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">

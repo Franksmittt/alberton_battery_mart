@@ -25,6 +25,10 @@ function canonicalProductHref(productSlug: string): string {
   return product ? `/products/id/${product.id}` : `/products/${productSlug}`;
 }
 
+function localAreaHref(areaSlug: string): string {
+  return areaSlug === "alberton" ? "/local" : `/local/${areaSlug}`;
+}
+
 export async function generateStaticParams() {
   return getAllServicePages().map((service) => ({
     service: service.serviceSlug,
@@ -151,7 +155,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
 
   const intentLinks = [
     {
-      href: `/local/${entry.areaSlug}`,
+      href: localAreaHref(entry.areaSlug),
       label: `Battery support in ${entry.areaSlug.replace(/-/g, " ")}`,
     },
     {

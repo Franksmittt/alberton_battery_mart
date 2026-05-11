@@ -139,7 +139,6 @@ export default function ProductDetailPage({
         image={product.imagePath}
         url={`/products/id/${product.id}`}
         price={parsePrice(product.sellingPrice_OUTPUT)}
-        aggregateRating={{ ratingValue: "4.8", reviewCount: "127" }}
       />
       <BreadcrumbSchema
         id="product-breadcrumb-schema"

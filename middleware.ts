@@ -164,7 +164,7 @@ export function middleware(request: NextRequest) {
         to: url.pathname,
       });
     }
-    const response = NextResponse.rewrite(url);
+    const response = NextResponse.redirect(url, 308);
     return addSecurityHeaders(response);
   }
 

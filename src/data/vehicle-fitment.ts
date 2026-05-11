@@ -762,3 +762,9 @@ export function getAllVehicleSlugs() {
   return VEHICLE_FITMENT.map((entry) => entry.slug);
 }
 
+export function getAllVehicleMakeSlugs() {
+  return Array.from(
+    new Set(VEHICLE_FITMENT.map((entry) => entry.make.toLowerCase()))
+  );
+}
+

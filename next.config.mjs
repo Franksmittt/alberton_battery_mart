@@ -44,6 +44,41 @@ const nextConfig = {
         destination: '/fitment', 
         permanent: true,
       },
+      {
+        source: '/vehicles/mercedes-benz',
+        destination: '/vehicles/mercedes',
+        permanent: true,
+      },
+      {
+        source: '/products/:id(\\d+)',
+        destination: '/products/id/:id',
+        permanent: true,
+      },
+      {
+        source: '/products/automotive',
+        destination: '/products/type/automotive',
+        permanent: true,
+      },
+      {
+        source: '/products/performance',
+        destination: '/products/type/performance',
+        permanent: true,
+      },
+      {
+        source: '/products/truck-commercial',
+        destination: '/products/type/truck-commercial',
+        permanent: true,
+      },
+      {
+        source: '/products/motorcycle',
+        destination: '/products/type/motorcycle',
+        permanent: true,
+      },
+      {
+        source: '/products/deep-cycle',
+        destination: '/products/type/deep-cycle',
+        permanent: true,
+      },
     ]
   },
   
@@ -56,10 +91,6 @@ const nextConfig = {
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

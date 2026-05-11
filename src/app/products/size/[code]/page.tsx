@@ -10,6 +10,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
+import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
+import { createItemListSchema } from "@/lib/seo/schema";
+import IntentLinks from "@/components/seo/IntentLinks";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +28,7 @@ export async function generateMetadata({
   params,
 }: SizePageProps): Promise<Metadata> {
   const code = params.code.toUpperCase();
-  const url = `${BASE_URL}/products/size/${params.code.toLowerCase()}`;
+  const url = `${BASE_URL}/products/size/${productSizeSlug(params.code)}`;
 
   const description = `Shop ${code} size batteries in Alberton. All brands available: Willard, Exide, Enertec. Free fitment and testing included.`;
 
@@ -62,7 +65,7 @@ export async function generateMetadata({
 // Helper to filter products by size/code
 const getSizeData = (allProducts: ProductCardData[], codeSlug: string) => {
   const products = allProducts.filter(
-    (p) => p.sku.toLowerCase() === codeSlug.toLowerCase()
+    (p) => productSizeMatchesSlug(p.sku, codeSlug)
   );
 
   const brands = Array.from(new Set(products.map((p) => p.brandName)));
@@ -90,7 +93,7 @@ export default async function SizePage({ params }: SizePageProps) {
   }
 
   const code = codeSlug.toUpperCase();
-  const canonicalUrl = `${BASE_URL}/products/size/${codeSlug.toLowerCase()}`;
+  const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(codeSlug)}`;
 
   // Get product specs for the first product (they should all be similar size)
   const avgCapacity = Math.round(
@@ -100,21 +103,15 @@ export default async function SizePage({ params }: SizePageProps) {
     products.reduce((sum, p) => sum + (p.cca || 0), 0) / products.length
   );
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: `${code} Size Batteries`,
     url: canonicalUrl,
     description: `All ${code} size batteries available at Alberton Battery Mart. Includes Willard, Exide, and Enertec brands.`,
-    hasPart: products.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: products.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
-      brand: product.brandName,
-      category: product.category,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">
@@ -228,6 +225,38 @@ export default async function SizePage({ params }: SizePageProps) {
           />
         </div>
       </div>
+
+      <IntentLinks
+        title={`High-intent ${code} battery support`}
+        description="Move from size research to the closest service page for fitment, diagnostics, or suburb dispatch."
+        columnsClassName="md:grid-cols-3"
+        links={[
+          {
+            href: "/services/mobile-battery-replacement/alberton",
+            label: `${code} mobile battery replacement in Alberton`,
+          },
+          {
+            href: "/services/free-battery-testing/new-redruth",
+            label: `${code} battery testing at New Redruth`,
+          },
+          {
+            href: "/services/mobile-battery-replacement/meyersdal",
+            label: `${code} battery callout in Meyersdal`,
+          },
+          {
+            href: "/services/emergency-jump-start/alberton-central",
+            label: `${code} emergency battery help in Alberton Central`,
+          },
+          {
+            href: "/vehicles/toyota/hilux-3-0-d4d",
+            label: "Toyota Hilux battery fitment guide",
+          },
+          {
+            href: "/vehicles/ford/ranger-2-2-tdci",
+            label: "Ford Ranger battery fitment guide",
+          },
+        ]}
+      />
     </div>
   );
 }

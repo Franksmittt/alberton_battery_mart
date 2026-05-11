@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 // Make this page dynamic so it can read updated prices from JSON
 export const dynamic = 'force-dynamic';
@@ -85,24 +86,15 @@ export default async function DeepCycleBatteriesPage() {
     p.category === 'Deep Cycle'
   );
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/deep-cycle`,
-    isRelatedTo: {
-      "@type": "Service",
-      name: "Inverter and Solar Deployment",
-      url: `${BASE_URL}/quote`,
-    },
-    hasPart: DEEP_CYCLE_PRODUCTS.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: DEEP_CYCLE_PRODUCTS.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   const faqSchema = {
     "@context": "https://schema.org",

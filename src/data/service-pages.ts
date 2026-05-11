@@ -41,27 +41,52 @@ export type ServicePageContent = {
   relatedProducts?: { label: string; slug: string }[];
 };
 
-const LOCAL_MOBILE_SERVICE_SLUGS = [
-  "brackenhurst",
-  "brackendowns",
-  "randhart",
-  "verwoerdpark",
-  "alberante",
-  "mayberry-park",
-  "eden-park",
-];
+const ALL_LOCAL_AREA_SLUGS = getAllLocalAreas().map((area) => area.slug);
 
-const PRIORITY_SERVICE_AREA_SLUGS = [
-  "brackenhurst",
-  "brackendowns",
-  "randhart",
-  "verwoerdpark",
-  "alberante",
-  "florentia",
-  "raceview",
-  "south-crest",
-  "mayberry-park",
-  "eden-park",
+const LOCAL_MOBILE_SERVICE_SLUGS = ALL_LOCAL_AREA_SLUGS;
+
+const PRIORITY_SERVICE_AREA_SLUGS = ALL_LOCAL_AREA_SLUGS;
+
+const HERO_SERVICE_AREAS = [
+  {
+    slug: "alberton-central",
+    name: "Alberton Central",
+    responseWindow: "30-45 minutes",
+    roads: ["Voortrekker Road", "Ring Road West", "Alberton Boulevard"],
+    landmarks: ["Alberton City", "Alberton CBD offices", "Civic Centre precinct"],
+    focusKeywords: [
+      "battery replacement Alberton Central",
+      "mobile battery service Alberton City",
+      "free battery testing Alberton CBD",
+    ],
+    keyVehicles: ["Toyota Corolla", "VW Polo Vivo", "Ford Ranger"],
+  },
+  {
+    slug: "new-redruth",
+    name: "New Redruth",
+    responseWindow: "20-35 minutes",
+    roads: ["St Columb Road", "Penzance Street", "Swartkoppies Road"],
+    landmarks: ["28 St Columb Rd workshop", "New Redruth Village", "Alberton Netcare corridor"],
+    focusKeywords: [
+      "battery replacement New Redruth",
+      "battery shop New Redruth",
+      "free battery testing New Redruth",
+    ],
+    keyVehicles: ["Hyundai i20", "Toyota Hilux", "Nissan NP200"],
+  },
+  {
+    slug: "meyersdal",
+    name: "Meyersdal",
+    responseWindow: "35-50 minutes",
+    roads: ["Michelle Avenue", "Hennie Alberts Street", "Meyersdal Drive"],
+    landmarks: ["Meyersdal Eco Estate", "Meyersdal Mall", "Virgin Active Meyersdal"],
+    focusKeywords: [
+      "battery replacement Meyersdal",
+      "AGM battery fitment Meyersdal",
+      "BMW battery coding Meyersdal",
+    ],
+    keyVehicles: ["BMW 3 Series", "Mercedes C-Class", "Audi Q5"],
+  },
 ];
 
 const generatedLocalMobileServicePages: ServicePageContent[] = getAllLocalAreas()
@@ -323,6 +348,303 @@ const generatedLocalJumpStartPages: ServicePageContent[] = getAllLocalAreas()
       { label: "Willard 658", slug: "willard-658" },
     ],
   }));
+
+const generatedHeroMobileServicePages: ServicePageContent[] = HERO_SERVICE_AREAS.map(
+  (area) => ({
+    serviceSlug: "mobile-battery-replacement",
+    areaSlug: area.slug,
+    heroEyebrow: `High-Intent Dispatch: ${area.name}`,
+    title: `Mobile Battery Replacement in ${area.name}`,
+    description: `On-site car battery replacement in ${area.name} with battery testing, alternator checks, and correct-fit Willard, Exide, Enertec, and AGM options. Typical response window: ${area.responseWindow}.`,
+    keywords: [
+      ...area.focusKeywords,
+      `mobile battery replacement ${area.name}`,
+      `car battery ${area.name}`,
+      `battery callout ${area.name}`,
+      ...area.keyVehicles.map((vehicle) => `${vehicle} battery ${area.name}`),
+    ],
+    intro: `Our mobile battery team covers ${area.name} with fast dispatch from the New Redruth workshop. We confirm the battery failure first, match the correct battery code, and fit on-site so you do not need a tow or risky repeat jump-start.`,
+    coverage: [
+      `Typical response window in ${area.name}: ${area.responseWindow}`,
+      `Frequent routes covered: ${area.roads.join(", ")}`,
+      `High-demand landmarks: ${area.landmarks.join(", ")}`,
+      `Common vehicles supported: ${area.keyVehicles.join(", ")}`,
+    ],
+    benefits: [
+      {
+        title: "Suburb-Specific Dispatch",
+        description:
+          "We route from the closest available technician and pre-load common battery sizes for your area.",
+      },
+      {
+        title: "Correct Battery Chemistry",
+        description:
+          "Standard flooded, EFB, AGM, and high-CCA batteries are matched to the vehicle before installation.",
+      },
+      {
+        title: "Diagnostics Before Payment",
+        description:
+          "Battery, alternator, and starter checks confirm the real fault before the replacement is completed.",
+      },
+    ],
+    process: [
+      {
+        title: "01 / Confirm Vehicle & Area",
+        description:
+          "Send your registration/VIN, vehicle model, and pin location so we dispatch with the right battery.",
+      },
+      {
+        title: "02 / Test Before Replacement",
+        description:
+          "The technician performs load, alternator, and starter checks before removing the old battery.",
+      },
+      {
+        title: "03 / Fit, Verify & Register",
+        description:
+          "We fit the new battery, check charging output, process payment, and register warranty details.",
+      },
+    ],
+    faqs: [
+      {
+        question: `Do you come to homes and offices in ${area.name}?`,
+        answer: `Yes. We provide mobile battery testing and replacement across ${area.name}, including ${area.landmarks.slice(0, 2).join(" and ")}.`,
+      },
+      {
+        question: `Can you fit AGM or EFB batteries in ${area.name}?`,
+        answer:
+          "Yes. We stock and fit AGM/EFB batteries for Start/Stop vehicles and can complete battery registration where required.",
+      },
+      {
+        question: "Will you check the alternator?",
+        answer:
+          "Yes. Every replacement includes a charging-system check so a weak alternator does not damage the new battery.",
+      },
+    ],
+    ctas: [
+      {
+        label: `Call for ${area.name} Battery Help`,
+        href: "tel:0101096211",
+      },
+      {
+        label: "WhatsApp Your Pin Location",
+        href: `https://wa.me/27823046926?text=Hi,%20I%20need%20mobile%20battery%20replacement%20in%20${encodeURIComponent(area.name)}.`,
+        variant: "secondary",
+      },
+    ],
+    schema: {
+      serviceType: `Mobile Battery Replacement ${area.name}`,
+      offers: "On-site battery testing, replacement, fitment, and charging-system checks",
+      serviceAreas: [area.name],
+    },
+    relatedVehicles: [
+      { label: "Toyota Hilux battery support", slug: "toyota/hilux-3-0-d4d" },
+      { label: "Ford Ranger battery support", slug: "ford/ranger-2-2-tdci" },
+      { label: "BMW battery coding support", slug: "bmw/3-series-f30" },
+    ],
+    relatedProducts: [
+      { label: "Willard 652", slug: "willard-652" },
+      { label: "Exide 668P", slug: "exide-668p" },
+      { label: "Willard 658", slug: "willard-658" },
+    ],
+  })
+);
+
+const generatedHeroFreeTestingPages: ServicePageContent[] = HERO_SERVICE_AREAS.map(
+  (area) => ({
+    serviceSlug: "free-battery-testing",
+    areaSlug: area.slug,
+    heroEyebrow: `Diagnostics: ${area.name}`,
+    title: `Free Battery Testing in ${area.name}`,
+    description: `Free battery, starter, and alternator testing for ${area.name} drivers before you replace your battery. Ideal for slow cranking, warning lights, and repeat jump-start issues.`,
+    keywords: [
+      ...area.focusKeywords,
+      `free battery testing ${area.name}`,
+      `alternator test ${area.name}`,
+      `battery diagnostics ${area.name}`,
+      `car battery test ${area.name}`,
+    ],
+    intro: `Before buying a replacement battery in ${area.name}, get the electrical system tested properly. We check resting voltage, cold-cranking performance, starter draw, and alternator output so you know whether the battery is truly the fault.`,
+    coverage: [
+      `Diagnostics support for ${area.name}: ${area.responseWindow}`,
+      `Coverage routes: ${area.roads.join(", ")}`,
+      `Nearby demand points: ${area.landmarks.join(", ")}`,
+    ],
+    benefits: [
+      {
+        title: "No Unnecessary Battery Sales",
+        description:
+          "A test result confirms whether the battery, alternator, starter, or cabling is causing the no-start issue.",
+      },
+      {
+        title: "Useful for Warranty Claims",
+        description:
+          "Digital readings make it easier to confirm battery condition and avoid guesswork.",
+      },
+      {
+        title: "Mobile or Workshop Options",
+        description:
+          "Use the New Redruth workshop or request mobile testing where dispatch is available.",
+      },
+    ],
+    process: [
+      {
+        title: "01 / Symptom Check",
+        description:
+          "We ask about slow crank, warning lights, recent jump-starts, and driving patterns.",
+      },
+      {
+        title: "02 / Electrical Test",
+        description:
+          "Battery load, starter draw, alternator charge, and voltage drop are tested in sequence.",
+      },
+      {
+        title: "03 / Clear Recommendation",
+        description:
+          "You get a practical pass/fail result and the right battery options only if replacement is needed.",
+      },
+    ],
+    faqs: [
+      {
+        question: `Is battery testing really free in ${area.name}?`,
+        answer:
+          "The diagnostic test is free. Mobile travel may depend on the callout details, and we confirm that before dispatch.",
+      },
+      {
+        question: "Can a bad alternator look like a bad battery?",
+        answer:
+          "Yes. That is why alternator output and ripple are checked before recommending a battery replacement.",
+      },
+      {
+        question: "How long does the test take?",
+        answer:
+          "Most tests take 10-15 minutes; Start/Stop vehicles can take longer if battery management checks are needed.",
+      },
+    ],
+    ctas: [
+      {
+        label: `Book ${area.name} Battery Test`,
+        href: "tel:0101096211",
+      },
+      {
+        label: "WhatsApp Test Request",
+        href: `https://wa.me/27823046926?text=Hi,%20I%20need%20a%20free%20battery%20test%20in%20${encodeURIComponent(area.name)}.`,
+        variant: "secondary",
+      },
+    ],
+    schema: {
+      serviceType: `Battery Testing ${area.name}`,
+      offers: "Free battery, starter, and alternator diagnostics",
+      serviceAreas: [area.name],
+    },
+    relatedVehicles: [
+      { label: "Toyota Hilux diagnostics", slug: "toyota/hilux-3-0-d4d" },
+      { label: "VW Polo Vivo testing", slug: "volkswagen/polo-vivo" },
+      { label: "BMW battery coding checks", slug: "bmw/3-series-f30" },
+    ],
+    relatedProducts: [
+      { label: "Willard 652", slug: "willard-652" },
+      { label: "Exide 668P", slug: "exide-668p" },
+    ],
+  })
+);
+
+const generatedHeroJumpStartPages: ServicePageContent[] = HERO_SERVICE_AREAS.map(
+  (area) => ({
+    serviceSlug: "emergency-jump-start",
+    areaSlug: area.slug,
+    heroEyebrow: `No-Start Support: ${area.name}`,
+    title: `Emergency Jump-Start in ${area.name}`,
+    description: `Safe emergency jump-start support in ${area.name}, followed by battery and alternator diagnostics so you know if replacement is needed before you drive away.`,
+    keywords: [
+      ...area.focusKeywords,
+      `emergency jump start ${area.name}`,
+      `dead battery ${area.name}`,
+      `car won't start ${area.name}`,
+      `battery rescue ${area.name}`,
+    ],
+    intro: `If your vehicle will not start in ${area.name}, we can boost it safely and test the battery immediately afterwards. If the battery fails, we can usually replace it during the same visit.`,
+    coverage: [
+      `Emergency response in ${area.name}: ${area.responseWindow}`,
+      `Main response routes: ${area.roads.join(", ")}`,
+      `High-demand locations: ${area.landmarks.join(", ")}`,
+    ],
+    benefits: [
+      {
+        title: "ECU-Safe Boosting",
+        description:
+          "Surge-protected jump-start equipment protects sensitive modern electronics.",
+      },
+      {
+        title: "Immediate Failure Check",
+        description:
+          "A quick battery and alternator check shows whether you can drive safely or need replacement.",
+      },
+      {
+        title: "Replacement Ready",
+        description:
+          "Common car, bakkie, SUV, and AGM battery sizes can be fitted during the same callout.",
+      },
+    ],
+    process: [
+      {
+        title: "01 / Share Location",
+        description:
+          "Call or WhatsApp your pin and vehicle details so we dispatch the right equipment.",
+      },
+      {
+        title: "02 / Safe Jump-Start",
+        description:
+          "We connect surge-protected boosters and start the vehicle using safe procedure.",
+      },
+      {
+        title: "03 / Test and Decide",
+        description:
+          "The battery and alternator are checked before you leave so the problem does not repeat.",
+      },
+    ],
+    faqs: [
+      {
+        question: `Can you jump-start my car in ${area.name}?`,
+        answer: `Yes. We assist no-start vehicles across ${area.name}, especially around ${area.landmarks.slice(0, 2).join(" and ")}.`,
+      },
+      {
+        question: "Can a jump-start damage my car?",
+        answer:
+          "DIY jump-starts can be risky. We use surge-protected boosters and follow safe connection procedures.",
+      },
+      {
+        question: "What if the battery is dead again tomorrow?",
+        answer:
+          "That is exactly why we test after the boost. If the battery fails, we can replace it before you get stranded again.",
+      },
+    ],
+    ctas: [
+      {
+        label: `Call for ${area.name} Jump-Start`,
+        href: "tel:0101096211",
+      },
+      {
+        label: "WhatsApp Emergency Location",
+        href: `https://wa.me/27823046926?text=Emergency%20jump-start%20needed%20in%20${encodeURIComponent(area.name)}.`,
+        variant: "secondary",
+      },
+    ],
+    schema: {
+      serviceType: `Emergency Jump Start ${area.name}`,
+      offers: "Safe jump-start, battery diagnostics, and optional on-site replacement",
+      serviceAreas: [area.name],
+    },
+    relatedVehicles: [
+      { label: "VW Polo Vivo jump-start support", slug: "volkswagen/polo-vivo" },
+      { label: "Toyota Fortuner no-start support", slug: "toyota/fortuner-2-8-gd6" },
+      { label: "Ford Ranger battery support", slug: "ford/ranger-2-2-tdci" },
+    ],
+    relatedProducts: [
+      { label: "Willard 652", slug: "willard-652" },
+      { label: "Willard 658", slug: "willard-658" },
+    ],
+  })
+);
 
 function normalizeForSimilarity(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -738,6 +1060,9 @@ const RAW_SERVICES: ServicePageContent[] = [
       { label: "Willard 658", slug: "willard-658" },
     ],
   },
+  ...generatedHeroMobileServicePages,
+  ...generatedHeroFreeTestingPages,
+  ...generatedHeroJumpStartPages,
   {
     serviceSlug: "battery-fitment",
     areaSlug: "meyersdal",

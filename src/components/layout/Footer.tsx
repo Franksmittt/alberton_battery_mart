@@ -104,6 +104,11 @@ const Footer = () => {
                     New Redruth
                   </Link>
                 </li>
+                <li>
+                  <Link href="/proof/toyota-hilux-battery-replacement-alberton" className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]">
+                    Local Proof
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -136,6 +141,15 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
+                  <Link
+                    href="/reviews"
+                    data-track-event="footer_reviews_click"
+                    className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]"
+                  >
+                    Leave a Google Review
+                  </Link>
+                </li>
+                <li>
                   <span>Mon - Fri: 08:00 AM - 5:00 PM | Sat: 08:00 AM - 12:00 PM</span>
                 </li>
               </ul>
@@ -156,12 +170,6 @@ const Footer = () => {
                 </a>
                 .
               </span>
-              <Link
-                href="/login"
-                className="inline-flex items-center rounded border border-[var(--brand-border)] px-3 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.5px] text-[var(--brand-muted-2)] transition-colors hover:border-[var(--brand-muted-3)] hover:text-white"
-              >
-                Login
-              </Link>
             </div>
             <div className="flex items-center gap-6">
               <Link href="#" className="transition-colors hover:text-white">

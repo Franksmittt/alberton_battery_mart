@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 // Make this page dynamic so it can read updated prices from JSON
 export const dynamic = 'force-dynamic';
@@ -95,24 +96,15 @@ export default async function TruckBatteriesPage() {
   );
   const { brands, sizes } = getFilterOptions(TRUCK_PRODUCTS);
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/truck-commercial`,
-    isRelatedTo: {
-      "@type": "Service",
-      name: "Truck & Fleet Battery Fitment",
-      url: `${BASE_URL}/services/truck-battery-fitment/alrode`,
-    },
-    hasPart: TRUCK_PRODUCTS.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: TRUCK_PRODUCTS.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">

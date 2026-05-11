@@ -1,10 +1,12 @@
 import { MetadataRoute } from "next";
 import { getAllProducts } from "@/data/products";
 import { ALL_POSTS } from "@/data/blog-posts";
-import { getAllVehicleSlugs } from "@/data/vehicle-fitment";
+import { getAllVehicleMakeSlugs, getAllVehicleSlugs } from "@/data/vehicle-fitment";
 import { getAllServicePages } from "@/data/service-pages";
 import { getAllLocalAreas } from "@/data/local-areas";
 import { BASE_URL } from "@/lib/seo-constants";
+import { productSizeSlug } from "@/lib/product-size-slugs";
+import { getAllLocalProofStories } from "@/data/local-proof";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -30,9 +32,13 @@ export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
     "/contact",
     "/products",
     "/products/all",
+    "/products/type/truck-motorcycle",
     "/faq",
     "/quote",
     "/fitment",
+    "/reviews",
+    "/emergency-battery-replacement",
+    "/deep-cycle",
     "/local",
     "/local/alberton-central",
     "/local/meyersdal",
@@ -78,10 +84,15 @@ export async function getProductSitemapEntries(): Promise<MetadataRoute.Sitemap>
       )
   );
 
+  const productSizePages = Array.from(new Set(allProducts.map((p) => productSizeSlug(p.sku))))
+    .filter(Boolean)
+    .map((slug) => buildEntry(`/products/size/${slug}`, "monthly", 0.75));
+
   return [
     ...productIdPages,
     ...productTypePages,
     ...productBrandPages,
+    ...productSizePages,
   ];
 }
 
@@ -92,7 +103,14 @@ export function getBlogSitemapEntries(): MetadataRoute.Sitemap {
 }
 
 export function getVehicleSitemapEntries(): MetadataRoute.Sitemap {
-  return getAllVehicleSlugs().map((slug) => buildEntry(`/vehicles/${slug}`, "monthly", 0.8));
+  const makePages = getAllVehicleMakeSlugs().map((slug) =>
+    buildEntry(`/vehicles/${slug}`, "monthly", 0.75)
+  );
+  const modelPages = getAllVehicleSlugs().map((slug) =>
+    buildEntry(`/vehicles/${slug}`, "monthly", 0.8)
+  );
+
+  return [...makePages, ...modelPages];
 }
 
 export function getServiceSitemapEntries(): MetadataRoute.Sitemap {
@@ -103,4 +121,10 @@ export function getServiceSitemapEntries(): MetadataRoute.Sitemap {
 
 export function getLocalSitemapEntries(): MetadataRoute.Sitemap {
   return getAllLocalAreas().map((area) => buildEntry(`/local/${area.slug}`, "monthly", 0.8));
+}
+
+export function getLocalProofSitemapEntries(): MetadataRoute.Sitemap {
+  return getAllLocalProofStories().map((story) =>
+    buildEntry(`/proof/${story.slug}`, "monthly", 0.75)
+  );
 }

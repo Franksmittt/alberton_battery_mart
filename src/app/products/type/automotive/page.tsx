@@ -6,6 +6,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 import AutomotiveCatalogExperience from "@/components/products/AutomotiveCatalogExperience";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 export const dynamic = "force-dynamic";
 
@@ -86,24 +87,15 @@ export default async function StandardAutomotiveBatteriesPage() {
     )
     .sort((a, b) => a.brandName.localeCompare(b.brandName) || a.name.localeCompare(b.name));
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/automotive`,
-    isRelatedTo: {
-      "@type": "Service",
-      name: "Mobile Battery Replacement",
-      url: `${BASE_URL}/services/mobile-battery-replacement/alberton`,
-    },
-    hasPart: automotiveProducts.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: automotiveProducts.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   return (
     <div className="container py-14 space-y-10">

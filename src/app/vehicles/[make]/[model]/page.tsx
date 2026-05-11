@@ -13,6 +13,7 @@ import { BASE_URL } from "@/lib/seo-constants";
 import { MapPin, AlertTriangle, ShieldCheck } from "lucide-react";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
 import Link from "next/link";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 type Params = {
   make: string;
@@ -86,16 +87,16 @@ export default function VehicleFitmentPage({ params }: { params: Params }) {
     vehicleModelDate: entry.years,
     manufacturer: entry.make,
     description: entry.description,
-    offers: entry.recommendedProducts.map((product) => ({
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Product",
-        name: product.title,
-        url: `${BASE_URL}${canonicalProductHref(product.slug)}`,
-      },
-      url: `${BASE_URL}${canonicalProductHref(product.slug)}`,
-    })),
   };
+
+  const recommendedProductsSchema = createItemListSchema({
+    name: `${entry.headline} recommended batteries`,
+    url: `/vehicles/${entry.slug}`,
+    items: entry.recommendedProducts.map((product) => ({
+      name: product.title,
+      url: canonicalProductHref(product.slug),
+    })),
+  });
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -113,6 +114,7 @@ export default function VehicleFitmentPage({ params }: { params: Params }) {
   return (
     <div className="container py-16 space-y-16">
       <JsonLd data={schema} id="vehicle-schema" />
+      <JsonLd data={recommendedProductsSchema} id="vehicle-recommended-products-schema" />
       <JsonLd data={faqSchema} id="vehicle-faq-schema" />
 
       <section className="grid lg:grid-cols-12 gap-10">

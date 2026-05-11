@@ -9,6 +9,7 @@ import { Bike, Phone, MessageSquare, Zap, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 // Make this page dynamic so it can read updated prices from JSON
 export const dynamic = 'force-dynamic';
@@ -90,24 +91,15 @@ export default async function MotorcycleBatteriesPage() {
   );
   const { brands, sizes } = getFilterOptions(MOTORCYCLE_PRODUCTS);
 
-  const productCollectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProductCollection",
+  const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/motorcycle`,
-    isRelatedTo: {
-      "@type": "Service",
-      name: "Motorcycle Battery Replacement",
-      url: `${BASE_URL}/services/mobile-battery-replacement/alberton`,
-    },
-    hasPart: MOTORCYCLE_PRODUCTS.slice(0, 20).map((product) => ({
-      "@type": "Product",
+    items: MOTORCYCLE_PRODUCTS.slice(0, 20).map((product) => ({
       name: product.name,
-      sku: product.id,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
-  };
+  });
 
   return (
     <div className="container py-16 space-y-12">

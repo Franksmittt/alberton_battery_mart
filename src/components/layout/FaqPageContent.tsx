@@ -4,62 +4,47 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import FaqSchema from "@/components/seo/FaqSchema";
 
 // --- CONTACT DETAILS (Lead Gen) ---
 const PRIMARY_PHONE = "0101096211";
-const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
+const EMAIL_ADDRESS = "info@albertonbatterymart.co.za";
 
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [
   {
-    question: "1. Is the mobile callout service free?",
+    question: "Is the mobile callout service free?",
     answer: "Our mobile callout includes a service fee for travel time and on-site assistance. However, the **battery testing and fitment service itself are 100% free.** You only pay for the battery and the callout fee, ensuring you receive transparent, fixed pricing.",
   },
   {
-    question: "2. How long is the warranty period on your batteries?",
+    question: "How long is the warranty period on your batteries?",
     answer: "We offer warranties ranging from 24 to 36 months on premium batteries. The specific warranty period is clearly displayed on every product and validated with our professional fitment service.",
   },
   {
-    question: "3. Do you stock batteries for Start/Stop (EFB & AGM) vehicles?",
+    question: "Do you stock batteries for Start/Stop (EFB & AGM) vehicles?",
     answer: "Yes. We stock and specialize in **EFB (Enhanced Flooded Battery) and AGM (Absorbed Glass Mat) technology** required by modern vehicles, eliminating the risk of using an incorrect, warranty-voiding battery.",
   },
   {
-    question: "4. Do I need an appointment for a battery replacement?",
+    question: "Do I need an appointment for a battery replacement?",
     answer: "While you can visit our storefront directly during trading hours, we recommend calling first, especially for mobile service, to schedule the fastest dispatch time and ensure immediate availability of your specific battery code.",
   },
   {
-    question: "5. How do I know if my alternator is faulty?",
+    question: "How do I know if my alternator is faulty?",
     answer: "If your battery keeps failing after a recent replacement, your alternator is likely the issue. We offer a **free on-site alternator diagnostic test** with every fitment to identify and solve this problem permanently.",
   },
   {
-    question: "6. Which brands do you stock, and why?",
+    question: "Which brands do you stock, and why?",
     answer: "We are a multi-brand stockist, offering the best options from **Willard, Enertec, and Exide**. This flexibility allows us to guarantee the best fit for your vehicle's specifications and your budget, unlike single-brand centers.",
   },
   {
-    question: "7. Do you sell batteries for solar and backup power?",
+    question: "Do you sell batteries for solar and backup power?",
     answer: "Yes. We stock a full range of deep cycle batteries, including high-end Lithium (LiFePO₄) and AGM models, designed specifically for home inverters, solar setups, and load shedding mitigation.",
   },
   {
-    question: "8. Where is your physical store located?",
+    question: "Where is your physical store located?",
     answer: `Our physical store is located at **28 St Columb Rd, New Redruth, Alberton, 1450.** We encourage in-store visits for expert consultation and over-the-counter sales.`,
   },
 ];
-
-// --- NEW: Generate FAQPage Schema from faqItems array ---
-const faqPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqItems.map(item => ({
-    "@type": "Question",
-    "name": item.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      // We must strip HTML tags for valid schema.
-      // This simple replace handles the **bold** tags.
-      "text": item.answer.replace(/<\/?strong>/g, '') 
-    }
-  }))
-};
 
 
 const FaqPageContent = () => {
@@ -71,11 +56,7 @@ const FaqPageContent = () => {
     // --- THEME FIX: Changed bg-white to bg-background ---
     <section className="w-full bg-background py-16"> 
 
-      {/* --- NEW: Add FAQPage Schema to the page --- */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema).replace(/</g, '\\u003c') }}
-      />
+      <FaqSchema items={faqItems} id="faq-page-schema" />
       
        <div className="container px-4 md:px-6 lg:px-8">
         

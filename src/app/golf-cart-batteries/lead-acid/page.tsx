@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Battery, Phone, MessageSquare, ArrowRight, CheckCircle, DollarSign, Wrench, Clock, AlertTriangle } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+import { createItemListSchema } from "@/lib/seo/schema";
 
 const PAGE_TITLE = "Golf Cart Lead-Acid Battery Replacement - Alberton | Trojan & Enertec";
 const PAGE_DESCRIPTION =
@@ -165,43 +166,21 @@ const FAQ_SCHEMA = {
   })),
 };
 
-const PRODUCT_COLLECTION_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "ProductCollection",
+const PRODUCT_COLLECTION_SCHEMA = createItemListSchema({
   name: "Golf Cart Lead-Acid Batteries",
   description: PAGE_DESCRIPTION,
   url: `${BASE_URL}/golf-cart-batteries/lead-acid`,
-  hasPart: [
+  items: [
     {
-      "@type": "Product",
       name: "Trojan T-875 8V Deep Cycle Battery",
-      brand: {
-        "@type": "Brand",
-        name: "Trojan",
-      },
-      category: "Golf Cart Battery",
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "ZAR",
-        availability: "https://schema.org/InStock",
-      },
+      url: "/golf-cart-batteries/lead-acid#trojan-t875",
     },
     {
-      "@type": "Product",
       name: "Enertec GC8 8V Deep Cycle Battery",
-      brand: {
-        "@type": "Brand",
-        name: "Enertec",
-      },
-      category: "Golf Cart Battery",
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "ZAR",
-        availability: "https://schema.org/InStock",
-      },
+      url: "/golf-cart-batteries/lead-acid#enertec-gc8",
     },
   ],
-};
+});
 
 const SERVICE_SCHEMA = {
   "@context": "https://schema.org",
