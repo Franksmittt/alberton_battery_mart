@@ -15,14 +15,14 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
   useEffect(() => {
     pushDataLayerEvent("contact_form_view");
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setIsSubmitting(true);
     setIsSuccess(false);
     setError(null);
@@ -34,22 +34,16 @@ const ContactForm = () => {
     }
 
     try {
-      // Use Web3Forms - free form submission service
+      const formData = new FormData(form);
+      const subject = String(formData.get("subject") || "Website enquiry");
+      formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+      formData.set("subject", `Contact Form: ${subject}`);
+      formData.append("from_name", "Alberton Battery Mart Website");
+      formData.append("to_email", "admin@albertonbatterymart.co.za");
+
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          name: formData.name,
-          email: formData.email,
-          subject: `Contact Form: ${formData.subject}`,
-          message: formData.message,
-          from_name: 'Alberton Battery Mart Website',
-          to_email: 'admin@albertonbatterymart.co.za'
-        }),
+        body: formData,
       });
 
       const data = await response.json();
@@ -58,15 +52,12 @@ const ContactForm = () => {
         throw new Error(data.message || 'Failed to send message');
       }
 
-      // Track successful submission
-      pushDataLayerEvent("generate_lead", {
-        value: "contact_form_submission",
-        subject: formData.subject,
-      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "generate_lead" });
 
       setIsSubmitting(false);
       setIsSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      form.reset();
     } catch (err) {
       console.error("Error submitting form:", err);
       setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
@@ -74,61 +65,98 @@ const ContactForm = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // --- NEW: Show success message if form was sent ---
-  if (isSuccess) {
-    return (
-      <div className="p-8 bg-card border border-green-500 text-green-300 rounded-lg flex flex-col items-center space-y-4 text-center">
-        <CheckCircle className="h-12 w-12 text-green-500" />
-        <h3 className="text-2xl font-bold text-foreground">Thank You!</h3>
-        <p className="text-lg text-muted-foreground">
-          Your message has been sent successfully. We will be in touch shortly.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} data-track-skip-form-submit="true" className="space-y-6">
-      
-      {/* --- ERROR MESSAGE --- */}
+    <form onSubmit={handleSubmit} data-track-skip-form-submit="true" className="space-y-5">
       {error && (
-        <div className="p-4 bg-red-900/20 border border-red-700 text-red-300 rounded-lg flex items-center space-x-3">
+        <div className="flex items-start gap-3 border border-red-500/60 bg-red-950/35 p-4 text-red-100">
           <AlertTriangle className="h-5 w-5 flex-shrink-0" />
-          <p className="text-sm font-medium">{error}</p>
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.16em]">Request failed</p>
+            <p className="mt-1 text-sm font-medium text-red-100/80">{error}</p>
+          </div>
+        </div>
+      )}
+
+      {isSuccess && (
+        <div className="flex items-start gap-3 border border-[var(--brand-success)]/70 bg-[var(--brand-success)]/12 p-4 text-white">
+          <CheckCircle className="h-5 w-5 flex-shrink-0 text-[var(--brand-success)]" />
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.16em]">Request sent</p>
+            <p className="mt-1 text-sm font-medium text-white/70">
+              We have received your message and will respond shortly.
+            </p>
+          </div>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="name">Full Name</Label>
-          <Input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required className="bg-background border-border text-foreground" />
+          <Label htmlFor="name" className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Full name</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            required
+            placeholder="Your name"
+            className="h-14 rounded-none border-white/15 bg-black/30 text-base font-semibold text-white placeholder:text-white/28 focus-visible:ring-[var(--brand-accent)]"
+          />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">Email Address</Label>
-           <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="bg-background border-border text-foreground" />
+          <Label htmlFor="email" className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Email address</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            className="h-14 rounded-none border-white/15 bg-black/30 text-base font-semibold text-white placeholder:text-white/28 focus-visible:ring-[var(--brand-accent)]"
+          />
         </div>
       </div>
       
       <div className="space-y-2">
-        <Label htmlFor="subject">Subject</Label>
-        <Input id="subject" name="subject" type="text" value={formData.subject} onChange={handleChange} required className="bg-background border-border text-foreground" />
+        <Label htmlFor="phone" className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Phone number</Label>
+        <Input
+          id="phone"
+          name="phone"
+          type="tel"
+          placeholder="010 109 6211"
+          className="h-14 rounded-none border-white/15 bg-black/30 text-base font-semibold text-white placeholder:text-white/28 focus-visible:ring-[var(--brand-accent)]"
+        />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message">Your Message</Label>
-        <Textarea id="message" name="message" rows={5} value={formData.message} onChange={handleChange} required className="bg-background border-border text-foreground" />
+        <Label htmlFor="subject" className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Subject</Label>
+        <Input
+          id="subject"
+          name="subject"
+          type="text"
+          required
+          placeholder="Battery quote, mobile callout, fleet enquiry..."
+          className="h-14 rounded-none border-white/15 bg-black/30 text-base font-semibold text-white placeholder:text-white/28 focus-visible:ring-[var(--brand-accent)]"
+        />
       </div>
 
-      <Button type="submit" variant="battery" className="w-full h-12 text-lg" disabled={isSubmitting}>
+      <div className="space-y-2">
+        <Label htmlFor="message" className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Message</Label>
+        <Textarea
+          id="message"
+          name="message"
+          rows={6}
+          required
+          placeholder="Tell us your vehicle, battery code, location, and urgency."
+          className="rounded-none border-white/15 bg-black/30 text-base font-semibold text-white placeholder:text-white/28 focus-visible:ring-[var(--brand-accent)]"
+        />
+      </div>
+
+      <Button
+        type="submit"
+        variant="battery"
+        className="h-14 w-full rounded-none bg-[var(--brand-accent)] text-base font-black uppercase tracking-[0.12em] text-white hover:bg-[var(--brand-accent-hover)]"
+        disabled={isSubmitting}
+      >
         <Send className="h-5 w-5 mr-2" />
-        {isSubmitting ? "Sending..." : "Submit Inquiry"}
+        {isSubmitting ? "Sending Request..." : "Send Request"}
       </Button>
     </form>
   );

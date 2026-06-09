@@ -1,9 +1,7 @@
 "use client";
 
-import { Mail, MapPin, Clock, Phone, MessageSquare } from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, MessageSquare, Phone } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import ContactForm from "@/components/content/ContactForm";
 import QuoteTrackingWrapper from "@/components/layout/QuoteTrackingWrapper";
 
@@ -32,105 +30,146 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
       ctaEventName="contact_page_cta_click"
     >
       {({ trackCta }) => (
-        <div className="container py-16 space-y-12">
-          {/* --- NEW: SEO-Optimized H1 & Subtitle --- */}
-          <h1 className="text-5xl font-extrabold text-foreground text-center">
-            Contact Alberton's Battery Experts
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto text-center">
-            Call us for immediate assistance in Alberton, or use the form below for detailed inquiries.
-          </p>
-
-          {/* Grid: Contact Options, Form, and Map */}
-          <div className="grid lg:grid-cols-3 gap-10 pt-6">
-            
-            {/* Column 1: Contact Details & CTAs */}
-            <div className="lg:col-span-1 space-y-6">
-              
-              <h2 className="text-3xl font-bold text-battery mb-4">Immediate Contact</h2>
-              
-              {/* CTA: Phone Call (High Urgency) */}
-              <Card className="bg-card border-l-4 border-battery">
-                <CardContent className="p-4 space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <Phone className="h-6 w-6 text-battery" />
-                    <h3 className="text-xl font-bold text-foreground">Mobile Callouts / Shop Line</h3>
+        <main className="bg-[#0D0D0D] text-white">
+          <section className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_20%_0%,rgba(229,57,53,0.22),transparent_32%),linear-gradient(135deg,#0D0D0D_0%,#121212_58%,#050505_100%)]">
+            <div className="container px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+              <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+                <div className="space-y-10">
+                  <div className="space-y-6">
+                    <p className="text-xs font-black uppercase tracking-[0.32em] text-[var(--brand-accent)]">
+                      Alberton headquarters
+                    </p>
+                    <h1 className="max-w-3xl text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[0.9] tracking-[-0.08em] text-white">
+                      Talk to the battery team that actually tests first.
+                    </h1>
+                    <p className="max-w-2xl text-lg font-medium leading-8 text-white/62 md:text-xl">
+                      Call for urgent mobile fitment, send a detailed request for a quote, or route directly to 28 St Columb Rd in New Redruth. Every enquiry is handled by the local Alberton team.
+                    </p>
                   </div>
-                  <p className="text-2xl font-extrabold text-foreground">{CONTACT_DETAILS.primaryPhone}</p>
-                  <Button asChild variant="battery" className="w-full mt-2">
-                    <a href={`tel:${CONTACT_DETAILS.primaryPhone}`} onClick={() => trackCta("call")}>Call Us Now</a>
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              {/* CTA: WhatsApp (Messaging Only) - CRITICAL CLARITY */}
-              <Card className="bg-card border-l-4 border-green-600">
-                <CardContent className="p-4 space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <MessageSquare className="h-6 w-6 text-green-600" />
-                    <h3 className="text-xl font-bold text-foreground">WhatsApp Messaging Only</h3>
-                  </div>
-                  <p className="text-lg text-muted-foreground">**Please note: This number is for messaging only. No calls.**</p>
-                  <Button asChild variant="secondary" className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white">
-                    <a href={`https://wa.me/${CONTACT_DETAILS.whatsAppLink}`} target="_blank" rel="noopener noreferrer" onClick={() => trackCta("whatsapp")}>
-                      Message {CONTACT_DETAILS.whatsAppNumber}
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
 
-              {/* Other Details */}
-              <div className="space-y-4 pt-4 border-t border-border">
-                <h3 className="text-2xl font-bold text-foreground">Location & Hours</h3>
-                
-                <div className="flex items-start space-x-4">
-                  <MapPin className="h-6 w-6 text-battery flex-shrink-0" />
-                  <p className="text-lg text-foreground">
-                    <a href={CONTACT_DETAILS.mapsLink} target="_blank" rel="noopener noreferrer" className="hover:text-battery" onClick={() => trackCta("maps")}>
-                      {CONTACT_DETAILS.address} (Click for Directions)
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <a
+                      href={`tel:${CONTACT_DETAILS.primaryPhone}`}
+                      data-cta-tracked="true"
+                      onClick={() => trackCta("call")}
+                      className="group border border-white/12 bg-white/[0.04] p-5 transition-colors hover:border-[var(--brand-accent)] hover:bg-[var(--brand-accent)]"
+                    >
+                      <div className="mb-8 flex items-center justify-between">
+                        <Phone className="h-5 w-5 text-[var(--brand-accent)] transition-colors group-hover:text-white" />
+                        <ArrowUpRight className="h-5 w-5 text-white/40 transition-colors group-hover:text-white" />
+                      </div>
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-white/45 group-hover:text-white/75">Call now</p>
+                      <p className="mt-2 text-2xl font-black tracking-tight text-white">{CONTACT_DETAILS.primaryPhone}</p>
                     </a>
-                  </p>
+
+                    <a
+                      href={`https://wa.me/${CONTACT_DETAILS.whatsAppLink}`}
+                      data-cta-tracked="true"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackCta("whatsapp")}
+                      className="group border border-white/12 bg-white/[0.04] p-5 transition-colors hover:border-[var(--brand-success)] hover:bg-[var(--brand-success)]"
+                    >
+                      <div className="mb-8 flex items-center justify-between">
+                        <MessageSquare className="h-5 w-5 text-[var(--brand-success)] transition-colors group-hover:text-white" />
+                        <ArrowUpRight className="h-5 w-5 text-white/40 transition-colors group-hover:text-white" />
+                      </div>
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-white/45 group-hover:text-white/75">WhatsApp only</p>
+                      <p className="mt-2 text-2xl font-black tracking-tight text-white">{CONTACT_DETAILS.whatsAppNumber}</p>
+                    </a>
+                  </div>
+
+                  <div className="space-y-4 border-t border-white/10 pt-8">
+                    {[
+                      {
+                        icon: MapPin,
+                        label: "Visit",
+                        value: CONTACT_DETAILS.address,
+                        href: CONTACT_DETAILS.mapsLink,
+                        action: "maps",
+                      },
+                      {
+                        icon: Mail,
+                        label: "Email",
+                        value: CONTACT_DETAILS.email,
+                        href: `mailto:${CONTACT_DETAILS.email}`,
+                        action: "email",
+                      },
+                      {
+                        icon: Clock,
+                        label: "Hours",
+                        value: CONTACT_DETAILS.hours,
+                      },
+                    ].map((item) => {
+                      const Icon = item.icon;
+                      const content = (
+                        <div className="flex gap-4 border border-white/10 bg-black/20 p-4">
+                          <Icon className="mt-1 h-5 w-5 flex-shrink-0 text-[var(--brand-accent)]" />
+                          <div>
+                            <p className="text-xs font-black uppercase tracking-[0.2em] text-white/40">{item.label}</p>
+                            <p className="mt-1 text-base font-bold leading-6 text-white">{item.value}</p>
+                          </div>
+                        </div>
+                      );
+
+                      return item.href ? (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          target={item.href.startsWith("http") ? "_blank" : undefined}
+                          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          data-cta-tracked="true"
+                          onClick={() => trackCta(item.action || item.label.toLowerCase())}
+                          className="block transition-transform hover:-translate-y-0.5"
+                        >
+                          {content}
+                        </a>
+                      ) : (
+                        <div key={item.label}>{content}</div>
+                      );
+                    })}
+                  </div>
                 </div>
-                
-                <div className="flex items-center space-x-4">
-                  <Clock className="h-6 w-6 text-battery" />
-                  <p className="text-lg text-foreground">{CONTACT_DETAILS.hours}</p>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <Mail className="h-6 w-6 text-battery" />
-                  <Link href={`mailto:${CONTACT_DETAILS.email}`} className="text-lg text-foreground hover:text-battery" onClick={() => trackCta("email")}>
-                    {CONTACT_DETAILS.email}
-                  </Link>
+
+                <div className="border border-white/12 bg-[#121212]/95 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.45)] sm:p-6 lg:sticky lg:top-36">
+                  <div className="mb-8 border-b border-white/10 pb-6">
+                    <p className="text-xs font-black uppercase tracking-[0.26em] text-[var(--brand-accent)]">Send request</p>
+                    <h2 className="mt-3 text-4xl font-black tracking-[-0.05em] text-white md:text-5xl">
+                      Get a call back or written quote.
+                    </h2>
+                  </div>
+                  <ContactForm />
                 </div>
               </div>
             </div>
+          </section>
 
-            {/* Column 2: Contact Form */}
-            <div className="lg:col-span-2">
-              <h2 className="text-3xl font-bold text-foreground mb-6">Send Us a Detailed Inquiry</h2>
-              <ContactForm />
+          <section className="bg-white px-4 py-10 text-[#0D0D0D] sm:px-6 lg:px-8">
+            <div className="container">
+              <div className="mb-5 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--brand-accent)]">Find us</p>
+                  <h2 className="mt-2 text-4xl font-black tracking-[-0.05em] md:text-6xl">28 St Columb Rd.</h2>
+                </div>
+                <Link href="/local/new-redruth" className="font-black uppercase tracking-[0.12em] text-[#0D0D0D] underline decoration-[var(--brand-accent)] decoration-4 underline-offset-8">
+                  New Redruth service page
+                </Link>
+              </div>
+              <div className="aspect-[16/9] overflow-hidden border border-black/10 bg-[#121212] shadow-2xl">
+                <iframe
+                  src={CONTACT_DETAILS.iframeSrc}
+                  width="100%"
+                  height="100%"
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full border-0 grayscale"
+                  title="Google Maps Location of Alberton Battery Mart"
+                />
+              </div>
             </div>
-          </div>
-
-          {/* Full Width Section for Map */}
-          <div className="w-full pt-16">
-            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Find Us on the Map</h2>
-            <div className="bg-card rounded-lg overflow-hidden border border-border aspect-video shadow-xl">
-              {/* --- CRITICAL FIX: Replaced placeholder with a real embed URL --- */}
-              <iframe 
-                src={CONTACT_DETAILS.iframeSrc} 
-                width="100%" 
-                height="100%" 
-                allowFullScreen={false} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full border-0"
-                title="Google Maps Location of Alberton Battery Mart"
-              />
-            </div>
-          </div>
-        </div>
+          </section>
+        </main>
       )}
     </QuoteTrackingWrapper>
   );

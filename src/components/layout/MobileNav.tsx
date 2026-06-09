@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 // --- FIX: Import navItems from the central constants file ---
 import { navItems, mobileCtaItem } from "@/lib/nav-constants";
+import { usePathname } from "next/navigation";
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const PRIMARY_PHONE = "0101096211"; 
   const WHATSAPP_NUMBER_LINK = "27823046926";
+  const pathname = usePathname();
 
   // --- FIX: Combine the standard nav with the mobile CTA ---
   const allMobileItems = [...navItems, mobileCtaItem];
@@ -51,6 +53,8 @@ const MobileNav = () => {
                 className={`block rounded-xl border px-4 py-3 text-base font-extrabold uppercase tracking-[0.05em] transition-colors ${
                   item.isCta
                     ? "border-[var(--brand-accent)]/60 bg-[var(--brand-accent)]/15 text-[var(--brand-accent)] hover:bg-[var(--brand-accent)]/25"
+                    : pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                      ? "border-white/30 bg-white text-[var(--brand-bg)]"
                     : "border-[var(--brand-border)] bg-white/[0.03] text-white hover:border-[var(--brand-accent)]/40 hover:text-[var(--brand-accent)]"
                 }`}
                 onClick={() => setIsOpen(false)}

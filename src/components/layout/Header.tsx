@@ -5,6 +5,7 @@ import { ChevronDown, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "@/components/layout/MobileNav";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const PRIMARY_PHONE_LINK = "0101096211";
@@ -12,6 +13,14 @@ const Header = () => {
   const DIRECTIONS_LINK =
     "https://www.google.com/maps/dir/?api=1&destination=28+St+Columb+Rd,+New+Redruth,+Alberton,+1450";
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navLinkClass = (href: string, exact = false) =>
+    `transition-colors ${
+      pathname === href || (!exact && href !== "/" && pathname.startsWith(href))
+        ? "text-white"
+        : "text-[var(--brand-muted)] hover:text-[var(--brand-accent)]"
+    }`;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--brand-border)] bg-[var(--brand-bg)] text-white shadow-sm">
@@ -150,10 +159,13 @@ const Header = () => {
             </div>
 
             <nav className="justify-self-center flex items-center gap-6 text-sm font-medium text-[var(--brand-muted)]">
-              <Link href="/products/type/automotive" className="hover:text-[var(--brand-accent)]">Automotive Batteries</Link>
-              <Link href="/products/type/truck-commercial" className="hover:text-[var(--brand-accent)]">Commercial & Fleet</Link>
-              <Link href="/products/type/performance" className="hover:text-[var(--brand-accent)]">Start/Stop (AGM)</Link>
-              <Link href="/products" className="hover:text-[var(--brand-accent)]">Accessories</Link>
+              <Link href="/products/type/automotive" className={navLinkClass("/products/type/automotive")}>Automotive Batteries</Link>
+              <Link href="/products/type/truck-commercial" className={navLinkClass("/products/type/truck-commercial")}>Commercial & Fleet</Link>
+              <Link href="/products/type/performance" className={navLinkClass("/products/type/performance")}>Start/Stop (AGM)</Link>
+              <Link href="/products" className={navLinkClass("/products", true)}>Accessories</Link>
+              <Link href="/contact" className={`${navLinkClass("/contact")} font-extrabold uppercase tracking-[0.08em]`}>
+                Contact
+              </Link>
             </nav>
 
             <div className="justify-self-end flex items-center gap-4 text-sm font-semibold text-[var(--brand-muted)]">
