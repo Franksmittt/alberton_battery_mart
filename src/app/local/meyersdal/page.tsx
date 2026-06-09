@@ -8,7 +8,14 @@ import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import AtomicAnswers from '@/components/seo/AtomicAnswers';
-import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
+import {
+  BASE_URL,
+  BUSINESS_ADDRESS,
+  BUSINESS_CONTACT,
+  LOCAL_BUSINESS_ID,
+  STORE_COORDINATES,
+  STRUCTURED_AREA_SERVED,
+} from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
@@ -55,8 +62,9 @@ const EMERGENCY_PHONE_LINK = "0101096211";
 export default function MeyersdalPage() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Alberton Battery Mart - Meyersdal Service",
+    "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
+    "@id": LOCAL_BUSINESS_ID,
+    name: "Alberton Battery Mart",
     description: "Mobile battery replacement and premium AGM fitment service for Meyersdal, Meyersdal Eco Estate, and surrounding areas",
     address: {
       "@type": "PostalAddress",
@@ -64,15 +72,21 @@ export default function MeyersdalPage() {
     },
     telephone: BUSINESS_CONTACT.telephone,
     url: `${BASE_URL}/local/meyersdal`,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: STORE_COORDINATES.latitude,
+      longitude: STORE_COORDINATES.longitude,
+    },
     areaServed: [
       {
-        "@type": "City",
+        "@type": "Place",
         name: "Meyersdal",
       },
       {
-        "@type": "City",
+        "@type": "Place",
         name: "Meyersdal Eco Estate",
       },
+      ...STRUCTURED_AREA_SERVED,
     ],
     serviceType: "Mobile Battery Replacement & Premium AGM Fitment",
   };
