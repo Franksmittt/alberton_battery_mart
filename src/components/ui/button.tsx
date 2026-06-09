@@ -1,4 +1,5 @@
 // src/components/ui/button.tsx
+"use client";
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
@@ -48,10 +49,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, trackingId, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, trackingId, onClick, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    if (trackingId && typeof window !== "undefined") {
-      const log = () => {
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (trackingId && typeof window !== "undefined") {
         ;(window as any).dataLayer = (window as any).dataLayer || []
         ;(window as any).dataLayer.push({
           event: "cta_click",
@@ -61,21 +63,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           console.info("[button-click]", trackingId)
         }
       }
-      if (!props.onClick) {
-        props.onClick = log
-      } else {
-        const originalOnClick = props.onClick
-        props.onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-          log()
-          originalOnClick(event)
-        }
-      }
+
+      onClick?.(event)
     }
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        data-cta-tracked={trackingId ? "true" : undefined}
         {...props}
+        onClick={trackingId || onClick ? handleClick : undefined}
       />
     )
   }

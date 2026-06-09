@@ -22,6 +22,29 @@ export const BUSINESS_CONTACT = {
   email: "info@albertonbatterymart.co.za",
 };
 
+export const STORE_COORDINATES = {
+  latitude: -26.28291418340356,
+  longitude: 28.12132331503201,
+};
+
+export const STRUCTURED_AREA_SERVED = [
+  {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: STORE_COORDINATES.latitude,
+      longitude: STORE_COORDINATES.longitude,
+    },
+    geoRadius: 12000,
+  },
+  { "@type": "Place", name: "Alberton" },
+  { "@type": "Place", name: "Alrode" },
+  { "@type": "Place", name: "New Redruth" },
+  { "@type": "Place", name: "Meyersdal" },
+  { "@type": "Place", name: "Brackenhurst" },
+  { "@type": "Place", name: "Raceview" },
+];
+
 export const DEFAULT_OPENING_HOURS = [
   {
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],

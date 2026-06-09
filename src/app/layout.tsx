@@ -8,6 +8,8 @@ import Footer from "@/components/layout/Footer";
 import { MobileStickyFooter } from "@/components/layout/MobileStickyFooter";
 import { Metadata } from "next";
 import Script from "next/script"; // --- NEW: Import next/script
+import { Suspense } from "react";
+import RouteChangeTracker from "@/components/analytics/RouteChangeTracker";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   BASE_URL,
@@ -19,6 +21,8 @@ import {
   LOCAL_BUSINESS_ID,
   ORG_ID,
   SERVICE_AREAS,
+  STORE_COORDINATES,
+  STRUCTURED_AREA_SERVED,
 } from "@/lib/seo-constants";
 
 const inter = Inter({ 
@@ -29,6 +33,7 @@ const inter = Inter({
   fallback: ['system-ui', 'arial']
 });
 const ENVIRONMENT = process.env.NODE_ENV ?? "development";
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-969671559";
 
 // --- SEO: Root Metadata with Open Graph & Twitter Cards ---
 export const metadata: Metadata = {
@@ -109,7 +114,7 @@ export const metadata: Metadata = {
 // --- LocalBusiness Schema ---
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
   "@id": LOCAL_BUSINESS_ID,
   name: "Alberton Battery Mart",
   image: DEFAULT_LOGO,
@@ -119,9 +124,15 @@ const localBusinessSchema = {
   address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: -26.2735,
-    longitude: 28.1256,
+    latitude: STORE_COORDINATES.latitude,
+    longitude: STORE_COORDINATES.longitude,
   },
+  areaServed: STRUCTURED_AREA_SERVED,
+  brand: [
+    { "@type": "Brand", name: "Willard" },
+    { "@type": "Brand", name: "Exide" },
+    { "@type": "Brand", name: "Enertec" },
+  ],
   openingHoursSpecification: DEFAULT_OPENING_HOURS.map((entry) => ({
     "@type": "OpeningHoursSpecification",
     ...entry,
@@ -182,7 +193,7 @@ export default function RootLayout({
 
         {/* --- Google Ads (gtag.js) - Deferred for performance --- */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-969671559"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
           strategy="lazyOnload"
         />
         <Script id="google-ads-init" strategy="lazyOnload">
@@ -190,13 +201,13 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-969671559');
+            gtag('config', '${GOOGLE_ADS_ID}');
           `}
         </Script>
 
         {/* --- Google Tag Manager - Deferred for performance --- */}
         {shouldLoadGtm && (
-          <Script id="google-tag-manager" strategy="lazyOnload">
+          <Script id="google-tag-manager" strategy="afterInteractive">
             {`
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -244,6 +255,11 @@ export default function RootLayout({
                     href: href,
                     tracking_label: link.textContent ? link.textContent.trim() : ""
                   });
+                  return;
+                }
+
+                if (link.getAttribute("data-cta-tracked") === "true") {
+                  return;
                 }
 
                 if (href.indexOf("tel:") === 0) {
@@ -274,6 +290,7 @@ export default function RootLayout({
               document.addEventListener("submit", function(event) {
                 var form = event.target;
                 if (!form || form.tagName !== "FORM") return;
+                if (form.getAttribute("data-track-skip-form-submit") === "true") return;
 
                 var action = form.getAttribute("action") || window.location.pathname;
                 var formId = form.getAttribute("id") || "";
@@ -292,6 +309,9 @@ export default function RootLayout({
             })();
           `}
         </Script>
+        <Suspense fallback={null}>
+          <RouteChangeTracker />
+        </Suspense>
 
         <ThemeProvider
           attribute="class"

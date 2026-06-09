@@ -9,7 +9,14 @@ import AtomicAnswers from "@/components/seo/AtomicAnswers";
 import FaqSection from "@/components/layout/FaqSection";
 import ProductSpotlight from "@/components/content/ProductSpotlight";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
+import {
+  BASE_URL,
+  BUSINESS_ADDRESS,
+  BUSINESS_CONTACT,
+  LOCAL_BUSINESS_ID,
+  STORE_COORDINATES,
+  STRUCTURED_AREA_SERVED,
+} from "@/lib/seo-constants";
 import { getAllLocalAreas, getLocalAreaBySlug, getNearbyLocalAreas } from "@/data/local-areas";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -22,6 +29,9 @@ type Params = {
 
 const EMERGENCY_PHONE_LINK = "0101096211";
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
+
+export const revalidate = 86400;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getAllLocalAreas().map((area) => ({ area: area.slug }));
@@ -54,8 +64,9 @@ export default function LocalAreaPage({ params }: { params: Params }) {
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: `Alberton Battery Mart - ${area.name} Service`,
+    "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
+    "@id": LOCAL_BUSINESS_ID,
+    name: "Alberton Battery Mart",
     description: `Mobile battery replacement and diagnostics for ${area.name}`,
     address: {
       "@type": "PostalAddress",
@@ -63,11 +74,17 @@ export default function LocalAreaPage({ params }: { params: Params }) {
     },
     telephone: BUSINESS_CONTACT.telephone,
     url: `${BASE_URL}/local/${area.slug}`,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: STORE_COORDINATES.latitude,
+      longitude: STORE_COORDINATES.longitude,
+    },
     areaServed: [
       {
-        "@type": "City",
+        "@type": "Place",
         name: area.name,
       },
+      ...STRUCTURED_AREA_SERVED,
     ],
     serviceType: "Mobile Battery Replacement",
   };
@@ -77,7 +94,8 @@ export default function LocalAreaPage({ params }: { params: Params }) {
     "@type": "Service",
     serviceType: `Mobile battery replacement in ${area.name}`,
     provider: {
-      "@type": "LocalBusiness",
+      "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
+      "@id": LOCAL_BUSINESS_ID,
       name: "Alberton Battery Mart",
       telephone: BUSINESS_CONTACT.telephone,
       url: BASE_URL,
@@ -85,12 +103,18 @@ export default function LocalAreaPage({ params }: { params: Params }) {
         "@type": "PostalAddress",
         ...BUSINESS_ADDRESS,
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: STORE_COORDINATES.latitude,
+        longitude: STORE_COORDINATES.longitude,
+      },
     },
     areaServed: [
       {
-        "@type": "City",
+        "@type": "Place",
         name: area.name,
       },
+      ...STRUCTURED_AREA_SERVED,
     ],
     offers: {
       "@type": "Offer",

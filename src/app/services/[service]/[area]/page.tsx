@@ -9,7 +9,14 @@ import {
   getAllServicePages,
 } from "@/data/service-pages";
 import { getProductDetail } from "@/data/product-detail";
-import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
+import {
+  BASE_URL,
+  BUSINESS_ADDRESS,
+  BUSINESS_CONTACT,
+  LOCAL_BUSINESS_ID,
+  STORE_COORDINATES,
+  STRUCTURED_AREA_SERVED,
+} from "@/lib/seo-constants";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { Phone, MapPin, Zap, ShieldCheck } from "lucide-react";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
@@ -19,6 +26,9 @@ type Params = {
   service: string;
   area: string;
 };
+
+export const revalidate = 86400;
+export const dynamicParams = false;
 
 function canonicalProductHref(productSlug: string): string {
   const product = getProductDetail(productSlug);
@@ -72,7 +82,8 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
         serviceType: entry.schema.serviceType,
         description: entry.description,
         provider: {
-          "@type": "LocalBusiness",
+          "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
+          "@id": LOCAL_BUSINESS_ID,
           name: "Alberton Battery Mart",
           address: {
             "@type": "PostalAddress",
@@ -80,11 +91,19 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
           },
           telephone: BUSINESS_CONTACT.telephone,
           url: BASE_URL,
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: STORE_COORDINATES.latitude,
+            longitude: STORE_COORDINATES.longitude,
+          },
         },
-        areaServed: entry.schema.serviceAreas?.map((name) => ({
-          "@type": "City",
-          name,
-        })),
+        areaServed: [
+          ...((entry.schema.serviceAreas || []).map((name) => ({
+            "@type": "Place",
+            name,
+          }))),
+          ...STRUCTURED_AREA_SERVED,
+        ],
         offers: {
           "@type": "Offer",
           description: entry.schema.offers,

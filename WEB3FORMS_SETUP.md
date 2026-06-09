@@ -5,7 +5,7 @@ Your contact form now uses **Web3Forms** - a free, backend-free form service tha
 ## ✅ Advantages
 
 - **No Backend Required**: Works entirely client-side
-- **No API Keys Needed**: Simple integration
+- **Environment-based Access Key**: Configure once without editing source code
 - **Free Forever**: 250 submissions/month on free plan
 - **No Errors**: Unlike Resend, this won't break if not configured
 - **Instant Setup**: Takes 2 minutes
@@ -29,14 +29,12 @@ Your contact form now uses **Web3Forms** - a free, backend-free form service tha
 
 ### Step 3: Update Your Website
 
-1. Open `src/components/content/ContactForm.tsx`
-2. Find this line (around line 37):
-   ```typescript
-   access_key: '8f2e8c3a-4d7b-4e9a-9f2c-1a3b5c7d9e0f', // Public key, will be replaced
+1. Open your deployment environment settings.
+2. Add the public environment variable:
+   ```bash
+   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_actual_access_key
    ```
-3. Replace the placeholder with your actual Access Key
-4. Save the file
-5. Rebuild and redeploy: `pnpm build`
+3. Rebuild and redeploy: `pnpm build`
 
 ### Step 4: Test It!
 

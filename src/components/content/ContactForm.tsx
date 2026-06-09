@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { Send, AlertTriangle, CheckCircle } from "lucide-react";
 import { pushDataLayerEvent } from "@/lib/analytics";
 
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -25,6 +27,12 @@ const ContactForm = () => {
     setIsSuccess(false);
     setError(null);
 
+    if (!WEB3FORMS_ACCESS_KEY) {
+      setError("Contact form is not configured. Please call us directly.");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       // Use Web3Forms - free form submission service
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -34,7 +42,7 @@ const ContactForm = () => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: '8f2e8c3a-4d7b-4e9a-9f2c-1a3b5c7d9e0f', // Public key, will be replaced
+          access_key: WEB3FORMS_ACCESS_KEY,
           name: formData.name,
           email: formData.email,
           subject: `Contact Form: ${formData.subject}`,
@@ -87,7 +95,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} data-track-skip-form-submit="true" className="space-y-6">
       
       {/* --- ERROR MESSAGE --- */}
       {error && (
