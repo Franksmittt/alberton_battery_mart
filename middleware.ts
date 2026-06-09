@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 const productIdPattern = /^\/products\/(\d+)$/;
 const isDev = process.env.NODE_ENV === "development";
+const PUBLIC_FILE_PATTERN = /\.(.*)$/;
 
 const GEO_TARGETS: Record<string, { rewriteTo: string }> = {
   ZA: { rewriteTo: "/services/mobile-battery-replacement/alberton" },
@@ -152,6 +153,15 @@ export function middleware(request: NextRequest) {
     if (!session || session.value !== "authenticated") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+  }
+
+  if (
+    pathname.startsWith("/api/") ||
+    pathname.startsWith("/_next/") ||
+    PUBLIC_FILE_PATTERN.test(pathname)
+  ) {
+    const response = NextResponse.next();
+    return addSecurityHeaders(response);
   }
 
   const legacyProductMatch = request.nextUrl.pathname.match(productIdPattern);

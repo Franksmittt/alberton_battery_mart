@@ -60,6 +60,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
   const [loading, setLoading] = useState(false);
   const [optionsLoading, setOptionsLoading] = useState(false);
   const [error, setError] = useState<string>('');
+  const [hasSearched, setHasSearched] = useState(false);
 
   const fetchItems = async (url: string): Promise<string[]> => {
     const response = await fetch(url);
@@ -90,6 +91,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
     setYears([]);
     setModels([]);
     setRecommendations([]);
+    setHasSearched(false);
     setError('');
     if (!value) return;
     try {
@@ -115,6 +117,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
     setYears([]);
     setModels([]);
     setRecommendations([]);
+    setHasSearched(false);
     setError('');
     if (!value || !vehicleType) return;
     try {
@@ -137,6 +140,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
     setModel('');
     setModels([]);
     setRecommendations([]);
+    setHasSearched(false);
     setError('');
     if (!value || !vehicleType || !manufacturer) return;
     try {
@@ -154,10 +158,18 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
     }
   };
 
+  const handleModelChange = (value: string) => {
+    setModel(value);
+    setRecommendations([]);
+    setHasSearched(false);
+    setError('');
+  };
+
   const handleSearch = async () => {
     if (vehicleType && manufacturer && year && model) {
       const vehicle = { vehicleType, manufacturer, year, model };
       setLoading(true);
+      setHasSearched(false);
       setError('');
       try {
         if (typeof window !== 'undefined') {
@@ -177,20 +189,102 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
         if (!response.ok) throw new Error('Failed to load recommendations');
         const payload = await response.json();
         setRecommendations(payload.items || []);
+        setHasSearched(true);
       } catch {
         setError('Could not load battery recommendations right now.');
+        setHasSearched(true);
       } finally {
         setLoading(false);
       }
     }
   };
 
-  const isComplete = vehicleType && manufacturer && year && model;
+  const isComplete = Boolean(vehicleType && manufacturer && year && model);
+  const searchFeedback = (
+    <>
+      {error && (
+        <p className="text-red-400 text-sm font-medium">{error}</p>
+      )}
+
+      {optionsLoading && (
+        <p className="text-white/70 text-sm font-medium">Loading selector options...</p>
+      )}
+
+      {hasSearched && !loading && !error && recommendations.length === 0 && (
+        <p className="text-white/70 text-sm font-medium">
+          No battery recommendation found for that exact vehicle yet. Please call us and we&apos;ll confirm the correct size manually.
+        </p>
+      )}
+
+      {recommendations.length > 0 && (
+        <div className="space-y-3 pt-2">
+          <h3 className="text-xl font-bold text-white">Recommended Size & Brand Options</h3>
+          <div className="grid gap-3">
+            {recommendations.map((rec) => (
+              <div
+                key={`${rec.battery_code}-${rec.replacement_type}-${rec.technology}`}
+                className="rounded-lg border border-white/15 bg-white/5 p-4"
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-block rounded bg-battery/20 px-2 py-1 text-sm font-bold text-battery">
+                    {rec.battery_code}
+                  </span>
+                  {rec.replacement_type && (
+                    <span className="inline-block rounded bg-white/10 px-2 py-1 text-xs font-semibold text-white/90">
+                      {rec.replacement_type}
+                    </span>
+                  )}
+                  {rec.technology && (
+                    <span className="inline-block rounded bg-white/10 px-2 py-1 text-xs font-semibold text-white/90">
+                      {rec.technology}
+                    </span>
+                  )}
+                </div>
+                {rec.description && (
+                  <p className="text-sm text-white/80 mt-3">{rec.description}</p>
+                )}
+
+                {rec.brand_options && rec.brand_options.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    <p className="text-sm font-semibold text-white/90">
+                      Available brands for size {rec.battery_code}:
+                    </p>
+                    <div className="grid gap-2">
+                      {rec.brand_options.map((option) => (
+                        <a
+                          key={`${rec.battery_code}-${option.id}`}
+                          href={option.product_url}
+                          className="block rounded border border-white/15 bg-white/5 px-3 py-2 hover:border-battery/60 transition-colors"
+                        >
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="text-sm font-bold text-battery">{option.brand_name}</span>
+                              <span className="text-sm text-white/90">{option.sku}</span>
+                              <span className="text-xs text-white/70">{option.technology}</span>
+                            </div>
+                            <span className="text-sm font-semibold text-white">{option.price}</span>
+                          </div>
+                          <p className="text-xs text-white/65 mt-1">
+                            {option.ah_capacity}Ah | {option.cca} CCA | {option.warranty_months} month warranty
+                          </p>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
 
   if (variant === 'compact') {
     return (
-      <div className="w-full rounded-2xl overflow-hidden border border-[var(--brand-accent)]/40 bg-[rgba(18,18,18,0.7)] backdrop-blur-[15px] shadow-[0_15px_35px_rgba(0,0,0,0.4),inset_0_0_15px_rgba(229,57,53,0.1)] max-[800px]:rounded-lg max-[800px]:p-4">
-        <div className="flex items-center max-[800px]:flex-col max-[800px]:items-stretch">
+      <div className="w-full">
+        <div className="rounded-2xl overflow-hidden border border-[var(--brand-accent)]/40 bg-[rgba(18,18,18,0.7)] backdrop-blur-[15px] shadow-[0_15px_35px_rgba(0,0,0,0.4),inset_0_0_15px_rgba(229,57,53,0.1)] max-[800px]:rounded-lg max-[800px]:p-4">
+          <div className="flex items-center max-[800px]:flex-col max-[800px]:items-stretch">
           <div className="flex-1 px-6 py-4 max-[800px]:px-0 max-[800px]:py-3 max-[800px]:border-b max-[800px]:border-[var(--brand-accent)]/20 relative">
             <label htmlFor="compact-vt" className="sr-only">Vehicle Type</label>
             <select
@@ -259,7 +353,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
             <select
               id="compact-model"
               value={model}
-              onChange={(e) => setModel(e.target.value)}
+              onChange={(e) => handleModelChange(e.target.value)}
               disabled={!year}
               aria-label="Select model"
               className="w-full bg-transparent border-0 outline-none appearance-none text-white text-base font-medium pr-8 disabled:opacity-60"
@@ -276,14 +370,16 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
 
           <Button
             onClick={handleSearch}
-            disabled={!isComplete}
+            disabled={!isComplete || loading}
             variant="battery"
             size="lg"
             className="rounded-none h-[65px] px-12 text-lg font-extrabold uppercase tracking-wide max-[800px]:w-full max-[800px]:rounded-lg max-[800px]:h-[55px] max-[800px]:mt-4"
           >
             {loading ? 'Loading...' : 'Search'}
           </Button>
+          </div>
         </div>
+        <div className="mt-4 space-y-3">{searchFeedback}</div>
       </div>
     );
   }
@@ -371,7 +467,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
             <select
               id="hero-model"
               value={model}
-              onChange={(e) => setModel(e.target.value)}
+              onChange={(e) => handleModelChange(e.target.value)}
               disabled={!year}
               aria-label="Select vehicle model"
               className={cn(
@@ -393,7 +489,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
         
         <Button
           onClick={handleSearch}
-          disabled={!isComplete}
+          disabled={!isComplete || loading}
           variant="battery"
           size="xl"
           className="w-full h-16 text-xl font-black shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -402,75 +498,7 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
           {loading ? 'Finding Batteries...' : 'Find My Battery'}
         </Button>
 
-        {error && (
-          <p className="text-red-400 text-sm font-medium">{error}</p>
-        )}
-
-        {optionsLoading && (
-          <p className="text-white/70 text-sm font-medium">Loading selector options...</p>
-        )}
-
-        {recommendations.length > 0 && (
-          <div className="space-y-3 pt-2">
-            <h3 className="text-xl font-bold text-white">Recommended Size & Brand Options</h3>
-            <div className="grid gap-3">
-              {recommendations.map((rec) => (
-                <div
-                  key={`${rec.battery_code}-${rec.replacement_type}-${rec.technology}`}
-                  className="rounded-lg border border-white/15 bg-white/5 p-4"
-                >
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-block rounded bg-battery/20 px-2 py-1 text-sm font-bold text-battery">
-                      {rec.battery_code}
-                    </span>
-                    {rec.replacement_type && (
-                      <span className="inline-block rounded bg-white/10 px-2 py-1 text-xs font-semibold text-white/90">
-                        {rec.replacement_type}
-                      </span>
-                    )}
-                    {rec.technology && (
-                      <span className="inline-block rounded bg-white/10 px-2 py-1 text-xs font-semibold text-white/90">
-                        {rec.technology}
-                      </span>
-                    )}
-                  </div>
-                  {rec.description && (
-                    <p className="text-sm text-white/80 mt-3">{rec.description}</p>
-                  )}
-
-                  {rec.brand_options && rec.brand_options.length > 0 && (
-                    <div className="mt-4 space-y-2">
-                      <p className="text-sm font-semibold text-white/90">
-                        Available brands for size {rec.battery_code}:
-                      </p>
-                      <div className="grid gap-2">
-                        {rec.brand_options.map((option) => (
-                          <a
-                            key={`${rec.battery_code}-${option.id}`}
-                            href={option.product_url}
-                            className="block rounded border border-white/15 bg-white/5 px-3 py-2 hover:border-battery/60 transition-colors"
-                          >
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                              <div className="flex flex-wrap items-center gap-2">
-                                <span className="text-sm font-bold text-battery">{option.brand_name}</span>
-                                <span className="text-sm text-white/90">{option.sku}</span>
-                                <span className="text-xs text-white/70">{option.technology}</span>
-                              </div>
-                              <span className="text-sm font-semibold text-white">{option.price}</span>
-                            </div>
-                            <p className="text-xs text-white/65 mt-1">
-                              {option.ah_capacity}Ah | {option.cca} CCA | {option.warranty_months} month warranty
-                            </p>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {searchFeedback}
         
         <div className="flex items-center justify-center gap-6 pt-2 text-sm text-white/60">
           <div className="flex items-center gap-2">
