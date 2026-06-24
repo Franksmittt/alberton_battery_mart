@@ -1,0 +1,222 @@
+[
+  {
+    "slug": "610c",
+    "sku": "610C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/610C_FB_GOLD.png",
+    "description": "First Battery 610C: 12V/60Ah car battery with high cold-cranking amps, maintenance-free design & 2-year warranty for reliable starts and extended service life.",
+    "specs": {
+      "reserveMinutes": 55,
+      "cca": 280,
+      "ahCapacity": 35,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 13.73
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles frequently used in moderate traffic conditions."
+    ],
+    "localImage": "/images/exide-gold/exide-610c-gold.png"
+  },
+  {
+    "slug": "611c",
+    "sku": "611C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/611C_FB_GOLD.png",
+    "description": "A dependable power solution for cars with entry-level start-stop systems and moderate electrical needs. Enjoy EFB durability and easy maintenance.",
+    "specs": {
+      "reserveMinutes": 55,
+      "cca": 280,
+      "ahCapacity": 35,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 13.73
+    },
+    "applications": [
+      "Vehicles with basic start-stop functionality.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles frequently used in moderate traffic conditions."
+    ],
+    "localImage": "/images/exide-gold/exide-611c-gold.png"
+  },
+  {
+    "slug": "612c",
+    "sku": "612CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/612C_FB_GOLD.png",
+    "description": "Power your ride with First Battery\u2019s 612CE: a 12V, maintenance-free vehicle battery offering exceptional cold-cranking amps and reliable long-term performance.",
+    "specs": {
+      "reserveMinutes": 70,
+      "cca": 345,
+      "ahCapacity": 44,
+      "lengthMm": 207,
+      "widthMm": 175,
+      "heightMm": 190,
+      "overallHeightMm": null,
+      "weightKg": 12.13
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (basic sound systems, etc.).",
+      "Vehicles frequently driven in urban or stop-and-go traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-612ce-gold.png"
+  },
+  {
+    "slug": "615c",
+    "sku": "615C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/615C_FB_GOLD.png",
+    "description": "When it comes to compact power, the EFB Technology Gold Range 615C Car Battery shines. With a 38 Ah capacity, this battery offers a dependable power source to",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 270,
+      "ahCapacity": 38,
+      "lengthMm": 187,
+      "widthMm": 127,
+      "heightMm": 203,
+      "overallHeightMm": 224,
+      "weightKg": 10.0
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher electrical usage.",
+      "Vehicles commonly driven in moderate traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-615c-gold.png"
+  },
+  {
+    "slug": "616c",
+    "sku": "616C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/616C_FB_GOLD.png",
+    "description": "Upgrade your entry-level start-stop equipped vehicle or car with modest electrical needs. Delivers improved durability, reserve power, and maintenance-free convenience.",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 270,
+      "ahCapacity": 38,
+      "lengthMm": 187,
+      "widthMm": 127,
+      "heightMm": 203,
+      "overallHeightMm": 224,
+      "weightKg": 10.0
+    },
+    "applications": [
+      "Vehicles equipped with basic start-stop systems.",
+      "Cars with slightly elevated electrical demands (i.e., basic sound systems).",
+      "Vehicles frequently used in moderate urban or stop-and-go traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-616c-gold.png"
+  },
+  {
+    "slug": "616cs",
+    "sku": "616CS",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/616CS_FB_GOLD.png",
+    "description": "Experience enhanced performance and durability with the EFB Technology Gold Range Car Battery (Model 616CS). Designed to meet the demanding power needs of",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 270,
+      "ahCapacity": 38,
+      "lengthMm": 187,
+      "widthMm": 136,
+      "heightMm": 203,
+      "overallHeightMm": 224,
+      "weightKg": 10.0
+    },
+    "applications": [
+      "Vehicles with basic start-stop functionality.",
+      "Cars with slightly elevated electrical needs (modest sound systems etc.).",
+      "Vehicles operated mainly in urban areas with stop-and-go traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-616cs-gold.png"
+  },
+  {
+    "slug": "619ce",
+    "sku": "619CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/619CE_FB_GOLD.png",
+    "description": "Experience exceptional performance with the EFB Technology Gold Range Car Battery (Model 619CE). This 12-volt battery is specifically designed to meet the",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 314,
+      "ahCapacity": 42,
+      "lengthMm": 207,
+      "widthMm": 175,
+      "heightMm": 175,
+      "overallHeightMm": null,
+      "weightKg": 11.3
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles used often in urban settings and stop-and-go traffic situations."
+    ],
+    "localImage": "/images/exide-gold/exide-619ce-gold.png"
+  },
+  {
+    "slug": "621c",
+    "sku": "621C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/621C_FB_GOLD.png",
+    "description": "Unleash the full potential of your vehicle with the EFB Technology Gold Range Car Battery (Model 621C). This 12-volt battery is designed to deliver",
+    "specs": {
+      "reserveMinutes": 70,
+      "cca": 400,
+      "ahCapacity": 52,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 14.52
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (sound systems, navigation, etc.).",
+      "Vehicles often driven in stop-and-go traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-621c-gold.png"
+  },
+  {
+    "slug": "622c",
+    "sku": "622C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/622C_FB_GOLD.png",
+    "description": "Discover the First Battery 622C: high-performance, durable power solution for motorcycles and ATVs. Extend ride time with reliable energy. Shop now!",
+    "specs": {
+      "reserveMinutes": 70,
+      "cca": 400,
+      "ahCapacity": 52,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 14.52
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (audio systems, navigation, etc.).",
+      "Vehicles used extensively in urban environments or stop-and-go traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-622c-gold.png"
+  },
+  {
+    "slug": "626ce",
+    "sku": "626CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/626CE_FB_GOLD.png",
+    "description": "First Battery\u2019s 626CE delivers high CCA, long service life and maintenance-free performance for reliable engine starts in extreme heat or freezing cold.",
+    "specs": {
+      "reserveMinutes": 75,
+      "cca": 424,
+      "ahCapacity": 53,
+      "lengthMm": 242,
+      "widthMm": 175,
+      "heightMm": 175,
+      "overallHeightMm": null,
+      "weightKg": 13.9
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (audio, navigation, etc.).",
+      "Vehicles frequently driven in stop-and-go traffic."
+    ],
+    "localImage": "/images/exide-gold/exide-626ce-gold.png"
+  }
+]
