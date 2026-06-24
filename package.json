@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "assert:619-pricing": "node scripts/assert-619-pricing.mjs"
+    "assert:619-pricing": "node scripts/assert-619-pricing.mjs",
+    "report:catalog": "tsx scripts/generate-battery-catalog-report.ts",
+    "audit:prices": "tsx scripts/audit-product-prices.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -38,6 +40,7 @@
     "eslint-config-next": "14.2.3",
     "postcss": "8.4.38",
     "tailwindcss": "3.4.1",
+    "tsx": "^4.19.4",
     "typescript": "5.4.5"
   }
 }

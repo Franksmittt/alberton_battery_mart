@@ -36,9 +36,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const products = await get619CatalogProducts();
   const fittedFromPrice = get619FittedPriceLabel(products);
 
+  const productCount = products.length;
+  const brandList = Array.from(new Set(products.map((p) => p.brandName))).join(", ");
+
   return buildPageMetadata({
-    title: "619 Car Battery Alberton | Exide & Willard | Free Fitment",
-    description: `619 car battery in Alberton from ${fittedFromPrice} with free fitment, alternator testing, and up to 25-month warranty. Willard 619 & Exide 619CE in stock. Mobile call-out to all suburbs.`,
+    title: "619 Car Battery Alberton | All Brands | Free Fitment",
+    description: `619 car battery in Alberton from ${fittedFromPrice} with free fitment, alternator testing, and up to 25-month warranty. ${productCount} option${productCount === 1 ? "" : "s"} in stock${brandList ? ` (${brandList})` : ""}. Mobile call-out to all suburbs.`,
     path: "/619-car-battery",
     keywords: [
       "619 car battery",

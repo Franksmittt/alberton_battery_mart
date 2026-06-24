@@ -1,7 +1,6 @@
 // src/app/products/size/[code]/page.tsx
 import Link from "next/link";
 import ProductListPage from "@/components/layout/ProductListPage";
-import { getAllProducts, ProductCardData } from "@/data/products";
 import { notFound } from "next/navigation";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
@@ -10,12 +9,17 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
-import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
+import { productSizeSlug } from "@/lib/product-size-slugs";
 import { createItemListSchema } from "@/lib/seo/schema";
 import IntentLinks from "@/components/seo/IntentLinks";
 import FaqSchema from "@/components/seo/FaqSchema";
 import { getBattery619HubFaq } from "@/data/battery-619";
-import { get619CatalogProducts, get619FittedPriceLabel } from "@/lib/products/battery-619";
+import {
+  get619FittedPriceLabel,
+  get619CatalogProducts,
+} from "@/lib/products/battery-619";
+import { getProductsBySizeCode } from "@/lib/products/by-size";
+import { extractBaseSizeCode } from "@/lib/products/size-matching";
 
 export const dynamic = "force-dynamic";
 
@@ -65,16 +69,14 @@ export async function generateMetadata({
   };
 }
 
-// Helper to filter products by size/code
-const getSizeData = (allProducts: ProductCardData[], codeSlug: string) => {
-  const products = allProducts.filter(
-    (p) => productSizeMatchesSlug(p.sku, codeSlug)
-  );
-
+// Filter products by canonical battery size code (619, 628, etc.)
+const getSizeData = async (codeSlug: string) => {
+  const baseCode = extractBaseSizeCode(codeSlug) ?? codeSlug.toUpperCase();
+  const products = await getProductsBySizeCode(baseCode);
   const brands = Array.from(new Set(products.map((p) => p.brandName)));
   const sizes = Array.from(new Set(products.map((p) => p.sku)));
 
-  return { products, brands, sizes };
+  return { products, brands, sizes, baseCode };
 };
 
 // Universal Capacity Filters
@@ -88,17 +90,15 @@ const allCapacityFilters = [
 // The page component
 export default async function SizePage({ params }: SizePageProps) {
   const { code: codeSlug } = params;
-  const allProducts = await getAllProducts();
-  const { products, brands, sizes } = getSizeData(allProducts, codeSlug);
+  const { products, brands, sizes, baseCode } = await getSizeData(codeSlug);
 
   if (products.length === 0) {
     notFound();
   }
 
-  const code = codeSlug.toUpperCase();
-  const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(codeSlug)}`;
-  const normalizedSlug = productSizeSlug(codeSlug);
-  const is619Family = normalizedSlug === "619" || normalizedSlug === "619ce";
+  const code = baseCode.toUpperCase();
+  const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(code)}`;
+  const is619Family = code === "619";
   const catalog619Products = is619Family ? await get619CatalogProducts() : [];
   const hubFaq = is619Family
     ? getBattery619HubFaq(get619FittedPriceLabel(catalog619Products))
