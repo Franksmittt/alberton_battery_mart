@@ -142,7 +142,7 @@ export function Battery619ProductCards({
   return (
     <section className="container py-10 space-y-6">
       <h2 className="text-3xl font-bold text-foreground">619 Batteries In Stock</h2>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product) => (
           <article
             key={product.id}
