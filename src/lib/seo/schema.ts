@@ -33,7 +33,7 @@ type ProductSchemaInput = {
   brand: string;
   image: string;
   url: string;
-  price: string | number;
+  price?: string | number;
   priceCurrency?: string;
   availability?: string;
   additionalProperty?: ProductPropertyInput[];
@@ -112,13 +112,17 @@ export function createProductSchema(input: ProductSchemaInput) {
       name: input.brand,
     },
     ...(input.manufacturerId ? { manufacturer: { "@id": input.manufacturerId } } : {}),
-    offers: {
-      "@type": "Offer",
-      price: String(input.price),
-      priceCurrency: input.priceCurrency || "ZAR",
-      availability: input.availability || "https://schema.org/InStock",
-      url: toAbsoluteUrl(input.url),
-    },
+    ...(input.price !== undefined
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: String(input.price),
+            priceCurrency: input.priceCurrency || "ZAR",
+            availability: input.availability || "https://schema.org/InStock",
+            url: toAbsoluteUrl(input.url),
+          },
+        }
+      : {}),
     ...(input.additionalProperty && input.additionalProperty.length > 0
       ? {
           additionalProperty: input.additionalProperty.map((property) => ({

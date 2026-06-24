@@ -15,10 +15,22 @@ export function formatZAR(amount: string | number): string {
   return `R ${groupedInteger}.${decimalPart}`;
 }
 
+const POA_PATTERN = /^(P\.?\s*O\.?\s*A\.?|POA)$/i;
+
+export function isPriceOnApplication(price: string | number): boolean {
+  return typeof price === "string" && POA_PATTERN.test(price.trim());
+}
+
 export function formatProductPrice(price: string | number): string {
+  if (isPriceOnApplication(price)) {
+    return "P.O.A";
+  }
   return formatZAR(price);
 }
 
-export function priceForSchema(price: string | number): string {
+export function priceForSchema(price: string | number): string | undefined {
+  if (isPriceOnApplication(price)) {
+    return undefined;
+  }
   return parsePriceAmount(price).toFixed(2);
 }

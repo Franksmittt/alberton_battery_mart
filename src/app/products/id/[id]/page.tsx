@@ -18,7 +18,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import ProductSchema from "@/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import IntentLinks from "@/components/seo/IntentLinks";
-import { formatProductPrice, priceForSchema } from "@/lib/formatting";
+import { formatProductPrice, priceForSchema, isPriceOnApplication } from "@/lib/formatting";
 
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
@@ -92,6 +92,21 @@ export default async function ProductDetailPage({
     { label: "Warranty", value: `${product.warrantyMonths} Months` },
   ];
 
+  const technicalSpecs = [
+    product.lengthMm
+      ? { label: "Length", value: `${product.lengthMm} mm` }
+      : null,
+    product.widthMm ? { label: "Width", value: `${product.widthMm} mm` } : null,
+    product.heightMm
+      ? { label: "Height", value: `${product.heightMm} mm` }
+      : null,
+    product.weightKg
+      ? { label: "Weight", value: `${product.weightKg} kg` }
+      : null,
+  ].filter(Boolean) as Array<{ label: string; value: string }>;
+
+  const schemaPrice = priceForSchema(product.sellingPrice_OUTPUT);
+
   const sameSizeAlternatives = products.filter(
     (item) => item.id !== product.id && item.sku === product.sku
   ).slice(0, 4);
@@ -134,7 +149,7 @@ export default async function ProductDetailPage({
         brand={product.brandName}
         image={product.imagePath}
         url={`/products/id/${product.id}`}
-        price={priceForSchema(product.sellingPrice_OUTPUT)}
+        price={schemaPrice}
       />
       <BreadcrumbSchema
         id="product-breadcrumb-schema"
@@ -180,6 +195,11 @@ export default async function ProductDetailPage({
             <p className="text-3xl font-bold text-foreground">
               {formatProductPrice(product.sellingPrice_OUTPUT)}
             </p>
+            {isPriceOnApplication(product.sellingPrice_OUTPUT) && (
+              <p className="text-sm text-muted-foreground">
+                Price on application — call or WhatsApp for a live quote.
+              </p>
+            )}
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" variant="battery">
                 <a href={`tel:${EMERGENCY_PHONE_LINK}`}>
@@ -216,6 +236,41 @@ export default async function ProductDetailPage({
           <TrackViewItem product={product} />
         </div>
       </div>
+
+      <Separator className="my-12" />
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-foreground">Description</h2>
+        <p className="text-muted-foreground leading-relaxed max-w-4xl">
+          {product.seoDescription}
+        </p>
+      </section>
+
+      {technicalSpecs.length > 0 && (
+        <>
+          <Separator className="my-12" />
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold text-foreground">
+              Technical specifications
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {technicalSpecs.map((spec) => (
+                <div
+                  key={spec.label}
+                  className="border border-border rounded-lg p-4 bg-card"
+                >
+                  <p className="text-sm uppercase tracking-wide text-muted-foreground">
+                    {spec.label}
+                  </p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {spec.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
 
       <Separator className="my-12" />
 

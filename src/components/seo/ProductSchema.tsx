@@ -9,7 +9,7 @@ type ProductSchemaProps = {
   brand: string;
   image: string;
   url: string;
-  price: string | number;
+  price?: string | number;
   priceCurrency?: string;
   availability?: string;
   additionalProperty?: Array<{ name: string; value: string | number }>;

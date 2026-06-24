@@ -1,5 +1,5 @@
 import { getAllProducts, type ProductCardData } from "@/data/products";
-import { formatProductPrice, parsePriceAmount } from "@/lib/formatting";
+import { formatProductPrice, isPriceOnApplication, parsePriceAmount } from "@/lib/formatting";
 import {
   compareBrandTier,
   findBrandFromQuery,
@@ -30,10 +30,11 @@ export function sortProductsByBrandTier(
 }
 
 export function getFittedPriceLabel(products: ProductCardData[]): string {
-  if (!products.length) return "R 0.00";
-  const lowest = Math.min(
-    ...products.map((product) => parsePriceAmount(product.sellingPrice_OUTPUT))
-  );
+  const priced = products
+    .map((product) => product.sellingPrice_OUTPUT)
+    .filter((price) => !isPriceOnApplication(price));
+  if (!priced.length) return "P.O.A";
+  const lowest = Math.min(...priced.map((price) => parsePriceAmount(price)));
   return formatProductPrice(lowest);
 }
 
