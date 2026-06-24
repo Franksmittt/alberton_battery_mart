@@ -13,58 +13,49 @@ import {
   LOCAL_BUSINESS_ID,
   SERVICE_AREAS,
 } from "@/lib/seo-constants";
-import { Battery619IntentLinks } from "@/components/content/Battery619Sections";
-import {
-  get619CatalogProducts,
-  get619FittedPriceLabel,
-} from "@/lib/products/battery-619";
+import { ServiceSizeClusterLinks } from "@/components/content/ServiceSizeClusterLinks";
+import { getProductsBySizeCode, getFittedPriceLabel } from "@/lib/products/by-size";
 
-function getEmergencyFaq(fittedFromPrice: string) {
-  return [
-    {
-      question: "Emergency 619 battery replacement in Alberton?",
-      answer:
-        "Yes. Call 010 109 6211 for urgent dispatch. We stock Willard 619 and Exide 619CE for compact cars and can replace on-site after free diagnostics.",
-    },
-    {
-      question: "Roadside 619 battery assistance near Alberton?",
-      answer:
-        "Our mobile unit provides roadside battery testing and replacement across Alberton with faster local response than national roadside clubs for battery-specific call-outs.",
-    },
-    {
-      question: "How much does emergency 619 replacement cost?",
-      answer: `619 batteries start from ${fittedFromPrice} fitted plus any applicable call-out fee. We confirm pricing before dispatch — no surprise charges after the job is done.`,
-    },
-  ];
-}
+const FAQ = [
+  {
+    question: "Emergency battery replacement in Alberton?",
+    answer:
+      "Yes. Call 010 109 6211 for urgent dispatch. We stock popular sizes including 619, 628, 646, 652, 668, and 658 for on-site replacement after free diagnostics.",
+  },
+  {
+    question: "Roadside battery assistance near Alberton?",
+    answer:
+      "Our mobile unit provides roadside battery testing and replacement across Alberton with faster local response than national roadside clubs for battery-specific call-outs.",
+  },
+  {
+    question: "How much does emergency battery replacement cost?",
+    answer:
+      "Price depends on battery size and brand. We confirm fitted pricing before dispatch — no surprise charges after the job is done.",
+  },
+];
 
 export async function generateMetadata(): Promise<Metadata> {
-  const products = await get619CatalogProducts();
-  const fittedFromPrice = get619FittedPriceLabel(products);
+  const products = await getProductsBySizeCode("619");
+  const fittedFromPrice = getFittedPriceLabel(products);
 
   return buildPageMetadata({
-  title: "Emergency 619 Battery Replacement Alberton | Roadside Help",
-  description:
-    "Emergency 619 battery replacement and roadside assistance in Alberton. Fast mobile dispatch, free diagnostics, Willard 619 & Exide 619CE in stock. Call 010 109 6211.",
+    title: "Emergency Battery Replacement Alberton | Roadside Help",
+    description: `Emergency battery replacement and roadside assistance in Alberton. Fast mobile dispatch, free diagnostics, popular sizes from ${fittedFromPrice} fitted. Call 010 109 6211.`,
     path: "/emergency-battery-replacement-alberton",
     keywords: [
-      "emergency 619 battery replacement",
-      "roadside 619 battery assistance",
+      "emergency battery replacement alberton",
+      "roadside battery assistance",
+      "dead battery alberton",
       "619 battery emergency alberton",
-      "dead battery alberton 619",
     ],
   });
 }
 
-export default async function Emergency619AlbertonPage() {
-  const products = await get619CatalogProducts();
-  const fittedFromPrice = get619FittedPriceLabel(products);
-  const FAQ = getEmergencyFaq(fittedFromPrice);
-
+export default async function EmergencyAlbertonPage() {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: "Emergency 619 battery replacement in Alberton",
+    serviceType: "Emergency battery replacement in Alberton",
     provider: {
       "@type": "LocalBusiness",
       "@id": LOCAL_BUSINESS_ID,
@@ -77,14 +68,14 @@ export default async function Emergency619AlbertonPage() {
 
   return (
     <div className="space-y-12 pb-16">
-      <JsonLd data={serviceSchema} id="emergency-619-service" />
-      <FaqSchema id="emergency-619-faq" items={FAQ} />
+      <JsonLd data={serviceSchema} id="emergency-service" />
+      <FaqSchema id="emergency-faq" items={FAQ} />
       <BreadcrumbSchema
-        id="emergency-619-breadcrumb"
+        id="emergency-breadcrumb"
         items={[
           { name: "Home", item: "/" },
-          { name: "619 Car Battery", item: "/619-car-battery" },
-          { name: "Emergency 619", item: "/emergency-battery-replacement-alberton" },
+          { name: "Emergency", item: "/emergency-battery-replacement" },
+          { name: "Alberton", item: "/emergency-battery-replacement-alberton" },
         ]}
       />
 
@@ -92,11 +83,10 @@ export default async function Emergency619AlbertonPage() {
         <div className="container max-w-4xl text-center space-y-6">
           <AlertCircle className="h-12 w-12 text-battery mx-auto" />
           <h1 className="text-4xl md:text-5xl font-black text-foreground">
-            Emergency 619 Battery Replacement — Alberton
+            Emergency Battery Replacement — Alberton
           </h1>
           <p className="text-lg text-muted-foreground">
-            Dead battery on a compact car? We dispatch with 619 batteries in stock, test before we sell, and
-            fit on-site across Alberton.
+            Dead battery? We dispatch with popular sizes in stock, test before we sell, and fit on-site across Alberton.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Button asChild size="xl" className="bg-red-600 hover:bg-red-700 text-white font-black">
@@ -114,7 +104,7 @@ export default async function Emergency619AlbertonPage() {
 
       <section className="container grid md:grid-cols-3 gap-6 max-w-5xl">
         {[
-          { icon: Zap, title: "619 in stock", text: "Willard 619 & Exide 619CE ready for dispatch" },
+          { icon: Zap, title: "Popular sizes in stock", text: "619, 628, 646, 652, 668, 658 & more" },
           { icon: Clock3, title: "Fast local response", text: "Alberton-based — not a national call centre" },
           { icon: AlertCircle, title: "Test first", text: "Free diagnostics before replacement" },
         ].map((item) => (
@@ -131,7 +121,7 @@ export default async function Emergency619AlbertonPage() {
       </section>
 
       <div className="container">
-        <Battery619IntentLinks />
+        <ServiceSizeClusterLinks />
       </div>
     </div>
   );
