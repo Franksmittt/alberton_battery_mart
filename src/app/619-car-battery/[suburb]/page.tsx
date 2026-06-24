@@ -6,7 +6,10 @@ import {
   getBattery619Suburb,
   getBattery619SuburbFaqs,
 } from "@/data/battery-619";
-import { getAllProducts } from "@/data/products";
+import {
+  get619CatalogProducts,
+  get619FittedPriceLabel,
+} from "@/lib/products/battery-619";
 import FaqSchema from "@/components/seo/FaqSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import {
@@ -43,9 +46,12 @@ export async function generateMetadata({
   const suburb = getBattery619Suburb(params.suburb);
   if (!suburb) return {};
 
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+
   return buildPageMetadata({
     title: `619 Car Battery ${suburb.name} | Mobile Fitment & Price`,
-    description: `619 car battery supply and mobile fitment in ${suburb.name}, Alberton. Willard 619 & Exide 619CE from R 1 450 with free testing. Response ${suburb.responseWindow}.`,
+    description: `619 car battery supply and mobile fitment in ${suburb.name}, Alberton. Willard 619 & Exide 619CE from ${fittedFromPrice} with free testing. Response ${suburb.responseWindow}.`,
     path: `/619-car-battery/${suburb.slug}`,
     keywords: [
       `619 car battery ${suburb.name.toLowerCase()}`,
@@ -60,9 +66,9 @@ export default async function Battery619SuburbPage({ params }: { params: Params 
   const suburb = getBattery619Suburb(params.suburb);
   if (!suburb) notFound();
 
-  const faqs = getBattery619SuburbFaqs(suburb);
-  const allProducts = await getAllProducts();
-  const products = allProducts.filter((p) => p.sku === "619" || p.sku === "619CE");
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+  const faqs = getBattery619SuburbFaqs(suburb, fittedFromPrice);
 
   const localBusinessSchema = {
     "@context": "https://schema.org",

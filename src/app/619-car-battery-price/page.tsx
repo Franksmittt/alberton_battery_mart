@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { BATTERY_619_HUB_FAQ, BATTERY_619_PRICE_ROWS } from "@/data/battery-619";
+import { getBattery619HubFaq, getBattery619PriceRows } from "@/data/battery-619";
 import FaqSchema from "@/components/seo/FaqSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import {
@@ -10,42 +10,65 @@ import {
   Battery619IntentLinks,
   Battery619TrustStrip,
 } from "@/components/content/Battery619Sections";
+import {
+  get619CatalogProducts,
+  get619FittedPriceLabel,
+  getExide619CE,
+  getWillard619,
+} from "@/lib/products/battery-619";
 
-const PRICE_FAQ = [
-  {
-    question: "619 battery price Midas?",
-    answer:
-      "Midas typically lists shelf-price 619 batteries around R 1 200–R 1 350 without fitment or charging-system diagnostics. Our fitted price from R 1 450 includes installation, alternator test, and warranty registration.",
-  },
-  {
-    question: "619 battery price Goldwagen?",
-    answer:
-      "Goldwagen shelf prices are similar to Midas for 619-size batteries. Alberton Battery Mart includes mobile fitment, scrap exchange, and free testing in our fitted price.",
-  },
-  {
-    question: "Best price for 619 car battery in Alberton?",
-    answer:
-      "The best value is not always the lowest shelf price. Our R 1 450 fitted price covers Willard 619 or Exide 619CE with up to 25-month warranty, professional installation, and on-site diagnostics.",
-  },
-];
+function getPriceFaqs(fittedFromPrice: string) {
+  return [
+    {
+      question: "619 battery price Midas?",
+      answer: `Midas typically lists shelf-price 619 batteries around R 1 200–R 1 350 without fitment or charging-system diagnostics. Our fitted price from ${fittedFromPrice} includes installation, alternator test, and warranty registration.`,
+    },
+    {
+      question: "619 battery price Goldwagen?",
+      answer:
+        "Goldwagen shelf prices are similar to Midas for 619-size batteries. Alberton Battery Mart includes mobile fitment, scrap exchange, and free testing in our fitted price.",
+    },
+    {
+      question: "Best price for 619 car battery in Alberton?",
+      answer: `The best value is not always the lowest shelf price. Our ${fittedFromPrice} fitted price covers Willard 619 or Exide 619CE with up to 25-month warranty, professional installation, and on-site diagnostics.`,
+    },
+  ];
+}
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "619 Battery Price Comparison Alberton | Midas vs Fitted Price",
-  description:
-    "Compare 619 battery prices: Alberton Battery Mart fitted price vs Midas, Goldwagen, and Makro shelf prices. Willard 619 & Exide 619CE from R 1 450 with free fitment.",
-  path: "/619-car-battery-price",
-  keywords: [
-    "619 battery price comparison",
-    "619 battery price midas",
-    "619 battery price goldwagen",
-    "best price 619 car battery",
-    "cheap 619 car battery alberton",
-    "619 battery trade-in discounts",
-  ],
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
 
-export default function Battery619PricePage() {
-  const allFaqs = [...PRICE_FAQ, ...BATTERY_619_HUB_FAQ.slice(0, 2)];
+  return buildPageMetadata({
+    title: "619 Battery Price Comparison Alberton | Midas vs Fitted Price",
+    description: `Compare 619 battery prices: Alberton Battery Mart fitted price vs Midas, Goldwagen, and Makro shelf prices. Willard 619 & Exide 619CE from ${fittedFromPrice} with free fitment.`,
+    path: "/619-car-battery-price",
+    keywords: [
+      "619 battery price comparison",
+      "619 battery price midas",
+      "619 battery price goldwagen",
+      "best price 619 car battery",
+      "cheap 619 car battery alberton",
+      "619 battery trade-in discounts",
+    ],
+  });
+}
+
+export default async function Battery619PricePage() {
+  const [willard, exide, catalogProducts] = await Promise.all([
+    getWillard619(),
+    getExide619CE(),
+    get619CatalogProducts(),
+  ]);
+  const fittedFromPrice = get619FittedPriceLabel(catalogProducts);
+  const priceRows = getBattery619PriceRows(
+    willard?.sellingPrice_OUTPUT || fittedFromPrice,
+    exide?.sellingPrice_OUTPUT || fittedFromPrice
+  );
+  const allFaqs = [
+    ...getPriceFaqs(fittedFromPrice),
+    ...getBattery619HubFaq(fittedFromPrice).slice(0, 2),
+  ];
 
   return (
     <div className="space-y-4 pb-16">
@@ -79,7 +102,7 @@ export default function Battery619PricePage() {
               </tr>
             </thead>
             <tbody>
-              {BATTERY_619_PRICE_ROWS.map((row) => (
+              {priceRows.map((row) => (
                 <tr key={row.retailer} className="border-b border-border/70 align-top">
                   <td className="py-3 pr-4 font-semibold text-foreground">{row.retailer}</td>
                   <td className="py-3 pr-4 text-muted-foreground">{row.willard619}</td>
@@ -90,8 +113,8 @@ export default function Battery619PricePage() {
             </tbody>
           </table>
           <p className="text-xs text-muted-foreground">
-            Shelf-price ranges are indicative and vary by branch and promotion. Last updated from Alberton
-            Battery Mart live pricing.
+            Shelf-price ranges are indicative and vary by branch and promotion. Fitted prices are loaded
+            from the live product catalog.
           </p>
           <Link href="/619-car-battery" className="text-battery font-semibold hover:underline">
             View 619 car battery hub →

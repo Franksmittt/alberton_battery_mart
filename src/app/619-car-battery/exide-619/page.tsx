@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllProducts } from "@/data/products";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { BATTERY_619_SPECS } from "@/data/battery-619";
 import FaqSchema from "@/components/seo/FaqSchema";
@@ -14,46 +13,54 @@ import {
   Battery619SpecTable,
   Battery619TrustStrip,
 } from "@/components/content/Battery619Sections";
+import { getExide619CE } from "@/lib/products/battery-619";
+import { formatProductPrice, priceForSchema } from "@/lib/formatting";
 
-const EXIDE_FAQ = [
-  {
-    question: "619 Exide battery price in Alberton?",
-    answer:
-      "Exide 619CE is R 1 450.00 at Alberton Battery Mart with scrap exchange, free fitment, and a 24-month warranty.",
-  },
-  {
-    question: "What is the difference between Exide 619 and 619CE?",
-    answer:
-      "619CE is Exide's catalog SKU for the 619 size family in South Africa. It is a maintenance-free 12V battery rated at 42Ah with strong cold-crank performance for compact cars and selected Start/Stop applications.",
-  },
-  {
-    question: "619 Exide vs Willard — which should I buy?",
-    answer:
-      "Choose Exide 619CE if your car originally used Exide or you want Exide's B-range performance. Choose Willard 619 for the extra 1Ah capacity and 25-month warranty. We test your charging system before recommending either.",
-  },
-];
+function getExideFaq(price: string) {
+  return [
+    {
+      question: "619 Exide battery price in Alberton?",
+      answer: `Exide 619CE is ${price} at Alberton Battery Mart with scrap exchange, free fitment, and a 24-month warranty.`,
+    },
+    {
+      question: "What is the difference between Exide 619 and 619CE?",
+      answer:
+        "619CE is Exide's catalog SKU for the 619 size family in South Africa. It is a maintenance-free 12V battery rated at 42Ah with strong cold-crank performance for compact cars and selected Start/Stop applications.",
+    },
+    {
+      question: "619 Exide vs Willard — which should I buy?",
+      answer:
+        "Choose Exide 619CE if your car originally used Exide or you want Exide's B-range performance. Choose Willard 619 for the extra 1Ah capacity and 25-month warranty. We test your charging system before recommending either.",
+    },
+  ];
+}
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "619 Exide Battery Alberton | 619CE Price, Specs & Fitment",
-  description:
-    "Exide 619 / 619CE battery in Alberton from R 1 450. 42Ah, 314 CCA, 24-month warranty, free fitment and mobile call-out. In stock now.",
-  path: "/619-car-battery/exide-619",
-  keywords: [
-    "619 exide battery",
-    "exide 619ce price",
-    "exide 619 Alberton",
-    "619 exide battery price south africa",
-  ],
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const product = await getExide619CE();
+  if (!product) return {};
+
+  return buildPageMetadata({
+    title: "619 Exide Battery Alberton | 619CE Price, Specs & Fitment",
+    description: `Exide 619 / 619CE battery in Alberton from ${product.sellingPrice_OUTPUT}. 42Ah, 314 CCA, 24-month warranty, free fitment and mobile call-out. In stock now.`,
+    path: "/619-car-battery/exide-619",
+    keywords: [
+      "619 exide battery",
+      "exide 619ce price",
+      "exide 619 Alberton",
+      "619 exide battery price south africa",
+    ],
+  });
+}
 
 export default async function Exide619Page() {
-  const allProducts = await getAllProducts();
-  const product = allProducts.find((p) => p.sku === "619CE");
+  const product = await getExide619CE();
   if (!product) notFound();
+
+  const exideFaq = getExideFaq(product.sellingPrice_OUTPUT);
 
   return (
     <div className="space-y-4 pb-16">
-      <FaqSchema id="exide-619-faq" items={EXIDE_FAQ} />
+      <FaqSchema id="exide-619-faq" items={exideFaq} />
       <BreadcrumbSchema
         id="exide-619-breadcrumb"
         items={[
@@ -69,7 +76,7 @@ export default async function Exide619Page() {
         brand={product.brandName}
         image={product.imagePath}
         url={`/products/id/${product.id}`}
-        price={product.sellingPrice_OUTPUT.replace(/[^\d.]/g, "") || "1450"}
+        price={priceForSchema(product.sellingPrice_OUTPUT)}
         additionalProperty={[
           { name: "Ah capacity", value: product.ahCapacity },
           { name: "CCA", value: product.cca },
@@ -91,7 +98,9 @@ export default async function Exide619Page() {
             Willard 619 for same-day replacement. Dimensions match the standard 619 footprint at{" "}
             {BATTERY_619_SPECS.dimensions}.
           </p>
-          <p className="text-2xl font-extrabold text-battery">{product.sellingPrice_OUTPUT}</p>
+          <p className="text-2xl font-extrabold text-battery">
+            {formatProductPrice(product.sellingPrice_OUTPUT)}
+          </p>
           <Link href={`/products/id/${product.id}`} className="text-battery font-semibold hover:underline">
             View full Exide 619CE product page →
           </Link>
@@ -99,7 +108,7 @@ export default async function Exide619Page() {
       </section>
 
       <Battery619SpecTable />
-      <Battery619FaqSection items={EXIDE_FAQ} title="Exide 619 FAQs" />
+      <Battery619FaqSection items={exideFaq} title="Exide 619 FAQs" />
       <div className="container">
         <Battery619IntentLinks />
       </div>

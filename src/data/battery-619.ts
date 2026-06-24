@@ -31,51 +31,53 @@ export const BATTERY_619_VEHICLES = [
   "Hyundai i10 / i20 (selected models)",
 ];
 
-export const BATTERY_619_HUB_FAQ = [
-  {
-    question: "What is a 619 car battery?",
-    answer:
-      "619 is one of South Africa's most common compact-car battery codes. It is a 12V maintenance-free battery typically around 42–43Ah with dimensions of roughly 207 × 175 × 175 mm, used on small hatchbacks and sedans such as Toyota Tazz, VW Polo Vivo, and Opel Corsa.",
-  },
-  {
-    question: "619 battery price in Alberton?",
-    answer:
-      "At Alberton Battery Mart, Willard 619 and Exide 619CE start from R 1 450.00 with scrap exchange, free fitment, free alternator testing, and up to 25-month warranty on Willard.",
-  },
-  {
-    question: "619 battery price Midas vs Alberton Battery Mart?",
-    answer:
-      "Midas and Goldwagen usually sell shelf-price batteries without mobile fitment or charging-system diagnostics. Our fitted price includes on-site testing, professional installation, warranty registration, and old-battery disposal.",
-  },
-  {
-    question: "Do you stock 619 batteries near me in Alberton?",
-    answer:
-      "Yes. We keep Willard 619 and Exide 619CE in stock at 28 St Columb Rd, New Redruth, and dispatch mobile fitment to Brackenhurst, Meyersdal, Brackendowns, Verwoerdpark, Randhart, and surrounding suburbs.",
-  },
-  {
-    question: "619 Exide vs Willard — which is better?",
-    answer:
-      "Both are correct OEM-size replacements. Willard 619 offers 43Ah and a 25-month warranty. Exide 619CE offers 42Ah with strong cold-start performance for Start/Stop-ready compact cars. We test your vehicle first and recommend the best match.",
-  },
-  {
-    question: "Do you offer mobile 619 battery fitment?",
-    answer:
-      "Yes. Our mobile team covers Alberton with typical response in 45–60 minutes. We bring the correct 619 battery, test alternator and starter health, fit on-site, and register your warranty.",
-  },
-  {
-    question: "619 battery trade-in discounts?",
-    answer:
-      "Our listed prices include scrap exchange. Bring your old battery and we handle core disposal as part of the replacement — no hidden environmental fees.",
-  },
-];
+export function getBattery619HubFaq(fittedFromPrice: string) {
+  return [
+    {
+      question: "What is a 619 car battery?",
+      answer:
+        "619 is one of South Africa's most common compact-car battery codes. It is a 12V maintenance-free battery typically around 42–43Ah with dimensions of roughly 207 × 175 × 175 mm, used on small hatchbacks and sedans such as Toyota Tazz, VW Polo Vivo, and Opel Corsa.",
+    },
+    {
+      question: "619 battery price in Alberton?",
+      answer: `At Alberton Battery Mart, Willard 619 and Exide 619CE start from ${fittedFromPrice} with scrap exchange, free fitment, free alternator testing, and up to 25-month warranty on Willard.`,
+    },
+    {
+      question: "619 battery price Midas vs Alberton Battery Mart?",
+      answer:
+        "Midas and Goldwagen usually sell shelf-price batteries without mobile fitment or charging-system diagnostics. Our fitted price includes on-site testing, professional installation, warranty registration, and old-battery disposal.",
+    },
+    {
+      question: "Do you stock 619 batteries near me in Alberton?",
+      answer:
+        "Yes. We keep Willard 619 and Exide 619CE in stock at 28 St Columb Rd, New Redruth, and dispatch mobile fitment to Brackenhurst, Meyersdal, Brackendowns, Verwoerdpark, Randhart, and surrounding suburbs.",
+    },
+    {
+      question: "619 Exide vs Willard — which is better?",
+      answer:
+        "Both are correct OEM-size replacements. Willard 619 offers 43Ah and a 25-month warranty. Exide 619CE offers 42Ah with strong cold-start performance for Start/Stop-ready compact cars. We test your vehicle first and recommend the best match.",
+    },
+    {
+      question: "Do you offer mobile 619 battery fitment?",
+      answer:
+        "Yes. Our mobile team covers Alberton with typical response in 45–60 minutes. We bring the correct 619 battery, test alternator and starter health, fit on-site, and register your warranty.",
+    },
+    {
+      question: "619 battery trade-in discounts?",
+      answer:
+        "Our listed prices include scrap exchange. Bring your old battery and we handle core disposal as part of the replacement — no hidden environmental fees.",
+    },
+  ];
+}
 
-export const BATTERY_619_PRICE_ROWS = [
-  {
-    retailer: "Alberton Battery Mart (fitted)",
-    willard619: "R 1 450.00",
-    exide619ce: "R 1 450.00",
-    notes: "Includes free fitment, alternator test, mobile call-out available",
-  },
+export function getBattery619PriceRows(willardPrice: string, exidePrice: string) {
+  return [
+    {
+      retailer: "Alberton Battery Mart (fitted)",
+      willard619: willardPrice,
+      exide619ce: exidePrice,
+      notes: "Includes free fitment, alternator test, mobile call-out available",
+    },
   {
     retailer: "Midas (battery only, shelf)",
     willard619: "R 1 200 – R 1 350",
@@ -94,7 +96,8 @@ export const BATTERY_619_PRICE_ROWS = [
     exide619ce: "R 1 150 – R 1 350",
     notes: "No local mobile fitment or BMS coding support in Alberton",
   },
-];
+  ];
+}
 
 const suburbOverrides: Record<string, Omit<Battery619Suburb, "slug" | "name">> = {
   "new-redruth": {
@@ -182,11 +185,14 @@ export function getBattery619Suburb(slug: string) {
   return getAllBattery619Suburbs().find((area) => area.slug === slug);
 }
 
-export function getBattery619SuburbFaqs(suburb: Battery619Suburb) {
+export function getBattery619SuburbFaqs(
+  suburb: Battery619Suburb,
+  fittedFromPrice: string
+) {
   return [
     {
       question: `619 car battery price in ${suburb.name}?`,
-      answer: `Willard 619 and Exide 619CE start from R 1 450.00 fitted with scrap exchange at Alberton Battery Mart. Mobile fitment to ${suburb.name} is available with typical response in ${suburb.responseWindow}.`,
+      answer: `Willard 619 and Exide 619CE start from ${fittedFromPrice} fitted with scrap exchange at Alberton Battery Mart. Mobile fitment to ${suburb.name} is available with typical response in ${suburb.responseWindow}.`,
     },
     {
       question: `Do you deliver and fit 619 batteries in ${suburb.name}?`,

@@ -14,7 +14,8 @@ import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slug
 import { createItemListSchema } from "@/lib/seo/schema";
 import IntentLinks from "@/components/seo/IntentLinks";
 import FaqSchema from "@/components/seo/FaqSchema";
-import { BATTERY_619_HUB_FAQ } from "@/data/battery-619";
+import { getBattery619HubFaq } from "@/data/battery-619";
+import { get619CatalogProducts, get619FittedPriceLabel } from "@/lib/products/battery-619";
 
 export const dynamic = "force-dynamic";
 
@@ -98,6 +99,10 @@ export default async function SizePage({ params }: SizePageProps) {
   const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(codeSlug)}`;
   const normalizedSlug = productSizeSlug(codeSlug);
   const is619Family = normalizedSlug === "619" || normalizedSlug === "619ce";
+  const catalog619Products = is619Family ? await get619CatalogProducts() : [];
+  const hubFaq = is619Family
+    ? getBattery619HubFaq(get619FittedPriceLabel(catalog619Products))
+    : [];
 
   // Get product specs for the first product (they should all be similar size)
   const avgCapacity = Math.round(
@@ -123,7 +128,7 @@ export default async function SizePage({ params }: SizePageProps) {
         data={productCollectionSchema}
         id={`${codeSlug}-size-collection-schema`}
       />
-      {is619Family && <FaqSchema id="619-size-faq" items={BATTERY_619_HUB_FAQ} />}
+      {is619Family && <FaqSchema id="619-size-faq" items={hubFaq} />}
 
       <div className="text-center space-y-3">
         <div className="flex items-center justify-center gap-3 mb-4">

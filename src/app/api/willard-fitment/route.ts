@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 import { getAllProducts } from "@/data/products";
+import { formatProductPrice } from "@/lib/formatting";
 import { productSizeSlug } from "@/lib/product-size-slugs";
 
 type FitmentRow = {
@@ -106,7 +107,7 @@ async function getBrandOptionsByBaseCode() {
       brand_name: product.brandName,
       sku: product.sku,
       category: product.category,
-      price: product.sellingPrice_OUTPUT,
+      price: formatProductPrice(product.sellingPrice_OUTPUT),
       warranty_months: product.warrantyMonths,
       ah_capacity: product.ahCapacity,
       cca: product.cca,
