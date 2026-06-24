@@ -13,6 +13,8 @@ import { Phone, MessageSquare, Battery } from "lucide-react";
 import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
 import { createItemListSchema } from "@/lib/seo/schema";
 import IntentLinks from "@/components/seo/IntentLinks";
+import FaqSchema from "@/components/seo/FaqSchema";
+import { BATTERY_619_HUB_FAQ } from "@/data/battery-619";
 
 export const dynamic = "force-dynamic";
 
@@ -94,6 +96,8 @@ export default async function SizePage({ params }: SizePageProps) {
 
   const code = codeSlug.toUpperCase();
   const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(codeSlug)}`;
+  const normalizedSlug = productSizeSlug(codeSlug);
+  const is619Family = normalizedSlug === "619" || normalizedSlug === "619ce";
 
   // Get product specs for the first product (they should all be similar size)
   const avgCapacity = Math.round(
@@ -119,6 +123,7 @@ export default async function SizePage({ params }: SizePageProps) {
         data={productCollectionSchema}
         id={`${codeSlug}-size-collection-schema`}
       />
+      {is619Family && <FaqSchema id="619-size-faq" items={BATTERY_619_HUB_FAQ} />}
 
       <div className="text-center space-y-3">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -129,6 +134,15 @@ export default async function SizePage({ params }: SizePageProps) {
         </div>
         <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
           All {code} size batteries available in Alberton. Compare prices, specs, and brands. Free fitment and testing included.
+          {is619Family && (
+            <>
+              {" "}
+              <Link href="/619-car-battery" className="text-battery font-semibold hover:underline">
+                View the full 619 car battery guide
+              </Link>
+              .
+            </>
+          )}
         </p>
         <div className="flex flex-wrap gap-4 justify-center pt-4">
           <Button
@@ -231,6 +245,13 @@ export default async function SizePage({ params }: SizePageProps) {
         description="Move from size research to the closest service page for fitment, diagnostics, or suburb dispatch."
         columnsClassName="md:grid-cols-3"
         links={[
+          ...(is619Family
+            ? [
+                { href: "/619-car-battery", label: "619 car battery hub — Alberton" },
+                { href: "/619-car-battery-price", label: "619 battery price comparison" },
+                { href: "/619-battery-specs", label: "619 battery specifications" },
+              ]
+            : []),
           {
             href: "/services/mobile-battery-replacement/alberton",
             label: `${code} mobile battery replacement in Alberton`,
@@ -255,6 +276,9 @@ export default async function SizePage({ params }: SizePageProps) {
             href: "/vehicles/ford/ranger-2-2-tdci",
             label: "Ford Ranger battery fitment guide",
           },
+          ...(is619Family
+            ? [{ href: "/vehicles/volkswagen/polo-vivo", label: "VW Polo Vivo 619 battery guide" }]
+            : []),
         ]}
       />
     </div>
