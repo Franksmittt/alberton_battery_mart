@@ -1,5 +1,5 @@
 BATTERY CATALOG COVERAGE REPORT
-Generated: 2026-06-24T08:50:53.550Z
+Generated: 2026-06-24T09:16:29.698Z
 Source: data/products.json (130 products)
 
 SUMMARY MATRIX

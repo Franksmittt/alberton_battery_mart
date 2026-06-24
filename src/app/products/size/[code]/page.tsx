@@ -13,12 +13,9 @@ import { productSizeSlug } from "@/lib/product-size-slugs";
 import { createItemListSchema } from "@/lib/seo/schema";
 import IntentLinks from "@/components/seo/IntentLinks";
 import FaqSchema from "@/components/seo/FaqSchema";
-import { getBattery619HubFaq } from "@/data/battery-619";
-import {
-  get619FittedPriceLabel,
-  get619CatalogProducts,
-} from "@/lib/products/battery-619";
-import { getProductsBySizeCode } from "@/lib/products/by-size";
+import { getClusterConfig } from "@/lib/battery-sizes/clusters";
+import { getHubFaq, summarizeBrands } from "@/lib/battery-sizes/content";
+import { getFittedPriceLabel, getProductsBySizeCode } from "@/lib/products/by-size";
 import { extractBaseSizeCode } from "@/lib/products/size-matching";
 
 export const dynamic = "force-dynamic";
@@ -98,11 +95,15 @@ export default async function SizePage({ params }: SizePageProps) {
 
   const code = baseCode.toUpperCase();
   const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(code)}`;
-  const is619Family = code === "619";
-  const catalog619Products = is619Family ? await get619CatalogProducts() : [];
-  const hubFaq = is619Family
-    ? getBattery619HubFaq(get619FittedPriceLabel(catalog619Products))
-    : [];
+  const cluster = getClusterConfig(baseCode);
+  const hubFaq =
+    cluster && products.length
+      ? getHubFaq(
+          cluster,
+          getFittedPriceLabel(products),
+          summarizeBrands(products)
+        )
+      : [];
 
   // Get product specs for the first product (they should all be similar size)
   const avgCapacity = Math.round(
@@ -128,7 +129,7 @@ export default async function SizePage({ params }: SizePageProps) {
         data={productCollectionSchema}
         id={`${codeSlug}-size-collection-schema`}
       />
-      {is619Family && <FaqSchema id="619-size-faq" items={hubFaq} />}
+      {hubFaq.length > 0 && <FaqSchema id={`${code}-size-faq`} items={hubFaq} />}
 
       <div className="text-center space-y-3">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -139,11 +140,11 @@ export default async function SizePage({ params }: SizePageProps) {
         </div>
         <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
           All {code} size batteries available in Alberton. Compare prices, specs, and brands. Free fitment and testing included.
-          {is619Family && (
+          {cluster && (
             <>
               {" "}
-              <Link href="/619-car-battery" className="text-battery font-semibold hover:underline">
-                View the full 619 car battery guide
+              <Link href={cluster.hubPath} className="text-battery font-semibold hover:underline">
+                View the full {code} car battery guide
               </Link>
               .
             </>
@@ -250,11 +251,11 @@ export default async function SizePage({ params }: SizePageProps) {
         description="Move from size research to the closest service page for fitment, diagnostics, or suburb dispatch."
         columnsClassName="md:grid-cols-3"
         links={[
-          ...(is619Family
+          ...(cluster
             ? [
-                { href: "/619-car-battery", label: "619 car battery hub — Alberton" },
-                { href: "/619-car-battery-price", label: "619 battery price comparison" },
-                { href: "/619-battery-specs", label: "619 battery specifications" },
+                { href: cluster.hubPath, label: `${code} car battery hub — Alberton` },
+                { href: `/${code}-car-battery-price`, label: `${code} battery price comparison` },
+                { href: `/${code}-battery-specs`, label: `${code} battery specifications` },
               ]
             : []),
           {
@@ -281,7 +282,7 @@ export default async function SizePage({ params }: SizePageProps) {
             href: "/vehicles/ford/ranger-2-2-tdci",
             label: "Ford Ranger battery fitment guide",
           },
-          ...(is619Family
+          ...(code === "619"
             ? [{ href: "/vehicles/volkswagen/polo-vivo", label: "VW Polo Vivo 619 battery guide" }]
             : []),
         ]}
