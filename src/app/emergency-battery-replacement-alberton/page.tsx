@@ -14,39 +14,53 @@ import {
   SERVICE_AREAS,
 } from "@/lib/seo-constants";
 import { Battery619IntentLinks } from "@/components/content/Battery619Sections";
+import {
+  get619CatalogProducts,
+  get619FittedPriceLabel,
+} from "@/lib/products/battery-619";
 
-const FAQ = [
-  {
-    question: "Emergency 619 battery replacement in Alberton?",
-    answer:
-      "Yes. Call 010 109 6211 for urgent dispatch. We stock Willard 619 and Exide 619CE for compact cars and can replace on-site after free diagnostics.",
-  },
-  {
-    question: "Roadside 619 battery assistance near Alberton?",
-    answer:
-      "Our mobile unit provides roadside battery testing and replacement across Alberton with faster local response than national roadside clubs for battery-specific call-outs.",
-  },
-  {
-    question: "How much does emergency 619 replacement cost?",
-    answer:
-      "619 batteries start from R 1 450 fitted plus any applicable call-out fee. We confirm pricing before dispatch — no surprise charges after the job is done.",
-  },
-];
+function getEmergencyFaq(fittedFromPrice: string) {
+  return [
+    {
+      question: "Emergency 619 battery replacement in Alberton?",
+      answer:
+        "Yes. Call 010 109 6211 for urgent dispatch. We stock Willard 619 and Exide 619CE for compact cars and can replace on-site after free diagnostics.",
+    },
+    {
+      question: "Roadside 619 battery assistance near Alberton?",
+      answer:
+        "Our mobile unit provides roadside battery testing and replacement across Alberton with faster local response than national roadside clubs for battery-specific call-outs.",
+    },
+    {
+      question: "How much does emergency 619 replacement cost?",
+      answer: `619 batteries start from ${fittedFromPrice} fitted plus any applicable call-out fee. We confirm pricing before dispatch — no surprise charges after the job is done.`,
+    },
+  ];
+}
 
-export const metadata: Metadata = buildPageMetadata({
+export async function generateMetadata(): Promise<Metadata> {
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+
+  return buildPageMetadata({
   title: "Emergency 619 Battery Replacement Alberton | Roadside Help",
   description:
     "Emergency 619 battery replacement and roadside assistance in Alberton. Fast mobile dispatch, free diagnostics, Willard 619 & Exide 619CE in stock. Call 010 109 6211.",
-  path: "/emergency-battery-replacement-alberton",
-  keywords: [
-    "emergency 619 battery replacement",
-    "roadside 619 battery assistance",
-    "619 battery emergency alberton",
-    "dead battery alberton 619",
-  ],
-});
+    path: "/emergency-battery-replacement-alberton",
+    keywords: [
+      "emergency 619 battery replacement",
+      "roadside 619 battery assistance",
+      "619 battery emergency alberton",
+      "dead battery alberton 619",
+    ],
+  });
+}
 
-export default function Emergency619AlbertonPage() {
+export default async function Emergency619AlbertonPage() {
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+  const FAQ = getEmergencyFaq(fittedFromPrice);
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",

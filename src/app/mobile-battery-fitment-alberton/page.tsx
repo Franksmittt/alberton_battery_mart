@@ -15,39 +15,53 @@ import {
   STORE_COORDINATES,
 } from "@/lib/seo-constants";
 import { Battery619IntentLinks } from "@/components/content/Battery619Sections";
+import {
+  get619CatalogProducts,
+  get619FittedPriceLabel,
+} from "@/lib/products/battery-619";
 
-const FAQ = [
-  {
-    question: "Mobile 619 battery fitment price in Alberton?",
-    answer:
-      "619 batteries start from R 1 450 fitted with scrap exchange. Mobile call-out includes free alternator and starter testing. Call-out fees apply for travel — we quote upfront before dispatch.",
-  },
-  {
-    question: "How fast is mobile 619 battery fitment?",
-    answer:
-      "Average response across Alberton is 45–60 minutes during operating hours. New Redruth and Alberton Central are typically fastest from our St Columb Rd storefront.",
-  },
-  {
-    question: "On-site 619 battery fitment — what is included?",
-    answer:
-      "We bring the correct 619 battery, test your charging system, professionally install with torque-checked clamps, register warranty, and dispose of your old battery.",
-  },
-];
+function getMobileFitmentFaq(fittedFromPrice: string) {
+  return [
+    {
+      question: "Mobile 619 battery fitment price in Alberton?",
+      answer: `619 batteries start from ${fittedFromPrice} fitted with scrap exchange. Mobile call-out includes free alternator and starter testing. Call-out fees apply for travel — we quote upfront before dispatch.`,
+    },
+    {
+      question: "How fast is mobile 619 battery fitment?",
+      answer:
+        "Average response across Alberton is 45–60 minutes during operating hours. New Redruth and Alberton Central are typically fastest from our St Columb Rd storefront.",
+    },
+    {
+      question: "On-site 619 battery fitment — what is included?",
+      answer:
+        "We bring the correct 619 battery, test your charging system, professionally install with torque-checked clamps, register warranty, and dispose of your old battery.",
+    },
+  ];
+}
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Mobile 619 Battery Fitment Alberton | On-Site Installation",
-  description:
-    "Mobile 619 battery fitment in Alberton. On-site delivery, installation, free alternator testing, and 45–60 min average response. Willard 619 & Exide 619CE in stock.",
-  path: "/mobile-battery-fitment-alberton",
-  keywords: [
-    "mobile 619 battery fitment",
-    "619 battery delivery and installation",
-    "on-site 619 battery fitment",
-    "mobile battery fitment alberton",
-  ],
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
 
-export default function MobileBatteryFitmentAlbertonPage() {
+  return buildPageMetadata({
+    title: "Mobile 619 Battery Fitment Alberton | On-Site Installation",
+    description:
+      "Mobile 619 battery fitment in Alberton. On-site delivery, installation, free alternator testing, and 45–60 min average response. Willard 619 & Exide 619CE in stock.",
+    path: "/mobile-battery-fitment-alberton",
+    keywords: [
+      "mobile 619 battery fitment",
+      "619 battery delivery and installation",
+      "on-site 619 battery fitment",
+      "mobile battery fitment alberton",
+    ],
+  });
+}
+
+export default async function MobileBatteryFitmentAlbertonPage() {
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+  const FAQ = getMobileFitmentFaq(fittedFromPrice);
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",

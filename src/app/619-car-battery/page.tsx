@@ -1,9 +1,8 @@
 import { Metadata } from "next";
-import { getAllProducts } from "@/data/products";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import {
-  BATTERY_619_HUB_FAQ,
   BATTERY_619_SPECS,
+  getBattery619HubFaq,
 } from "@/data/battery-619";
 import {
   BASE_URL,
@@ -27,28 +26,38 @@ import {
   Battery619TrustStrip,
   Battery619VehicleList,
 } from "@/components/content/Battery619Sections";
+import {
+  get619CatalogProducts,
+  get619FittedPriceLabel,
+} from "@/lib/products/battery-619";
+import { priceForSchema } from "@/lib/formatting";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "619 Car Battery Alberton | Exide & Willard | Free Fitment",
-  description:
-    "619 car battery in Alberton from R 1 450 with free fitment, alternator testing, and up to 25-month warranty. Willard 619 & Exide 619CE in stock. Mobile call-out to all suburbs.",
-  path: "/619-car-battery",
-  keywords: [
-    "619 car battery",
-    "619 battery price",
-    "619 car battery Alberton",
-    "619 battery near me",
-    "619 exide battery",
-    "619 willard battery",
-    "619 battery for sale",
-    "affordable 619 battery brands",
-  ],
-  imageAlt: "619 car battery Alberton - Alberton Battery Mart",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+
+  return buildPageMetadata({
+    title: "619 Car Battery Alberton | Exide & Willard | Free Fitment",
+    description: `619 car battery in Alberton from ${fittedFromPrice} with free fitment, alternator testing, and up to 25-month warranty. Willard 619 & Exide 619CE in stock. Mobile call-out to all suburbs.`,
+    path: "/619-car-battery",
+    keywords: [
+      "619 car battery",
+      "619 battery price",
+      "619 car battery Alberton",
+      "619 battery near me",
+      "619 exide battery",
+      "619 willard battery",
+      "619 battery for sale",
+      "affordable 619 battery brands",
+    ],
+    imageAlt: "619 car battery Alberton - Alberton Battery Mart",
+  });
+}
 
 export default async function Battery619HubPage() {
-  const allProducts = await getAllProducts();
-  const products = allProducts.filter((p) => p.sku === "619" || p.sku === "619CE");
+  const products = await get619CatalogProducts();
+  const fittedFromPrice = get619FittedPriceLabel(products);
+  const hubFaq = getBattery619HubFaq(fittedFromPrice);
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -70,7 +79,7 @@ export default async function Battery619HubPage() {
   return (
     <div className="space-y-4 pb-16">
       <JsonLd data={localBusinessSchema} id="619-hub-localbusiness" />
-      <FaqSchema id="619-hub-faq" items={BATTERY_619_HUB_FAQ} />
+      <FaqSchema id="619-hub-faq" items={hubFaq} />
       <BreadcrumbSchema
         id="619-hub-breadcrumb"
         items={[
@@ -88,7 +97,7 @@ export default async function Battery619HubPage() {
           brand={product.brandName}
           image={product.imagePath}
           url={`/products/id/${product.id}`}
-          price={product.sellingPrice_OUTPUT.replace(/[^\d.]/g, "") || "1450"}
+          price={priceForSchema(product.sellingPrice_OUTPUT)}
           additionalProperty={[
             { name: "Ah capacity", value: product.ahCapacity },
             { name: "CCA", value: product.cca },
@@ -99,7 +108,7 @@ export default async function Battery619HubPage() {
 
       <Battery619Hero
         title="619 Car Battery Alberton"
-        subtitle={`South Africa's most common compact-car battery code. ${BATTERY_619_SPECS.ahRange}, ${BATTERY_619_SPECS.dimensions}, from R 1 450 fitted with free testing and mobile call-out across Alberton.`}
+        subtitle={`South Africa's most common compact-car battery code. ${BATTERY_619_SPECS.ahRange}, ${BATTERY_619_SPECS.dimensions}, from ${fittedFromPrice} fitted with free testing and mobile call-out across Alberton.`}
         trackingId="619-hub-call"
       />
       <Battery619TrustStrip />
@@ -107,7 +116,7 @@ export default async function Battery619HubPage() {
       <Battery619SpecTable />
       <Battery619VehicleList />
       <Battery619SuburbGrid />
-      <Battery619FaqSection items={BATTERY_619_HUB_FAQ} />
+      <Battery619FaqSection items={hubFaq} />
       <div className="container">
         <Battery619IntentLinks />
       </div>

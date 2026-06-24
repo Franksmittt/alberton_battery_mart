@@ -10,6 +10,7 @@ import {
   type Battery619Suburb,
 } from "@/data/battery-619";
 import type { ProductCardData } from "@/data/products";
+import { formatProductPrice } from "@/lib/formatting";
 
 const PHONE_LINK = "0101096211";
 const PHONE_DISPLAY = "010 109 6211";
@@ -169,7 +170,9 @@ export function Battery619ProductCards({
                 <dd className="font-bold">{product.warrantyMonths} mo</dd>
               </div>
             </dl>
-            <p className="text-2xl font-extrabold text-battery">{product.sellingPrice_OUTPUT}</p>
+            <p className="text-2xl font-extrabold text-battery">
+              {formatProductPrice(product.sellingPrice_OUTPUT)}
+            </p>
             <p className="text-xs text-muted-foreground">Scrap exchange required · Free fitment</p>
             <Button asChild variant="battery">
               <Link href={`/products/id/${product.id}`}>View {product.sku} details</Link>
