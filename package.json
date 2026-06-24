@@ -11,7 +11,8 @@
     "report:catalog": "tsx scripts/generate-battery-catalog-report.ts",
     "audit:prices": "tsx scripts/audit-product-prices.ts",
     "report:size-clusters": "tsx scripts/generate-size-cluster-qa-report.ts",
-    "import:exide-gold-batch1": "node scripts/import-exide-gold-batch1.mjs"
+    "import:exide-gold-batch1": "node scripts/import-exide-gold-batch1.mjs",
+    "sync:exide-gold": "node scripts/sync-exide-gold-range.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",

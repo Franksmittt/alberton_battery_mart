@@ -1,0 +1,581 @@
+[
+  {
+    "sku": "610C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/610C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 55,
+      "cca": 280,
+      "ahCapacity": 35,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 13.73
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles frequently used in moderate traffic conditions."
+    ],
+    "imagePath": "/images/exide-gold/exide-610c-gold.png"
+  },
+  {
+    "sku": "611C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/611C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 55,
+      "cca": 280,
+      "ahCapacity": 35,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 13.73
+    },
+    "applications": [
+      "Vehicles with basic start-stop functionality.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles frequently used in moderate traffic conditions."
+    ],
+    "imagePath": "/images/exide-gold/exide-611c-gold.png"
+  },
+  {
+    "sku": "612CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/612C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 70,
+      "cca": 345,
+      "ahCapacity": 44,
+      "lengthMm": 207,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 12.13
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (basic sound systems, etc.).",
+      "Vehicles frequently driven in urban or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-612ce-gold.png"
+  },
+  {
+    "sku": "615C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/615C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 270,
+      "ahCapacity": 38,
+      "lengthMm": 187,
+      "widthMm": 127,
+      "heightMm": 203,
+      "overallHeightMm": 224,
+      "weightKg": 10
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher electrical usage.",
+      "Vehicles commonly driven in moderate traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-615c-gold.png"
+  },
+  {
+    "sku": "616C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/616C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 270,
+      "ahCapacity": 38,
+      "lengthMm": 187,
+      "widthMm": 127,
+      "heightMm": 203,
+      "overallHeightMm": 224,
+      "weightKg": 10
+    },
+    "applications": [
+      "Vehicles equipped with basic start-stop systems.",
+      "Cars with slightly elevated electrical demands (i.e., basic sound systems).",
+      "Vehicles frequently used in moderate urban or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-616c-gold.png"
+  },
+  {
+    "sku": "616CS",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/616CS_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 270,
+      "ahCapacity": 38,
+      "lengthMm": 187,
+      "widthMm": 136,
+      "heightMm": 203,
+      "overallHeightMm": 224,
+      "weightKg": 10
+    },
+    "applications": [
+      "Vehicles with basic start-stop functionality.",
+      "Cars with slightly elevated electrical needs (modest sound systems etc.).",
+      "Vehicles operated mainly in urban areas with stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-616cs-gold.png"
+  },
+  {
+    "sku": "619CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/619CE_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 314,
+      "ahCapacity": 42,
+      "lengthMm": 207,
+      "widthMm": 175,
+      "heightMm": 175,
+      "weightKg": 11.3
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles used often in urban settings and stop-and-go traffic situations."
+    ],
+    "imagePath": "/images/exide-gold/exide-619ce-gold.png"
+  },
+  {
+    "sku": "621C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/621C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 70,
+      "cca": 400,
+      "ahCapacity": 52,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 14.52
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (sound systems, navigation, etc.).",
+      "Vehicles often driven in stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-621c-gold.png"
+  },
+  {
+    "sku": "622C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/622C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 70,
+      "cca": 400,
+      "ahCapacity": 52,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 14.52
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (audio systems, navigation, etc.).",
+      "Vehicles used extensively in urban environments or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-622c-gold.png"
+  },
+  {
+    "sku": "626CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/626CE_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 75,
+      "cca": 424,
+      "ahCapacity": 53,
+      "lengthMm": 242,
+      "widthMm": 175,
+      "heightMm": 175,
+      "weightKg": 13.9
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (audio, navigation, etc.).",
+      "Vehicles frequently driven in stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-626ce-gold.png"
+  },
+  {
+    "sku": "628CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/628CE_FNB_GOLD.png",
+    "specs": {
+      "cca": 0,
+      "ahCapacity": 0
+    },
+    "applications": [],
+    "imagePath": "/images/exide-gold/exide-628ce-gold.png"
+  },
+  {
+    "sku": "630C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/630C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 315,
+      "ahCapacity": 42,
+      "lengthMm": 241,
+      "widthMm": 135,
+      "heightMm": 182,
+      "overallHeightMm": 204,
+      "weightKg": 10.44
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher-than-average electrical demands.",
+      "Vehicles frequently used in urban areas or traffic with frequent stops."
+    ],
+    "imagePath": "/images/exide-gold/exide-630c-gold.png"
+  },
+  {
+    "sku": "631C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/631C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 315,
+      "ahCapacity": 42,
+      "lengthMm": 241,
+      "widthMm": 135,
+      "heightMm": 182,
+      "overallHeightMm": 204,
+      "weightKg": 10.44
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly increased electrical usage.",
+      "Vehicles primarily used in urban environments or traffic requiring frequent stops."
+    ],
+    "imagePath": "/images/exide-gold/exide-631c-gold.png"
+  },
+  {
+    "sku": "634C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/634C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 75,
+      "cca": 345,
+      "ahCapacity": 47,
+      "lengthMm": 241,
+      "widthMm": 135,
+      "heightMm": 182,
+      "overallHeightMm": 204,
+      "weightKg": 11.61
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (sound systems, navigation, etc.).",
+      "Vehicles often driven in urban or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-634c-gold.png"
+  },
+  {
+    "sku": "636C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/636C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 60,
+      "cca": 315,
+      "ahCapacity": 42,
+      "lengthMm": 218,
+      "widthMm": 135,
+      "heightMm": 182,
+      "overallHeightMm": 204,
+      "weightKg": 10.45
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with slightly higher-than-average electrical usage.",
+      "Vehicles frequently driven in stop-and-go traffic or urban areas."
+    ],
+    "imagePath": "/images/exide-gold/exide-636c-gold.png"
+  },
+  {
+    "sku": "636CS",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/636CS_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 75,
+      "cca": 345,
+      "ahCapacity": 47,
+      "lengthMm": 219,
+      "widthMm": 135,
+      "heightMm": 197,
+      "overallHeightMm": 217,
+      "weightKg": 11.85
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with moderate electrical demands (sound systems, navigation, etc.).",
+      "Vehicles predominantly used in urban or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-636cs-gold.png"
+  },
+  {
+    "sku": "638C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/638C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 90,
+      "cca": 440,
+      "ahCapacity": 58,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 16.17
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars and SUVs with higher electrical demands (sound systems, navigation, etc.).",
+      "Vehicles driven often in heavy stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-638c-gold.png"
+  },
+  {
+    "sku": "639C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/639C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 90,
+      "cca": 440,
+      "ahCapacity": 58,
+      "lengthMm": 241,
+      "widthMm": 173,
+      "heightMm": 193,
+      "overallHeightMm": 215,
+      "weightKg": 16.17
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with higher electrical usage (premium audio systems, navigation etc.).",
+      "Vehicles heavily used in urban areas and stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-639c-gold.png"
+  },
+  {
+    "sku": "640CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/640CE_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 90,
+      "cca": 451,
+      "ahCapacity": 58,
+      "lengthMm": 242,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 14.85
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with higher electrical demands (sound systems, navigation, etc.).",
+      "Vehicles driven mainly in urban settings or facing regular traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-640ce-gold.png"
+  },
+  {
+    "sku": "646CE",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/646CE_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 90,
+      "cca": 451,
+      "ahCapacity": 58,
+      "lengthMm": 242,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 14.85
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with high electrical demands (upgraded sound systems, navigation, etc.).",
+      "Vehicles frequently used in city traffic or in harsh weather conditions."
+    ],
+    "imagePath": "/images/exide-gold/exide-646ce-gold.png"
+  },
+  {
+    "sku": "650C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/650CR_FNB_GOLD.png",
+    "specs": {
+      "cca": 0,
+      "ahCapacity": 0
+    },
+    "applications": [],
+    "imagePath": "/images/exide-gold/exide-650c-gold.png"
+  },
+  {
+    "sku": "650CR",
+    "image": "https://www.battery.co.za/wp-content/uploads/2024/04/650CR_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 150,
+      "cca": 790,
+      "ahCapacity": 93,
+      "lengthMm": 303,
+      "widthMm": 174,
+      "heightMm": 200,
+      "overallHeightMm": 220,
+      "weightKg": 23.17
+    },
+    "applications": [
+      "Vehicles with advanced start-stop systems.",
+      "Cars with very high electrical demands (premium sound systems, multiple in-car screens, etc.).",
+      "Vehicles used for commercial or fleet purposes.",
+      "Vehicles driven in extreme weather conditions or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-650cr-gold.png"
+  },
+  {
+    "sku": "651C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/651C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 95,
+      "cca": 480,
+      "ahCapacity": 60,
+      "lengthMm": 276,
+      "widthMm": 175,
+      "heightMm": 175,
+      "weightKg": 16.35
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems",
+      "Cars with moderate to high electrical demands (upgraded sound systems, navigation, etc.).",
+      "Vehicles frequently driven in urban areas or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-651c-gold.png"
+  },
+  {
+    "sku": "651CP",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/651CP_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 100,
+      "cca": 570,
+      "ahCapacity": 66,
+      "lengthMm": 276,
+      "widthMm": 175,
+      "heightMm": 175,
+      "weightKg": 17.7
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with higher-than-average electrical demands (audio systems, navigation, etc.).",
+      "Vehicles frequently driven in heavy urban traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-651cp-gold.png"
+  },
+  {
+    "sku": "652C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/652C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 110,
+      "cca": 567,
+      "ahCapacity": 70,
+      "lengthMm": 276,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 17.36
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with higher-than-average electrical usage (sound systems, navigation, etc.).",
+      "Vehicles frequently used in urban areas or situations with heavy stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-652c-gold.png"
+  },
+  {
+    "sku": "652CP",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/652CP_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 130,
+      "cca": 615,
+      "ahCapacity": 75,
+      "lengthMm": 276,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 18.81
+    },
+    "applications": [
+      "Vehicles with entry level start-stop systems.",
+      "Cars with very high electrical demands (premium sound systems, multiple in-car screens, etc.).",
+      "Vehicles used for commercial or fleet purposes.",
+      "Vehicles driven in extreme weather conditions or stop-and-go traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-652cp-gold.png"
+  },
+  {
+    "sku": "654C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/654C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 130,
+      "cca": 670,
+      "ahCapacity": 78,
+      "lengthMm": 352,
+      "widthMm": 175,
+      "heightMm": 175,
+      "weightKg": 21.17
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with high electrical demands (powerful stereos, additional lighting, navigation, etc.).",
+      "Vehicles used in heavy urban traffic.",
+      "Vehicles that operate in challenging climates."
+    ],
+    "imagePath": "/images/exide-gold/exide-654c-gold.png"
+  },
+  {
+    "sku": "657C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/657C_FNB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 110,
+      "cca": 567,
+      "ahCapacity": 70,
+      "lengthMm": 276,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 17.36
+    },
+    "applications": [
+      "Cars with higher-than-average electrical demands (sound systems, navigation, etc.)",
+      "Vehicles used primarily in city settings with heavy traffic."
+    ],
+    "imagePath": "/images/exide-gold/exide-657c-gold.png"
+  },
+  {
+    "sku": "658C",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 175,
+      "cca": 820,
+      "ahCapacity": 96,
+      "lengthMm": 352,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 24.23
+    },
+    "applications": [
+      "Vehicles with basic start-stop systems.",
+      "Cars with extreme electrical demands (multi-component sound systems, many in-car screens, etc.).",
+      "Vehicles operating in severe weather conditions or heavy, stop-and-go traffic situations."
+    ],
+    "imagePath": "/images/exide-gold/exide-658c-gold.jpg"
+  },
+  {
+    "sku": "668P",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "cca": 0,
+      "ahCapacity": 0
+    },
+    "applications": [],
+    "imagePath": "/images/exide-gold/exide-668p-gold.jpg"
+  },
+  {
+    "sku": "669P",
+    "image": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 150,
+      "cca": 715,
+      "ahCapacity": 85,
+      "lengthMm": 314,
+      "widthMm": 175,
+      "heightMm": 190,
+      "weightKg": 21.51
+    },
+    "applications": [
+      "Vehicles with entry level start-stop systems.",
+      "Cars with extreme electrical demands (multiple sound system components, in-car screens, etc.)",
+      "Vehicles frequently driven in heavy city traffic with many stops."
+    ],
+    "imagePath": "/images/exide-gold/exide-669p-gold.jpg"
+  }
+]
