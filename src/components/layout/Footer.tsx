@@ -46,6 +46,11 @@ const Footer = () => {
               <h4 className="mb-6 text-[1.1rem] font-bold text-white">Categories</h4>
               <ul className="space-y-3 text-[0.95rem] text-[var(--brand-muted-2)]">
                 <li>
+                  <Link href="/619-car-battery" className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]">
+                    619 Car Battery
+                  </Link>
+                </li>
+                <li>
                   <Link href="/products/type/automotive" className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]">
                     Passenger & Sedans
                   </Link>

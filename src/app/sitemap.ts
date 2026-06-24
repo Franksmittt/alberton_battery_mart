@@ -1,6 +1,7 @@
 // src/app/sitemap.ts
 import { MetadataRoute } from "next";
 import {
+  getBattery619SitemapEntries,
   getBlogSitemapEntries,
   getLocalProofSitemapEntries,
   getLocalSitemapEntries,
@@ -18,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const servicePages = getServiceSitemapEntries();
   const localAreaPages = getLocalSitemapEntries();
   const localProofPages = getLocalProofSitemapEntries();
+  const battery619Pages = getBattery619SitemapEntries();
 
   return [
     ...staticPages,
@@ -27,5 +29,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...servicePages,
     ...localAreaPages,
     ...localProofPages,
+    ...battery619Pages,
   ];
 }

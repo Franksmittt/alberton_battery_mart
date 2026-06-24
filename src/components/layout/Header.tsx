@@ -131,6 +131,8 @@ const Header = () => {
                   </div>
                   <div className="space-y-2">
                     <p className="font-black text-white uppercase text-xs tracking-wide">Popular Sizes</p>
+                    <Link href="/619-car-battery" className="block font-bold text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)]">619 Car Battery Hub</Link>
+                    <Link href="/products/size/619" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 619</Link>
                     <Link href="/products/size/621" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 621</Link>
                     <Link href="/products/size/646" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 646</Link>
                     <Link href="/products/size/652" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 652</Link>
