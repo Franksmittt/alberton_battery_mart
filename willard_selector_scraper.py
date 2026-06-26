@@ -53,6 +53,8 @@ class Config:
     backoff_factor: float
     request_jitter: float
     vehicle_type_filter: Set[str]
+    manufacturer_filter: Set[str]
+    min_year: int
     max_vehicle_types: int
     max_manufacturers: int
     max_years: int
@@ -61,6 +63,32 @@ class Config:
 
 def normalize_vehicle_type(value: str) -> str:
     return value.strip().lower()
+
+
+def normalize_manufacturer(value: str) -> str:
+    return value.strip().lower()
+
+
+def manufacturer_matches(name: str, cfg: Config) -> bool:
+    if not cfg.manufacturer_filter:
+        return True
+    normalized = normalize_manufacturer(name)
+    for allowed in cfg.manufacturer_filter:
+        allowed_normalized = normalize_manufacturer(allowed)
+        if normalized == allowed_normalized:
+            return True
+        if allowed_normalized == "toyota" and normalized.startswith("toyota"):
+            return True
+    return False
+
+
+def year_matches(year: str, cfg: Config) -> bool:
+    if cfg.min_year <= 0:
+        return True
+    try:
+        return int(str(year).strip()) >= cfg.min_year
+    except ValueError:
+        return False
 
 
 def sanitize_text(value: str) -> str:
@@ -209,12 +237,16 @@ def run(cfg: Config) -> None:
                 manu = (manu_node.get("name") or "").strip()
                 if not manu:
                     continue
+                if not manufacturer_matches(manu, cfg):
+                    continue
                 print(f"-> Manufacturer: {manu}")
 
                 years = call_api(session, "/Year", {"vt": vt, "manu": manu}, cfg)
                 for year_node in limit_iter(years, cfg.max_years):
                     year = str(year_node.get("year") or "").strip()
                     if not year:
+                        continue
+                    if not year_matches(year, cfg):
                         continue
 
                     models = call_api(
@@ -323,6 +355,20 @@ def parse_args() -> Config:
         help="Exponential backoff factor.",
     )
     parser.add_argument(
+        "--manufacturers",
+        default="",
+        help=(
+            "Comma-separated manufacturer filter, e.g. "
+            "\"Toyota,Suzuki,Volkswagen\". Toyota also matches Toyota Crown and Toyota/Hino."
+        ),
+    )
+    parser.add_argument(
+        "--min-year",
+        type=int,
+        default=0,
+        help="Only include model years from this year upward (e.g. 2012).",
+    )
+    parser.add_argument(
         "--vehicle-types",
         default="",
         help=(
@@ -365,6 +411,14 @@ def parse_args() -> Config:
             if chunk.strip()
         }
 
+    manufacturer_filter: Set[str] = set()
+    if args.manufacturers.strip():
+        manufacturer_filter = {
+            chunk.strip()
+            for chunk in args.manufacturers.split(",")
+            if chunk.strip()
+        }
+
     return Config(
         output_file=args.output,
         timeout=args.timeout,
@@ -373,6 +427,8 @@ def parse_args() -> Config:
         backoff_factor=max(0.1, args.backoff),
         request_jitter=max(0.0, args.jitter),
         vehicle_type_filter=vehicle_type_filter,
+        manufacturer_filter=manufacturer_filter,
+        min_year=max(0, args.min_year),
         max_vehicle_types=max(0, args.max_vehicle_types),
         max_manufacturers=max(0, args.max_manufacturers),
         max_years=max(0, args.max_years),

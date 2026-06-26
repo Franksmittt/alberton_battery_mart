@@ -303,7 +303,20 @@ function buildIndex(
 }
 
 async function getFitmentIndex() {
-  const csvPath = path.join(process.cwd(), "willard_battery_database.csv");
+  const focusedPath = path.join(
+    process.cwd(),
+    "willard_battery_database_focused.csv"
+  );
+  const defaultPath = path.join(process.cwd(), "willard_battery_database.csv");
+  let csvPath = defaultPath;
+
+  try {
+    await fs.access(focusedPath);
+    csvPath = focusedPath;
+  } catch {
+    csvPath = defaultPath;
+  }
+
   const stat = await fs.stat(csvPath);
 
   if (fitmentCache && fitmentCache.mtimeMs === stat.mtimeMs) {
@@ -370,7 +383,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "Could not load fitment data. Ensure willard_battery_database.csv exists in repo root.",
+          "Could not load fitment data. Ensure willard_battery_database_focused.csv or willard_battery_database.csv exists in repo root.",
         detail: error?.message || "unknown error",
       },
       { status: 500 }
