@@ -1,0 +1,120 @@
+BATTERY CATALOG COVERAGE REPORT
+Generated: 2026-06-24T09:16:29.698Z
+Source: data/products.json (130 products)
+
+SUMMARY MATRIX
+════════════════════════════════════════════════════════════════════════
+Size | Willard | Exide | Eco Plus | Power Plus | Total SKUs | Gaps
+------------------------------------------------------------------------
+619  | ✅       | ✅     | ❌        | ❌          | 2          | 2 missing brands
+628  | ✅       | ✅     | ✅        | ✅          | 4          | none
+646  | ✅       | ✅     | ✅        | ✅          | 7          | none
+652  | ✅       | ✅     | ✅        | ✅          | 7          | none
+668  | ✅       | ✅     | ✅        | ✅          | 7          | none
+658  | ✅       | ✅     | ✅        | ✅          | 7          | none
+657  | —       | —     | ✅        | ✅          | 2          | none
+616  | —       | —     | ✅        | ✅          | 4          | none
+
+SIZE: 619
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | YES         | 101        | Willard 619            | 1450.00     | YES                | YES           | YES
+Exide        | YES         | 118        | Exide 619CE            | 1450.00     | YES                | YES           | YES
+Eco Plus     | NO          | —          | —                      | —           | NO                 | NO            | NO
+Power Plus   | NO          | —          | —                      | —           | NO                 | NO            | NO
+
+GAP SUMMARY: Missing Eco Plus 619; Missing Power Plus 619
+ACTION: [ ] Add Eco Plus 619 product  [ ] Add Power Plus 619 product
+
+All SKUs for size 619 (2): Willard 619 (R 1 450.00); Exide 619CE (R 1 450.00)
+
+SIZE: 628
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | YES         | 108        | Willard 628/9          | 1600.00     | YES                | YES           | —
+Exide        | YES         | 114        | Exide 628              | 1600.00     | YES                | YES           | —
+Eco Plus     | YES         | 308        | Eco Plus 628           | 1300.00     | YES                | YES           | —
+Power Plus   | YES         | 208        | Power Plus 628         | 1300.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 628 (4): Willard 628/9 (R 1 600.00); Exide 628 (R 1 600.00); Eco Plus 628 (R 1 300.00); Power Plus 628 (R 1 300.00)
+
+SIZE: 646
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | YES         | 110        | Willard 646            | 1900.00     | YES                | YES           | —
+Exide        | YES         | 113        | Exide 646CE            | 1900.00     | YES                | YES           | —
+Eco Plus     | YES         | 318        | Eco Plus 646           | 1400.00     | YES                | YES           | —
+Power Plus   | YES         | 216        | Power Plus 646         | 1550.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 646 (7): Willard 646 (R 1 900.00); Exide 646CE (R 1 900.00); Exide 646AGM (R 3 550.00); Eco Plus 646 (R 1 400.00); Power Plus 646 (R 1 550.00); Power Plus 646EFB (R 2 000.00); Power Plus 646AGM (R 3 150.00)
+
+SIZE: 652
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | YES         | 102        | Willard 652            | 2150.00     | YES                | YES           | —
+Exide        | YES         | 132        | Exide 652PS            | 2600.00     | YES                | YES           | —
+Eco Plus     | YES         | 322        | Eco Plus 652           | 1700.00     | YES                | YES           | —
+Power Plus   | YES         | 220        | Power Plus 652         | 2000.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 652 (7): Willard 652 (R 2 150.00); Exide 652PS (R 2 600.00); Exide 652AGM (R 4 250.00); Eco Plus 652 (R 1 700.00); Power Plus 652 (R 2 000.00); Power Plus 652EFB (R 2 400.00); Power Plus 652AGM (R 3 580.00)
+
+SIZE: 668
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | YES         | 104        | Willard 668            | 2950.00     | YES                | YES           | —
+Exide        | YES         | 117        | Exide 668              | 2950.00     | YES                | YES           | —
+Eco Plus     | YES         | 326        | Eco Plus 668           | 2050.00     | YES                | YES           | —
+Power Plus   | YES         | 224        | Power Plus 668         | 2300.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 668 (7): Willard 668 (R 2 950.00); Exide 668 (R 2 950.00); Exide 668AGM (R 4 400.00); Eco Plus 668 (R 2 050.00); Power Plus 668 (R 2 300.00); Power Plus 668EFB (R 2 950.00); Power Plus 668AGM (R 3 800.00)
+
+SIZE: 658
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | YES         | 109        | Willard 658            | 3050.00     | YES                | YES           | —
+Exide        | YES         | 126        | Exide 658C             | 3050.00     | YES                | YES           | —
+Eco Plus     | YES         | 324        | Eco Plus 658           | 2100.00     | YES                | YES           | —
+Power Plus   | YES         | 222        | Power Plus 658         | 2450.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 658 (7): Willard 658 (R 3 050.00); Exide 658C (R 3 050.00); Exide 658AGM (R 4 700.00); Eco Plus 658 (R 2 100.00); Power Plus 658 (R 2 450.00); Power Plus 658EFB (R 3 450.00); Power Plus 658AGM (R 4 450.00)
+
+SIZE: 657
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | NO          | —          | —                      | —           | NO                 | NO            | —
+Exide        | NO          | —          | —                      | —           | NO                 | NO            | —
+Eco Plus     | YES         | 323        | Eco Plus 657           | 1700.00     | YES                | YES           | —
+Power Plus   | YES         | 221        | Power Plus 657         | 1950.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 657 (2): Eco Plus 657 (R 1 700.00); Power Plus 657 (R 1 950.00)
+
+SIZE: 616
+────────────────────────────────────────────────────────────────────────
+Brand        | In Catalog? | Product ID | Product Name           | Price (ZAR) | On /products/size? | On search?q=? | On SEO hub?
+Willard      | NO          | —          | —                      | —           | NO                 | NO            | —
+Exide        | NO          | —          | —                      | —           | NO                 | NO            | —
+Eco Plus     | YES         | 303        | Eco Plus 616           | 1050.00     | YES                | YES           | —
+Power Plus   | YES         | 203        | Power Plus 616         | 1150.00     | YES                | YES           | —
+
+GAP SUMMARY: No missing expected brands.
+ACTION: [ ] None — catalog complete for expected brands
+
+All SKUs for size 616 (4): Eco Plus 616 (R 1 050.00); Eco Plus 616B (R 1 050.00); Power Plus 616 (R 1 150.00); Power Plus 616B (R 1 150.00)

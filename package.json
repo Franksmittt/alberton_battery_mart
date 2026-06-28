@@ -7,6 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "assert:619-pricing": "node scripts/assert-619-pricing.mjs",
+    "report:catalog": "tsx scripts/generate-battery-catalog-report.ts",
+    "audit:prices": "tsx scripts/audit-product-prices.ts",
+    "report:size-clusters": "tsx scripts/generate-size-cluster-qa-report.ts",
+    "import:exide-gold-batch1": "node scripts/import-exide-gold-batch1.mjs",
+    "sync:exide-gold": "node scripts/sync-exide-gold-range.mjs",
     "scrape:willard:focused": "python3 willard_selector_scraper.py --output willard_battery_database_focused.csv --vehicle-types \"Passenger & SUV\" --manufacturers \"Toyota,Suzuki,Volkswagen,Hyundai,Ford,GWM,Chery,Jetour,Mahindra\" --min-year 2012",
     "scrape:willard:vw-passenger": "python3 willard_selector_scraper.py --output willard_battery_database_focused.csv --vehicle-types \"Passenger & SUV\" --manufacturers Volkswagen --min-year 2012",
     "filter:willard-focused": "node scripts/filter-willard-focused-csv.mjs"
@@ -40,6 +46,7 @@
     "eslint-config-next": "14.2.3",
     "postcss": "8.4.38",
     "tailwindcss": "3.4.1",
+    "tsx": "^4.19.4",
     "typescript": "5.4.5"
   }
 }

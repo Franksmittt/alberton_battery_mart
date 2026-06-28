@@ -1,7 +1,6 @@
 // src/app/products/size/[code]/page.tsx
 import Link from "next/link";
 import ProductListPage from "@/components/layout/ProductListPage";
-import { getAllProducts, ProductCardData } from "@/data/products";
 import { notFound } from "next/navigation";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
@@ -10,9 +9,14 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Battery } from "lucide-react";
-import { productSizeMatchesSlug, productSizeSlug } from "@/lib/product-size-slugs";
+import { productSizeSlug } from "@/lib/product-size-slugs";
 import { createItemListSchema } from "@/lib/seo/schema";
 import IntentLinks from "@/components/seo/IntentLinks";
+import FaqSchema from "@/components/seo/FaqSchema";
+import { getClusterConfig } from "@/lib/battery-sizes/clusters";
+import { getHubFaq, summarizeBrands } from "@/lib/battery-sizes/content";
+import { getFittedPriceLabel, getProductsBySizeCode } from "@/lib/products/by-size";
+import { extractBaseSizeCode } from "@/lib/products/size-matching";
 
 export const dynamic = "force-dynamic";
 
@@ -62,16 +66,14 @@ export async function generateMetadata({
   };
 }
 
-// Helper to filter products by size/code
-const getSizeData = (allProducts: ProductCardData[], codeSlug: string) => {
-  const products = allProducts.filter(
-    (p) => productSizeMatchesSlug(p.sku, codeSlug)
-  );
-
+// Filter products by canonical battery size code (619, 628, etc.)
+const getSizeData = async (codeSlug: string) => {
+  const baseCode = extractBaseSizeCode(codeSlug) ?? codeSlug.toUpperCase();
+  const products = await getProductsBySizeCode(baseCode);
   const brands = Array.from(new Set(products.map((p) => p.brandName)));
   const sizes = Array.from(new Set(products.map((p) => p.sku)));
 
-  return { products, brands, sizes };
+  return { products, brands, sizes, baseCode };
 };
 
 // Universal Capacity Filters
@@ -85,15 +87,23 @@ const allCapacityFilters = [
 // The page component
 export default async function SizePage({ params }: SizePageProps) {
   const { code: codeSlug } = params;
-  const allProducts = await getAllProducts();
-  const { products, brands, sizes } = getSizeData(allProducts, codeSlug);
+  const { products, brands, sizes, baseCode } = await getSizeData(codeSlug);
 
   if (products.length === 0) {
     notFound();
   }
 
-  const code = codeSlug.toUpperCase();
-  const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(codeSlug)}`;
+  const code = baseCode.toUpperCase();
+  const canonicalUrl = `${BASE_URL}/products/size/${productSizeSlug(code)}`;
+  const cluster = getClusterConfig(baseCode);
+  const hubFaq =
+    cluster && products.length
+      ? getHubFaq(
+          cluster,
+          getFittedPriceLabel(products),
+          summarizeBrands(products)
+        )
+      : [];
 
   // Get product specs for the first product (they should all be similar size)
   const avgCapacity = Math.round(
@@ -119,6 +129,7 @@ export default async function SizePage({ params }: SizePageProps) {
         data={productCollectionSchema}
         id={`${codeSlug}-size-collection-schema`}
       />
+      {hubFaq.length > 0 && <FaqSchema id={`${code}-size-faq`} items={hubFaq} />}
 
       <div className="text-center space-y-3">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -129,6 +140,15 @@ export default async function SizePage({ params }: SizePageProps) {
         </div>
         <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
           All {code} size batteries available in Alberton. Compare prices, specs, and brands. Free fitment and testing included.
+          {cluster && (
+            <>
+              {" "}
+              <Link href={cluster.hubPath} className="text-battery font-semibold hover:underline">
+                View the full {code} car battery guide
+              </Link>
+              .
+            </>
+          )}
         </p>
         <div className="flex flex-wrap gap-4 justify-center pt-4">
           <Button
@@ -231,6 +251,13 @@ export default async function SizePage({ params }: SizePageProps) {
         description="Move from size research to the closest service page for fitment, diagnostics, or suburb dispatch."
         columnsClassName="md:grid-cols-3"
         links={[
+          ...(cluster
+            ? [
+                { href: cluster.hubPath, label: `${code} car battery hub — Alberton` },
+                { href: `/${code}-car-battery-price`, label: `${code} battery price comparison` },
+                { href: `/${code}-battery-specs`, label: `${code} battery specifications` },
+              ]
+            : []),
           {
             href: "/services/mobile-battery-replacement/alberton",
             label: `${code} mobile battery replacement in Alberton`,
@@ -255,6 +282,9 @@ export default async function SizePage({ params }: SizePageProps) {
             href: "/vehicles/ford/ranger-2-2-tdci",
             label: "Ford Ranger battery fitment guide",
           },
+          ...(code === "619"
+            ? [{ href: "/vehicles/volkswagen/polo-vivo", label: "VW Polo Vivo 619 battery guide" }]
+            : []),
         ]}
       />
     </div>

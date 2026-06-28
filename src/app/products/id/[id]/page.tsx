@@ -1,4 +1,4 @@
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -18,29 +18,23 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import ProductSchema from "@/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import IntentLinks from "@/components/seo/IntentLinks";
+import { formatProductPrice, priceForSchema, isPriceOnApplication } from "@/lib/formatting";
 
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 const WHATSAPP_NUMBER_LINK = "27823046926";
 
-const parsePrice = (price: string): string => {
-  try {
-    return price.replace("R", "").replace(/,/g, "").trim();
-  } catch (e) {
-    return "0.00";
-  }
-};
-
-const getProductById = (id: string): ProductCardData | undefined => {
-  return ALL_PRODUCTS.find((p) => p.id.toString() === id);
-};
+async function getProductById(id: string): Promise<ProductCardData | undefined> {
+  const products = await getAllProducts();
+  return products.find((p) => p.id.toString() === id);
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const product = getProductById(params.id);
+  const product = await getProductById(params.id);
   if (!product) {
     return { title: "Product Not Found" };
   }
@@ -72,17 +66,19 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return ALL_PRODUCTS.map((product) => ({
+  const products = await getAllProducts();
+  return products.map((product) => ({
     id: product.id.toString(),
   }));
 }
 
-export default function ProductDetailPage({
+export default async function ProductDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const product = getProductById(params.id);
+  const products = await getAllProducts();
+  const product = products.find((p) => p.id.toString() === params.id);
   if (!product) {
     notFound();
   }
@@ -96,11 +92,26 @@ export default function ProductDetailPage({
     { label: "Warranty", value: `${product.warrantyMonths} Months` },
   ];
 
-  const sameSizeAlternatives = ALL_PRODUCTS.filter(
+  const technicalSpecs = [
+    product.lengthMm
+      ? { label: "Length", value: `${product.lengthMm} mm` }
+      : null,
+    product.widthMm ? { label: "Width", value: `${product.widthMm} mm` } : null,
+    product.heightMm
+      ? { label: "Height", value: `${product.heightMm} mm` }
+      : null,
+    product.weightKg
+      ? { label: "Weight", value: `${product.weightKg} kg` }
+      : null,
+  ].filter(Boolean) as Array<{ label: string; value: string }>;
+
+  const schemaPrice = priceForSchema(product.sellingPrice_OUTPUT);
+
+  const sameSizeAlternatives = products.filter(
     (item) => item.id !== product.id && item.sku === product.sku
   ).slice(0, 4);
 
-  const sameBrandAlternatives = ALL_PRODUCTS.filter(
+  const sameBrandAlternatives = products.filter(
     (item) =>
       item.id !== product.id &&
       item.brandName === product.brandName &&
@@ -138,7 +149,7 @@ export default function ProductDetailPage({
         brand={product.brandName}
         image={product.imagePath}
         url={`/products/id/${product.id}`}
-        price={parsePrice(product.sellingPrice_OUTPUT)}
+        price={schemaPrice}
       />
       <BreadcrumbSchema
         id="product-breadcrumb-schema"
@@ -182,8 +193,13 @@ export default function ProductDetailPage({
 
           <div className="space-y-4">
             <p className="text-3xl font-bold text-foreground">
-              {product.sellingPrice_OUTPUT}
+              {formatProductPrice(product.sellingPrice_OUTPUT)}
             </p>
+            {isPriceOnApplication(product.sellingPrice_OUTPUT) && (
+              <p className="text-sm text-muted-foreground">
+                Price on application — call or WhatsApp for a live quote.
+              </p>
+            )}
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" variant="battery">
                 <a href={`tel:${EMERGENCY_PHONE_LINK}`}>
@@ -220,6 +236,41 @@ export default function ProductDetailPage({
           <TrackViewItem product={product} />
         </div>
       </div>
+
+      <Separator className="my-12" />
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold text-foreground">Description</h2>
+        <p className="text-muted-foreground leading-relaxed max-w-4xl">
+          {product.seoDescription}
+        </p>
+      </section>
+
+      {technicalSpecs.length > 0 && (
+        <>
+          <Separator className="my-12" />
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold text-foreground">
+              Technical specifications
+            </h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {technicalSpecs.map((spec) => (
+                <div
+                  key={spec.label}
+                  className="border border-border rounded-lg p-4 bg-card"
+                >
+                  <p className="text-sm uppercase tracking-wide text-muted-foreground">
+                    {spec.label}
+                  </p>
+                  <p className="text-lg font-semibold text-foreground">
+                    {spec.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
 
       <Separator className="my-12" />
 

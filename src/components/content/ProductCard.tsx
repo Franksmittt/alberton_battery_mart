@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { ProductCardData } from '@/data/products';
+import { formatProductPrice } from '@/lib/formatting';
 
 export function ProductCard({ product }: { product: ProductCardData }) {
   const isAGM = product.isAGM;
@@ -97,7 +98,9 @@ export function ProductCard({ product }: { product: ProductCardData }) {
 
             <div className="space-y-1 text-right">
               <p className="text-[11px] uppercase tracking-[0.2em] text-white/50">Price</p>
-              <p className="text-xl font-black text-battery">{product.sellingPrice_OUTPUT}</p>
+              <p className="text-xl font-black text-battery">
+                {formatProductPrice(product.sellingPrice_OUTPUT)}
+              </p>
             </div>
           </div>
         </CardContent>

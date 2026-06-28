@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronDown, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileNav from "@/components/layout/MobileNav";
+import { SizeClusterNavLinks } from "@/components/content/SizeClusterNavLinks";
 import { useState } from "react";
 
 const Header = () => {
@@ -131,11 +132,8 @@ const Header = () => {
                   </div>
                   <div className="space-y-2">
                     <p className="font-black text-white uppercase text-xs tracking-wide">Popular Sizes</p>
-                    <Link href="/products/size/621" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 621</Link>
-                    <Link href="/products/size/646" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 646</Link>
-                    <Link href="/products/size/652" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 652</Link>
-                    <Link href="/products/size/658" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 658</Link>
-                    <Link href="/products/size/668" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 668</Link>
+                    <SizeClusterNavLinks />
+                    <Link href="/products/size/621" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 621 (catalog)</Link>
                   </div>
                   <div className="space-y-2">
                     <p className="font-black text-white uppercase text-xs tracking-wide">Services</p>

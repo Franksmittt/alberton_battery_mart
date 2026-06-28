@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Link from "next/link";
 import { CheckCircle2, Clock3, MapPin, Navigation, Phone, Search, ShieldCheck } from "lucide-react";
 import { YMMSearchWidget } from "@/components/content/YMMSearchWidget";
+import { SizeClusterNavLinks } from "@/components/content/SizeClusterNavLinks";
 import Image from "next/image";
 import { ALL_PRODUCTS, type ProductCardData } from "@/data/products";
 import MobileTrustRotator from "@/components/layout/MobileTrustRotator";
@@ -217,7 +218,8 @@ export default function Home() {
               Battery Finder: Match the Right Battery Fast
             </h2>
             <p className="text-[var(--brand-muted)] text-[clamp(1rem,2vw,1.15rem)] max-w-3xl mx-auto">
-              Select your vehicle details below to get matched battery results instantly.
+              Select your vehicle details below to get matched battery results instantly. Popular size guides:{" "}
+              <SizeClusterNavLinks variant="inline" />
             </p>
           </div>
           <YMMSearchWidget variant="compact" />

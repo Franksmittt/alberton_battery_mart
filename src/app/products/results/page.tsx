@@ -1,10 +1,12 @@
 // src/app/products/results/page.tsx
-import { getAllProducts, ProductCardData, ALL_PRODUCTS } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import ProductListPage from "@/components/layout/ProductListPage";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from 'next';
 import { BASE_URL } from "@/lib/seo-constants";
+import { searchProducts } from "@/lib/products/by-size";
+import { findBrandFromQuery, normalizeBrand } from "@/lib/products/brands";
 
 // Mark route as dynamic since it uses searchParams
 export const dynamic = 'force-dynamic';
@@ -75,22 +77,30 @@ export async function generateMetadata({ searchParams }: ResultsPageProps): Prom
 
 // Function now returns an object containing both the filtered list and the title string.
 const filterProducts = (allProducts: ProductCardData[], params: ResultsPageProps['searchParams']): { products: ProductCardData[], title: string } => {
-  let filtered = allProducts;
   let title = "Search Results";
 
-  // --- Filter 1: SKU/Code Search (?q=619) ---
+  // --- Filter 1: SKU/Code Search (?q=619) — uses same size matching as /products/size/[code] ---
   if (params.q) {
-    const query = params.q.toLowerCase();
-    filtered = filtered.filter(p => 
-      p.sku.toLowerCase().includes(query) || p.name.toLowerCase().includes(query)
-    );
+    const products = searchProducts(allProducts, params.q);
     title = `Search Results for "${params.q}"`;
+    return { products, title };
   }
   
+  let filtered = allProducts;
+
   // --- Filter 2: Brand Filter (?brand=Willard) ---
-  else if (params.brand) {
+  if (params.brand) {
     const brandQuery = params.brand.toLowerCase().trim();
-    filtered = filtered.filter(p => p.brandName.toLowerCase().trim() === brandQuery);
+    const aliasBrand = findBrandFromQuery(brandQuery);
+    if (aliasBrand) {
+      filtered = filtered.filter(
+        (product) => normalizeBrand(product.brandName) === aliasBrand
+      );
+    } else {
+      filtered = filtered.filter(
+        (product) => product.brandName.toLowerCase().trim() === brandQuery
+      );
+    }
     title = `${params.brand} Batteries`;
   }
 

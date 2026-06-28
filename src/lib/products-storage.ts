@@ -4,8 +4,20 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { ProductCardData } from '@/data/products';
 import { ALL_PRODUCTS } from '@/data/products';
+import { formatProductPrice } from '@/lib/formatting';
 
 const PRODUCTS_FILE = path.join(process.cwd(), 'data', 'products.json');
+
+function normalizeProduct(product: ProductCardData): ProductCardData {
+  return {
+    ...product,
+    sellingPrice_OUTPUT: formatProductPrice(product.sellingPrice_OUTPUT),
+  };
+}
+
+function normalizeProducts(products: ProductCardData[]): ProductCardData[] {
+  return products.map(normalizeProduct);
+}
 
 // Initialize JSON file from TypeScript file if it doesn't exist
 export async function initializeProductsFile() {
@@ -18,7 +30,7 @@ export async function initializeProductsFile() {
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(
       PRODUCTS_FILE,
-      JSON.stringify(ALL_PRODUCTS, null, 2),
+      JSON.stringify(normalizeProducts(ALL_PRODUCTS), null, 2),
       'utf-8'
     );
   }
@@ -27,14 +39,15 @@ export async function initializeProductsFile() {
 export async function getProducts(): Promise<ProductCardData[]> {
   await initializeProductsFile();
   const fileContent = await fs.readFile(PRODUCTS_FILE, 'utf-8');
-  return JSON.parse(fileContent);
+  const products = JSON.parse(fileContent) as ProductCardData[];
+  return normalizeProducts(products);
 }
 
 export async function saveProducts(products: ProductCardData[]): Promise<void> {
   await initializeProductsFile();
   await fs.writeFile(
     PRODUCTS_FILE,
-    JSON.stringify(products, null, 2),
+    JSON.stringify(normalizeProducts(products), null, 2),
     'utf-8'
   );
 }

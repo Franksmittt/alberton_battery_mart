@@ -7,6 +7,14 @@ import { getAllLocalAreas } from "@/data/local-areas";
 import { BASE_URL } from "@/lib/seo-constants";
 import { productSizeSlug } from "@/lib/product-size-slugs";
 import { getAllLocalProofStories } from "@/data/local-proof";
+import { getAllClusterConfigs } from "@/lib/battery-sizes/clusters";
+import {
+  brandPageSlug,
+  getClusterSuburbs,
+  getPrimaryProductForBrand,
+} from "@/lib/battery-sizes/content";
+import { getAllProductsSync } from "@/lib/battery-sizes/products-sync";
+import { getProductsBySizeCodeSync } from "@/lib/products/by-size";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
@@ -25,6 +33,27 @@ const buildEntry = (
 });
 
 export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
+  const clusterRoutes = getAllClusterConfigs().flatMap((cluster) => {
+    const products = getProductsBySizeCodeSync(
+      getAllProductsSync(),
+      cluster.code
+    );
+    const brandPages = cluster.brands
+      .filter((brand) => getPrimaryProductForBrand(products, brand))
+      .map((brand) => `${cluster.hubPath}/${brandPageSlug(brand, cluster.code)}`);
+
+    return [
+      cluster.hubPath,
+      `/${cluster.code}-car-battery-price`,
+      `/${cluster.code}-battery-specs`,
+      `/${cluster.code}-battery-dimensions`,
+      ...brandPages,
+      ...getClusterSuburbs(cluster).map(
+        (suburb) => `${cluster.hubPath}/${suburb.slug}`
+      ),
+    ];
+  });
+
   const staticRoutes = [
     "/",
     "/about",
@@ -38,6 +67,8 @@ export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
     "/fitment",
     "/reviews",
     "/emergency-battery-replacement",
+    "/emergency-battery-replacement-alberton",
+    "/mobile-battery-fitment-alberton",
     "/deep-cycle",
     "/local",
     "/local/alberton-central",
@@ -48,10 +79,15 @@ export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
     "/golf-cart-batteries/lithium-conversion",
     "/golf-cart-batteries/lead-acid",
     "/testing",
+    ...clusterRoutes,
   ];
 
   return staticRoutes.map((route) =>
-    buildEntry(route, "monthly", route === "/" ? 1.0 : 0.9)
+    buildEntry(
+      route,
+      "monthly",
+      route === "/" ? 1.0 : route.endsWith("-car-battery") ? 0.95 : 0.9
+    )
   );
 }
 
@@ -127,4 +163,9 @@ export function getLocalProofSitemapEntries(): MetadataRoute.Sitemap {
   return getAllLocalProofStories().map((story) =>
     buildEntry(`/proof/${story.slug}`, "monthly", 0.75)
   );
+}
+
+
+export function getSizeClusterSitemapEntries(): MetadataRoute.Sitemap {
+  return [];
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MessageSquare } from "lucide-react";
+import { SizeClusterNavLinks } from "@/components/content/SizeClusterNavLinks";
 
 const Footer = () => {
   const WHATSAPP_NUMBER_LINK = "27823046926";
@@ -45,6 +46,7 @@ const Footer = () => {
             <div>
               <h4 className="mb-6 text-[1.1rem] font-bold text-white">Categories</h4>
               <ul className="space-y-3 text-[0.95rem] text-[var(--brand-muted-2)]">
+                <SizeClusterNavLinks variant="footer" />
                 <li>
                   <Link href="/products/type/automotive" className="transition-all hover:pl-1 hover:text-[var(--brand-accent)]">
                     Passenger & Sedans
