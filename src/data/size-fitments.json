@@ -1,0 +1,702 @@
+{
+  "generatedAt": "2026-06-28T20:48:59.141Z",
+  "source": "willard_battery_database_focused.csv",
+  "rowCount": 7171,
+  "fitments": {
+    "616": {
+      "vehicles": [
+        {
+          "manufacturer": "Hyundai",
+          "model": "Grand i10 1.0 Fluid Hatch",
+          "label": "Hyundai Grand i10",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Suzuki",
+          "model": "Jimny 1.3i 4x4",
+          "label": "Suzuki Jimny",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Starlet 1.4 Xi",
+          "label": "Toyota Starlet",
+          "yearRange": "2020–2026"
+        },
+        {
+          "manufacturer": "Suzuki",
+          "model": "Swift 1.2 GL 5MT",
+          "label": "Suzuki Swift",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "i10",
+          "label": "Hyundai i10",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Suzuki",
+          "model": "S-Presso 1.0 GL AT (Update)",
+          "label": "Suzuki S-Presso",
+          "yearRange": "2020–2026"
+        },
+        {
+          "manufacturer": "Suzuki",
+          "model": "Ertiga 1.5 GA (MT)",
+          "label": "Suzuki Ertiga",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Suzuki",
+          "model": "Dzire 1.2 GA 5MT",
+          "label": "Suzuki Dzire",
+          "yearRange": "2018–2026"
+        },
+        {
+          "manufacturer": "Suzuki",
+          "model": "Baleno 1.5 GL AT",
+          "label": "Suzuki Baleno",
+          "yearRange": "2022–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Vitz 1.0 MT",
+          "label": "Toyota Vitz",
+          "yearRange": "2023–2026"
+        }
+      ],
+      "labels": [
+        "Hyundai Grand i10",
+        "Suzuki Jimny",
+        "Toyota Starlet",
+        "Suzuki Swift",
+        "Hyundai i10",
+        "Suzuki S-Presso",
+        "Suzuki Ertiga",
+        "Suzuki Dzire",
+        "Suzuki Baleno",
+        "Toyota Vitz"
+      ]
+    },
+    "619": {
+      "vehicles": [
+        {
+          "manufacturer": "Hyundai",
+          "model": "i20",
+          "label": "Hyundai i20",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Fusion 1.5 EcoBoost Trend",
+          "label": "Ford Fusion",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Fiesta",
+          "label": "Ford Fiesta",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Focus Petrol",
+          "label": "Ford Focus",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Figo",
+          "label": "Ford Figo",
+          "yearRange": "2015–2018"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Ecosport 1.0 Ecoboost",
+          "label": "Ford EcoSport",
+          "yearRange": "2015–2017"
+        }
+      ],
+      "labels": [
+        "Hyundai i20",
+        "Ford Fusion",
+        "Ford Fiesta",
+        "Ford Focus",
+        "Ford Figo",
+        "Ford EcoSport"
+      ]
+    },
+    "628": {
+      "vehicles": [
+        {
+          "manufacturer": "Ford",
+          "model": "EcoSport 1.0 EcoBoost Titanium 6AT",
+          "label": "Ford EcoSport",
+          "yearRange": "2015–2022"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Elantra 1.6 MD JS",
+          "label": "Hyundai Elantra",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Mondeo",
+          "label": "Ford Mondeo",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "I 30 1.6 FD",
+          "label": "Hyundai i30",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Polo Vivo sedan my15 1.4",
+          "label": "Volkswagen Polo",
+          "yearRange": "2015–2022"
+        }
+      ],
+      "labels": [
+        "Ford EcoSport",
+        "Hyundai Elantra",
+        "Ford Mondeo",
+        "Hyundai i30",
+        "Volkswagen Polo"
+      ]
+    },
+    "646": {
+      "vehicles": [
+        {
+          "manufacturer": "Toyota",
+          "model": "Corolla 1.3 Esteem",
+          "label": "Toyota Corolla",
+          "yearRange": "2017–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "C-HR 1.2T (Facelift)",
+          "label": "Toyota C-HR",
+          "yearRange": "2017–2026"
+        },
+        {
+          "manufacturer": "Chery",
+          "model": "Tiggo 4 Pro 1.5 Comfort (CVT 9SPD)",
+          "label": "Chery Tiggo",
+          "yearRange": "2021–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Polo",
+          "label": "Volkswagen Polo",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Mahindra",
+          "model": "XUV3XO 1.2T AX5 AT",
+          "label": "Mahindra XUV",
+          "yearRange": "2022–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Auris",
+          "label": "Toyota Auris",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Creta 1.5 Executive CVT Matte Edition Update",
+          "label": "Hyundai Creta",
+          "yearRange": "2017–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Venue 1.0 TGDI Fluid DCT Update",
+          "label": "Hyundai Venue",
+          "yearRange": "2019–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Figo Hatch 1.5TDCi Ambiente",
+          "label": "Ford Figo",
+          "yearRange": "2016–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "I 30 2.0 FD",
+          "label": "Hyundai i30",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "RAV4 2.0 GX 2WD",
+          "label": "Toyota RAV4",
+          "yearRange": "2016–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "GR Yaris 1.6T GR-Four Rally 6-spd MT",
+          "label": "Toyota GR Yaris",
+          "yearRange": "2025–2026"
+        }
+      ],
+      "labels": [
+        "Toyota Corolla",
+        "Toyota C-HR",
+        "Chery Tiggo",
+        "Volkswagen Polo",
+        "Mahindra XUV",
+        "Toyota Auris",
+        "Hyundai Creta",
+        "Hyundai Venue",
+        "Ford Figo",
+        "Hyundai i30",
+        "Toyota RAV4",
+        "Toyota GR Yaris"
+      ]
+    },
+    "652": {
+      "vehicles": [
+        {
+          "manufacturer": "Toyota",
+          "model": "Fortuner 2.4 GD6 4×4 AT",
+          "label": "Toyota Fortuner",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Golf",
+          "label": "Volkswagen Golf",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Tiguan 1.4 TSI 110 kW DSG",
+          "label": "Volkswagen Tiguan",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "T-Roc Design 1.4 TSI 110kW Tiptronic – Update",
+          "label": "Volkswagen T-Roc",
+          "yearRange": "2021–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Passat",
+          "label": "Volkswagen Passat",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Kona 1.6 TGDI Executive DCT",
+          "label": "Hyundai Kona",
+          "yearRange": "2021–2026"
+        },
+        {
+          "manufacturer": "Mahindra",
+          "model": "Scorpio-N 2.2D Z4 6 AT 4×2",
+          "label": "Mahindra Scorpio",
+          "yearRange": "2023–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Polo Sedan 1.6 MPI 81 kW",
+          "label": "Volkswagen Polo",
+          "yearRange": "2022–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "GR Yaris",
+          "label": "Toyota GR Yaris",
+          "yearRange": "2021–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Kuga 2.5",
+          "label": "Ford Kuga",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Arteon 2.0 TDI 130 kW Elegance DSG",
+          "label": "Volkswagen Arteon",
+          "yearRange": "2018–2026"
+        },
+        {
+          "manufacturer": "GWM",
+          "model": "Tank 300 2.0T 8AT 4×4 Super Luxury",
+          "label": "GWM Tank",
+          "yearRange": "2023–2026"
+        }
+      ],
+      "labels": [
+        "Toyota Fortuner",
+        "Volkswagen Golf",
+        "Volkswagen Tiguan",
+        "Volkswagen T-Roc",
+        "Volkswagen Passat",
+        "Hyundai Kona",
+        "Mahindra Scorpio",
+        "Volkswagen Polo",
+        "Toyota GR Yaris",
+        "Ford Kuga",
+        "Volkswagen Arteon",
+        "GWM Tank"
+      ]
+    },
+    "657": {
+      "vehicles": [
+        {
+          "manufacturer": "Hyundai",
+          "model": "Sonata YF",
+          "label": "Hyundai Sonata",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Land Cruiser Diesel",
+          "label": "Toyota Land Cruiser",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "MR2",
+          "label": "Toyota MR2",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Prado Diesel",
+          "label": "Toyota Prado",
+          "yearRange": "2015–2026"
+        }
+      ],
+      "labels": [
+        "Hyundai Sonata",
+        "Toyota Land Cruiser",
+        "Toyota MR2",
+        "Toyota Prado"
+      ]
+    },
+    "658": {
+      "vehicles": [
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Toareg 4.2 V8",
+          "label": "Volkswagen Touareg",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Santa Fe R2.2 Elite 8sp DCT AWD MY21",
+          "label": "Hyundai Santa Fe",
+          "yearRange": "2021–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Caravelle",
+          "label": "Volkswagen Caravelle",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "CC Bluemotion Petrol",
+          "label": "Volkswagen CC",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "T5 Caravelle",
+          "label": "Volkswagen T5 Transporter",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "GWM",
+          "model": "Tank 500 2.0T HEV Ultra Luxury 4x4",
+          "label": "GWM Tank",
+          "yearRange": "2024–2026"
+        }
+      ],
+      "labels": [
+        "Volkswagen Touareg",
+        "Hyundai Santa Fe",
+        "Volkswagen Caravelle",
+        "Volkswagen CC",
+        "Volkswagen T5 Transporter",
+        "GWM Tank"
+      ]
+    },
+    "668": {
+      "vehicles": [
+        {
+          "manufacturer": "Hyundai",
+          "model": "Tucson 2.0D N-Line AT AWD",
+          "label": "Hyundai Tucson",
+          "yearRange": "2017–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Fortuner",
+          "label": "Toyota Fortuner",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Everest Platinum 3.0L V6 AWD 10AT",
+          "label": "Ford Everest",
+          "yearRange": "2022–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Grand Tourneo Connect 1.6 EcoBoost Titanium AT LWB",
+          "label": "Ford Grand Tourneo Connect",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Tourneo Connect 1.0 EcoBoost Ambiente SWB",
+          "label": "Ford Tourneo",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Palisade R2.2 Elite 7-seater 8AT AWD Update",
+          "label": "Hyundai Palisade",
+          "yearRange": "2021–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Tourneo Custom 2.2 tdci",
+          "label": "Ford Tourneo Custom",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Tiguan 1.4 TSI 110 kW R-Line DSG",
+          "label": "Volkswagen Tiguan",
+          "yearRange": "2024–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Kuga 2.0 tdci",
+          "label": "Ford Kuga",
+          "yearRange": "2015"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "GR Supra (Matte Grey)",
+          "label": "Toyota GR Yaris",
+          "yearRange": "2019–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Land Cruiser Prado 2.8GD 1st Edition",
+          "label": "Toyota Land Cruiser",
+          "yearRange": "2024–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Tayron 1.4TSI DSG (5-seater)",
+          "label": "Volkswagen Tayron",
+          "yearRange": "2025–2026"
+        }
+      ],
+      "labels": [
+        "Hyundai Tucson",
+        "Toyota Fortuner",
+        "Ford Everest",
+        "Ford Grand Tourneo Connect",
+        "Ford Tourneo",
+        "Hyundai Palisade",
+        "Ford Tourneo Custom",
+        "Volkswagen Tiguan",
+        "Ford Kuga",
+        "Toyota GR Yaris",
+        "Toyota Land Cruiser",
+        "Volkswagen Tayron"
+      ]
+    },
+    "646-AGM": {
+      "vehicles": [
+        {
+          "manufacturer": "Toyota",
+          "model": "RAV4 2.0 GX 2WD",
+          "label": "Toyota RAV4",
+          "yearRange": "2016–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Polo 1.0 R-Line",
+          "label": "Volkswagen Polo",
+          "yearRange": "2017–2022"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "GR Yaris 1.6T GR-Four Rally 6-spd MT",
+          "label": "Toyota GR Yaris",
+          "yearRange": "2025–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "i20 1.0T N Line",
+          "label": "Hyundai i20",
+          "yearRange": "2024–2026"
+        }
+      ],
+      "labels": [
+        "Toyota RAV4",
+        "Volkswagen Polo",
+        "Toyota GR Yaris",
+        "Hyundai i20"
+      ]
+    },
+    "652-AGM": {
+      "vehicles": [
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Golf 7 2.0 tdi bmt",
+          "label": "Volkswagen Golf",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Tiguan Bluemotion Diesel",
+          "label": "Volkswagen Tiguan",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Arteon 2.0 TDI 130 kW Elegance DSG",
+          "label": "Volkswagen Arteon",
+          "yearRange": "2018–2026"
+        },
+        {
+          "manufacturer": "GWM",
+          "model": "Tank 300 2.0T 8AT 4×4 Super Luxury",
+          "label": "GWM Tank",
+          "yearRange": "2023–2026"
+        },
+        {
+          "manufacturer": "Jetour",
+          "model": "T1 1.5T Aspire 7DCT",
+          "label": "Jetour T1",
+          "yearRange": "2025–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "2.5 E-Four CVT",
+          "label": "Toyota 2.5",
+          "yearRange": "2023–2026"
+        },
+        {
+          "manufacturer": "Hyundai",
+          "model": "Tucson 2.0 Premium AT Update",
+          "label": "Hyundai Tucson",
+          "yearRange": "2025–2026"
+        },
+        {
+          "manufacturer": "Jetour",
+          "model": "T2 1.5T Aspire 7DCT",
+          "label": "Jetour T2",
+          "yearRange": "2025–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Polo 2.0TSI GTI",
+          "label": "Volkswagen Polo",
+          "yearRange": "2022–2026"
+        },
+        {
+          "manufacturer": "Ford",
+          "model": "Tourneo Custom 2.0SiT Sport",
+          "label": "Ford Tourneo Custom",
+          "yearRange": "2025–2026"
+        }
+      ],
+      "labels": [
+        "Volkswagen Golf",
+        "Volkswagen Tiguan",
+        "Volkswagen Arteon",
+        "GWM Tank",
+        "Jetour T1",
+        "Toyota 2.5",
+        "Hyundai Tucson",
+        "Jetour T2",
+        "Volkswagen Polo",
+        "Ford Tourneo Custom"
+      ]
+    },
+    "658-AGM": {
+      "vehicles": [
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Touareg 3.0 V6 TDI 190kW Executive",
+          "label": "Volkswagen Touareg",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "CC Bluemotion Diesel",
+          "label": "Volkswagen CC",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "T5 California Beach 2.0 bitdi 4-motion",
+          "label": "Volkswagen T5 Transporter",
+          "yearRange": "2015–2026"
+        },
+        {
+          "manufacturer": "GWM",
+          "model": "Tank 500 2.0T HEV Ultra Luxury 4x4",
+          "label": "GWM Tank",
+          "yearRange": "2024–2026"
+        }
+      ],
+      "labels": [
+        "Volkswagen Touareg",
+        "Volkswagen CC",
+        "Volkswagen T5 Transporter",
+        "GWM Tank"
+      ]
+    },
+    "668-AGM": {
+      "vehicles": [
+        {
+          "manufacturer": "Ford",
+          "model": "Everest Sport 2.0 4×2 AT",
+          "label": "Ford Everest",
+          "yearRange": "2019–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "GR Supra (Matte Grey)",
+          "label": "Toyota GR Yaris",
+          "yearRange": "2019–2026"
+        },
+        {
+          "manufacturer": "Toyota",
+          "model": "Land Cruiser Prado 2.8GD 1st Edition",
+          "label": "Toyota Land Cruiser",
+          "yearRange": "2024–2026"
+        },
+        {
+          "manufacturer": "Volkswagen",
+          "model": "Tayron 1.4TSI DSG (5-seater)",
+          "label": "Volkswagen Tayron",
+          "yearRange": "2025–2026"
+        }
+      ],
+      "labels": [
+        "Ford Everest",
+        "Toyota GR Yaris",
+        "Toyota Land Cruiser",
+        "Volkswagen Tayron"
+      ]
+    }
+  }
+}

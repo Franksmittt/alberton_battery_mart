@@ -15,7 +15,8 @@
     "sync:exide-gold": "node scripts/sync-exide-gold-range.mjs",
     "scrape:willard:focused": "python3 willard_selector_scraper.py --output willard_battery_database_focused.csv --vehicle-types \"Passenger & SUV\" --manufacturers \"Toyota,Suzuki,Volkswagen,Hyundai,Ford,GWM,Chery,Jetour,Mahindra\" --min-year 2012",
     "scrape:willard:vw-passenger": "python3 willard_selector_scraper.py --output willard_battery_database_focused.csv --vehicle-types \"Passenger & SUV\" --manufacturers Volkswagen --min-year 2012",
-    "filter:willard-focused": "node scripts/filter-willard-focused-csv.mjs"
+    "filter:willard-focused": "node scripts/filter-willard-focused-csv.mjs",
+    "generate:size-fitments": "node scripts/generate-size-fitments.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
