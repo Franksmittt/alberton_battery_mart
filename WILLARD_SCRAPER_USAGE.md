@@ -16,17 +16,31 @@ pip install requests
 
 ## Focused run (recommended)
 
-Nine brands, 2012 and newer only. Writes to a separate CSV so the full legacy database is untouched.
+Nine passenger brands, 2012 and newer only. Writes to a separate CSV so the full legacy database is untouched.
 
 ```bash
 python willard_selector_scraper.py \
   --output willard_battery_database_focused.csv \
-  --vehicle-types "Passenger & SUV,Commercial,Light Commercial" \
+  --vehicle-types "Passenger & SUV" \
   --manufacturers "Toyota,Suzuki,Volkswagen,Hyundai,Ford,GWM,Chery,Jetour,Mahindra" \
   --min-year 2012
 ```
 
+Or:
+
+```bash
+pnpm scrape:willard:focused
+```
+
+After any scrape, enforce passenger-only brand/year rules:
+
+```bash
+pnpm filter:willard-focused
+```
+
 The site API prefers `willard_battery_database_focused.csv` when that file exists.
+
+**Passenger brands kept:** Toyota, Hyundai, Ford, Volkswagen, Suzuki, Mahindra, Chery, GWM, Jetour (2012+ only).
 
 ## Full extraction run (legacy)
 
