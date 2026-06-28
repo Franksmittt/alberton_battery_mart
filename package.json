@@ -12,7 +12,10 @@
     "audit:prices": "tsx scripts/audit-product-prices.ts",
     "report:size-clusters": "tsx scripts/generate-size-cluster-qa-report.ts",
     "import:exide-gold-batch1": "node scripts/import-exide-gold-batch1.mjs",
-    "sync:exide-gold": "node scripts/sync-exide-gold-range.mjs"
+    "sync:exide-gold": "node scripts/sync-exide-gold-range.mjs",
+    "scrape:willard:focused": "python3 willard_selector_scraper.py --output willard_battery_database_focused.csv --vehicle-types \"Passenger & SUV\" --manufacturers \"Toyota,Suzuki,Volkswagen,Hyundai,Ford,GWM,Chery,Jetour,Mahindra\" --min-year 2012",
+    "scrape:willard:vw-passenger": "python3 willard_selector_scraper.py --output willard_battery_database_focused.csv --vehicle-types \"Passenger & SUV\" --manufacturers Volkswagen --min-year 2012",
+    "filter:willard-focused": "node scripts/filter-willard-focused-csv.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
