@@ -64,6 +64,12 @@ const IMAGE_MAP = [
     note: "618 = 619 size; no Power Plus 619 SKU in catalog yet",
   },
   {
+    source: "612 powerplus efb.png",
+    dest: "612-efb.png",
+    brand: "Power Plus",
+    skus: ["612EFB"],
+  },
+  {
     source: "639 power plus efb.png",
     dest: "639-efb.png",
     brand: "Power Plus",
