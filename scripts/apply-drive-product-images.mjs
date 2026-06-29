@@ -27,8 +27,14 @@ const IMAGE_MAP = [
     source: "616 ecoplus.png",
     dest: "616.png",
     brand: "Eco Plus",
-    skus: ["616", "616B"],
-    note: "616B shares 616 Eco Plus artwork (no separate 616B eco image in Drive)",
+    skus: ["616"],
+  },
+  {
+    source: "eco-plus-616b.png",
+    dest: "616b.png",
+    brand: "Eco Plus",
+    skus: ["616B"],
+    note: "Drive file may be named Gemini_Generated_Image_... — rename to eco-plus-616b.png",
   },
   {
     source: "618 ecoplus.png",
@@ -163,7 +169,7 @@ function main() {
     if (!usedSources.has(file)) {
       let reason = "Not mapped to any catalog product";
       if (file.toLowerCase().includes("gemini")) {
-        reason = "AI/test image — not a product photo";
+        reason = "Eco Plus 616B — rename to eco-plus-616b.png and re-run import";
       } else if (file.toLowerCase().includes("612") && file.toLowerCase().includes("efb")) {
         reason = "No Power Plus 612 EFB (or Eco Plus 612 EFB) product in catalog";
       }
