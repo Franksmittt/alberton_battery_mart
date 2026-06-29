@@ -1,0 +1,262 @@
+[
+  {
+    "slug": "f682c",
+    "sku": "682C",
+    "itemCode": "F682C",
+    "batteryModel": "682",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 190,
+      "cca": 690,
+      "ahCapacity": 115,
+      "lengthMm": 513,
+      "widthMm": 188,
+      "heightMm": 221,
+      "weightKg": 35.77,
+      "holdDown": "B0",
+      "terminalLayout": "4",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/stock-battery.jpg"
+  },
+  {
+    "slug": "f683c",
+    "sku": "683C",
+    "itemCode": "F683C",
+    "batteryModel": "683",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 190,
+      "cca": 690,
+      "ahCapacity": 115,
+      "lengthMm": 513,
+      "widthMm": 188,
+      "heightMm": 221,
+      "weightKg": 35.77,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-683-truck-battery-alberton.jpg"
+  },
+  {
+    "slug": "f685h",
+    "sku": "685H",
+    "itemCode": "F685H",
+    "batteryModel": "685",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 180,
+      "cca": 850,
+      "ahCapacity": 106,
+      "lengthMm": 513,
+      "widthMm": 188,
+      "heightMm": 209,
+      "weightKg": 32.75,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/stock-battery.jpg"
+  },
+  {
+    "slug": "f686c",
+    "sku": "686C",
+    "itemCode": "F686C",
+    "batteryModel": "686",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 220,
+      "cca": 810,
+      "ahCapacity": 132,
+      "lengthMm": 513,
+      "widthMm": 188,
+      "heightMm": 221,
+      "weightKg": 37.88,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/stock-battery.jpg"
+  },
+  {
+    "slug": "f688c",
+    "sku": "688C",
+    "itemCode": "F688C",
+    "batteryModel": "688",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 330,
+      "cca": 1260,
+      "ahCapacity": 195,
+      "lengthMm": 513,
+      "widthMm": 276,
+      "heightMm": 241,
+      "weightKg": 60.1,
+      "holdDown": "B0",
+      "terminalLayout": "4",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/stock-battery.jpg"
+  },
+  {
+    "slug": "f688cr",
+    "sku": "688CR",
+    "itemCode": "F688CR",
+    "batteryModel": "688",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 330,
+      "cca": 1260,
+      "ahCapacity": 195,
+      "lengthMm": 513,
+      "widthMm": 276,
+      "heightMm": 241,
+      "weightKg": 60.1,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/stock-battery.jpg"
+  },
+  {
+    "slug": "f689c",
+    "sku": "689C",
+    "itemCode": "F689C",
+    "batteryModel": "689",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2024/04/689C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 220,
+      "cca": 810,
+      "ahCapacity": 132,
+      "lengthMm": 514,
+      "widthMm": 220,
+      "heightMm": 221,
+      "weightKg": 41.97,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-commercial/exide-689c-commercial.png"
+  },
+  {
+    "slug": "f690c",
+    "sku": "690C",
+    "itemCode": "F690C",
+    "batteryModel": "690",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2024/04/690C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 220,
+      "cca": 810,
+      "ahCapacity": 132,
+      "lengthMm": 514,
+      "widthMm": 220,
+      "heightMm": 221,
+      "weightKg": 41.97,
+      "holdDown": "B0",
+      "terminalLayout": "4",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-commercial/exide-690c-commercial.png"
+  },
+  {
+    "slug": "f690cp",
+    "sku": "690CP",
+    "itemCode": "F690CP",
+    "batteryModel": "690",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2024/04/690CP_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 250,
+      "cca": 920,
+      "ahCapacity": 145,
+      "lengthMm": 514,
+      "widthMm": 220,
+      "heightMm": 221,
+      "weightKg": 43.86,
+      "holdDown": "B0",
+      "terminalLayout": "4",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-commercial/exide-690cp-commercial.png"
+  },
+  {
+    "slug": "f692c",
+    "sku": "692C",
+    "itemCode": "F692C",
+    "batteryModel": "692",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2024/04/692C_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 250,
+      "cca": 920,
+      "ahCapacity": 145,
+      "lengthMm": 514,
+      "widthMm": 220,
+      "heightMm": 221,
+      "weightKg": 43.86,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-commercial/exide-692c-commercial.png"
+  },
+  {
+    "slug": "f695cz",
+    "sku": "695CZ",
+    "itemCode": "F695CZ",
+    "batteryModel": "695",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2024/04/695CZ_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 380,
+      "cca": 1350,
+      "ahCapacity": 230,
+      "lengthMm": 513,
+      "widthMm": 276,
+      "heightMm": 241,
+      "weightKg": 64.44,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-commercial/exide-695cz-commercial.png"
+  },
+  {
+    "slug": "f696c",
+    "sku": "696C",
+    "itemCode": "F696C",
+    "batteryModel": "696",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2023/12/No-Image_22.jpg",
+    "specs": {
+      "reserveMinutes": 300,
+      "cca": 1150,
+      "ahCapacity": 180,
+      "lengthMm": 514,
+      "widthMm": 220,
+      "heightMm": 221,
+      "weightKg": 48.51,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-696-truck-battery-alberton.jpg"
+  },
+  {
+    "slug": "f696cz",
+    "sku": "696CZ",
+    "itemCode": "F696CZ",
+    "batteryModel": "696",
+    "imageUrl": "https://www.battery.co.za/wp-content/uploads/2024/04/696CZ_FB_GOLD.png",
+    "specs": {
+      "reserveMinutes": 320,
+      "cca": 1080,
+      "ahCapacity": 180,
+      "lengthMm": 514,
+      "widthMm": 220,
+      "heightMm": 221,
+      "weightKg": 50.33,
+      "holdDown": "B0",
+      "terminalLayout": "3",
+      "terminalType": "STD"
+    },
+    "imagePath": "/images/exide-commercial/exide-696cz-commercial.png"
+  }
+]
