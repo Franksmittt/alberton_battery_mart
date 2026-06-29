@@ -900,6 +900,27 @@
     "weightKg": 11.5
   },
   {
+    "id": 725,
+    "name": "Power Plus 612 EFB",
+    "sku": "612EFB",
+    "category": "Performance AGM/EFB",
+    "brandName": "Power Plus",
+    "ahCapacity": 50,
+    "cca": 440,
+    "warrantyMonths": 24,
+    "sellingPrice_OUTPUT": "R 2 100.00",
+    "isAGM": false,
+    "imagePath": "/images/power-plus/612-efb.png",
+    "popularFits": "Hyundai i20, Ford Fiesta, Ford Focus, Ford Figo",
+    "isScrapPrice": true,
+    "seoSubtitle": "Power Plus EFB Battery (50Ah)",
+    "seoDescription": "Power Plus 612 EFB: Performance EFB battery with 50Ah capacity and 440 CCA. Case size: 207 x 175 x 175 mm. Built for start/stop and everyday passenger vehicles.",
+    "lengthMm": 207,
+    "widthMm": 175,
+    "heightMm": 175,
+    "weightKg": 11.3
+  },
+  {
     "id": 202,
     "name": "Power Plus 615",
     "sku": "615",
