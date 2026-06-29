@@ -10,7 +10,7 @@ import {
   type ClusterSuburb,
 } from "@/lib/battery-sizes/types";
 import { normalizeBrand } from "@/lib/products/brands";
-import { getVehicleFitmentsForSize } from "@/lib/battery-sizes/fitments";
+import { getVehicleFitmentsForSize, getProductFitmentLabels } from "@/lib/battery-sizes/fitments";
 
 const SUBURB_NAMES: Record<string, string> = {
   brackenhurst: "Brackenhurst",
