@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { Battery, MapPin, Phone, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,11 @@ import {
 } from "@/lib/battery-sizes/content";
 import { getAllProductsSync } from "@/lib/battery-sizes/products-sync";
 import { getProductsBySizeCodeSync } from "@/lib/products/by-size";
+import {
+  formatFitmentList,
+  getProductFitmentLabels,
+  getVehicleFitmentsForSize,
+} from "@/lib/battery-sizes/fitments";
 
 const PHONE_LINK = "0101096211";
 const PHONE_DISPLAY = "010 109 6211";
@@ -173,8 +179,21 @@ export function BatterySizeProductCards({
         {products.map((product) => (
           <article
             key={product.id}
-            className="rounded-2xl border border-border bg-card p-6 space-y-4"
+            className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col"
           >
+            <Link
+              href={`/products/id/${product.id}`}
+              className="relative block w-full aspect-[4/3] bg-muted/30 border-b border-border"
+            >
+              <Image
+                src={product.imagePath || "/images/stock-battery.jpg"}
+                alt={product.name}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                className="object-contain p-4"
+              />
+            </Link>
+            <div className="p-6 space-y-4 flex flex-col flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded bg-battery/15 px-2 py-1 text-xs font-bold text-battery uppercase">
                 In stock
@@ -182,7 +201,7 @@ export function BatterySizeProductCards({
               <span className="text-sm text-muted-foreground">{product.brandName}</span>
             </div>
             <h3 className="text-2xl font-bold text-foreground">{product.name}</h3>
-            <p className="text-sm text-muted-foreground">{product.popularFits}</p>
+            <p className="text-sm text-muted-foreground">{getProductFitmentLabels(product)}</p>
             <dl className="grid grid-cols-3 gap-3 text-sm">
               <div>
                 <dt className="text-muted-foreground">Capacity</dt>
@@ -201,9 +220,10 @@ export function BatterySizeProductCards({
               {formatProductPrice(product.sellingPrice_OUTPUT)}
             </p>
             <p className="text-xs text-muted-foreground">Scrap exchange required · Free fitment</p>
-            <Button asChild variant="battery">
+            <Button asChild variant="battery" className="mt-auto">
               <Link href={`/products/id/${product.id}`}>View {product.sku} details</Link>
             </Button>
+            </div>
           </article>
         ))}
       </div>
@@ -216,6 +236,11 @@ export function BatterySizeVehicleList({
 }: {
   cluster: BatterySizeClusterConfig;
 }) {
+  const csvFitments = getVehicleFitmentsForSize(cluster.code);
+  const vehicles = formatFitmentList(
+    csvFitments.length ? csvFitments : cluster.vehicleFitments
+  );
+
   return (
     <section className="container py-10">
       <div className="rounded-2xl border border-border bg-card/40 p-6 md:p-8 space-y-4">
@@ -223,10 +248,10 @@ export function BatterySizeVehicleList({
           Popular {cluster.code} Vehicle Fitments
         </h2>
         <p className="text-muted-foreground">
-          Common South African vehicles that use the {cluster.code} battery code include:
+          Vehicles confirmed for the {cluster.code} battery code in our Willard fitment database:
         </p>
         <ul className="grid sm:grid-cols-2 gap-2 text-foreground">
-          {cluster.vehicleFitments.map((vehicle) => (
+          {vehicles.map((vehicle) => (
             <li key={vehicle} className="flex items-center gap-2">
               <Zap className="h-4 w-4 text-battery" />
               {vehicle}

@@ -10,6 +10,7 @@ import {
   type ClusterSuburb,
 } from "@/lib/battery-sizes/types";
 import { normalizeBrand } from "@/lib/products/brands";
+import { getVehicleFitmentsForSize } from "@/lib/battery-sizes/fitments";
 
 const SUBURB_NAMES: Record<string, string> = {
   brackenhurst: "Brackenhurst",
@@ -56,11 +57,14 @@ function buildSuburb(
 ): ClusterSuburb {
   const local = getLocalAreaBySlug(slug);
   const override = suburbSizeOverrides[slug];
+  const csvVehicles = getVehicleFitmentsForSize(cluster.code);
   const vehicles =
     override?.vehicles ||
-    (local?.keyVehicles?.length
-      ? local.keyVehicles
-      : cluster.vehicleFitments.slice(0, 3));
+    (csvVehicles.length
+      ? csvVehicles.slice(0, 3)
+      : local?.keyVehicles?.length
+        ? local.keyVehicles
+        : cluster.vehicleFitments.slice(0, 3));
 
   return {
     slug,
@@ -132,6 +136,12 @@ export function getPrimaryProductForBrand(
   return products.find((product) => normalizeBrand(product.brandName) === brand);
 }
 
+function fitmentExamples(cluster: BatterySizeClusterConfig, count = 3): string {
+  const csv = getVehicleFitmentsForSize(cluster.code);
+  const examples = csv.length ? csv : cluster.vehicleFitments;
+  return examples.slice(0, count).join(", ");
+}
+
 export function getHubFaq(
   cluster: BatterySizeClusterConfig,
   fittedFromPrice: string,
@@ -141,7 +151,7 @@ export function getHubFaq(
   return [
     {
       question: `What is a ${code} car battery?`,
-      answer: `${code} is a common South African automotive battery code. It is a ${cluster.specs.voltage} maintenance-free battery typically around ${cluster.specs.ahRange} with dimensions of roughly ${cluster.specs.dimensions}, used on vehicles such as ${cluster.vehicleFitments.slice(0, 3).join(", ")}.`,
+      answer: `${code} is a common South African automotive battery code. It is a ${cluster.specs.voltage} maintenance-free battery typically around ${cluster.specs.ahRange} with dimensions of roughly ${cluster.specs.dimensions}, used on vehicles such as ${fitmentExamples(cluster)}.`,
     },
     {
       question: `${code} battery price in Alberton?`,
@@ -212,7 +222,7 @@ export function getBrandFaq(
     },
     {
       question: `Why choose ${brand} ${cluster.code}?`,
-      answer: `${product.popularFits}. We stock ${product.name} for counter sales and mobile fitment across Alberton.`,
+      answer: `${getProductFitmentLabels(product)}. We stock ${product.name} for counter sales and mobile fitment across Alberton.`,
     },
   ];
 }
@@ -329,7 +339,7 @@ export function getDimensionsFaq(cluster: BatterySizeClusterConfig) {
     },
     {
       question: `Will ${code} fit my car?`,
-      answer: `Fitment depends on tray size, hold-down, and terminal orientation. Common ${code} vehicles include ${cluster.vehicleFitments.slice(0, 4).join(", ")}. We confirm before fitment.`,
+      answer: `Fitment depends on tray size, hold-down, and terminal orientation. Common ${code} vehicles in our fitment database include ${fitmentExamples(cluster, 4)}. We confirm before fitment.`,
     },
   ];
 }
