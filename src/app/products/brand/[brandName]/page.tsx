@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AdLandingHero } from "@/components/layout/AdLandingHero";
-import { BASE_URL, DEFAULT_LOGO } from "@/lib/seo-constants";
+import { BASE_URL, DEFAULT_LOGO, WHATSAPP_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
 import { createItemListSchema } from "@/lib/seo/schema";
@@ -266,7 +266,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
                 trackingId={`brand-${normalizedSlug}-whatsapp`}
               >
                 <a
-                  href="https://wa.me/27101096211?text=Battery%20quote"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2"

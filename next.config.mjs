@@ -98,7 +98,7 @@ const nextConfig = {
       },
       {
         source: '/whatsapp',
-        destination: 'https://wa.me/27101096211?text=Hi%20Alberton%20Battery%20Mart%2C%20I%20need%20a%20battery%20quote',
+        destination: 'https://wa.me/27823046926?text=Hi%20Alberton%20Battery%20Mart%2C%20I%20need%20a%20battery%20quote',
         permanent: false,
       },
       {

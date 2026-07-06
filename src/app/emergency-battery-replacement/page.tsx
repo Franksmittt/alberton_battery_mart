@@ -4,7 +4,12 @@ import { YMMSearchWidget } from "@/components/content/YMMSearchWidget";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, Zap, MapPin, Clock, AlertCircle } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { BASE_URL } from "@/lib/seo-constants";
+import {
+  BASE_URL,
+  buildWhatsAppUrl,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+} from "@/lib/seo-constants";
 
 export const metadata: Metadata = {
   title: "Emergency Battery Replacement | We Come to You in 30 Mins | Alberton",
@@ -48,9 +53,6 @@ export const metadata: Metadata = {
   },
 };
 
-const PRIMARY_PHONE = "010 109 6211";
-const PRIMARY_PHONE_LINK = "0101096211";
-const WHATSAPP_NUMBER_LINK = "27823046926";
 
 export default function EmergencyBatteryReplacementPage() {
   const serviceSchema = {
@@ -114,9 +116,9 @@ export default function EmergencyBatteryReplacementPage() {
                 size="lg"
                 className="w-full sm:w-auto min-w-[300px] h-16 bg-red-600 hover:bg-red-700 text-white font-black text-xl shadow-[0_8px_30px_rgba(239,68,68,0.5)] hover:shadow-[0_12px_40px_rgba(239,68,68,0.6)] transition-all"
               >
-                <a href={`tel:${PRIMARY_PHONE_LINK}`} className="flex items-center justify-center gap-3">
+                <a href={`tel:${PHONE_TEL}`} className="flex items-center justify-center gap-3">
                   <Phone className="h-7 w-7" />
-                  <span>CALL NOW: {PRIMARY_PHONE}</span>
+                  <span>CALL NOW: {PHONE_DISPLAY}</span>
                 </a>
               </Button>
               
@@ -177,9 +179,9 @@ export default function EmergencyBatteryReplacementPage() {
                 size="lg"
                 className="h-14 bg-red-600 hover:bg-red-700 text-white font-black text-lg shadow-lg"
               >
-                <a href={`tel:${PRIMARY_PHONE_LINK}`} className="flex items-center justify-center gap-2">
+                <a href={`tel:${PHONE_TEL}`} className="flex items-center justify-center gap-2">
                   <Phone className="h-6 w-6" />
-                  <span>Call {PRIMARY_PHONE}</span>
+                  <span>Call {PHONE_DISPLAY}</span>
                 </a>
               </Button>
               <Button
@@ -189,7 +191,7 @@ export default function EmergencyBatteryReplacementPage() {
                 className="h-14 bg-green-600 hover:bg-green-700 text-white font-black text-lg"
               >
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER_LINK}?text=${encodeURIComponent('Emergency battery replacement needed')}`}
+                  href={buildWhatsAppUrl("Emergency battery replacement needed")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2"

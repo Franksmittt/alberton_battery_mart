@@ -7,11 +7,13 @@ import MobileNav from "@/components/layout/MobileNav";
 import { SizeClusterNavLinks } from "@/components/content/SizeClusterNavLinks";
 import { useState } from "react";
 
+import {
+  PHONE_TEL,
+  STORE_MAPS_URL,
+  WHATSAPP_URL,
+} from "@/lib/seo-constants";
+
 const Header = () => {
-  const PRIMARY_PHONE_LINK = "0101096211";
-  const WHATSAPP_NUMBER_LINK = "27823046926";
-  const DIRECTIONS_LINK =
-    "https://www.google.com/maps/dir/?api=1&destination=28+St+Columb+Rd,+New+Redruth,+Alberton,+1450";
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
@@ -28,7 +30,7 @@ const Header = () => {
             </Link>
 
             <p className="hidden xl:block justify-self-center text-white/85 text-sm xl:text-base font-extrabold uppercase tracking-[0.12em] whitespace-nowrap">
-              Mobile Fitment. Honest Testing. Warranty Backed.
+              Drive-In Stock. Honest Testing. Warranty Backed.
             </p>
 
             <div className="justify-self-end flex items-center gap-2 relative">
@@ -38,7 +40,7 @@ const Header = () => {
                 trackingId="header-call-top"
                 className="h-8 min-w-[92px] bg-[var(--brand-accent)] hover:bg-[var(--brand-accent-hover)] text-white font-extrabold"
               >
-                <a href={`tel:${PRIMARY_PHONE_LINK}`}>Call</a>
+                <a href={`tel:${PHONE_TEL}`}>Call</a>
               </Button>
               <Button
                 asChild
@@ -47,7 +49,7 @@ const Header = () => {
                 className="h-8 min-w-[92px] bg-[var(--brand-success)] text-white border border-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] font-extrabold"
               >
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -61,7 +63,7 @@ const Header = () => {
                 className="h-8 min-w-[92px] bg-white text-[var(--brand-accent)] border border-[var(--brand-accent)] hover:bg-red-50 font-extrabold"
               >
                 <a
-                  href={DIRECTIONS_LINK}
+                  href={STORE_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -7,6 +7,7 @@ import {
   PHONE_TEL,
   STORE_ADDRESS_SHORT,
   STORE_MAPS_URL,
+  WHATSAPP_DISPLAY,
   WHATSAPP_URL,
 } from "@/lib/seo-constants";
 
@@ -68,7 +69,7 @@ export function AdLandingHero({
               className="flex items-center gap-2"
             >
               <MessageSquare className="h-5 w-5" />
-              WhatsApp
+              WhatsApp {WHATSAPP_DISPLAY}
             </a>
           </Button>
           <Button

@@ -229,9 +229,9 @@ export default function Home() {
       <section className="bg-[var(--brand-bg)] text-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-extrabold tracking-tight mb-3">Seamless Mobile Fitment</h2>
+            <h2 className="text-4xl font-extrabold tracking-tight mb-3">Drive In — Fastest Service</h2>
             <p className="text-[var(--brand-muted)] text-lg max-w-2xl mx-auto leading-relaxed">
-              Get back on the road safely without the need for a tow truck or expensive dealership fees.
+              Visit our New Redruth storefront for free testing and same-day fitment. Mobile service is available on request if you cannot reach the shop.
             </p>
           </div>
 
@@ -279,7 +279,7 @@ export default function Home() {
                 Trending Fitments in Alberton
               </h2>
               <p className="text-zinc-600 text-[0.95rem]">
-                Prices indicate complete mobile fitment and old battery core exchange.
+                Prices indicate complete in-store fitment and old battery core exchange.
               </p>
             </div>
             <Link href="/products" className="text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)] text-[0.95rem] font-bold">

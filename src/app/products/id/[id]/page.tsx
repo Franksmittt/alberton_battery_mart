@@ -20,9 +20,11 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import IntentLinks from "@/components/seo/IntentLinks";
 import { formatProductPrice, priceForSchema, isPriceOnApplication } from "@/lib/formatting";
 
-const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
-const EMERGENCY_PHONE_LINK = "0101096211";
-const WHATSAPP_NUMBER_LINK = "27823046926";
+import {
+  buildWhatsAppUrl,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+} from "@/lib/seo-constants";
 
 async function getProductById(id: string): Promise<ProductCardData | undefined> {
   const products = await getAllProducts();
@@ -202,14 +204,14 @@ export default async function ProductDetailPage({
             )}
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" variant="battery">
-                <a href={`tel:${EMERGENCY_PHONE_LINK}`}>
+                <a href={`tel:${PHONE_TEL}`}>
                   <Phone className="h-5 w-5 mr-2" />
-                  Call {EMERGENCY_PHONE_DISPLAY}
+                  Call {PHONE_DISPLAY}
                 </a>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}
+                  href={buildWhatsAppUrl(`Hi, I need a quote for ${product.name}.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

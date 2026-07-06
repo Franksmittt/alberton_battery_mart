@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
-import { SERVICE_AREAS } from "@/lib/seo-constants";
+import { SERVICE_AREAS, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -49,9 +49,6 @@ export const metadata: Metadata = {
 };
 
 // --- FINAL VERIFIED CONTACT DETAILS & HOURS ---
-const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
-const EMERGENCY_PHONE_LINK = "0101096211";
-const WHATSAPP_NUMBER_LINK = "27823046926";
 const WEEKDAY_HOURS = "08:00 AM – 5:00 PM"; 
 const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
 
@@ -102,9 +99,9 @@ export default function ServicesPage() {
         </p>
         {/* --- It was </pre>, now it's </p> --- */}
         <Button asChild size="xl" variant="battery" className="mt-6 shadow-lg">
-          <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
-             <Phone className="h-6 w-6" />
-            <span>Call Us: {EMERGENCY_PHONE_DISPLAY}</span> 
+          <a href={`tel:${PHONE_TEL}`} className="flex items-center space-x-3 mx-auto">
+            <Phone className="h-6 w-6" />
+            <span>Call Us: {PHONE_DISPLAY}</span> 
           </a>
         </Button>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto pt-3">
@@ -155,7 +152,7 @@ export default function ServicesPage() {
             <p>Focused Callout Zones: New Redruth, Meyersdal, Alberton Central, Brackenhurst, Brackendowns, Randhart, Verwoerdpark, and Alrode.</p>
           </div>
           <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white">
-             <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer">
+             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
               WhatsApp Us for Quick Service Booking
             </a>
           </Button>
@@ -368,9 +365,9 @@ export default function ServicesPage() {
           Don't Guess Your Battery Needs. Get Expert Help.
         </h3>
         <Button asChild size="xl" variant="battery" className="mt-4 shadow-xl">
-          <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center justify-center space-x-3 mx-auto">
+          <a href={`tel:${PHONE_TEL}`} className="flex items-center justify-center space-x-3 mx-auto">
             <Phone className="h-6 w-6" />
-            <span>Call Now: {EMERGENCY_PHONE_DISPLAY}</span>
+            <span>Call Now: {PHONE_DISPLAY}</span>
           </a>
         </Button>
       </div>

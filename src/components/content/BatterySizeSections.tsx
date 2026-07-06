@@ -27,8 +27,11 @@ import {
   getVehicleFitmentsForSize,
 } from "@/lib/battery-sizes/fitments";
 
-const PHONE_LINK = "0101096211";
-const PHONE_DISPLAY = "010 109 6211";
+import {
+  buildWhatsAppUrl,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+} from "@/lib/seo-constants";
 
 export function BatterySizeHero({
   cluster,
@@ -58,14 +61,14 @@ export function BatterySizeHero({
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
           <Button asChild size="xl" variant="battery" trackingId={trackingId}>
-            <a href={`tel:${PHONE_LINK}`} className="flex items-center gap-2">
+            <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-2">
               <Phone className="h-5 w-5" />
               Call {PHONE_DISPLAY}
             </a>
           </Button>
           <Button asChild size="lg" variant="secondary" className="bg-green-600 hover:bg-green-700 text-white">
             <a
-              href={`https://wa.me/27823046926?text=Hi,%20I%20need%20a%20${cluster.code}%20battery%20in%20Alberton.`}
+              href={buildWhatsAppUrl(`Hi, I need a ${cluster.code} battery in Alberton.`)}
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -28,11 +28,15 @@ export const STORE_MAPS_EMBED =
 export const PHONE_DISPLAY = "010 109 6211";
 export const PHONE_TEL = "0101096211";
 
-export const WHATSAPP_E164 = "27101096211";
-export const WHATSAPP_DISPLAY = "010 109 6211";
+export const WHATSAPP_E164 = "27823046926";
+export const WHATSAPP_DISPLAY = "082 304 6926";
 export const WHATSAPP_PREFILL_TEXT =
   "Hi Alberton Battery Mart, I need a battery quote";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(WHATSAPP_PREFILL_TEXT)}`;
+
+export function buildWhatsAppUrl(text = WHATSAPP_PREFILL_TEXT): string {
+  return `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(text)}`;
+}
 
 export const STORE_HOURS_WEEKDAY = { opens: "08:00", closes: "17:00" };
 export const STORE_HOURS_SATURDAY = { opens: "08:00", closes: "12:00" };

@@ -9,9 +9,11 @@ type HeroCtaButtonsProps = {
   variant: "control" | "variant";
 };
 
-const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
-const EMERGENCY_PHONE_LINK = "0101096211";
-const WHATSAPP_NUMBER_LINK = "27823046926";
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_URL,
+} from "@/lib/seo-constants";
 
 export function HeroCtaButtons({ variant }: HeroCtaButtonsProps) {
   useEffect(() => {
@@ -35,7 +37,7 @@ export function HeroCtaButtons({ variant }: HeroCtaButtonsProps) {
         className="shadow-2xl shadow-battery/50 hover:shadow-battery/70 w-full sm:w-auto sm:min-w-[200px] font-black text-sm md:text-base transition-all hover:scale-105 h-11 md:h-12"
       >
         <a
-          href={`tel:${EMERGENCY_PHONE_LINK}`}
+          href={`tel:${PHONE_TEL}`}
           className="flex items-center justify-center space-x-2"
           onClick={() => handleClick("call")}
         >
@@ -54,7 +56,7 @@ export function HeroCtaButtons({ variant }: HeroCtaButtonsProps) {
         className="bg-[var(--brand-success)] hover:bg-[var(--brand-success-hover)] text-white w-full sm:w-auto sm:min-w-[200px] shadow-2xl shadow-[var(--brand-success)]/30 hover:shadow-[var(--brand-success)]/50 font-black text-sm md:text-base transition-all hover:scale-105 h-11 md:h-12"
       >
         <a
-          href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}
+          href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center space-x-2"

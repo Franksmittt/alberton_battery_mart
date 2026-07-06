@@ -8,10 +8,14 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 // --- FIX: Import navItems from the central constants file ---
 import { navItems, mobileCtaItem } from "@/lib/nav-constants";
 
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_URL,
+} from "@/lib/seo-constants";
+
 const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const PRIMARY_PHONE = "0101096211"; 
-  const WHATSAPP_NUMBER_LINK = "27823046926";
 
   // --- FIX: Combine the standard nav with the mobile CTA ---
   const allMobileItems = [...navItems, mobileCtaItem];
@@ -62,10 +66,10 @@ const MobileNav = () => {
 
           <div className="space-y-3 border-t border-[var(--brand-border)] px-6 py-6">
             <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-accent)] text-white hover:bg-[var(--brand-accent-hover)] font-extrabold">
-              <a href={`tel:${PRIMARY_PHONE}`}>Call Us: {PRIMARY_PHONE}</a>
+              <a href={`tel:${PHONE_TEL}`}>Call Us: {PHONE_DISPLAY}</a>
             </Button>
             <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-success)] text-white hover:bg-[var(--brand-success-hover)] font-extrabold">
-              <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
             </Button>
           </div>
         </div>

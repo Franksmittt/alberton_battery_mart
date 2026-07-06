@@ -148,6 +148,9 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                     <p className="text-lg text-foreground">
                       {STORE_HOURS_DISPLAY_LONG}
                     </p>
+                    <p className="text-sm text-muted-foreground">
+                      Staff answer the shop line from 07:30 — store opens to the public at 08:00.
+                    </p>
                   </div>
 
                   <div className="flex items-center space-x-4">

@@ -2,9 +2,14 @@ import Link from "next/link";
 import { MapPin, MessageSquare, Phone } from "lucide-react";
 import { getAllClusterConfigs } from "@/lib/battery-sizes/clusters";
 
-const WHATSAPP_NUMBER_LINK = "27823046926";
-const PHONE_DISPLAY = "010 109 6211";
-const PHONE_LINK = "0101096211";
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  STORE_ADDRESS_SHORT,
+  STORE_MAPS_URL,
+  WHATSAPP_URL,
+} from "@/lib/seo-constants";
+
 const SIZE_HUBS = getAllClusterConfigs();
 
 const SHOP_LINKS = [
@@ -31,19 +36,19 @@ const Footer = () => {
             <div>
               <p className="text-lg font-black tracking-tight">Alberton Battery Mart</p>
               <p className="mt-1 text-sm text-[var(--brand-muted-2)]">
-                Mobile fitment · Free testing · Warranty backed
+                Mobile fitment available · Free testing · Warranty backed
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <a
-                href={`tel:${PHONE_LINK}`}
+                href={`tel:${PHONE_TEL}`}
                 className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-semibold transition-colors hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
               >
                 <Phone className="h-3.5 w-3.5" />
                 {PHONE_DISPLAY}
               </a>
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-md border border-[var(--brand-success)]/40 bg-[var(--brand-success)]/10 px-3 py-1.5 text-sm font-semibold text-[var(--brand-success)] transition-colors hover:bg-[var(--brand-success)] hover:text-white"
@@ -59,7 +64,7 @@ const Footer = () => {
               className="inline-flex items-start gap-1.5 text-sm text-[var(--brand-muted-2)] transition-colors hover:text-white"
             >
               <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-              28 St Columb Rd, New Redruth, Alberton
+              {STORE_ADDRESS_SHORT}
             </a>
             <p className="text-xs text-[var(--brand-muted-3)]">
               Mon–Fri 08:00–17:00 · Sat 08:00–12:00

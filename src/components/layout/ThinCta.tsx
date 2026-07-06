@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
 import { pushDataLayerEvent } from "@/lib/analytics";
 
-// --- CONTACT DETAILS ---
-const PRIMARY_PHONE = "010 109 6211";
-const WHATSAPP_NUMBER_LINK = "27823046926"; 
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  WHATSAPP_URL,
+} from "@/lib/seo-constants";
 
 const ThinCta = () => {
   useEffect(() => {
@@ -52,15 +54,15 @@ const ThinCta = () => {
           
           {/* Call Us Button (Full width on mobile) */}
           <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 w-full">
-            <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center space-x-2" onClick={() => handleClick("call")}>
+            <a href={`tel:${PHONE_TEL}`} className="flex items-center justify-center space-x-2" onClick={() => handleClick("call")}>
               <Phone className="h-5 w-5" />
-              <span>Call: {PRIMARY_PHONE}</span> 
+              <span>Call: {PHONE_DISPLAY}</span> 
             </a>
           </Button>
 
           {/* WhatsApp Button (Full width on mobile) */}
           <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10 w-full">
-             <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2" onClick={() => handleClick("whatsapp")}>
+             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2" onClick={() => handleClick("whatsapp")}>
               <MessageSquare className="h-5 w-5" />
               <span>WhatsApp Now</span>
             </a>

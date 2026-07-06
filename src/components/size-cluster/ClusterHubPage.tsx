@@ -129,7 +129,7 @@ export async function clusterHubMetadata(code: string) {
 
   return buildPageMetadata({
     title: `${cluster.code} Car Battery Alberton | All Brands | Free Fitment`,
-    description: `${cluster.headTerm} in Alberton from ${fittedFromPrice} with free fitment, alternator testing, and warranty. ${products.length} option${products.length === 1 ? "" : "s"} in stock (${brandList}). Mobile call-out to all suburbs.`,
+    description: `${cluster.headTerm} in Alberton from ${fittedFromPrice} with free fitment, alternator testing, and warranty. ${products.length} option${products.length === 1 ? "" : "s"} in stock (${brandList}). Drive in to our New Redruth store or call for availability.`,
     path: cluster.hubPath,
     keywords: [
       `${cluster.code} car battery`,
