@@ -38,7 +38,7 @@ const Header = () => {
                 asChild
                 size="sm"
                 trackingId="header-call-top"
-                className="h-8 min-w-[92px] bg-[var(--brand-accent)] hover:bg-[var(--brand-accent-hover)] text-white font-extrabold"
+                className="h-8 min-w-[92px] bg-[var(--brand-accent-hover)] hover:bg-[#b71c1c] text-white font-extrabold"
               >
                 <a href={`tel:${PHONE_TEL}`}>Call</a>
               </Button>
@@ -60,7 +60,7 @@ const Header = () => {
                 asChild
                 size="sm"
                 trackingId="header-directions-top"
-                className="h-8 min-w-[92px] bg-white text-[var(--brand-accent)] border border-[var(--brand-accent)] hover:bg-red-50 font-extrabold"
+                className="h-8 min-w-[92px] bg-white text-[var(--brand-accent-hover)] border border-[var(--brand-accent-hover)] hover:bg-red-50 font-extrabold"
               >
                 <a
                   href={STORE_MAPS_URL}
@@ -96,7 +96,7 @@ const Header = () => {
                       />
                       <button
                         type="submit"
-                        className="h-10 px-4 rounded-md bg-[var(--brand-accent)] hover:bg-[var(--brand-accent-hover)] text-white text-sm font-bold"
+                        className="h-10 px-4 rounded-md bg-[var(--brand-accent-solid)] hover:bg-[var(--brand-accent-hover)] text-white text-sm font-bold"
                       >
                         Search
                       </button>

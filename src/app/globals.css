@@ -7,7 +7,7 @@
     --background: 220 10% 12%;       /* Dark Grey (Background) */
     --foreground: 0 0% 100%;       /* White (Text/Foreground) */
 
-    --primary: 0 90% 48%;          /* Bright Red */
+    --primary: 0 72% 45%;          /* Bright Red */
     --primary-foreground: 0 0% 100%; /* White */
 
     --card: 220 10% 18%;           /* Slightly lighter dark grey for cards */
@@ -33,13 +33,15 @@
     --brand-bg-soft: #171717;
     --brand-bg-elevated: #1e1e1e;
     --brand-border: #2a2a2a;
-    --brand-muted: #a0a0a0;
-    --brand-muted-2: #888888;
-    --brand-muted-3: #555555;
-    --brand-accent: #e53935;
-    --brand-accent-hover: #c62828;
+    --brand-muted: #a3a3a3;
+    --brand-muted-2: #9ca3af;
+    --brand-muted-3: #9ca3af;
+    --brand-accent: #ef5350;
+    --brand-accent-solid: #c62828;
+    --brand-accent-hover: #b71c1c;
     --brand-success: #0f766e;
     --brand-success-hover: #0d5f58;
+    --brand-success-text: #5eead4;
   }
 
   .dark {
@@ -47,7 +49,7 @@
     --background: 220 10% 12%;
     --foreground: 0 0% 100%;
 
-    --primary: 0 90% 48%;
+    --primary: 0 72% 45%;
     --primary-foreground: 0 0% 100%;
 
     --card: 220 10% 18%;
@@ -66,13 +68,15 @@
     --brand-bg-soft: #171717;
     --brand-bg-elevated: #1e1e1e;
     --brand-border: #2a2a2a;
-    --brand-muted: #a0a0a0;
-    --brand-muted-2: #888888;
-    --brand-muted-3: #555555;
-    --brand-accent: #e53935;
-    --brand-accent-hover: #c62828;
+    --brand-muted: #a3a3a3;
+    --brand-muted-2: #9ca3af;
+    --brand-muted-3: #9ca3af;
+    --brand-accent: #ef5350;
+    --brand-accent-solid: #c62828;
+    --brand-accent-hover: #b71c1c;
     --brand-success: #0f766e;
     --brand-success-hover: #0d5f58;
+    --brand-success-text: #5eead4;
   }
 }
 
@@ -97,6 +101,11 @@
   .border-\[\#2A2A2A\], .border-\[\#2a2a2a\] { border-color: var(--brand-border) !important; }
   .text-\[\#A0A0A0\], .text-\[\#a0a0a0\] { color: var(--brand-muted) !important; }
   .text-\[\#888888\] { color: var(--brand-muted-2) !important; }
+
+  /* Accessible accent text on dark surfaces (buttons keep hsl(--primary)) */
+  .text-battery {
+    color: var(--brand-accent) !important;
+  }
 
   .bg-\[\#E53935\] { background-color: var(--brand-accent) !important; }
   .text-\[\#E53935\] { color: var(--brand-accent) !important; }
@@ -475,8 +484,6 @@
     position: relative;
     display: inline-block;
     color: var(--brand-accent);
-    will-change: opacity, text-shadow, filter;
-    animation: batteryNeonStartup 6s ease-in-out infinite;
   }
 
   @keyframes brandFlipUp {

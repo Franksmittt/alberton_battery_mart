@@ -37,11 +37,11 @@ export function AdLandingHero({
             {subtitle}
           </p>
         ) : null}
-        <p className="text-base md:text-lg font-semibold text-battery">
+        <p className="text-base md:text-lg font-semibold text-foreground">
           {AD_PRICE_ANCHORS_LINE}
         </p>
         <p className="text-base text-foreground flex items-center justify-center gap-2 flex-wrap">
-          <MapPin className="h-5 w-5 text-battery shrink-0" />
+          <MapPin className="h-5 w-5 text-[var(--brand-accent)] shrink-0" aria-hidden="true" />
           <span>{STORE_ADDRESS_SHORT}</span>
         </p>
         <div className="flex flex-wrap gap-3 justify-center pt-2">

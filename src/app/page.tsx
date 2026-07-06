@@ -1,25 +1,37 @@
 // src/app/page.tsx
-import dynamicImport from 'next/dynamic';
-import { Metadata } from 'next';
+import dynamicImport from "next/dynamic";
+import { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, Clock3, MapPin, Navigation, Phone, Search, ShieldCheck } from "lucide-react";
-import { YMMSearchWidget } from "@/components/content/YMMSearchWidget";
-import { SizeClusterNavLinks } from "@/components/content/SizeClusterNavLinks";
-import Image from "next/image";
-import { ALL_PRODUCTS, type ProductCardData } from "@/data/products";
-import MobileTrustRotator from "@/components/layout/MobileTrustRotator";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
-import { RelatedContent } from "@/components/seo/RelatedContent";
 
-// Optimized for static generation
-export const dynamic = 'auto';
+export const dynamic = "auto";
 
-// Lazy-load all components below the fold
-const FaqSection = dynamicImport(() => import('@/components/layout/FaqSection'));
+const FaqSection = dynamicImport(() => import("@/components/layout/FaqSection"));
+const YMMSearchWidget = dynamicImport(
+  () => import("@/components/content/YMMSearchWidget").then((m) => m.YMMSearchWidget),
+  { loading: () => <div className="h-48 animate-pulse rounded-lg bg-white/5" aria-hidden="true" /> }
+);
+const SizeClusterNavLinks = dynamicImport(
+  () => import("@/components/content/SizeClusterNavLinks").then((m) => m.SizeClusterNavLinks),
+  { loading: () => <span className="text-[var(--brand-muted)]">Loading guides…</span> }
+);
+const MobileTrustRotator = dynamicImport(() => import("@/components/layout/MobileTrustRotator"));
+const HomeProductGrid = dynamicImport(
+  () => import("@/components/home/HomeProductGrid").then((m) => m.HomeProductGrid),
+  { loading: () => <div className="h-96 animate-pulse bg-zinc-100" aria-hidden="true" /> }
+);
+const HomeMapEmbed = dynamicImport(
+  () => import("@/components/home/HomeMapEmbed").then((m) => m.HomeMapEmbed),
+  { loading: () => <div className="min-h-[350px] bg-[var(--brand-bg-elevated)]" aria-hidden="true" /> }
+);
+const RelatedContent = dynamicImport(
+  () => import("@/components/seo/RelatedContent").then((m) => m.RelatedContent),
+  { loading: () => null }
+);
 
-// --- SEO: Homepage Metadata with Open Graph ---
 export const metadata: Metadata = {
   ...buildPageMetadata({
     title: "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
@@ -74,61 +86,6 @@ export default function Home() {
     { label: "AGM Start/Stop", href: "/products/type/performance" },
     { label: "Commercial Truck Batteries", href: "/products/type/truck-commercial" },
   ];
-  const pickPowerPlusAgm = () =>
-    ALL_PRODUCTS.find(
-      (product) =>
-        product.brandName.toLowerCase() === "power plus" && product.isAGM
-    ) ||
-    ALL_PRODUCTS.find(
-      (product) =>
-        product.brandName.toLowerCase() === "power plus" &&
-        product.category === "Performance AGM/EFB"
-    );
-
-  const pickAnyExide = () =>
-    ALL_PRODUCTS.find((product) => product.brandName.toLowerCase() === "exide");
-
-  const pickEcoPlusTruck = () =>
-    ALL_PRODUCTS.find(
-      (product) =>
-        product.brandName.toLowerCase() === "eco plus" &&
-        product.category === "Truck & Commercial"
-    ) ||
-    ALL_PRODUCTS.find((product) => product.brandName.toLowerCase() === "eco plus");
-
-  const pickWillard646 = () =>
-    ALL_PRODUCTS.find(
-      (product) =>
-        product.brandName.toLowerCase() === "willard" &&
-        product.sku.toLowerCase() === "646"
-    ) ||
-    ALL_PRODUCTS.find((product) => product.brandName.toLowerCase() === "willard");
-
-  const curatedRaw: Array<ProductCardData | undefined> = [
-    pickPowerPlusAgm(),
-    pickAnyExide(),
-    pickEcoPlusTruck(),
-    pickWillard646(),
-  ];
-
-  const curatedProducts = curatedRaw
-    .filter(Boolean)
-    .reduce((acc: ProductCardData[], current) => {
-      const product = current as ProductCardData;
-      if (!acc.some((item) => item.id === product.id)) {
-        acc.push(product);
-      }
-      return acc;
-    }, []);
-
-  if (curatedProducts.length < 4) {
-    for (const fallback of ALL_PRODUCTS) {
-      if (!curatedProducts.some((item) => item.id === fallback.id)) {
-        curatedProducts.push(fallback);
-      }
-      if (curatedProducts.length === 4) break;
-    }
-  }
 
   return (
     <main className="overflow-x-clip">
@@ -137,9 +94,9 @@ export default function Home() {
         description="Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Free fitment, testing, and 24-month warranty. Call 010 109 6211."
         path="/"
       />
-      <HubSection className="min-h-[72vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] text-white flex items-center">
+      <HubSection className="min-h-[60vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] text-white flex items-center">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center animate-in fade-in slide-in-from-bottom-2 duration-700">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-[clamp(2.2rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.08] mb-4 md:whitespace-nowrap">
               {heroCopy.heading}
             </h1>
@@ -154,17 +111,17 @@ export default function Home() {
             >
               <div className="flex items-center max-[600px]:flex-col max-[600px]:items-stretch max-[600px]:gap-2.5">
                 <div className="flex items-center justify-center pl-5 pr-2 text-[var(--brand-muted-2)] max-[600px]:hidden">
-                  <Search className="h-5 w-5" />
+                  <Search className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <input
                   type="text"
                   name="q"
                   placeholder="e.g., 'Ford Ranger battery' or 'Varta 652 AGM'"
-                  className="flex-1 h-[4.25rem] px-4 text-[1.05rem] text-[var(--brand-muted-3)] bg-transparent border-0 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal max-[600px]:h-[5rem] max-[600px]:px-4 max-[600px]:text-base max-[600px]:bg-white max-[600px]:rounded-md"
+                  className="flex-1 h-[4.25rem] px-4 text-[1.05rem] text-zinc-900 bg-transparent border-0 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal max-[600px]:h-[5rem] max-[600px]:px-4 max-[600px]:text-base max-[600px]:bg-white max-[600px]:rounded-md"
                 />
                 <button
                   type="submit"
-                  className="h-12 px-8 rounded-[40px] bg-[var(--brand-accent)] hover:bg-[var(--brand-accent-hover)] text-white font-bold text-base transition-colors max-[600px]:w-full max-[600px]:rounded-md max-[600px]:h-12"
+                  className="h-12 px-8 rounded-[40px] bg-[var(--brand-accent-solid)] hover:bg-[var(--brand-accent-hover)] text-white font-bold text-base transition-colors max-[600px]:w-full max-[600px]:rounded-md max-[600px]:h-12"
                 >
                   Search
                 </button>
@@ -184,7 +141,9 @@ export default function Home() {
             </div>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3 items-center">
-              <span className="uppercase tracking-[1px] text-xs font-bold text-[var(--brand-muted-3)] mr-1">Trending:</span>
+              <span className="uppercase tracking-[1px] text-xs font-bold text-[var(--brand-muted-2)] mr-1">
+                Trending:
+              </span>
               {trendingSearches.map((item) => (
                 <Link
                   key={item.label}
@@ -202,16 +161,16 @@ export default function Home() {
       <HubSection className="bg-zinc-100 border-y border-zinc-200 border-b-2">
         <div className="container px-0 sm:px-6 lg:px-8">
           <div className="max-[900px]:hidden flex items-center justify-center gap-16 px-8 py-5">
-            <div className="inline-flex items-center gap-3 text-[var(--brand-muted-3)] font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
-              <ShieldCheck className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} />
+            <div className="inline-flex items-center gap-3 text-zinc-700 font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
+              <ShieldCheck className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
               Up to 36-Month Warranty
             </div>
-            <div className="inline-flex items-center gap-3 text-[var(--brand-muted-3)] font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
-              <Clock3 className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} />
+            <div className="inline-flex items-center gap-3 text-zinc-700 font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
+              <Clock3 className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
               60-Minute Average Response
             </div>
-            <div className="inline-flex items-center gap-3 text-[var(--brand-muted-3)] font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
-              <CheckCircle2 className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} />
+            <div className="inline-flex items-center gap-3 text-zinc-700 font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
+              <CheckCircle2 className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
               Free On-Site Midtronics Diagnostics
             </div>
           </div>
@@ -279,96 +238,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-zinc-50 py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-end mb-8 border-b-2 border-zinc-300 pb-4 max-[1000px]:flex-col max-[1000px]:items-start max-[1000px]:gap-3">
-            <div>
-              <h2 className="text-[2rem] text-[var(--brand-bg)] tracking-tight font-extrabold mb-2">
-                Trending Fitments in Alberton
-              </h2>
-              <p className="text-zinc-600 text-[0.95rem]">
-                Prices indicate complete in-store fitment and old battery core exchange.
-              </p>
-            </div>
-            <Link href="/products" className="text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)] text-[0.95rem] font-bold">
-              View Full Catalog →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-4 gap-6 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
-            {curatedProducts.map((product, index) => {
-              const badge =
-                index === 0
-                  ? { text: "Bestseller", className: "bg-[var(--brand-accent)] text-white" }
-                  : product.isAGM
-                  ? { text: "Start/Stop AGM", className: "bg-[var(--brand-bg)] text-white" }
-                  : product.category === "Truck & Commercial"
-                  ? { text: "Alrode Fleet", className: "bg-[var(--brand-accent)] text-white" }
-                  : null;
-
-              return (
-                <article
-                  key={product.id}
-                  className="bg-white border border-zinc-200 rounded-lg p-6 relative isolate flex flex-col transition-all hover:border-[var(--brand-bg)] hover:shadow-[0_10px_20px_rgba(0,0,0,0.05)]"
-                >
-                  {badge && (
-                    <span className={`absolute top-3 right-3 z-20 px-3 py-1 rounded-full text-[0.7rem] font-bold uppercase tracking-[0.5px] ${badge.className}`}>
-                      {badge.text}
-                    </span>
-                  )}
-
-                  <Link
-                    href={`/products/id/${product.id}`}
-                    className="w-full h-[200px] max-[600px]:h-[250px] bg-zinc-50 border border-dashed border-zinc-300 rounded-md mb-6 relative overflow-hidden z-0 block"
-                  >
-                    <Image
-                      src={product.imagePath || "/images/stock-battery.jpg"}
-                      alt={product.name}
-                      fill
-                      quality={75}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 25vw"
-                      className="object-contain p-3"
-                    />
-                  </Link>
-
-                  <p className="text-[0.75rem] text-zinc-600 uppercase tracking-[1px] font-semibold mb-1">
-                    {product.brandName}
-                  </p>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--brand-bg)] leading-snug mb-4 flex-grow">
-                    <Link href={`/products/id/${product.id}`} className="hover:text-[var(--brand-accent-hover)] transition-colors">
-                      {product.name}
-                    </Link>
-                  </h3>
-
-                  <div className="mb-6">
-                    <span className="text-2xl text-[var(--brand-accent)] font-extrabold tracking-tight">
-                      {product.sellingPrice_OUTPUT}
-                    </span>
-                    <p className="text-xs text-zinc-600 font-medium mt-1">
-                      Scrap Required
-                    </p>
-                  </div>
-
-                  <div>
-                    <Link
-                      href={`/products/id/${product.id}`}
-                      className="w-full inline-flex items-center justify-center border-2 border-zinc-200 rounded-md px-3 py-2.5 text-[var(--brand-bg)] text-[0.8rem] font-semibold uppercase tracking-[0.5px] hover:border-[var(--brand-bg)] hover:bg-zinc-100 transition-colors"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <HomeProductGrid />
 
       <section className="bg-white py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex border border-zinc-200 rounded-lg overflow-hidden max-[900px]:flex-col">
             <div className="flex-1 bg-white px-16 py-16 flex flex-col justify-center items-start max-[900px]:px-10 max-[900px]:py-10">
-              <span className="text-[var(--brand-accent)] font-extrabold uppercase tracking-[1.5px] text-[0.85rem] mb-4">
+              <span className="text-[var(--brand-accent-solid)] font-extrabold uppercase tracking-[1.5px] text-[0.85rem] mb-4">
                 Two-Wheel Power
               </span>
               <h2 className="text-[2.5rem] max-[900px]:text-[2rem] text-[var(--brand-bg)] leading-tight tracking-tight font-extrabold mb-4">
@@ -436,22 +312,22 @@ export default function Home() {
             <article className="bg-[var(--brand-bg-elevated)] border border-[var(--brand-border)] rounded-lg overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:border-[var(--brand-muted-3)]">
               <div className="bg-white/[0.03] border-b border-[var(--brand-border)] px-6 py-4 flex items-center justify-between text-[0.95rem] font-bold">
                 <span>BMS System Coding</span>
-                <span className="text-[var(--brand-success)] text-[0.85rem] inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4" strokeWidth={3} />
+                <span className="text-[var(--brand-success-text)] text-[0.85rem] inline-flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4" strokeWidth={3} aria-hidden="true" />
                   Verified
                 </span>
               </div>
               <div className="px-6 py-8 flex-grow flex flex-col justify-between">
                 <p className="text-[1.05rem] italic leading-relaxed text-zinc-300 mb-8">
-                  "Fitted an AGM battery to my modern SUV and cleared all the dashboard error codes right in my garage.
-                  Dealership wanted triple the price and a tow-in for the exact same service."
+                  &quot;Fitted an AGM battery to my modern SUV and cleared all the dashboard error codes right in my garage.
+                  Dealership wanted triple the price and a tow-in for the exact same service.&quot;
                 </p>
                 <div className="pt-6 border-t border-white/5 flex items-end justify-between">
                   <div>
                     <p className="font-bold text-base mb-1">David C.</p>
                     <p className="text-[0.85rem] uppercase tracking-[0.5px] text-[var(--brand-muted)]">📍 Meyersdal</p>
                   </div>
-                  <p className="text-amber-400 text-base tracking-[2px]">★★★★★</p>
+                  <p className="text-amber-400 text-base tracking-[2px]" aria-label="5 out of 5 stars">★★★★★</p>
                 </div>
               </div>
             </article>
@@ -459,22 +335,22 @@ export default function Home() {
             <article className="bg-[var(--brand-bg-elevated)] border border-[var(--brand-border)] rounded-lg overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:border-[var(--brand-muted-3)]">
               <div className="bg-white/[0.03] border-b border-[var(--brand-border)] px-6 py-4 flex items-center justify-between text-[0.95rem] font-bold">
                 <span>Midtronics Diagnostics</span>
-                <span className="text-[var(--brand-success)] text-[0.85rem] inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4" strokeWidth={3} />
+                <span className="text-[var(--brand-success-text)] text-[0.85rem] inline-flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4" strokeWidth={3} aria-hidden="true" />
                   Verified
                 </span>
               </div>
               <div className="px-6 py-8 flex-grow flex flex-col justify-between">
                 <p className="text-[1.05rem] italic leading-relaxed text-zinc-300 mb-8">
-                  "Car wouldn't start. They came out, tested it, and found it was just a loose terminal.
-                  Fixed it for free instead of selling me a battery I didn't need. You don't get honesty like that anymore."
+                  &quot;Car wouldn&apos;t start. They came out, tested it, and found it was just a loose terminal.
+                  Fixed it for free instead of selling me a battery I didn&apos;t need. You don&apos;t get honesty like that anymore.&quot;
                 </p>
                 <div className="pt-6 border-t border-white/5 flex items-end justify-between">
                   <div>
                     <p className="font-bold text-base mb-1">Samantha P.</p>
                     <p className="text-[0.85rem] uppercase tracking-[0.5px] text-[var(--brand-muted)]">📍 Brackendowns</p>
                   </div>
-                  <p className="text-amber-400 text-base tracking-[2px]">★★★★★</p>
+                  <p className="text-amber-400 text-base tracking-[2px]" aria-label="5 out of 5 stars">★★★★★</p>
                 </div>
               </div>
             </article>
@@ -482,22 +358,22 @@ export default function Home() {
             <article className="bg-[var(--brand-bg-elevated)] border border-[var(--brand-border)] rounded-lg overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:border-[var(--brand-muted-3)]">
               <div className="bg-white/[0.03] border-b border-[var(--brand-border)] px-6 py-4 flex items-center justify-between text-[0.95rem] font-bold">
                 <span>Commercial Fleet Fitment</span>
-                <span className="text-[var(--brand-success)] text-[0.85rem] inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4" strokeWidth={3} />
+                <span className="text-[var(--brand-success-text)] text-[0.85rem] inline-flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4" strokeWidth={3} aria-hidden="true" />
                   Verified
                 </span>
               </div>
               <div className="px-6 py-8 flex-grow flex flex-col justify-between">
                 <p className="text-[1.05rem] italic leading-relaxed text-zinc-300 mb-8">
-                  "We run a logistics company with 15 trucks. ABM handles all our heavy-duty battery replacements on-site.
-                  The speed of dispatch keeps our trucks moving and minimizes our downtime."
+                  &quot;We run a logistics company with 15 trucks. ABM handles all our heavy-duty battery replacements on-site.
+                  The speed of dispatch keeps our trucks moving and minimizes our downtime.&quot;
                 </p>
                 <div className="pt-6 border-t border-white/5 flex items-end justify-between">
                   <div>
                     <p className="font-bold text-base mb-1">Fleet Ops Mgr</p>
                     <p className="text-[0.85rem] uppercase tracking-[0.5px] text-[var(--brand-muted)]">📍 Alrode South</p>
                   </div>
-                  <p className="text-amber-400 text-base tracking-[2px]">★★★★★</p>
+                  <p className="text-amber-400 text-base tracking-[2px]" aria-label="5 out of 5 stars">★★★★★</p>
                 </div>
               </div>
             </article>
@@ -520,7 +396,7 @@ export default function Home() {
               <div className="grid gap-8 mb-14">
                 <div className="flex items-start gap-5">
                   <div className="text-[var(--brand-accent)] bg-[var(--brand-accent)]/10 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6" />
+                    <MapPin className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="m-0 mb-1.5 text-[1.05rem] text-white tracking-[0.5px] font-bold">
@@ -536,7 +412,7 @@ export default function Home() {
 
                 <div className="flex items-start gap-5">
                   <div className="text-[var(--brand-accent)] bg-[var(--brand-accent)]/10 p-3 rounded-lg">
-                    <Clock3 className="h-6 w-6" />
+                    <Clock3 className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
                     <h4 className="m-0 mb-1.5 text-[1.05rem] text-white tracking-[0.5px] font-bold">
@@ -558,36 +434,26 @@ export default function Home() {
                   href="https://www.google.com/maps/dir/?api=1&destination=28+St+Columb+Rd,+New+Redruth,+Alberton,+1450"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded font-bold uppercase text-[0.85rem] tracking-[0.5px] bg-[var(--brand-accent)] text-white transition-all hover:bg-[var(--brand-accent-hover)] hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded font-bold uppercase text-[0.85rem] tracking-[0.5px] bg-[var(--brand-accent-solid)] text-white transition-all hover:bg-[var(--brand-accent-hover)] hover:-translate-y-0.5"
                 >
-                  <Navigation className="h-4 w-4" />
+                  <Navigation className="h-4 w-4" aria-hidden="true" />
                   Get Directions
                 </a>
                 <a
                   href="tel:0101096211"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded font-bold uppercase text-[0.85rem] tracking-[0.5px] border-2 border-[var(--brand-border)] text-white transition-all hover:border-[var(--brand-muted)] hover:bg-white/5 hover:-translate-y-0.5"
                 >
-                  <Phone className="h-4 w-4" />
+                  <Phone className="h-4 w-4" aria-hidden="true" />
                   Call: 010 109 6211
                 </a>
               </div>
             </div>
 
-            <div className="flex-1 min-h-[500px] max-[950px]:min-h-[350px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.683815614464!2d28.12046317541756!3d-26.27192337703497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e951bf317cfb98d%3A0x33408b268a9458a6!2sAlberton%20Battery%20Mart!5e0!3m2!1sen!2sza!4v1778246480882!5m2!1sen!2sza"
-                className="h-full w-full min-h-[500px] max-[950px]:min-h-[350px]"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Alberton Battery Mart map"
-              />
-            </div>
+            <HomeMapEmbed />
           </div>
         </div>
       </section>
-      
+
       <RelatedContent className="container py-12 bg-background" />
       <FaqSection />
     </main>

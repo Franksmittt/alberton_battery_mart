@@ -30,7 +30,10 @@ export function SizeClusterNavLinks({
       <span className="inline-flex flex-wrap gap-x-3 gap-y-1 justify-center">
         {SIZE_HUBS.map((cluster, index) => (
           <span key={cluster.code}>
-            <Link href={cluster.hubPath} className="text-battery font-semibold hover:underline">
+            <Link
+              href={cluster.hubPath}
+              className="font-semibold text-[var(--brand-accent)] underline decoration-[var(--brand-accent)]/50 underline-offset-2 hover:decoration-[var(--brand-accent)]"
+            >
               {cluster.code} guide
             </Link>
             {index < SIZE_HUBS.length - 1 ? <span className="text-muted-foreground"> · </span> : null}

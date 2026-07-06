@@ -35,8 +35,8 @@ export function MobileStickyFooter() {
           <span
             className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
               openStatus.isOpen
-                ? "bg-[var(--brand-success)]/20 text-[var(--brand-success)]"
-                : "bg-white/10 text-[var(--brand-muted)]"
+                ? "bg-[var(--brand-success)] text-white"
+                : "bg-[var(--brand-bg-elevated)] text-[var(--brand-muted-2)]"
             }`}
           >
             {openStatus.label}

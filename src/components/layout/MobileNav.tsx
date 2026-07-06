@@ -65,7 +65,7 @@ const MobileNav = () => {
           </nav>
 
           <div className="space-y-3 border-t border-[var(--brand-border)] px-6 py-6">
-            <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-accent)] text-white hover:bg-[var(--brand-accent-hover)] font-extrabold">
+            <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-accent-solid)] text-white hover:bg-[var(--brand-accent-hover)] font-extrabold">
               <a href={`tel:${PHONE_TEL}`}>Call Us: {PHONE_DISPLAY}</a>
             </Button>
             <Button asChild size="lg" className="h-12 w-full bg-[var(--brand-success)] text-white hover:bg-[var(--brand-success-hover)] font-extrabold">

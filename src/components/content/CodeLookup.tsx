@@ -36,8 +36,8 @@ const CodeLookup = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="h-12 text-lg bg-background border-border/50"
                     />
-                    <Button type="submit" variant="battery" size="lg" disabled={!searchTerm}>
-                        <Search className="h-5 w-5" />
+                    <Button type="submit" variant="battery" size="lg" disabled={!searchTerm} aria-label="Search products">
+                        <Search className="h-5 w-5" aria-hidden="true" />
                     </Button>
                 </form>
             </CardContent>

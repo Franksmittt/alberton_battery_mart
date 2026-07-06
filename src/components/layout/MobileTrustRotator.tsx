@@ -25,7 +25,7 @@ export default function MobileTrustRotator() {
 
   return (
     <div className="min-[901px]:hidden px-4 py-5">
-      <div className="flex items-center justify-center gap-3 text-center text-[var(--brand-muted-3)] font-semibold text-[0.95rem] tracking-[0.3px]">
+      <div className="flex items-center justify-center gap-3 text-center text-zinc-700 font-semibold text-[0.95rem] tracking-[0.3px]">
         <ActiveIcon className="h-6 w-6 text-[var(--brand-success)] shrink-0" strokeWidth={2.5} />
         <span>{activeSignal.title}</span>
       </div>

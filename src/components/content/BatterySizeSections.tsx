@@ -147,14 +147,14 @@ export function BatterySizeSpecTable({
           Need terminal layout or dimension diagrams? See our{" "}
           <Link
             href={`/${cluster.code}-battery-dimensions`}
-            className="text-battery font-semibold hover:underline"
+            className="text-foreground font-semibold underline decoration-[var(--brand-accent)] underline-offset-2"
           >
             {cluster.code} battery dimensions guide
           </Link>{" "}
           and{" "}
           <Link
             href={`/${cluster.code}-battery-specs`}
-            className="text-battery font-semibold hover:underline"
+            className="text-foreground font-semibold underline decoration-[var(--brand-accent)] underline-offset-2"
           >
             full {cluster.code} specs page
           </Link>
@@ -198,7 +198,7 @@ export function BatterySizeProductCards({
             </Link>
             <div className="p-6 space-y-4 flex flex-col flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded bg-battery/15 px-2 py-1 text-xs font-bold text-battery uppercase">
+              <span className="rounded bg-[var(--brand-accent-solid)] px-2 py-1 text-xs font-bold text-white uppercase">
                 In stock
               </span>
               <span className="text-sm text-muted-foreground">{product.brandName}</span>

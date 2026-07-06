@@ -26,6 +26,9 @@ const AREA_LINKS = [
   { href: "/local", label: "All areas" },
 ] as const;
 
+const footerLinkClass =
+  "underline decoration-white/25 underline-offset-2 transition-colors hover:text-white hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--brand-bg)]";
+
 const Footer = () => {
   return (
     <footer className="w-full border-t border-[var(--brand-border)] bg-[var(--brand-bg)] text-white">
@@ -51,7 +54,7 @@ const Footer = () => {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md border border-[var(--brand-success)]/40 bg-[var(--brand-success)]/10 px-3 py-1.5 text-sm font-semibold text-[var(--brand-success)] transition-colors hover:bg-[var(--brand-success)] hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-md bg-[var(--brand-success)] px-3 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-success-hover)]"
               >
                 <MessageSquare className="h-3.5 w-3.5" />
                 WhatsApp
@@ -79,7 +82,7 @@ const Footer = () => {
             <ul className="space-y-1.5 text-sm text-[var(--brand-muted-2)]">
               {SHOP_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="transition-colors hover:text-white">
+                  <Link href={link.href} className={footerLinkClass}>
                     {link.label}
                   </Link>
                 </li>
@@ -95,16 +98,13 @@ const Footer = () => {
             <ul className="space-y-1.5 text-sm text-[var(--brand-muted-2)]">
               {AREA_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="transition-colors hover:text-white">
+                  <Link href={link.href} className={footerLinkClass}>
                     {link.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link
-                  href="/mobile-battery-fitment-alberton"
-                  className="transition-colors hover:text-white"
-                >
+                <Link href="/mobile-battery-fitment-alberton" className={footerLinkClass}>
                   Mobile fitment
                 </Link>
               </li>
@@ -121,7 +121,7 @@ const Footer = () => {
                 <span key={cluster.code}>
                   <Link
                     href={cluster.hubPath}
-                    className="transition-colors hover:text-[var(--brand-accent)]"
+                    className={`${footerLinkClass} hover:text-[var(--brand-accent)] hover:decoration-[var(--brand-accent)]`}
                   >
                     {cluster.code}
                   </Link>
@@ -132,16 +132,16 @@ const Footer = () => {
               ))}
             </div>
             <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--brand-muted-2)]">
-              <Link href="/services" className="transition-colors hover:text-white">
+              <Link href="/services" className={footerLinkClass}>
                 Services
               </Link>
-              <Link href="/fitment" className="transition-colors hover:text-white">
+              <Link href="/fitment" className={footerLinkClass}>
                 Fitment lookup
               </Link>
               <Link
                 href="/reviews"
                 data-track-event="footer_reviews_click"
-                className="transition-colors hover:text-white"
+                className={footerLinkClass}
               >
                 Reviews
               </Link>
@@ -158,19 +158,19 @@ const Footer = () => {
               href="https://www.endpointmedia.co.za/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--brand-muted-2)] transition-colors hover:text-white"
+              className={`text-[var(--brand-muted-2)] ${footerLinkClass}`}
             >
               Endpoint Media
             </a>
           </span>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="#" className="transition-colors hover:text-white">
+            <Link href="#" className={footerLinkClass}>
               Privacy
             </Link>
-            <Link href="#" className="transition-colors hover:text-white">
+            <Link href="#" className={footerLinkClass}>
               Terms
             </Link>
-            <Link href="#" className="transition-colors hover:text-white">
+            <Link href="#" className={footerLinkClass}>
               POPIA
             </Link>
           </div>
