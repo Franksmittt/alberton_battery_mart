@@ -81,6 +81,31 @@ const nextConfig = {
         destination: '/products/type/deep-cycle',
         permanent: true,
       },
+      {
+        source: '/power-plus',
+        destination: '/products/brand/power-plus',
+        permanent: true,
+      },
+      {
+        source: '/eco-plus',
+        destination: '/products/brand/eco-plus',
+        permanent: true,
+      },
+      {
+        source: '/brands',
+        destination: '/products',
+        permanent: true,
+      },
+      {
+        source: '/whatsapp',
+        destination: 'https://wa.me/27101096211?text=Hi%20Alberton%20Battery%20Mart%2C%20I%20need%20a%20battery%20quote',
+        permanent: false,
+      },
+      {
+        source: '/store-hours',
+        destination: '/contact#hours',
+        permanent: false,
+      },
     ]
   },
   

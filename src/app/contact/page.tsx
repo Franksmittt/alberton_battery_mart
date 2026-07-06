@@ -10,8 +10,8 @@ export const dynamic = 'force-dynamic';
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
-  title: "Contact Alberton Battery Mart | Callouts & Store Location",
-  description: "Contact us for battery help. Call 010 109 6211, WhatsApp us, or visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test.",
+  title: "Contact Alberton Battery Mart | Store Location & Hours",
+  description: "Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes.",
   keywords: [
     'contact battery service Alberton',
     'battery store Alberton',
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     'battery testing Alberton'
   ],
   openGraph: {
-    title: "Contact Alberton Battery Mart | Callouts & Store Location",
-    description: "Contact us for battery help. Call 010 109 6211, WhatsApp us, or visit our store at 28 St Columb Rd, New Redruth, Alberton.",
+    title: "Contact Alberton Battery Mart | Store Location & Hours",
+    description: "Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes.",
     url: 'https://www.albertonbatterymart.co.za/contact',
     type: 'website',
     locale: 'en_ZA',
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Contact Alberton Battery Mart | Callouts & Store Location",
-    description: "Contact us for battery help. Call 010 109 6211, WhatsApp us, or visit our store at 28 St Columb Rd, New Redruth, Alberton.",
+    title: "Contact Alberton Battery Mart | Store Location & Hours",
+    description: "Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes.",
     images: ['/images/og-image.jpg'],
   },
   alternates: {
@@ -70,7 +70,7 @@ const CONTACT_SCHEMA = {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: "Saturday",
         opens: "08:00",
-        closes: "13:00",
+        closes: "12:00",
       },
     ],
   },

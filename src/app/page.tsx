@@ -538,6 +538,8 @@ export default function Home() {
                       Mon - Fri: 08:00 AM - 5:00 PM
                       <br />
                       Sat: 08:00 AM - 12:00 PM
+                      <br />
+                      Sun: Closed
                     </p>
                   </div>
                 </div>

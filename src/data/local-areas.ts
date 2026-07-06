@@ -351,6 +351,118 @@ export const LOCAL_AREAS: LocalArea[] = [
       },
     ],
   },
+  {
+    slug: "alberton-north",
+    name: "Alberton North",
+    areaSummary:
+      "Northern Alberton corridor with strong commuter traffic and convenient access to our New Redruth storefront.",
+    responseWindow: "35-50 minutes",
+    roads: ["Voortrekker Road", "Hennie Alberts Street"],
+    landmarks: ["Alberton North retail nodes", "Voortrekker commuter strip"],
+    keyVehicles: ["Toyota Corolla", "VW Polo Vivo", "Hyundai i20"],
+    focusKeywords: [
+      "car battery Alberton North",
+      "battery shop near Alberton North",
+      "battery replacement Alberton North",
+    ],
+    nearbySlugs: ["randhart", "florentia", "raceview"],
+    faq: [
+      {
+        question: "Can I drive in from Alberton North for a same-day battery?",
+        answer:
+          "Yes. Visit our store at 28 St Columb Rd, New Redruth for free testing and same-day fitment on common sizes.",
+      },
+      {
+        question: "Do you offer mobile service to Alberton North?",
+        answer:
+          "Yes. Mobile callouts are available on request — call 010 109 6211 to check dispatch availability.",
+      },
+    ],
+  },
+  {
+    slug: "newmarket-park",
+    name: "Newmarket Park",
+    areaSummary:
+      "Established residential pocket close to Alberton CBD where drivers value fast in-store turnaround.",
+    responseWindow: "40-55 minutes",
+    roads: ["Voortrekker Road", "Du Plessis Road"],
+    landmarks: ["Newmarket Park residential cluster", "Alberton CBD fringe"],
+    keyVehicles: ["Suzuki Swift", "Toyota Starlet", "Ford Fiesta"],
+    focusKeywords: [
+      "car battery Newmarket Park",
+      "battery replacement Newmarket Park",
+      "battery shop Alberton",
+    ],
+    nearbySlugs: ["florentia", "raceview", "general-alberts-park"],
+    faq: [
+      {
+        question: "Where is the nearest battery shop to Newmarket Park?",
+        answer:
+          "Alberton Battery Mart is at 28 St Columb Rd, New Redruth — a short drive from Newmarket Park with free parking.",
+      },
+      {
+        question: "Can you test my battery before selling a replacement?",
+        answer:
+          "Yes. Every visit includes free battery, alternator, and starter testing before we recommend a replacement.",
+      },
+    ],
+  },
+  {
+    slug: "elandshaven",
+    name: "Elandshaven",
+    areaSummary:
+      "Quiet residential suburb where drivers prefer walk-in testing and transparent fitted pricing.",
+    responseWindow: "45-60 minutes",
+    roads: ["Elandshaven Drive", "Swartkoppies Road links"],
+    landmarks: ["Elandshaven residential estates", "Nearby school routes"],
+    keyVehicles: ["Toyota Etios", "Renault Kwid", "Nissan NP200"],
+    focusKeywords: [
+      "car battery Elandshaven",
+      "battery replacement Elandshaven",
+      "battery fitment Elandshaven",
+    ],
+    nearbySlugs: ["brackenhurst", "brackendowns", "alberante"],
+    faq: [
+      {
+        question: "Do you welcome walk-ins from Elandshaven?",
+        answer:
+          "Yes. Drive in during trading hours for a free 5-minute diagnostic test — no appointment needed.",
+      },
+      {
+        question: "Is mobile battery replacement available in Elandshaven?",
+        answer:
+          "Yes, on request. Call us to schedule a mobile callout if you cannot reach the store.",
+      },
+    ],
+  },
+  {
+    slug: "albertsdal",
+    name: "Albertsdal",
+    areaSummary:
+      "Family suburb south of Alberton CBD with steady demand for reliable starter batteries and honest diagnostics.",
+    responseWindow: "45-60 minutes",
+    roads: ["Albertsdal Avenue", "Hennie Alberts Street"],
+    landmarks: ["Albertsdal schools", "Local retail strip"],
+    keyVehicles: ["Toyota Fortuner", "VW Polo", "Isuzu KB"],
+    focusKeywords: [
+      "car battery Albertsdal",
+      "battery replacement Albertsdal",
+      "battery shop near Albertsdal",
+    ],
+    nearbySlugs: ["meyersdal", "brackenhurst", "verwoerdpark"],
+    faq: [
+      {
+        question: "Can Albertsdal residents get batteries fitted in-store?",
+        answer:
+          "Yes. Bring your vehicle to our New Redruth shop for free fitment and testing on every qualifying battery purchase.",
+      },
+      {
+        question: "What brands do you stock for Albertsdal customers?",
+        answer:
+          "We stock Willard, Exide, Power Plus, and Eco Plus with options from R1,050 fitted.",
+      },
+    ],
+  },
 ];
 
 export function getAllLocalAreas() {

@@ -19,6 +19,7 @@ import {
 } from "@/lib/battery-sizes/content";
 import { getProductsBySizeCode, getFittedPriceLabel } from "@/lib/products/by-size";
 import { priceForSchema } from "@/lib/formatting";
+import { AdLandingHero } from "@/components/layout/AdLandingHero";
 import {
   BatterySizeFaqSection,
   BatterySizeHero,
@@ -87,15 +88,23 @@ export async function renderClusterHub(code: string) {
         />
       ))}
 
-      <BatterySizeHero
-        cluster={cluster}
-        title={`${cluster.code} Car Battery Alberton`}
-        subtitle={
-          cluster.hubIntro ||
-          `${cluster.headTerm} in Alberton from ${fittedFromPrice} fitted. ${cluster.specs.ahRange}, ${cluster.specs.dimensions}, free testing and mobile call-out across Alberton. In stock: ${brandSummary}.`
-        }
-        trackingId={`${code}-hub-call`}
-      />
+      {code === "658" ? (
+        <AdLandingHero
+          title={`${cluster.code} Car Battery Alberton`}
+          subtitle={`${cluster.headTerm} in Alberton from ${fittedFromPrice} fitted. ${cluster.specs.ahRange}, ${cluster.specs.dimensions}, free in-store testing and same-day fitment. In stock: ${brandSummary}.`}
+          trackingPrefix={`${code}-hub`}
+        />
+      ) : (
+        <BatterySizeHero
+          cluster={cluster}
+          title={`${cluster.code} Car Battery Alberton`}
+          subtitle={
+            cluster.hubIntro ||
+            `${cluster.headTerm} in Alberton from ${fittedFromPrice} fitted. ${cluster.specs.ahRange}, ${cluster.specs.dimensions}, free testing and mobile call-out across Alberton. In stock: ${brandSummary}.`
+          }
+          trackingId={`${code}-hub-call`}
+        />
+      )}
       <BatterySizeTrustStrip />
       <BatterySizeProductCards cluster={cluster} products={products} />
       <BatterySizeSpecTable cluster={cluster} />

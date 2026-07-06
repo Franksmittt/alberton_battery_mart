@@ -7,6 +7,7 @@ import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { AdLandingHero } from "@/components/layout/AdLandingHero";
 import { BASE_URL, DEFAULT_LOGO } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
@@ -171,6 +172,10 @@ const BRAND_POSITIONING: Record<string, string> = {
     "Exide's AGM and EFB line-up handles Start/Stop vehicles with coding-safe fitment. Ideal for Fortuner, BMW, Mercedes, and premium SUVs needing reserve capacity.",
   enertec:
     "Enertec deep-cycle and lithium batteries power inverter, solar, and expedition builds. Pair them with our inverter design desk for stable backup power.",
+  "power-plus":
+    "Power Plus batteries in stock at our New Redruth storefront. Drive in for free testing, same-day fitment, and honest advice — no upselling.",
+  "eco-plus":
+    "Eco Plus value batteries available in-store at Alberton Battery Mart. Walk in for a free test and fitted pricing from R1,050.",
 };
 
 // The new page component
@@ -192,7 +197,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
   const vehicleLinks = BRAND_VEHICLE_LINKS[normalizedSlug] ?? [];
   const positioningCopy =
     BRAND_POSITIONING[normalizedSlug] ??
-    "Battery supply, diagnostics, and mobile fitment for Alberton and the East Rand.";
+    "Visit our Alberton storefront for battery supply, free diagnostics, and same-day fitment.";
 
   const brandSchema = {
     "@context": "https://schema.org",
@@ -215,53 +220,68 @@ export default async function BrandPage({ params }: BrandPageProps) {
   });
 
   return (
-    <div className="container py-16 space-y-12">
+    <div className="space-y-12">
       <JsonLd data={brandSchema} id={`${normalizedSlug}-brand-schema`} />
       <JsonLd
         data={productCollectionSchema}
         id={`${normalizedSlug}-collection-schema`}
       />
 
-      <div className="text-center space-y-3">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
-          <span className="text-battery">{brandName}</span> Batteries
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-          {positioningCopy}
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center pt-4">
-          <Button
-            asChild
-            size="lg"
-            variant="battery"
-            trackingId={`brand-${normalizedSlug}-call`}
-          >
-            <a href="tel:0101096211" className="flex items-center gap-2">
-              <Phone className="h-5 w-5" />
-              Call for {brandName} fitment
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="secondary"
-            className="bg-green-600 hover:bg-green-700 text-white"
-            trackingId={`brand-${normalizedSlug}-whatsapp`}
-          >
-            <a
-              href="https://wa.me/27823046926?text=Battery%20quote"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <MessageSquare className="h-5 w-5" />
-              WhatsApp the workshop
-            </a>
-          </Button>
+      {normalizedSlug === "power-plus" ? (
+        <AdLandingHero
+          title={
+            <>
+              <span className="text-battery">{brandName}</span> Batteries
+            </>
+          }
+          subtitle={positioningCopy}
+          trackingPrefix={`brand-${normalizedSlug}`}
+        />
+      ) : (
+        <div className="container py-16 space-y-12">
+          <div className="text-center space-y-3">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
+              <span className="text-battery">{brandName}</span> Batteries
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              {positioningCopy}
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center pt-4">
+              <Button
+                asChild
+                size="lg"
+                variant="battery"
+                trackingId={`brand-${normalizedSlug}-call`}
+              >
+                <a href="tel:0101096211" className="flex items-center gap-2">
+                  <Phone className="h-5 w-5" />
+                  Call for {brandName} fitment
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="bg-green-600 hover:bg-green-700 text-white"
+                trackingId={`brand-${normalizedSlug}-whatsapp`}
+              >
+                <a
+                  href="https://wa.me/27101096211?text=Battery%20quote"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <MessageSquare className="h-5 w-5" />
+                  WhatsApp the workshop
+                </a>
+              </Button>
+            </div>
+            <Separator className="pt-4" />
+          </div>
         </div>
-        <Separator className="pt-4" />
-      </div>
+      )}
 
+      <div className="container pb-16 space-y-12">
       <section className="bg-card/40 border border-border rounded-2xl p-8 space-y-6">
         <h2 className="text-3xl font-bold text-foreground">
           How we deploy {brandName} batteries in Alberton
@@ -349,6 +369,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
             products={products}
           />
         </div>
+      </div>
       </div>
     </div>
   );

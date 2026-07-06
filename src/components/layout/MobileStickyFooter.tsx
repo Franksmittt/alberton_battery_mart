@@ -1,26 +1,48 @@
 'use client';
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Phone, MessageSquare, Search, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import {
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  STORE_ADDRESS_LINE,
+  STORE_MAPS_URL,
+  WHATSAPP_URL,
+} from "@/lib/seo-constants";
+import { getStoreOpenStatus } from "@/lib/store-hours";
 
 const CodeLookup = dynamic(() => import("@/components/content/CodeLookup"), {
   loading: () => <div className="p-4 text-sm text-muted-foreground">Loading search...</div>,
 });
 
-const PRIMARY_PHONE = "010 109 6211";
-const WHATSAPP_NUMBER_LINK = "27823046926";
-const ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
-
 export function MobileStickyFooter() {
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
+  const [openStatus, setOpenStatus] = useState(() => getStoreOpenStatus());
+
+  useEffect(() => {
+    const updateStatus = () => setOpenStatus(getStoreOpenStatus());
+    updateStatus();
+    const interval = window.setInterval(updateStatus, 60_000);
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-[var(--brand-border)] bg-[var(--brand-bg)]/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
-      <div className="container px-1 py-1.5">
+      <div className="container px-1 py-1.5 space-y-1">
+        <div className="flex justify-center">
+          <span
+            className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+              openStatus.isOpen
+                ? "bg-[var(--brand-success)]/20 text-[var(--brand-success)]"
+                : "bg-white/10 text-[var(--brand-muted)]"
+            }`}
+          >
+            {openStatus.label}
+          </span>
+        </div>
         <div className="mx-auto w-full max-w-[360px] grid grid-cols-[auto_1fr_1fr_auto] items-center gap-1">
-          {/* Search Button */}
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -44,7 +66,6 @@ export function MobileStickyFooter() {
             </SheetContent>
           </Sheet>
 
-          {/* Call Button - Primary CTA */}
           <Button
             asChild
             variant="battery"
@@ -52,13 +73,12 @@ export function MobileStickyFooter() {
             className="h-11 px-2 font-bold"
             trackingId="mobile-sticky-call"
           >
-            <a href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center">
+            <a href={`tel:${PHONE_TEL}`} className="flex items-center justify-center">
               <Phone className="h-4 w-4 mr-1.5" />
               <span className="text-xs">Call Now</span>
             </a>
           </Button>
 
-          {/* WhatsApp Button */}
           <Button
             asChild
             variant="secondary"
@@ -67,7 +87,7 @@ export function MobileStickyFooter() {
             trackingId="mobile-sticky-whatsapp"
           >
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER_LINK}?text=Hi, I need help with a battery.`}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
@@ -77,7 +97,6 @@ export function MobileStickyFooter() {
             </a>
           </Button>
 
-          {/* Directions Button */}
           <Button
             asChild
             variant="outline"
@@ -86,11 +105,11 @@ export function MobileStickyFooter() {
             trackingId="mobile-sticky-map"
           >
             <a
-              href={googleMapsUrl}
+              href={STORE_MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center"
-              aria-label="Open map directions"
+              aria-label={`Get directions to ${STORE_ADDRESS_LINE}`}
             >
               <MapPin className="h-5 w-5" />
             </a>
@@ -100,4 +119,3 @@ export function MobileStickyFooter() {
     </div>
   );
 }
-

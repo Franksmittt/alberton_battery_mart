@@ -14,8 +14,11 @@ import {
   BUSINESS_ADDRESS,
   BUSINESS_CONTACT,
   LOCAL_BUSINESS_ID,
+  PHONE_DISPLAY,
+  PHONE_TEL,
   STORE_COORDINATES,
   STRUCTURED_AREA_SERVED,
+  WHATSAPP_URL,
 } from "@/lib/seo-constants";
 import { getAllLocalAreas, getLocalAreaBySlug, getNearbyLocalAreas } from "@/data/local-areas";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -27,8 +30,8 @@ type Params = {
   area: string;
 };
 
-const EMERGENCY_PHONE_LINK = "0101096211";
-const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
+const EMERGENCY_PHONE_LINK = PHONE_TEL;
+const EMERGENCY_PHONE_DISPLAY = PHONE_DISPLAY;
 
 export const revalidate = 86400;
 export const dynamicParams = false;
@@ -45,8 +48,8 @@ export async function generateMetadata({
   const area = getLocalAreaBySlug(params.area);
   if (!area) return {};
 
-  const title = `Mobile Battery Replacement ${area.name} | Alberton Battery Mart`;
-  const description = `Fast mobile battery replacement in ${area.name}. ${area.responseWindow} response window, on-site testing, and professional fitment.`;
+  const title = `Car Batteries in ${area.name} | Visit Alberton Battery Mart`;
+  const description = `Drive in to Alberton Battery Mart for car batteries serving ${area.name}. Free testing, same-day fitment, and honest advice at our New Redruth store.`;
 
   return buildPageMetadata({
     title,
@@ -67,7 +70,7 @@ export default function LocalAreaPage({ params }: { params: Params }) {
     "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
     "@id": LOCAL_BUSINESS_ID,
     name: "Alberton Battery Mart",
-    description: `Mobile battery replacement and diagnostics for ${area.name}`,
+    description: `Car battery supply and in-store fitment for customers in ${area.name}`,
     address: {
       "@type": "PostalAddress",
       ...BUSINESS_ADDRESS,
@@ -86,13 +89,13 @@ export default function LocalAreaPage({ params }: { params: Params }) {
       },
       ...STRUCTURED_AREA_SERVED,
     ],
-    serviceType: "Mobile Battery Replacement",
+    serviceType: "Car Battery Supply & Fitment",
   };
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: `Mobile battery replacement in ${area.name}`,
+    serviceType: `Car batteries for ${area.name} customers`,
     provider: {
       "@type": ["LocalBusiness", "AutoPartsStore", "AutoRepair"],
       "@id": LOCAL_BUSINESS_ID,
@@ -140,37 +143,35 @@ export default function LocalAreaPage({ params }: { params: Params }) {
       <section className="bg-card border-b border-border py-20">
         <div className="container text-center max-w-4xl space-y-6">
           <span className="text-battery font-bold text-lg uppercase">
-            Hyper-Local Service: {area.name}
+            Serving: {area.name}
           </span>
           <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
-            Mobile Battery Replacement in{" "}
-            <span className="text-battery">{area.name}</span>
+            Car Batteries in{" "}
+            <span className="text-battery">{area.name}</span> — Visit Alberton
+            Battery Mart
           </h1>
           <p className="text-xl text-muted-foreground">
-            {area.areaSummary} Our dispatch team normally reaches {area.name} in{" "}
-            {area.responseWindow} with stocked replacement batteries and diagnostic
-            tools.
+            {area.areaSummary} Drive in to our New Redruth storefront for free
+            testing, same-day fitment, and stock across all major brands.
           </p>
           <Button asChild size="xl" variant="battery" trackingId={`local-${area.slug}-call`}>
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center gap-3 mx-auto">
               <Phone className="h-6 w-6" />
-              <span>Call Now: {EMERGENCY_PHONE_DISPLAY}</span>
+              <span>Call Store: {EMERGENCY_PHONE_DISPLAY}</span>
             </a>
           </Button>
           <div className="flex flex-wrap gap-3 justify-center">
             <Button asChild variant="secondary" trackingId={`local-${area.slug}-whatsapp`}>
               <a
-                href={`https://wa.me/27823046926?text=Hi,%20I%20need%20battery%20help%20in%20${encodeURIComponent(area.name)}.`}
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                WhatsApp dispatch
+                WhatsApp for a quote
               </a>
             </Button>
-            <Button asChild variant="outline" trackingId={`local-${area.slug}-service-page`}>
-              <Link href="/services/mobile-battery-replacement/alberton">
-                View mobile replacement service
-              </Link>
+            <Button asChild variant="outline" trackingId={`local-${area.slug}-directions`}>
+              <Link href="/contact#hours">Get directions & hours</Link>
             </Button>
           </div>
         </div>
@@ -227,9 +228,13 @@ export default function LocalAreaPage({ params }: { params: Params }) {
             </li>
           </ul>
           <p className="text-sm text-muted-foreground">
-            Prefer in-store service? Visit us at{" "}
-            <Link href="/contact" className="text-battery underline">
-              28 St Columb Rd, New Redruth
+            Need a mobile callout? We also dispatch to {area.name} in{" "}
+            {area.responseWindow} —{" "}
+            <Link
+              href="/services/mobile-battery-replacement/alberton"
+              className="text-battery underline"
+            >
+              view mobile replacement service
             </Link>
             .
           </p>
