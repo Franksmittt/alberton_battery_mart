@@ -1,0 +1,20 @@
+/** Hub paths for Node audit scripts — keep in sync with src/lib/hub-pages.ts */
+export const HUB_PATHS = [
+  "/",
+  "/about",
+  "/contact",
+  "/services",
+  "/products",
+  "/products/brand/power-plus",
+  "/products/brand/eco-plus",
+  "/testing",
+  "/quote",
+  "/faq",
+  "/616-car-battery",
+  "/619-car-battery",
+  "/628-car-battery",
+  "/646-car-battery",
+  "/652-car-battery",
+  "/658-car-battery",
+  "/668-car-battery",
+];

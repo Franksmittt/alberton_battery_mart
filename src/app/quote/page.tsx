@@ -3,12 +3,16 @@ import { Metadata } from "next";
 import { headers } from "next/headers";
 import QuotePageContent from "@/components/content/QuotePageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Solar & Inverter Quote Alberton | Alberton Battery Mart",
+  title: {
+    absolute: "Solar & Inverter Quote Alberton | Alberton Battery Mart",
+  },
   description:
     "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
   keywords: [
@@ -98,9 +102,15 @@ export default function QuotePage() {
 
   return (
     <>
+      <PageJsonLd
+        title="Solar & Inverter Quote Alberton | Alberton Battery Mart"
+        description="Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you."
+        path="/quote"
+      />
       <JsonLd data={SERVICE_SCHEMA} id="service-schema" />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
       <QuotePageContent bucket={bucket} />
+      <RelatedContent />
     </>
   );
 }

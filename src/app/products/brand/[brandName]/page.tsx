@@ -11,6 +11,9 @@ import { AdLandingHero } from "@/components/layout/AdLandingHero";
 import { BASE_URL, DEFAULT_LOGO, WHATSAPP_URL } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { HubSection } from "@/components/seo/HubSection";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { createItemListSchema } from "@/lib/seo/schema";
 
 // Make this page dynamic so it can read updated prices from JSON
@@ -49,7 +52,7 @@ export async function generateMetadata({
     .join(" ");
   const url = `${BASE_URL}/products/brand/${params.brandName.toLowerCase()}`;
 
-  const description = `Shop authentic ${brandName} batteries in Alberton with on-site testing, coding, and same-day fitment.`;
+  const description = `Shop ${brandName} car batteries in Alberton with on-site testing, same-day fitment, and warranty. Drive in to New Redruth or call for stock.`;
 
   return {
     title: `${brandName} Batteries in Alberton | Alberton Battery Mart`,
@@ -221,6 +224,12 @@ export default async function BrandPage({ params }: BrandPageProps) {
 
   return (
     <div className="space-y-12">
+      <PageJsonLd
+        title={`${brandName} Batteries in Alberton | Alberton Battery Mart`}
+        description={`Shop ${brandName} car batteries in Alberton with on-site testing, same-day fitment, and warranty. Drive in to New Redruth or call for stock.`}
+        path={`/products/brand/${normalizedSlug}`}
+        type="CollectionPage"
+      />
       <JsonLd data={brandSchema} id={`${normalizedSlug}-brand-schema`} />
       <JsonLd
         data={productCollectionSchema}
@@ -228,17 +237,19 @@ export default async function BrandPage({ params }: BrandPageProps) {
       />
 
       {normalizedSlug === "power-plus" ? (
-        <AdLandingHero
-          title={
-            <>
-              <span className="text-battery">{brandName}</span> Batteries
-            </>
-          }
-          subtitle={positioningCopy}
-          trackingPrefix={`brand-${normalizedSlug}`}
-        />
+        <HubSection>
+          <AdLandingHero
+            title={
+              <>
+                <span className="text-battery">{brandName}</span> Batteries
+              </>
+            }
+            subtitle={positioningCopy}
+            trackingPrefix={`brand-${normalizedSlug}`}
+          />
+        </HubSection>
       ) : (
-        <div className="container py-16 space-y-12">
+        <HubSection className="container py-16 space-y-12">
           <div className="text-center space-y-3">
             <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
               <span className="text-battery">{brandName}</span> Batteries
@@ -262,7 +273,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
                 asChild
                 size="lg"
                 variant="secondary"
-                className="bg-green-600 hover:bg-green-700 text-white"
+                className="bg-hub-teal hover:bg-hub-teal-hover text-white"
                 trackingId={`brand-${normalizedSlug}-whatsapp`}
               >
                 <a
@@ -278,10 +289,10 @@ export default async function BrandPage({ params }: BrandPageProps) {
             </div>
             <Separator className="pt-4" />
           </div>
-        </div>
+        </HubSection>
       )}
 
-      <div className="container pb-16 space-y-12">
+      <HubSection className="container pb-16 space-y-12">
       <section className="bg-card/40 border border-border rounded-2xl p-8 space-y-6">
         <h2 className="text-3xl font-bold text-foreground">
           How we deploy {brandName} batteries in Alberton
@@ -370,7 +381,8 @@ export default async function BrandPage({ params }: BrandPageProps) {
           />
         </div>
       </div>
-      </div>
+      </HubSection>
+      <RelatedContent />
     </div>
   );
 }

@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { HubSection } from "@/components/seo/HubSection";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
@@ -94,9 +97,14 @@ const BREADCRUMB_SCHEMA = {
 export default function AboutPage() {
   return (
     <>
+      <PageJsonLd
+        title="About Alberton Battery Mart | Your Local Battery Experts"
+        description="Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts in Alberton."
+        path="/about"
+      />
       <JsonLd data={ORGANIZATION_SCHEMA} id="organization-schema" />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
-      <div className="container py-16 space-y-12 max-w-5xl">
+      <HubSection className="container py-16 space-y-12 max-w-5xl">
       
       {/* --- NEW: SEO-Optimized H1 & Subtitle --- */}
       <div className="text-center space-y-4">
@@ -139,12 +147,13 @@ export default function AboutPage() {
       </div>
 
       <div className="pt-8 text-center space-y-4">
-        <h3 className="text-2xl font-bold text-foreground">Ready to Get the Right Battery, First Time?</h3>
+        <h2 className="text-2xl font-bold text-foreground">Ready to Get the Right Battery, First Time?</h2>
         <Button asChild size="xl" variant="battery" className="shadow-lg">
           <Link href="/products">View Our Full Product Range</Link>
         </Button>
       </div>
-    </div>
+    </HubSection>
+    <RelatedContent />
     </>
   );
 }

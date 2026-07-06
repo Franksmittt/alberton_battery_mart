@@ -20,7 +20,12 @@
     "filter:willard-focused": "node scripts/filter-willard-focused-csv.mjs",
     "generate:size-fitments": "node scripts/generate-size-fitments.mjs",
     "import:drive-images": "node scripts/apply-drive-product-images.mjs",
-    "generate:car-catalog": "node scripts/generate-car-batteries-catalog.mjs"
+    "generate:car-catalog": "node scripts/generate-car-batteries-catalog.mjs",
+    "compile:llms": "node scripts/compile-llms.mjs",
+    "audit:hub:gsc": "tsx scripts/verify-hub-gsc.ts",
+    "audit:hub:axe": "node scripts/audit-hub-axe.mjs",
+    "audit:hub:lighthouse": "node scripts/audit-hub-lighthouse.mjs",
+    "audit:hub": "npm run compile:llms && npm run audit:hub:gsc && npm run build && npm run audit:hub:axe && npm run audit:hub:lighthouse"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -42,13 +47,18 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "20.11.24",
     "@types/react": "18.3.26",
     "@types/react-dom": "18.3.7",
     "autoprefixer": "10.4.19",
+    "chrome-launcher": "^1.2.1",
     "eslint": "8.57.1",
     "eslint-config-next": "14.2.3",
+    "lighthouse": "^13.4.0",
+    "playwright": "^1.61.1",
     "postcss": "8.4.38",
     "tailwindcss": "3.4.1",
     "tsx": "^4.19.4",

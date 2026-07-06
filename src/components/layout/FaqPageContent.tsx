@@ -54,7 +54,7 @@ const FaqPageContent = () => {
 
   return (
     // --- THEME FIX: Changed bg-white to bg-background ---
-    <section className="w-full bg-background py-16"> 
+    <section className="w-full bg-background py-16" data-chunk-boundary="true"> 
 
       <FaqSchema items={faqItems} id="faq-page-schema" />
       

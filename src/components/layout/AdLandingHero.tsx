@@ -59,7 +59,7 @@ export function AdLandingHero({
           <Button
             asChild
             size="lg"
-            className="bg-green-600 hover:bg-green-700 text-white"
+            className="bg-hub-teal hover:bg-hub-teal-hover text-white"
             trackingId={`${trackingPrefix}-whatsapp`}
           >
             <a

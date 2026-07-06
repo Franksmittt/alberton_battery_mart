@@ -5,6 +5,9 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { HubSection } from "@/components/seo/HubSection";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
 import { SERVICE_AREAS, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/seo-constants";
 
@@ -85,11 +88,14 @@ export default function ServicesPage() {
 
   return (
     <div className="container py-16 space-y-16">
-      {/* --- Add Service Schema --- */}
+      <PageJsonLd
+        title="Mobile Battery Replacement Service in Alberton | Alberton Battery Mart"
+        description="Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout."
+        path="/services"
+      />
       <JsonLd data={serviceSchema} id="services-landing-schema" />
       
-      {/* SECTION 1: HERO & PRIMARY CTA (H1 Focus) */}
-      <div className="text-center space-y-4 border-b border-border pb-10">
+      <HubSection className="text-center space-y-4 border-b border-border pb-10">
         <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
           Mobile Battery <span className="text-battery">Replacement</span> in Alberton
         </h1>
@@ -120,10 +126,9 @@ export default function ServicesPage() {
             <Link href="/local">View suburb service pages</Link>
           </Button>
         </div>
-      </div>
+      </HubSection>
 
-      {/* SECTION 2: MOBILE SERVICE LOGISTICS (Logistical USP) */}
-      <div className="grid lg:grid-cols-12 gap-10">
+      <HubSection className="grid lg:grid-cols-12 gap-10">
         <div className="lg:col-span-5 space-y-6">
           <Zap className="h-12 w-12 text-battery" />
            <h2 className="text-4xl font-bold text-foreground">
@@ -151,7 +156,7 @@ export default function ServicesPage() {
             <MapPin className="h-5 w-5 text-battery" />
             <p>Focused Callout Zones: New Redruth, Meyersdal, Alberton Central, Brackenhurst, Brackendowns, Randhart, Verwoerdpark, and Alrode.</p>
           </div>
-          <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white">
+          <Button asChild variant="secondary" className="mt-4 bg-hub-teal hover:bg-hub-teal-hover text-white">
              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
               WhatsApp Us for Quick Service Booking
             </a>
@@ -178,11 +183,13 @@ export default function ServicesPage() {
               <p className="text-sm text-muted-foreground mt-1">We offer the full spectrum of products, from OEM Raylite alternatives to specialized LiFePO₄ solar solutions.</p>
             </div>
         </div>
-      </div>
+      </HubSection>
 
       <Separator className="bg-border" />
 
-      <AtomicAnswers variant="services" />
+      <HubSection>
+        <AtomicAnswers variant="services" />
+      </HubSection>
 
       <Separator className="bg-border" />
 
@@ -359,18 +366,18 @@ export default function ServicesPage() {
       {/* --- END NEW SECTION 4 --- */}
 
 
-      {/* Final Conversion Funnel */}
-      <div className="w-full text-center pt-10">
-        <h3 className="text-3xl font-extrabold text-foreground mb-4">
+      <HubSection className="w-full text-center pt-10">
+        <h2 className="text-3xl font-extrabold text-foreground mb-4">
           Don't Guess Your Battery Needs. Get Expert Help.
-        </h3>
+        </h2>
         <Button asChild size="xl" variant="battery" className="mt-4 shadow-xl">
           <a href={`tel:${PHONE_TEL}`} className="flex items-center justify-center space-x-3 mx-auto">
             <Phone className="h-6 w-6" />
             <span>Call Now: {PHONE_DISPLAY}</span>
           </a>
         </Button>
-      </div>
+      </HubSection>
+      <RelatedContent />
     </div>
   );
 }

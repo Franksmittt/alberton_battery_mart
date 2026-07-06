@@ -31,14 +31,16 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
     >
       {({ trackCta }) => (
         <div className="space-y-12">
-          <AdLandingHero
+          <section data-chunk-boundary="true">
+            <AdLandingHero
             title="Contact Alberton's Battery Experts"
             subtitle="Drive in for a free battery test, same-day fitment, and expert advice at our New Redruth storefront."
             trackingPrefix="contact-hero"
             className="border-b-0"
           />
+          </section>
 
-          <div className="container pb-16 space-y-12">
+          <section data-chunk-boundary="true" className="container pb-16 space-y-12">
             <div className="grid lg:grid-cols-3 gap-10">
               <div className="lg:col-span-1 space-y-6">
                 <h2 className="text-3xl font-bold text-battery mb-4">
@@ -95,10 +97,10 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                   </CardContent>
                 </Card>
 
-                <Card className="bg-card border-l-4 border-green-600">
+                <Card className="bg-card border-l-4 border-hub-teal">
                   <CardContent className="p-4 space-y-2">
                     <div className="flex items-center space-x-3">
-                      <MessageSquare className="h-6 w-6 text-green-600" />
+                      <MessageSquare className="h-6 w-6 text-hub-teal" />
                       <h3 className="text-xl font-bold text-foreground">
                         WhatsApp Quotes
                       </h3>
@@ -109,7 +111,7 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                     <Button
                       asChild
                       variant="secondary"
-                      className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white"
+                      className="w-full mt-2 bg-hub-teal hover:bg-hub-teal-hover text-white"
                     >
                       <a
                         href={WHATSAPP_URL}
@@ -196,7 +198,7 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                 />
               </div>
             </div>
-          </div>
+          </section>
         </div>
       )}
     </QuoteTrackingWrapper>

@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import { headers } from "next/headers";
 import ContactPageContent from "@/components/content/ContactPageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 // Mark route as dynamic since we're using headers()
@@ -101,9 +103,16 @@ export default function ContactPage() {
 
   return (
     <>
+      <PageJsonLd
+        title="Contact Alberton Battery Mart | Store Location & Hours"
+        description="Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes."
+        path="/contact"
+        type="ContactPage"
+      />
       <JsonLd data={CONTACT_SCHEMA} id="contact-schema" />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
       <ContactPageContent bucket={bucket} />
+      <RelatedContent />
     </>
   );
 }

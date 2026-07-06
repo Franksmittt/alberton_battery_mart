@@ -3,6 +3,9 @@ import { Gauge, MapPin, Phone, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { HubSection } from "@/components/seo/HubSection";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { AdLandingHero } from "@/components/layout/AdLandingHero";
 import {
   BASE_URL,
@@ -107,10 +110,16 @@ const BREADCRUMB_SCHEMA = {
 export default function TestingPage() {
   return (
     <>
+      <PageJsonLd
+        title="Free Battery, Starter & Alternator Test in Alberton | Alberton Battery Mart"
+        description="Get a 100% free, no-obligation battery, starter, and alternator test at our Alberton store. We only sell you a battery if you actually need one."
+        path="/testing"
+      />
       <JsonLd data={SERVICE_SCHEMA} id="service-schema" />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
 
-      <AdLandingHero
+      <HubSection>
+        <AdLandingHero
         title={
           <>
             Get a <span className="text-battery">FREE</span> 3-Point Diagnostic
@@ -119,9 +128,10 @@ export default function TestingPage() {
         }
         subtitle="Don't guess. Know for sure. Drive in for an instant, professional diagnostic of your battery, starter, and alternator."
         trackingPrefix="testing-hero"
-      />
+        />
+      </HubSection>
 
-      <div className="container py-16 space-y-12 max-w-4xl">
+      <HubSection className="container py-16 space-y-12 max-w-4xl">
         <div className="text-center">
           <Gauge className="h-12 w-12 text-battery mx-auto mb-4" />
         </div>
@@ -166,9 +176,9 @@ export default function TestingPage() {
         </div>
 
         <div className="text-center pt-4 space-y-4">
-          <h3 className="text-2xl font-bold text-foreground">
+          <h2 className="text-2xl font-bold text-foreground">
             Worried About Your Battery? Visit Us Today.
-          </h3>
+          </h2>
           <p className="text-lg text-muted-foreground">
             No appointment needed for in-store testing at {STORE_ADDRESS_LINE}.
           </p>
@@ -195,7 +205,8 @@ export default function TestingPage() {
             </Button>
           </div>
         </div>
-      </div>
+      </HubSection>
+      <RelatedContent />
     </>
   );
 }

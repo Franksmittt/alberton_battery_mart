@@ -9,6 +9,9 @@ import Image from "next/image";
 import { ALL_PRODUCTS, type ProductCardData } from "@/data/products";
 import MobileTrustRotator from "@/components/layout/MobileTrustRotator";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { HubSection } from "@/components/seo/HubSection";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 
 // Optimized for static generation
 export const dynamic = 'auto';
@@ -21,7 +24,7 @@ export const metadata: Metadata = {
   ...buildPageMetadata({
     title: "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
     description:
-      "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Free fitment, testing, and 24-month warranty. Call 010 109 6211.",
+      "Fast mobile battery replacement in Alberton, New Redruth, and Meyersdal. Willard & Exide in stock. Free fitment, testing, and warranty. Call 010 109 6211.",
     path: "/",
     keywords: [
       "battery replacement Alberton",
@@ -129,7 +132,12 @@ export default function Home() {
 
   return (
     <main className="overflow-x-clip">
-      <section className="min-h-[72vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(37,211,102,0.12)_0%,transparent_70%)] text-white flex items-center">
+      <PageJsonLd
+        title="Alberton Battery Mart | Mobile Battery Replacement & Fitment Service"
+        description="Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Free fitment, testing, and 24-month warranty. Call 010 109 6211."
+        path="/"
+      />
+      <HubSection className="min-h-[72vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] text-white flex items-center">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center animate-in fade-in slide-in-from-bottom-2 duration-700">
             <h1 className="text-[clamp(2.2rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.08] mb-4 md:whitespace-nowrap">
@@ -189,9 +197,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </HubSection>
 
-      <section className="bg-zinc-100 border-y border-zinc-200 border-b-2">
+      <HubSection className="bg-zinc-100 border-y border-zinc-200 border-b-2">
         <div className="container px-0 sm:px-6 lg:px-8">
           <div className="max-[900px]:hidden flex items-center justify-center gap-16 px-8 py-5">
             <div className="inline-flex items-center gap-3 text-[var(--brand-muted-3)] font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
@@ -209,9 +217,9 @@ export default function Home() {
           </div>
           <MobileTrustRotator />
         </div>
-      </section>
+      </HubSection>
 
-      <section className="py-16 px-4 bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-black bg-[radial-gradient(circle_at_15%_50%,rgba(229,57,53,0.15),transparent_25%),radial-gradient(circle_at_85%_30%,rgba(37,211,102,0.15),transparent_25%)]">
+      <section className="py-16 px-4 bg-gradient-to-br from-[var(--brand-bg-soft)] via-[var(--brand-bg)] to-black bg-[radial-gradient(circle_at_15%_50%,rgba(229,57,53,0.15),transparent_25%),radial-gradient(circle_at_85%_30%,rgba(15,118,110,0.15),transparent_25%)]">
         <div className="container px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="text-center mb-8">
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-tight text-white mb-3">
@@ -580,7 +588,7 @@ export default function Home() {
         </div>
       </section>
       
-      {/* 2. EXPERTISE & FAQ: Overcomes customer objections and builds expert status. */}
+      <RelatedContent className="container py-12 bg-background" />
       <FaqSection />
     </main>
   );

@@ -36,6 +36,11 @@ const config: Config = {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
         },
+        'hub-teal': {
+          DEFAULT: '#0F766E',
+          hover: '#0D5F58',
+          dark: '#006B6B',
+        },
   			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'

@@ -66,7 +66,7 @@ export function BatterySizeHero({
               Call {PHONE_DISPLAY}
             </a>
           </Button>
-          <Button asChild size="lg" variant="secondary" className="bg-green-600 hover:bg-green-700 text-white">
+          <Button asChild size="lg" className="bg-hub-teal hover:bg-hub-teal-hover text-white">
             <a
               href={buildWhatsAppUrl(`Hi, I need a ${cluster.code} battery in Alberton.`)}
               target="_blank"
@@ -125,7 +125,7 @@ export function BatterySizeSpecTable({
         <h2 className="text-3xl font-bold text-foreground">
           {cluster.code} Battery Specifications
         </h2>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={`${cluster.code} battery specifications table`}>
           <table className="w-full text-left text-sm md:text-base border-collapse">
             <thead>
               <tr className="border-b border-border">

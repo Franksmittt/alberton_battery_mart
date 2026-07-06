@@ -6,6 +6,9 @@ import { Separator } from "@/components/ui/separator";
 import CodeLookup from "@/components/content/CodeLookup";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { HubSection } from "@/components/seo/HubSection";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
@@ -89,8 +92,14 @@ const BREADCRUMB_SCHEMA = {
 export default function ProductsBasePage() {
   return (
     <>
+      <PageJsonLd
+        title="Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar"
+        description="Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters. Free fitment & testing."
+        path="/products"
+        type="CollectionPage"
+      />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
-      <div className="container py-16 space-y-16">
+      <HubSection className="container py-16 space-y-16">
         
         {/* H1 and Introduction (SEO Focus) */}
         <div className="text-center space-y-4">
@@ -154,7 +163,8 @@ export default function ProductsBasePage() {
                 ))}
             </div>
         </div>
-    </div>
+      </HubSection>
+      <RelatedContent />
     </>
   );
 }

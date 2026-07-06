@@ -79,6 +79,8 @@ export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
     "/golf-cart-batteries/lithium-conversion",
     "/golf-cart-batteries/lead-acid",
     "/testing",
+    "/products/brand/power-plus",
+    "/products/brand/eco-plus",
     ...clusterRoutes,
   ];
 

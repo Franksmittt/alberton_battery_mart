@@ -20,8 +20,9 @@ export default function QuotePageContent({ bucket }: QuotePageContentProps) {
       ctaEventName="quote_page_cta_click"
     >
       {({ trackCta }) => (
-        <div className="container py-16 space-y-12 max-w-4xl">
-          <div className="text-center space-y-4">
+        <>
+          <section data-chunk-boundary="true" className="container py-16 space-y-12 max-w-4xl">
+            <div className="text-center space-y-4">
             <Battery className="h-16 w-16 text-battery mx-auto" />
             <h1 className="text-5xl font-extrabold text-foreground">
               Request a Quote
@@ -70,9 +71,9 @@ export default function QuotePageContent({ bucket }: QuotePageContentProps) {
           </div>
 
           <div>
-            <h3 className="text-3xl font-bold text-foreground text-center mb-6">
+            <h2 className="text-3xl font-bold text-foreground text-center mb-6">
               Send Us Your Inquiry
-            </h3>
+            </h2>
             <ContactForm />
           </div>
 
@@ -103,7 +104,8 @@ export default function QuotePageContent({ bucket }: QuotePageContentProps) {
               </Button>
             </div>
           </div>
-        </div>
+          </section>
+        </>
       )}
     </QuoteTrackingWrapper>
   );

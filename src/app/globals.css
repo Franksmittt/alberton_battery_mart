@@ -38,8 +38,8 @@
     --brand-muted-3: #555555;
     --brand-accent: #e53935;
     --brand-accent-hover: #c62828;
-    --brand-success: #25d366;
-    --brand-success-hover: #1ebe5a;
+    --brand-success: #0f766e;
+    --brand-success-hover: #0d5f58;
   }
 
   .dark {
@@ -71,8 +71,8 @@
     --brand-muted-3: #555555;
     --brand-accent: #e53935;
     --brand-accent-hover: #c62828;
-    --brand-success: #25d366;
-    --brand-success-hover: #1ebe5a;
+    --brand-success: #0f766e;
+    --brand-success-hover: #0d5f58;
   }
 }
 

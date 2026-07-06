@@ -2,6 +2,8 @@
 import FaqPageContent from "@/components/layout/FaqPageContent";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageJsonLd } from "@/components/seo/PageJsonLd";
+import { RelatedContent } from "@/components/seo/RelatedContent";
 import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
@@ -67,8 +69,15 @@ const BREADCRUMB_SCHEMA = {
 export default function FaqPage() {
   return (
     <>
+      <PageJsonLd
+        title="FAQ - Alberton Battery Mart | Free Testing & Fitment"
+        description="Answers to common battery questions in Alberton. Learn about our free callouts, warranty, and AGM/EFB batteries. Get expert advice."
+        path="/faq"
+        type="FAQPage"
+      />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
       <FaqPageContent />
+      <RelatedContent />
     </>
   );
 }
