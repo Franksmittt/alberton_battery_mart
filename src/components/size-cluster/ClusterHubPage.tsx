@@ -22,7 +22,6 @@ import { priceForSchema } from "@/lib/formatting";
 import { AdLandingHero } from "@/components/layout/AdLandingHero";
 import {
   BatterySizeFaqSection,
-  BatterySizeHero,
   BatterySizeIntentLinks,
   BatterySizeProductCards,
   BatterySizeSiblingLinks,
@@ -31,6 +30,18 @@ import {
   BatterySizeTrustStrip,
   BatterySizeVehicleList,
 } from "@/components/content/BatterySizeSections";
+
+function buildHubSubtitle(
+  cluster: NonNullable<ReturnType<typeof getClusterConfig>>,
+  fittedFromPrice: string,
+  brandSummary: string
+): string {
+  const driveInLead = `${cluster.headTerm} in Alberton from ${fittedFromPrice} fitted. ${cluster.specs.ahRange}, ${cluster.specs.dimensions}, free in-store testing and same-day fitment.`;
+  if (cluster.hubIntro) {
+    return `${cluster.hubIntro} ${driveInLead} In stock: ${brandSummary}.`;
+  }
+  return `${driveInLead} In stock: ${brandSummary}.`;
+}
 
 export async function renderClusterHub(code: string) {
   const cluster = getClusterConfig(code);
@@ -46,7 +57,7 @@ export async function renderClusterHub(code: string) {
     "@type": ["LocalBusiness", "AutoPartsStore"],
     "@id": LOCAL_BUSINESS_ID,
     name: "Alberton Battery Mart",
-    description: `${cluster.code} car battery supply, testing, and mobile fitment in Alberton`,
+    description: `${cluster.code} car battery supply, in-store testing, and same-day fitment in Alberton`,
     address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
     telephone: BUSINESS_CONTACT.telephone,
     url: `${BASE_URL}${cluster.hubPath}`,
@@ -88,23 +99,11 @@ export async function renderClusterHub(code: string) {
         />
       ))}
 
-      {code === "658" ? (
-        <AdLandingHero
-          title={`${cluster.code} Car Battery Alberton`}
-          subtitle={`${cluster.headTerm} in Alberton from ${fittedFromPrice} fitted. ${cluster.specs.ahRange}, ${cluster.specs.dimensions}, free in-store testing and same-day fitment. In stock: ${brandSummary}.`}
-          trackingPrefix={`${code}-hub`}
-        />
-      ) : (
-        <BatterySizeHero
-          cluster={cluster}
-          title={`${cluster.code} Car Battery Alberton`}
-          subtitle={
-            cluster.hubIntro ||
-            `${cluster.headTerm} in Alberton from ${fittedFromPrice} fitted. ${cluster.specs.ahRange}, ${cluster.specs.dimensions}, free testing and mobile call-out across Alberton. In stock: ${brandSummary}.`
-          }
-          trackingId={`${code}-hub-call`}
-        />
-      )}
+      <AdLandingHero
+        title={`${cluster.code} Car Battery — In Stock at Alberton Battery Mart`}
+        subtitle={buildHubSubtitle(cluster, fittedFromPrice, brandSummary)}
+        trackingPrefix={`${code}-hub`}
+      />
       <BatterySizeTrustStrip />
       <BatterySizeProductCards cluster={cluster} products={products} />
       <BatterySizeSpecTable cluster={cluster} />
@@ -128,7 +127,7 @@ export async function clusterHubMetadata(code: string) {
   const brandList = summarizeBrands(products);
 
   return buildPageMetadata({
-    title: `${cluster.code} Car Battery Alberton | All Brands | Free Fitment`,
+    title: `${cluster.code} Car Battery Alberton | In Stock | Free Fitment`,
     description: `${cluster.headTerm} in Alberton from ${fittedFromPrice} with free fitment, alternator testing, and warranty. ${products.length} option${products.length === 1 ? "" : "s"} in stock (${brandList}). Drive in to our New Redruth store or call for availability.`,
     path: cluster.hubPath,
     keywords: [
