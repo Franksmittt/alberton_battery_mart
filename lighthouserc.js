@@ -24,6 +24,14 @@ module.exports = {
       numberOfRuns: 1,
       settings: {
         preset: "desktop",
+        screenEmulation: {
+          mobile: false,
+          width: 1350,
+          height: 940,
+          deviceScaleFactor: 1,
+          disabled: false,
+        },
+        chromeFlags: ["--headless=new", "--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"],
       },
     },
     assert: {
