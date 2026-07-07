@@ -137,25 +137,42 @@ export async function initializeProductsFile() {
 
 export async function getProducts(): Promise<ProductCardData[]> {
   if (shouldUseBlobStorage()) {
-    const blobProducts = await readProductsFromBlob();
-    if (blobProducts) {
-      return blobProducts;
+    try {
+      const blobProducts = await readProductsFromBlob();
+      if (blobProducts) {
+        return blobProducts;
+      }
+    } catch (error) {
+      console.error("[products-storage] Blob read failed, falling back to filesystem:", error);
     }
-
-    const seed = await readProductsFromFilesystem();
-    await writeProductsToBlob(seed);
-    return seed;
   }
 
-  return readProductsFromFilesystem();
+  const filesystemProducts = await readProductsFromFilesystem();
+
+  if (shouldUseBlobStorage()) {
+    try {
+      await writeProductsToBlob(filesystemProducts);
+    } catch (error) {
+      console.error("[products-storage] Blob seed failed:", error);
+    }
+  }
+
+  return filesystemProducts;
 }
 
 export async function saveProducts(products: ProductCardData[]): Promise<void> {
   const normalized = normalizeProducts(products);
 
-  await writeProductsToFilesystem(normalized);
-
   if (shouldUseBlobStorage()) {
     await writeProductsToBlob(normalized);
+    try {
+      await writeProductsToFilesystem(normalized);
+    } catch (error) {
+      // Serverless filesystem is ephemeral — blob is the production source of truth.
+      console.warn("[products-storage] Filesystem write skipped:", error);
+    }
+    return;
   }
+
+  await writeProductsToFilesystem(normalized);
 }
