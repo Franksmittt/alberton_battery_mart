@@ -13,6 +13,7 @@ import {
 import { brandDisplayName, type BatteryBrand } from "@/lib/products/brands";
 import { getProductsBySizeCode } from "@/lib/products/by-size";
 import { formatProductPrice, priceForSchema } from "@/lib/formatting";
+import { isProductSchemaEligible } from "@/lib/seo/product-schema-eligibility";
 import {
   BatterySizeFaqSection,
   BatterySizeHero,
@@ -49,19 +50,21 @@ export async function renderClusterBrand(
           },
         ]}
       />
-      <ProductSchema
-        name={product.name}
-        description={product.seoDescription}
-        sku={product.sku}
-        brand={product.brandName}
-        image={product.imagePath}
-        url={`/products/id/${product.id}`}
-        price={priceForSchema(product.sellingPrice_OUTPUT)}
-        additionalProperty={[
-          { name: "Ah capacity", value: product.ahCapacity },
-          { name: "CCA", value: product.cca },
-        ]}
-      />
+      {isProductSchemaEligible(product) ? (
+        <ProductSchema
+          name={product.name}
+          description={product.seoDescription}
+          sku={product.sku}
+          brand={product.brandName}
+          image={product.imagePath}
+          url={`/products/id/${product.id}`}
+          price={priceForSchema(product.sellingPrice_OUTPUT)}
+          additionalProperty={[
+            { name: "Ah capacity", value: product.ahCapacity },
+            { name: "CCA", value: product.cca },
+          ]}
+        />
+      ) : null}
 
       <BatterySizeHero
         cluster={cluster}

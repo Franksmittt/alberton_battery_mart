@@ -19,6 +19,7 @@ import ProductSchema from "@/components/seo/ProductSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import IntentLinks from "@/components/seo/IntentLinks";
 import { formatProductPrice, priceForSchema, isPriceOnApplication } from "@/lib/formatting";
+import { isProductSchemaEligible } from "@/lib/seo/product-schema-eligibility";
 
 import {
   buildWhatsAppUrl,
@@ -139,20 +140,22 @@ export default async function ProductDetailPage({
 
   return (
     <div className="container py-16">
-      <ProductSchema
-        scriptId="product-schema"
-        name={product.name}
-        description={`Get the ${product.name} ${
-          product.seoSubtitle
-        } at Alberton Battery Mart. Free fitment, testing, and ${
-          product.warrantyMonths
-        }-month warranty.`}
-        sku={product.sku}
-        brand={product.brandName}
-        image={product.imagePath}
-        url={`/products/id/${product.id}`}
-        price={schemaPrice}
-      />
+      {isProductSchemaEligible(product) ? (
+        <ProductSchema
+          scriptId="product-schema"
+          name={product.name}
+          description={`Get the ${product.name} ${
+            product.seoSubtitle
+          } at Alberton Battery Mart. Free fitment, testing, and ${
+            product.warrantyMonths
+          }-month warranty.`}
+          sku={product.sku}
+          brand={product.brandName}
+          image={product.imagePath}
+          url={`/products/id/${product.id}`}
+          price={schemaPrice}
+        />
+      ) : null}
       <BreadcrumbSchema
         id="product-breadcrumb-schema"
         items={[

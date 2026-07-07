@@ -19,6 +19,7 @@ import {
 } from "@/lib/battery-sizes/content";
 import { getProductsBySizeCode, getFittedPriceLabel } from "@/lib/products/by-size";
 import { priceForSchema } from "@/lib/formatting";
+import { isProductSchemaEligible } from "@/lib/seo/product-schema-eligibility";
 import { AdLandingHero } from "@/components/layout/AdLandingHero";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
@@ -88,7 +89,7 @@ export async function renderClusterHub(code: string) {
           { name: cluster.displayName, item: cluster.hubPath },
         ]}
       />
-      {products.map((product) => (
+      {products.filter(isProductSchemaEligible).map((product) => (
         <ProductSchema
           key={product.id}
           scriptId={`${code}-product-schema-${product.id}`}
