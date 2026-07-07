@@ -1,9 +1,11 @@
-// Simple authentication helper
-// In production, use environment variables for credentials
-export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+// Soft staff login — password only in production via ADMIN_PASSWORD env var.
+export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin@abm";
 
-export function verifyCredentials(username: string, password: string): boolean {
-  return username === ADMIN_USERNAME && password === ADMIN_PASSWORD;
+export function verifyPassword(password: string): boolean {
+  return password === ADMIN_PASSWORD;
 }
 
+/** @deprecated Username is no longer required; kept for backwards compatibility. */
+export function verifyCredentials(username: string, password: string): boolean {
+  return verifyPassword(password);
+}

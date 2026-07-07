@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getAllProducts } from '@/data/products';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // API route to get all products (reads from JSON if available)
 export async function GET() {
   try {

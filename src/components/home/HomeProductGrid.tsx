@@ -1,8 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HOMEPAGE_CURATED_PRODUCTS } from "@/data/homepage-curated-products";
+import { getAllProducts } from "@/data/products";
+import { HOMEPAGE_CURATED_PRODUCT_IDS } from "@/data/homepage-curated-products";
 
-export function HomeProductGrid() {
+export async function HomeProductGrid() {
+  const allProducts = await getAllProducts();
+  const products = HOMEPAGE_CURATED_PRODUCT_IDS.map((id) =>
+    allProducts.find((product) => product.id === id)
+  ).filter((product): product is NonNullable<typeof product> => Boolean(product));
+
   return (
     <section className="bg-zinc-50 py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -24,10 +30,10 @@ export function HomeProductGrid() {
         </div>
 
         <div className="grid grid-cols-4 gap-6 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
-          {HOMEPAGE_CURATED_PRODUCTS.map((product, index) => {
+          {products.map((product, index) => {
             const badge =
               index === 0
-                  ? { text: "Bestseller", className: "bg-[var(--brand-accent-solid)] text-white" }
+                ? { text: "Bestseller", className: "bg-[var(--brand-accent-solid)] text-white" }
                 : product.isAGM
                   ? { text: "Start/Stop AGM", className: "bg-[var(--brand-bg)] text-white" }
                   : product.category === "Truck & Commercial"

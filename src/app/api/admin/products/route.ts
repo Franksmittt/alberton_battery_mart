@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { getProducts, saveProducts } from '@/lib/products-storage';
 import { ProductCardData } from '@/data/products';
+import { revalidateAfterProductSave } from '@/lib/revalidate-product-paths';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -48,6 +49,7 @@ export async function POST(request: NextRequest) {
     
     products.push(product);
     await saveProducts(products);
+    await revalidateAfterProductSave([product.id]);
     
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
@@ -78,6 +80,7 @@ export async function PUT(request: NextRequest) {
     
     products[index] = product;
     await saveProducts(products);
+    await revalidateAfterProductSave([product.id]);
     
     return NextResponse.json(product);
   } catch (error) {
@@ -116,6 +119,7 @@ export async function DELETE(request: NextRequest) {
     }
     
     await saveProducts(filtered);
+    await revalidateAfterProductSave([id]);
     
     return NextResponse.json({ success: true });
   } catch (error) {

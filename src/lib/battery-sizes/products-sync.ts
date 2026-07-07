@@ -11,3 +11,7 @@ export function getAllProductsSync(): ProductCardData[] {
   cachedProducts = JSON.parse(readFileSync(file, "utf-8")) as ProductCardData[];
   return cachedProducts;
 }
+
+export function clearProductsSyncCache(): void {
+  cachedProducts = null;
+}

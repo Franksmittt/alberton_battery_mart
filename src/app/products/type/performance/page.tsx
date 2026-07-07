@@ -1,6 +1,6 @@
 // src/app/products/type/performance/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
@@ -52,17 +52,13 @@ export const metadata: Metadata = {
   },
 };
 
-// Filters for: Performance AGM/EFB
-const PERFORMANCE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Performance AGM/EFB'
-);
+export const dynamic = "force-dynamic";
 
 const getFilterOptions = (products: ProductCardData[]) => {
     const brands = Array.from(new Set(products.map(p => p.brandName)));
     const sizes = Array.from(new Set(products.map(p => p.sku)));
     return { brands, sizes };
 };
-const { brands, sizes } = getFilterOptions(PERFORMANCE_PRODUCTS);
 
 const SERVICE_LINKS = [
   {
@@ -83,12 +79,18 @@ const VEHICLE_LINKS = [
   { label: "Audi Q5 boot battery replacement", slug: "audi/q5-tdi" },
 ];
 
-export default function PerformanceBatteriesPage() {
+export default async function PerformanceBatteriesPage() {
+  const allProducts = await getAllProducts();
+  const performanceProducts = allProducts.filter(
+    (product) => product.category === "Performance AGM/EFB"
+  );
+  const { brands, sizes } = getFilterOptions(performanceProducts);
+
   const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/performance`,
-    items: PERFORMANCE_PRODUCTS.slice(0, 20).map((product) => ({
+    items: performanceProducts.slice(0, 20).map((product) => ({
       name: product.name,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
@@ -357,8 +359,8 @@ export default function PerformanceBatteriesPage() {
  
                  <ProductListPage
                     title="All Performance & Start/Stop Batteries"
-                    description={`Displaying ${PERFORMANCE_PRODUCTS.length} specialized EFB and AGM products ready for fitment.`}
-                    products={PERFORMANCE_PRODUCTS}
+                    description={`Displaying ${performanceProducts.length} specialized EFB and AGM products ready for fitment.`}
+                    products={performanceProducts}
                  />
             </div>
 

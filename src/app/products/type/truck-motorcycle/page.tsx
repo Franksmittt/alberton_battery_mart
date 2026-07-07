@@ -1,6 +1,6 @@
 // src/app/products/type/truck-motorcycle/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
@@ -51,17 +51,13 @@ export const metadata: Metadata = {
   },
 };
 
-const TRUCK_MOTORCYCLE_PRODUCTS = ALL_PRODUCTS.filter(
-  (p: ProductCardData) =>
-    p.category === "Truck & Commercial" || p.category === "Motorcycle"
-);
+export const dynamic = "force-dynamic";
 
 const getFilterOptions = (products: ProductCardData[]) => {
   const brands = Array.from(new Set(products.map((p) => p.brandName)));
   const sizes = Array.from(new Set(products.map((p) => p.sku)));
   return { brands, sizes };
 };
-const { brands, sizes } = getFilterOptions(TRUCK_MOTORCYCLE_PRODUCTS);
 
 const SERVICE_LINKS = [
   {
@@ -76,12 +72,19 @@ const SERVICE_LINKS = [
   },
 ];
 
-export default function TruckMotorcycleBatteriesPage() {
+export default async function TruckMotorcycleBatteriesPage() {
+  const allProducts = await getAllProducts();
+  const truckMotorcycleProducts = allProducts.filter(
+    (product) =>
+      product.category === "Truck & Commercial" || product.category === "Motorcycle"
+  );
+  const { brands, sizes } = getFilterOptions(truckMotorcycleProducts);
+
   const productCollectionSchema = createItemListSchema({
     name: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/truck-motorcycle`,
-    items: TRUCK_MOTORCYCLE_PRODUCTS.slice(0, 20).map((product) => ({
+    items: truckMotorcycleProducts.slice(0, 20).map((product) => ({
       name: product.name,
       url: `${BASE_URL}/products/id/${product.id}`,
     })),
@@ -167,8 +170,8 @@ export default function TruckMotorcycleBatteriesPage() {
             <div className="lg:flex-grow">
                 <ProductListPage
                     title="All Commercial & Powersport Batteries"
-                    description={`Displaying ${TRUCK_MOTORCYCLE_PRODUCTS.length} products ready for heavy-duty and light-sport applications.`}
-                    products={TRUCK_MOTORCYCLE_PRODUCTS}
+                    description={`Displaying ${truckMotorcycleProducts.length} products ready for heavy-duty and light-sport applications.`}
+                    products={truckMotorcycleProducts}
                 />
             </div>
 

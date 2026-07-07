@@ -1,5 +1,8 @@
 import type { ProductCardData } from "@/data/products";
 
+/** Product IDs shown on the homepage trending grid. */
+export const HOMEPAGE_CURATED_PRODUCT_IDS = [235, 118, 328, 110] as const;
+
 /** Static homepage showcase — avoids importing the full ~73KB products catalog. */
 export const HOMEPAGE_CURATED_PRODUCTS: ProductCardData[] = [
   {
