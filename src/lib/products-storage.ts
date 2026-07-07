@@ -31,16 +31,25 @@ function getBlobAuthToken(): string | null {
   return process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN || null;
 }
 
-function blobHeaders(contentType = "application/json"): HeadersInit {
+function getBlobAccess(): "private" | "public" {
+  return process.env.BLOB_STORE_ACCESS === "public" ? "public" : "private";
+}
+
+function blobRequestHeaders(contentType = "application/json"): Record<string, string> {
   const token = getBlobAuthToken();
+  if (!token) {
+    throw new Error("Blob auth token is not configured");
+  }
+
   const headers: Record<string, string> = {
     authorization: `Bearer ${token}`,
+    "x-vercel-blob-access": getBlobAccess(),
     "x-content-type": contentType,
     "x-add-random-suffix": "0",
     "x-allow-overwrite": "1",
   };
 
-  if (process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN) {
+  if (process.env.BLOB_STORE_ID) {
     headers["x-store-id"] = process.env.BLOB_STORE_ID;
   }
 
@@ -64,24 +73,15 @@ async function writeProductsToFilesystem(products: ProductCardData[]): Promise<v
 }
 
 async function readProductsFromBlob(): Promise<ProductCardData[] | null> {
-  const cachedUrl = process.env.BLOB_PRODUCTS_URL;
-  if (cachedUrl) {
-    const response = await fetch(cachedUrl, { cache: "no-store" });
-    if (response.ok) {
-      return normalizeProducts((await response.json()) as ProductCardData[]);
-    }
+  const token = getBlobAuthToken();
+  if (!token) {
+    return null;
   }
 
-  const token = getBlobAuthToken();
   const listResponse = await fetch(
     `${BLOB_API}?prefix=${encodeURIComponent(BLOB_PATHNAME)}`,
     {
-      headers: {
-        authorization: `Bearer ${token}`,
-        ...(process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN
-          ? { "x-store-id": process.env.BLOB_STORE_ID }
-          : {}),
-      },
+      headers: blobRequestHeaders(),
       cache: "no-store",
     }
   );
@@ -96,7 +96,11 @@ async function readProductsFromBlob(): Promise<ProductCardData[] | null> {
     return null;
   }
 
-  const response = await fetch(blobUrl, { cache: "no-store" });
+  const response = await fetch(blobUrl, {
+    headers: { authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+
   if (!response.ok) {
     return null;
   }
@@ -107,7 +111,7 @@ async function readProductsFromBlob(): Promise<ProductCardData[] | null> {
 async function writeProductsToBlob(products: ProductCardData[]): Promise<void> {
   const response = await fetch(`${BLOB_API}/${BLOB_PATHNAME}`, {
     method: "PUT",
-    headers: blobHeaders(),
+    headers: blobRequestHeaders(),
     body: JSON.stringify(normalizeProducts(products), null, 2),
   });
 
