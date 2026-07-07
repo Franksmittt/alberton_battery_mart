@@ -21,16 +21,30 @@ function normalizeProducts(products: ProductCardData[]): ProductCardData[] {
 }
 
 function shouldUseBlobStorage(): boolean {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN ||
+      (process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN)
+  );
+}
+
+function getBlobAuthToken(): string | null {
+  return process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN || null;
 }
 
 function blobHeaders(contentType = "application/json"): HeadersInit {
-  return {
-    authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`,
+  const token = getBlobAuthToken();
+  const headers: Record<string, string> = {
+    authorization: `Bearer ${token}`,
     "x-content-type": contentType,
     "x-add-random-suffix": "0",
     "x-allow-overwrite": "1",
   };
+
+  if (process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN) {
+    headers["x-store-id"] = process.env.BLOB_STORE_ID;
+  }
+
+  return headers;
 }
 
 async function readProductsFromFilesystem(): Promise<ProductCardData[]> {
@@ -58,10 +72,16 @@ async function readProductsFromBlob(): Promise<ProductCardData[] | null> {
     }
   }
 
+  const token = getBlobAuthToken();
   const listResponse = await fetch(
     `${BLOB_API}?prefix=${encodeURIComponent(BLOB_PATHNAME)}`,
     {
-      headers: { authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` },
+      headers: {
+        authorization: `Bearer ${token}`,
+        ...(process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN
+          ? { "x-store-id": process.env.BLOB_STORE_ID }
+          : {}),
+      },
       cache: "no-store",
     }
   );
