@@ -372,40 +372,6 @@ export default function TestMapHiddenPage() {
     );
 
     map.on('load', () => {
-      map.addSource('store-location', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: { type: 'Point', coordinates: STORE },
-        },
-      });
-
-      map.addLayer({
-        id: 'store-glow-outer',
-        type: 'circle',
-        source: 'store-location',
-        paint: {
-          'circle-radius': 28,
-          'circle-color': '#ef4444',
-          'circle-opacity': 0.35,
-          'circle-blur': 0.8,
-        },
-      });
-
-      map.addLayer({
-        id: 'store-glow-inner',
-        type: 'circle',
-        source: 'store-location',
-        paint: {
-          'circle-radius': 12,
-          'circle-color': '#dc2626',
-          'circle-opacity': 0.9,
-          'circle-stroke-width': 3,
-          'circle-stroke-color': '#ffffff',
-        },
-      });
-
       const landmarkBounds = new maplibregl.LngLatBounds();
       landmarkBounds.extend(STORE);
       LANDMARKS.forEach((landmark) => landmarkBounds.extend(landmark.coords));
