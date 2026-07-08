@@ -284,6 +284,26 @@ export default function TestMapHiddenPage() {
 
     mapRef.current = map;
 
+    map.addControl(
+      new maplibregl.NavigationControl({
+        showCompass: true,
+        showZoom: true,
+        visualizePitch: true,
+      }),
+      'top-right'
+    );
+
+    map.addControl(
+      new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' }),
+      'bottom-right'
+    );
+
+    map.dragRotate.enable();
+    map.touchZoomRotate.enable();
+    map.touchPitch.enable();
+    map.keyboard.enable();
+    map.doubleClickZoom.enable();
+
     storeMarkerRef.current = new maplibregl.Marker({
       element: createStoreMarker(),
       anchor: 'bottom',
@@ -385,6 +405,38 @@ export default function TestMapHiddenPage() {
         .maplibregl-marker {
           z-index: 10;
         }
+        .maplibregl-ctrl-top-right {
+          top: 72px;
+          right: 10px;
+        }
+        .maplibregl-ctrl-bottom-right {
+          bottom: 200px;
+          right: 10px;
+        }
+        .maplibregl-ctrl-group {
+          background: rgba(17, 17, 17, 0.88) !important;
+          border: 1px solid rgba(255, 255, 255, 0.12) !important;
+          border-radius: 12px !important;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        }
+        .maplibregl-ctrl-group button {
+          width: 36px !important;
+          height: 36px !important;
+        }
+        .maplibregl-ctrl-group button + button {
+          border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        .maplibregl-ctrl button .maplibregl-ctrl-icon {
+          filter: invert(1) brightness(1.2);
+        }
+        .maplibregl-ctrl-scale {
+          background: rgba(17, 17, 17, 0.75);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 8px;
+          color: #e5e5e5;
+          font-size: 10px;
+          padding: 2px 8px;
+        }
       `}</style>
 
       <div ref={mapContainerRef} className="absolute inset-0 h-full w-full" />
@@ -412,8 +464,8 @@ export default function TestMapHiddenPage() {
             <p className="mt-2 text-xs text-gray-500">{statusMessage}</p>
           ) : (
             <p className="mt-2 text-xs text-gray-500">
-              The flashing red pin marks our shop. Tap below to show your location and the best
-              route to us.
+              The flashing red pin marks our shop. Use +/− to zoom, the compass to rotate, or pinch
+              and drag on mobile. Tap below to show your location and the best route to us.
             </p>
           )}
 
