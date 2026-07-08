@@ -4,16 +4,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-/**
- * Alberton Battery Mart — 28 St Columb Rd, New Redruth, Alberton, 1450
- * Coordinates from the live Google Business / homepage map embed (place pin).
- */
-const STORE: [number, number] = [28.12046317541756, -26.27192337703497];
+/** Alberton Battery Mart — 28 St Columb Rd (verified store coordinates). */
+const STORE: [number, number] = [28.12318092354321, -26.271879483112066];
 
 const STORE_ADDRESS = '28 St Columb Rd, New Redruth, Alberton, 1450';
 
 const DIRECTIONS_URL =
-  'https://maps.google.com/?daddr=28+St+Columb+Rd,+New+Redruth,+Alberton,+1450';
+  'https://maps.google.com/?daddr=-26.271879483112066,28.12318092354321';
 
 type LngLat = [number, number];
 
