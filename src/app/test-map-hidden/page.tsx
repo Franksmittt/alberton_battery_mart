@@ -12,6 +12,14 @@ const STORE_ADDRESS = '28 St Columb Rd, New Redruth, Alberton, 1450';
 const DIRECTIONS_URL =
   'https://maps.google.com/?daddr=-26.271879483112066,28.12318092354321';
 
+/** Local landmarks — approximate map positions to help customers orient themselves. */
+const LANDMARKS: Array<{ name: string; coords: LngLat }> = [
+  { name: 'Alberton City Shopping Centre', coords: [28.122475, -26.266315] },
+  { name: "McDonald's", coords: [28.1209, -26.2715] },
+  { name: 'Mall at Newmarket', coords: [28.1260753, -26.2782238] },
+  { name: 'Raceview Motors', coords: [28.1224305, -26.2746914] },
+];
+
 type LngLat = [number, number];
 
 type RouteGeometry = {
@@ -83,6 +91,41 @@ function createStoreMarker() {
   return wrap;
 }
 
+function createLandmarkLabel(name: string) {
+  const wrap = document.createElement('div');
+  wrap.style.display = 'flex';
+  wrap.style.flexDirection = 'column';
+  wrap.style.alignItems = 'center';
+  wrap.style.pointerEvents = 'none';
+  wrap.style.zIndex = '8';
+  wrap.style.maxWidth = '148px';
+
+  const badge = document.createElement('span');
+  badge.textContent = name;
+  badge.style.padding = '4px 8px';
+  badge.style.borderRadius = '8px';
+  badge.style.fontSize = '9px';
+  badge.style.fontWeight = '700';
+  badge.style.lineHeight = '1.3';
+  badge.style.textAlign = 'center';
+  badge.style.color = '#fde68a';
+  badge.style.background = 'rgba(12, 12, 12, 0.84)';
+  badge.style.border = '1px solid rgba(251, 191, 36, 0.4)';
+  badge.style.boxShadow = '0 4px 14px rgba(0, 0, 0, 0.45)';
+
+  const dot = document.createElement('div');
+  dot.style.width = '6px';
+  dot.style.height = '6px';
+  dot.style.marginTop = '4px';
+  dot.style.borderRadius = '50%';
+  dot.style.background = 'rgba(251, 191, 36, 0.9)';
+  dot.style.boxShadow = '0 0 8px rgba(251, 191, 36, 0.55)';
+
+  wrap.appendChild(badge);
+  wrap.appendChild(dot);
+  return wrap;
+}
+
 function createUserMarker() {
   const wrap = document.createElement('div');
   wrap.style.display = 'flex';
@@ -92,7 +135,7 @@ function createUserMarker() {
   wrap.style.zIndex = '15';
 
   const badge = document.createElement('span');
-  badge.textContent = 'You are here';
+  badge.textContent = 'Your location (approximate)';
   badge.style.marginBottom = '6px';
   badge.style.padding = '4px 10px';
   badge.style.borderRadius = '999px';
@@ -136,6 +179,7 @@ export default function TestMapHiddenPage() {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const storeMarkerRef = useRef<maplibregl.Marker | null>(null);
   const userMarkerRef = useRef<maplibregl.Marker | null>(null);
+  const landmarkMarkerRefs = useRef<maplibregl.Marker[]>([]);
 
   const [status, setStatus] = useState<'idle' | 'locating' | 'routing' | 'ready' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -318,6 +362,15 @@ export default function TestMapHiddenPage() {
       .setLngLat(STORE)
       .addTo(map);
 
+    landmarkMarkerRefs.current = LANDMARKS.map((landmark) =>
+      new maplibregl.Marker({
+        element: createLandmarkLabel(landmark.name),
+        anchor: 'bottom',
+      })
+        .setLngLat(landmark.coords)
+        .addTo(map)
+    );
+
     map.on('load', () => {
       map.addSource('store-location', {
         type: 'geojson',
@@ -353,12 +406,22 @@ export default function TestMapHiddenPage() {
         },
       });
 
-      map.flyTo({
-        center: STORE,
-        zoom: 18,
-        pitch: 55,
+      const landmarkBounds = new maplibregl.LngLatBounds();
+      landmarkBounds.extend(STORE);
+      LANDMARKS.forEach((landmark) => landmarkBounds.extend(landmark.coords));
+
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      map.fitBounds(landmarkBounds, {
+        padding: {
+          top: isMobile ? 48 : 88,
+          bottom: isMobile ? 128 : 220,
+          left: isMobile ? 28 : 48,
+          right: isMobile ? 28 : 48,
+        },
+        pitch: 52,
         bearing: -20,
-        duration: 1200,
+        maxZoom: 16.8,
+        duration: 1800,
       });
 
       if (!map.getSource('openfreemap')) {
@@ -396,6 +459,8 @@ export default function TestMapHiddenPage() {
     return () => {
       storeMarkerRef.current?.remove();
       userMarkerRef.current?.remove();
+      landmarkMarkerRefs.current.forEach((marker) => marker.remove());
+      landmarkMarkerRefs.current = [];
       map.remove();
       mapRef.current = null;
     };
@@ -480,8 +545,8 @@ export default function TestMapHiddenPage() {
             <p className="mt-2 text-xs text-gray-500">{statusMessage}</p>
           ) : (
             <p className="mt-2 text-xs text-gray-500">
-              The flashing red pin marks our shop. Use +/− to zoom, the compass to rotate, or pinch
-              and drag on mobile. Tap below to show your location and the best route to us.
+              The flashing red pin marks our shop. Gold labels show nearby landmarks locals know.
+              Tap below to show your approximate location and the best route to us.
             </p>
           )}
 
@@ -547,7 +612,7 @@ export default function TestMapHiddenPage() {
               <p className="mt-2 text-[11px] leading-snug text-gray-500">{statusMessage}</p>
             ) : (
               <p className="mt-2 text-[11px] leading-snug text-gray-500">
-                Pinch to zoom and drag to explore. Turquoise line appears after you tap My route.
+                Gold labels = local landmarks. Turquoise line appears after you tap My route.
               </p>
             )}
 
