@@ -163,16 +163,25 @@ const Footer = () => {
               Endpoint Media
             </a>
           </span>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="#" className={footerLinkClass}>
-              Privacy
-            </Link>
-            <Link href="#" className={footerLinkClass}>
-              Terms
-            </Link>
-            <Link href="#" className={footerLinkClass}>
-              POPIA
-            </Link>
+          <div className="flex flex-col items-center gap-2 md:items-end">
+            <p className="text-[var(--brand-muted-3)]">
+              Independent retailer — see{" "}
+              <Link href="/disclosure" className={footerLinkClass}>
+                Disclosure
+              </Link>
+              .
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link href="#" className={footerLinkClass}>
+                Privacy
+              </Link>
+              <Link href="#" className={footerLinkClass}>
+                Terms
+              </Link>
+              <Link href="#" className={footerLinkClass}>
+                POPIA
+              </Link>
+            </div>
           </div>
         </div>
       </div>

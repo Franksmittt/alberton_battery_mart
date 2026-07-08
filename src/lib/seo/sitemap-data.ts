@@ -66,6 +66,7 @@ export function getStaticSitemapEntries(): MetadataRoute.Sitemap {
     "/quote",
     "/fitment",
     "/reviews",
+    "/disclosure",
     "/emergency-battery-replacement",
     "/emergency-battery-replacement-alberton",
     "/mobile-battery-fitment-alberton",

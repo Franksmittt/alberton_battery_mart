@@ -155,7 +155,7 @@ export const ALL_POSTS: BlogPost[] = [
   {
     slug: 'mobile-fitment-vs-in-store-service',
     title: 'Mobile Fitment vs. In-Store Service',
-    description: 'Don\'t waste time driving to a battery centre. Our mobile service brings the expert and the battery to your home or office. We test and fit on-site.',
+    description: 'Don\'t waste time driving to a franchise battery shop. Our mobile service brings the expert and the battery to your home or office. We test and fit on-site.',
     date: '2025-11-14',
     category: 'Local Problem',
     content: (
@@ -2825,7 +2825,7 @@ export const ALL_POSTS: BlogPost[] = [
         </p>
         <ul className="list-disc space-y-2 pl-6">
           <li><strong>Pros:</strong> It is the *actual* OEM-approved battery. You are buying the exact part the manufacturer trusts.</li>
-          <li><strong>Cons:</strong> Usually only available through specialist franchise dealers (like Battery Centre).</li>
+          <li><strong>Cons:</strong> Usually only available through specialist franchise battery shops.</li>
           <li><strong>Best For:</strong> The driver who wants the "correct" OEM-spec part without paying dealership prices.</li>
         </ul>
 
