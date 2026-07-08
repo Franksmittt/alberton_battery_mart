@@ -140,6 +140,7 @@ export default function TestMapHiddenPage() {
   const [status, setStatus] = useState<'idle' | 'locating' | 'routing' | 'ready' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [routeSummary, setRouteSummary] = useState<string | null>(null);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const drawRoute = useCallback((geometry: RouteGeometry) => {
     const map = mapRef.current;
@@ -188,8 +189,14 @@ export default function TestMapHiddenPage() {
     bounds.extend(STORE);
     route.coordinates.forEach((coord) => bounds.extend(coord as LngLat));
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     map.fitBounds(bounds, {
-      padding: { top: 100, bottom: 240, left: 56, right: 56 },
+      padding: {
+        top: isMobile ? 56 : 100,
+        bottom: isMobile ? 112 : 240,
+        left: isMobile ? 32 : 56,
+        right: isMobile ? 32 : 56,
+      },
       pitch: 50,
       bearing: -20,
       duration: 1600,
@@ -413,6 +420,14 @@ export default function TestMapHiddenPage() {
           bottom: 200px;
           right: 10px;
         }
+        @media (max-width: 767px) {
+          .maplibregl-ctrl-top-right {
+            top: 10px;
+          }
+          .maplibregl-ctrl-bottom-right {
+            bottom: 108px;
+          }
+        }
         .maplibregl-ctrl-group {
           background: rgba(17, 17, 17, 0.88) !important;
           border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -441,7 +456,8 @@ export default function TestMapHiddenPage() {
 
       <div ref={mapContainerRef} className="absolute inset-0 h-full w-full" />
 
-      <div className="pointer-events-none absolute inset-0 z-10 flex items-end p-6 sm:p-8">
+      {/* Desktop — full info card */}
+      <div className="pointer-events-none absolute inset-0 z-10 hidden items-end p-6 sm:p-8 md:flex">
         <div
           className="pointer-events-auto w-full max-w-sm rounded-[32px] border border-white/10 bg-[#111]/70 p-6 shadow-2xl backdrop-blur-2xl"
           style={{ backdropFilter: 'blur(40px)' }}
@@ -488,6 +504,123 @@ export default function TestMapHiddenPage() {
             GET DIRECTIONS
           </button>
         </div>
+      </div>
+
+      {/* Mobile — compact bottom dock (collapsed) or sheet (expanded) */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 md:hidden">
+        {panelOpen ? (
+          <div
+            className="pointer-events-auto mx-3 mb-3 max-h-[min(72vh,520px)] overflow-y-auto rounded-[24px] border border-white/10 bg-[#111]/90 p-4 shadow-2xl backdrop-blur-2xl"
+            style={{ backdropFilter: 'blur(40px)' }}
+          >
+            <button
+              type="button"
+              onClick={() => setPanelOpen(false)}
+              className="mx-auto mb-3 flex h-1 w-10 rounded-full bg-white/25"
+              aria-label="Collapse details"
+            />
+
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <span className="inline-block rounded-full bg-red-500/20 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-red-400">
+                  Red pin = our shop
+                </span>
+                <h2 className="mt-2 text-lg font-bold tracking-tight text-white">
+                  Alberton Battery Mart
+                </h2>
+                <p className="mt-1 text-xs leading-snug text-gray-400">{STORE_ADDRESS}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setPanelOpen(false)}
+                className="shrink-0 rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400"
+              >
+                Less
+              </button>
+            </div>
+
+            {routeSummary ? (
+              <p className="mt-3 text-xs font-semibold text-[#14B8A6]">{routeSummary}</p>
+            ) : null}
+
+            {statusMessage ? (
+              <p className="mt-2 text-[11px] leading-snug text-gray-500">{statusMessage}</p>
+            ) : (
+              <p className="mt-2 text-[11px] leading-snug text-gray-500">
+                Pinch to zoom and drag to explore. Turquoise line appears after you tap My route.
+              </p>
+            )}
+
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={locateAndRoute}
+                disabled={status === 'locating' || status === 'routing'}
+                className="rounded-xl border border-[#14B8A6]/40 bg-[#14B8A6]/10 px-3 py-2.5 text-[11px] font-bold uppercase tracking-wide text-[#14B8A6] disabled:opacity-50"
+              >
+                {status === 'locating' || status === 'routing' ? 'Finding…' : 'My route'}
+              </button>
+              <button
+                type="button"
+                onClick={() => window.open(DIRECTIONS_URL, '_blank', 'noopener,noreferrer')}
+                className="rounded-xl bg-[#14B8A6] px-3 py-2.5 text-[11px] font-bold uppercase tracking-wide text-black"
+              >
+                Directions
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div
+            className="pointer-events-auto border-t border-white/10 bg-[#111]/92 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_-12px_40px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
+            style={{ backdropFilter: 'blur(32px)' }}
+          >
+            <button
+              type="button"
+              onClick={() => setPanelOpen(true)}
+              className="mx-auto mb-2 flex h-1 w-10 rounded-full bg-white/25"
+              aria-label="Show shop details"
+            />
+
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.9)]" />
+              <p className="min-w-0 flex-1 truncate text-sm font-semibold text-white">
+                Alberton Battery Mart
+              </p>
+              <button
+                type="button"
+                onClick={() => setPanelOpen(true)}
+                className="shrink-0 text-[10px] font-semibold uppercase tracking-wide text-gray-400"
+              >
+                More
+              </button>
+            </div>
+
+            <p className="mt-1 truncate text-[11px] text-gray-500">
+              {routeSummary ??
+                (statusMessage && status !== 'idle'
+                  ? statusMessage
+                  : 'Red pin on map · tap My route for directions')}
+            </p>
+
+            <div className="mt-2.5 grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={locateAndRoute}
+                disabled={status === 'locating' || status === 'routing'}
+                className="rounded-xl border border-[#14B8A6]/40 bg-[#14B8A6]/10 px-3 py-2.5 text-[11px] font-bold uppercase tracking-wide text-[#14B8A6] disabled:opacity-50"
+              >
+                {status === 'locating' || status === 'routing' ? 'Finding…' : 'My route'}
+              </button>
+              <button
+                type="button"
+                onClick={() => window.open(DIRECTIONS_URL, '_blank', 'noopener,noreferrer')}
+                className="rounded-xl bg-[#14B8A6] px-3 py-2.5 text-[11px] font-bold uppercase tracking-wide text-black"
+              >
+                Directions
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
