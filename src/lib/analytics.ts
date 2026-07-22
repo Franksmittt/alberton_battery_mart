@@ -47,6 +47,7 @@ function fireGtagConversion(
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(["event", "conversion", params]);
 }
+
 /**
  * Push a semantic conversion click event for GTM, and optionally fire gtag
  * when a website conversion label is configured.
