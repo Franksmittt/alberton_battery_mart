@@ -6,6 +6,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { trackCtaButtonClick } from "@/lib/analytics"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -54,14 +55,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (trackingId && typeof window !== "undefined") {
-        ;(window as any).dataLayer = (window as any).dataLayer || []
-        ;(window as any).dataLayer.push({
-          event: "cta_click",
-          tracking_id: trackingId,
-        })
-        if ((window as any).__abmEnv === "development") {
-          console.info("[button-click]", trackingId)
-        }
+        const target = event.currentTarget as HTMLElement
+        const link =
+          target.tagName === "A"
+            ? (target as HTMLAnchorElement)
+            : (target.closest("a") as HTMLAnchorElement | null)
+        const href = link?.getAttribute("href") || undefined
+        trackCtaButtonClick(trackingId, href)
       }
 
       onClick?.(event)

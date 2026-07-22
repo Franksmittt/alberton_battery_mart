@@ -63,18 +63,29 @@ Core local data files:
 
 ## Tracking Events (dataLayer)
 
-The app now pushes the following events for GTM/GA4:
+The app pushes the following events for GTM/GA4:
 
-- `cta_click` (buttons with `trackingId`)
-- `phone_call_click`
+- `cta_click` (buttons with `trackingId`, including AdLandingHero)
+- `phone_call_click` → Google Ads Conversion Action ID `6560221892`
+- `map_directions_click` → Google Ads Conversion Action ID `6560221601`
 - `whatsapp_click`
-- `map_directions_click`
 - `email_click`
+
+Each conversion click also includes `conversion_action_id` and `google_ads_id` on the dataLayer row so GTM can map Custom Event triggers to Google Ads Conversion tags.
+
+GTM setup (container UI):
+
+1. Triggers: Custom Event = `phone_call_click`, `map_directions_click`, `whatsapp_click`, `cta_click`
+2. Tags: Google Ads Conversion for Call → Action ID `6560221892`; Directions → Action ID `6560221601`
+3. Optional Data Layer Variable: `conversion_action_id` (for a lookup table)
 
 Primary implementation files:
 
+- `src/lib/google-ads-conversions.ts`
+- `src/lib/analytics.ts`
 - `src/app/layout.tsx`
 - `src/components/ui/button.tsx`
+- `src/components/layout/AdLandingHero.tsx`
 - `src/components/layout/MobileStickyFooter.tsx`
 - `src/components/layout/Header.tsx`
 - `src/components/layout/Footer.tsx`
