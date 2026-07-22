@@ -216,6 +216,25 @@ async function main() {
       fail(hub.path, "page-json-ld", "No WebPage/ContactPage/FAQPage/CollectionPage JSON-LD");
     }
 
+    // Size hubs must keep LocalBusiness NAP for local Ads Quality Score
+    if (/^\/\d{3}-car-battery$/.test(hub.path)) {
+      const hasLocalBusiness =
+        html.includes('"LocalBusiness"') || html.includes("LocalBusiness");
+      const hasStreet = html.includes("28 St Columb Rd");
+      const hasSuburb = html.includes("New Redruth");
+      const hasAlberton = html.includes("Alberton");
+      if (!hasLocalBusiness) {
+        fail(hub.path, "localbusiness-schema", "Missing LocalBusiness JSON-LD on size hub");
+      }
+      if (!hasStreet || !hasSuburb || !hasAlberton) {
+        fail(
+          hub.path,
+          "localbusiness-address",
+          "LocalBusiness NAP missing exact address (28 St Columb Rd, New Redruth, Alberton)"
+        );
+      }
+    }
+
     const chunks = countChunkBoundaries(html);
     if (chunks < 2) {
       fail(hub.path, "chunk-boundary", `Only ${chunks} data-chunk-boundary sections (need ≥2)`);

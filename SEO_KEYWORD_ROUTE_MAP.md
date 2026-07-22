@@ -70,6 +70,9 @@ Use it for content updates, internal links, and Search Console tracking.
 ## Tracking Rules (GTM/GA4)
 
 - Track events: `phone_call_click`, `whatsapp_click`, `map_directions_click`, `cta_click`
+- Google Ads Conversion Action mapping (dataLayer `conversion_action_id`):
+  - Call clicks (`phone_call_click` / `cta_click` *-call) → `6560221892`
+  - Map directions (`map_directions_click` / `cta_click` *-directions) → `6560221601`
 - Mark `phone_call_click` and `whatsapp_click` as key events in GA4.
 - Build weekly report segments by landing path prefix:
   - `/local/`

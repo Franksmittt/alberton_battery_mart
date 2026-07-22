@@ -3,6 +3,11 @@ import { Inter } from 'next/font/google';
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GTM_ID, hasValidGtmId } from "@/lib/gtm-constants";
+import {
+  GOOGLE_ADS_ID,
+  getInlineConversionActionIds,
+  getInlineConversionSendTos,
+} from "@/lib/google-ads-conversions";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { MobileStickyFooter } from "@/components/layout/MobileStickyFooter";
@@ -33,7 +38,8 @@ const inter = Inter({
   fallback: ['system-ui', 'arial']
 });
 const ENVIRONMENT = process.env.NODE_ENV ?? "development";
-const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-969671559";
+const ADS_CONVERSION_ACTION_IDS = getInlineConversionActionIds();
+const ADS_CONVERSION_SEND_TOS = getInlineConversionSendTos();
 
 // --- SEO: Root Metadata with Open Graph & Twitter Cards ---
 export const metadata: Metadata = {
@@ -236,16 +242,62 @@ export default function RootLayout({
               if (typeof window === "undefined" || typeof document === "undefined") return;
               window.dataLayer = window.dataLayer || [];
 
+              var ADS_ID = ${JSON.stringify(GOOGLE_ADS_ID)};
+              var ACTION_IDS = {
+                call: ${JSON.stringify(ADS_CONVERSION_ACTION_IDS.call)},
+                directions: ${JSON.stringify(ADS_CONVERSION_ACTION_IDS.directions)},
+                whatsapp: ${JSON.stringify(ADS_CONVERSION_ACTION_IDS.whatsapp)}
+              };
+              var SEND_TOS = {
+                call: ${JSON.stringify(ADS_CONVERSION_SEND_TOS.call)},
+                directions: ${JSON.stringify(ADS_CONVERSION_SEND_TOS.directions)},
+                whatsapp: ${JSON.stringify(ADS_CONVERSION_SEND_TOS.whatsapp)}
+              };
+
+              function fireGtagConversion(sendTo, conversionActionId) {
+                if (!sendTo) return;
+                var params = { send_to: sendTo };
+                if (conversionActionId) {
+                  params.conversion_action_id = conversionActionId;
+                }
+                if (typeof window.gtag === "function") {
+                  window.gtag("event", "conversion", params);
+                  return;
+                }
+                window.dataLayer.push(["event", "conversion", params]);
+              }
+
               function push(eventName, payload) {
                 var details = payload || {};
-                window.dataLayer.push({
+                var row = {
                   event: eventName,
                   href: details.href || "",
                   form_action: details.form_action || "",
                   form_id: details.form_id || "",
                   tracking_label: details.tracking_label || "",
+                  tracking_id: details.tracking_id || "",
+                  google_ads_id: ADS_ID,
                   page_path: window.location.pathname
+                };
+                if (details.conversion_action_id) {
+                  row.conversion_action_id = details.conversion_action_id;
+                }
+                window.dataLayer.push(row);
+              }
+
+              function pushConversion(kind, href) {
+                var actionId = ACTION_IDS[kind] || "";
+                var eventName =
+                  kind === "call"
+                    ? "phone_call_click"
+                    : kind === "directions"
+                      ? "map_directions_click"
+                      : "whatsapp_click";
+                push(eventName, {
+                  href: href,
+                  conversion_action_id: actionId
                 });
+                fireGtagConversion(SEND_TOS[kind] || "", actionId);
               }
 
               document.addEventListener("click", function(event) {
@@ -266,22 +318,23 @@ export default function RootLayout({
                   return;
                 }
 
+                // Buttons with trackingId emit cta_click + mapped conversion events themselves
                 if (link.getAttribute("data-cta-tracked") === "true") {
                   return;
                 }
 
                 if (href.indexOf("tel:") === 0) {
-                  push("phone_call_click", { href: href });
+                  pushConversion("call", href);
                   return;
                 }
 
                 if (href.indexOf("https://wa.me/") === 0 || href.indexOf("https://api.whatsapp.com/") === 0) {
-                  push("whatsapp_click", { href: href });
+                  pushConversion("whatsapp", href);
                   return;
                 }
 
                 if (href.indexOf("google.com/maps") !== -1 || href.indexOf("maps.google.com") !== -1) {
-                  push("map_directions_click", { href: href });
+                  pushConversion("directions", href);
                   return;
                 }
 
