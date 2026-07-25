@@ -12,7 +12,10 @@ export type StoryTemplateId =
   | "power"
   | "essentials"
   | "dark-ui"
-  | "spec-sheet";
+  | "spec-sheet"
+  | "air"
+  | "pro"
+  | "widget";
 
 export type StoryProductView = {
   id: number;
@@ -76,6 +79,21 @@ export const STORY_TEMPLATES: Array<{
     id: "spec-sheet",
     name: "Spec Sheet",
     thesis: "White data list · huge thin price",
+  },
+  {
+    id: "air",
+    name: "The Air",
+    thesis: "Keynote white · tight Inter tracking · pill CTA",
+  },
+  {
+    id: "pro",
+    name: "The Pro",
+    thesis: "Cinematic dark · gradient title · glass panel",
+  },
+  {
+    id: "widget",
+    name: "The Widget",
+    thesis: "iOS cards · grey canvas · dark action bar",
   },
 ];
 

@@ -61,11 +61,11 @@ One-click social creatives: pick a battery from stock, pick a visual template, d
 - Badge category-aware (`START/STOP READY`, `FLEET / TRUCK`, …)
 - Phone CTA
 
-### Product templates (8)
+### Product templates (11)
 Registry: `STORY_TEMPLATES` in `storyData.ts`
 
 Brand palette: charcoal `#2b2b2b` / `#1f1f1f`, emergency red `#e61919`, white.
-Fonts via `next/font` on the studio layout: Oswald, Montserrat (100–900), Inter, Teko, Poppins.
+Fonts via `next/font` on the studio layout: Oswald, Montserrat (100–900), Inter (300–900), Teko, Poppins.
 
 | id | name | thesis |
 |---|---|---|
@@ -77,6 +77,9 @@ Fonts via `next/font` on the studio layout: Oswald, Montserrat (100–900), Inte
 | essentials | Power Essentials | White premium · light Montserrat · red CTA |
 | dark-ui | Dark Mode UI | Charcoal UI · thin title · red action bar |
 | spec-sheet | Spec Sheet | White data list · huge thin price |
+| air | The Air | Keynote white · tight Inter tracking · pill CTA |
+| pro | The Pro | Cinematic dark · gradient title · glass panel |
+| widget | The Widget | iOS cards · grey canvas · dark action bar |
 
 Components in `src/components/studio/marketing/templates/`.
 
