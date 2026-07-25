@@ -4,7 +4,12 @@ import type { ProductCardData } from "@/data/products";
 export const STORY_WIDTH = 1080;
 export const STORY_HEIGHT = 1920;
 
-export type StoryTemplateId = "industrial" | "modern";
+export type StoryTemplateId =
+  | "industrial"
+  | "modern"
+  | "editorial"
+  | "diagonal"
+  | "power";
 
 export type StoryProductView = {
   id: number;
@@ -38,6 +43,21 @@ export const STORY_TEMPLATES: Array<{
     id: "modern",
     name: "Modern Tech",
     thesis: "Gradient glass · Montserrat · pill tags",
+  },
+  {
+    id: "editorial",
+    name: "Editorial Grid",
+    thesis: "Inter · top photo · red price bar",
+  },
+  {
+    id: "diagonal",
+    name: "Diagonal Slash",
+    thesis: "Teko · red slash · huge price",
+  },
+  {
+    id: "power",
+    name: "Power Core",
+    thesis: "Poppins · circular product · white price pill",
   },
 ];
 

@@ -13,6 +13,9 @@ import {
 } from "@/components/studio/marketing/storyData";
 import StoryIndustrial from "@/components/studio/marketing/templates/StoryIndustrial";
 import StoryModern from "@/components/studio/marketing/templates/StoryModern";
+import StoryEditorial from "@/components/studio/marketing/templates/StoryEditorial";
+import StoryDiagonal from "@/components/studio/marketing/templates/StoryDiagonal";
+import StoryPowerCore from "@/components/studio/marketing/templates/StoryPowerCore";
 
 const PREVIEW_SCALE = 0.38;
 
@@ -23,6 +26,12 @@ function renderTemplate(templateId: StoryTemplateId, product: ProductCardData) {
       return <StoryIndustrial view={view} />;
     case "modern":
       return <StoryModern view={view} />;
+    case "editorial":
+      return <StoryEditorial view={view} />;
+    case "diagonal":
+      return <StoryDiagonal view={view} />;
+    case "power":
+      return <StoryPowerCore view={view} />;
     default:
       return <StoryIndustrial view={view} />;
   }
