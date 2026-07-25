@@ -9,7 +9,10 @@ export type StoryTemplateId =
   | "modern"
   | "editorial"
   | "diagonal"
-  | "power";
+  | "power"
+  | "essentials"
+  | "dark-ui"
+  | "spec-sheet";
 
 export type StoryProductView = {
   id: number;
@@ -58,6 +61,21 @@ export const STORY_TEMPLATES: Array<{
     id: "power",
     name: "Power Core",
     thesis: "Poppins · circular product · white price pill",
+  },
+  {
+    id: "essentials",
+    name: "Power Essentials",
+    thesis: "White premium · light Montserrat · red CTA",
+  },
+  {
+    id: "dark-ui",
+    name: "Dark Mode UI",
+    thesis: "Charcoal UI · thin title · red action bar",
+  },
+  {
+    id: "spec-sheet",
+    name: "Spec Sheet",
+    thesis: "White data list · huge thin price",
   },
 ];
 
