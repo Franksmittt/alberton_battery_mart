@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat, Oswald, Poppins, Teko } from "next/font/google";
+import { Bebas_Neue, Inter, Montserrat, Oswald, Poppins, Teko } from "next/font/google";
 import StudioGate from "@/components/studio/StudioGate";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
+  weight: ["100", "300", "400", "500", "700", "800", "900"],
   style: ["normal", "italic"],
   variable: "--font-montserrat",
+  display: "swap",
+});
+
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas",
   display: "swap",
 });
 
@@ -53,7 +60,7 @@ export default function StudioLayout({
 }) {
   return (
     <div
-      className={`${montserrat.variable} ${oswald.variable} ${inter.variable} ${poppins.variable} ${teko.variable}`}
+      className={`${montserrat.variable} ${oswald.variable} ${inter.variable} ${poppins.variable} ${teko.variable} ${bebas.variable}`}
     >
       <StudioGate>{children}</StudioGate>
     </div>
