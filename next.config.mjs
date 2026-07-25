@@ -47,6 +47,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/login',
+        destination: '/studio',
+        permanent: false,
+      },
+      {
         source: '/vehicles/mercedes-benz',
         destination: '/vehicles/mercedes',
         permanent: true,
