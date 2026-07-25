@@ -61,18 +61,21 @@ One-click social creatives: pick a battery from stock, pick a visual template, d
 - Badge category-aware (`START/STOP READY`, `FLEET / TRUCK`, …)
 - Phone CTA
 
-### Product templates (2)
+### Product templates (5)
 Registry: `STORY_TEMPLATES` in `storyData.ts`
 
 Brand palette: charcoal `#2b2b2b` / `#1f1f1f`, emergency red `#e61919`, white.
-Fonts: Oswald (Industrial), Montserrat (Modern) via `next/font` on the studio layout.
+Fonts via `next/font` on the studio layout: Oswald, Montserrat, Inter, Teko, Poppins.
 
 | id | name | thesis |
 |---|---|---|
 | industrial | Industrial Beast | Charcoal wedge · Oswald · red footer CTA |
 | modern | Modern Tech | Gradient glass · Montserrat · pill tags |
+| editorial | Editorial Grid | Inter · top photo · red price bar |
+| diagonal | Diagonal Slash | Teko · red slash · huge price |
+| power | Power Core | Poppins · circular product · white price pill |
 
-Components: `StoryIndustrial.tsx`, `StoryModern.tsx` in `src/components/studio/marketing/templates/`.
+Components in `src/components/studio/marketing/templates/`.
 
 ---
 
