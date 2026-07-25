@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { domToPng } from "modern-screenshot";
 import { Download, Search } from "lucide-react";
-import { ALL_PRODUCTS, type ProductCardData } from "@/data/products";
+import type { ProductCardData } from "@/data/products";
 import {
   STORY_HEIGHT,
   STORY_TEMPLATES,
@@ -38,26 +38,55 @@ function renderTemplate(templateId: StoryTemplateId, product: ProductCardData) {
 }
 
 export default function ProductMarketingStudio() {
+  const [products, setProducts] = useState<ProductCardData[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [query, setQuery] = useState("");
   const [brandFilter, setBrandFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [templateId, setTemplateId] = useState<StoryTemplateId>("clean");
-  const [selectedId, setSelectedId] = useState(ALL_PRODUCTS[0]?.id ?? 0);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [downloading, setDownloading] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const response = await fetch("/api/products", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`Failed to load products (${response.status})`);
+        }
+        const data = (await response.json()) as ProductCardData[];
+        if (cancelled) return;
+        setProducts(Array.isArray(data) ? data : []);
+        setSelectedId((current) => current ?? data[0]?.id ?? null);
+        setLoadError("");
+      } catch (error) {
+        if (cancelled) return;
+        console.error(error);
+        setLoadError("Could not load product catalog for studio.");
+      } finally {
+        if (!cancelled) setLoadingProducts(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const brands = useMemo(
-    () => Array.from(new Set(ALL_PRODUCTS.map((p) => p.brandName))).sort(),
-    []
+    () => Array.from(new Set(products.map((p) => p.brandName))).sort(),
+    [products]
   );
   const categories = useMemo(
-    () => Array.from(new Set(ALL_PRODUCTS.map((p) => p.category))).sort(),
-    []
+    () => Array.from(new Set(products.map((p) => p.category))).sort(),
+    [products]
   );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return ALL_PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       if (brandFilter !== "all" && product.brandName !== brandFilter) return false;
       if (categoryFilter !== "all" && product.category !== categoryFilter) return false;
       if (!q) return true;
@@ -68,12 +97,12 @@ export default function ProductMarketingStudio() {
         product.popularFits.toLowerCase().includes(q)
       );
     });
-  }, [brandFilter, categoryFilter, query]);
+  }, [brandFilter, categoryFilter, products, query]);
 
   const selected =
     filtered.find((product) => product.id === selectedId) ||
     filtered[0] ||
-    ALL_PRODUCTS[0];
+    products[0];
 
   const downloadPng = async () => {
     if (!canvasRef.current || !selected) return;
@@ -191,6 +220,12 @@ export default function ProductMarketingStudio() {
           </label>
 
           <div className="max-h-[52vh] overflow-y-auto space-y-2 pr-1">
+            {loadingProducts ? (
+              <p className="text-sm text-slate-400 px-1 py-4">Loading catalog…</p>
+            ) : null}
+            {loadError ? (
+              <p className="text-sm text-red-400 px-1 py-4">{loadError}</p>
+            ) : null}
             {filtered.map((product) => {
               const active = product.id === selected?.id;
               return (
@@ -211,7 +246,7 @@ export default function ProductMarketingStudio() {
                 </button>
               );
             })}
-            {filtered.length === 0 ? (
+            {!loadingProducts && !loadError && filtered.length === 0 ? (
               <p className="text-sm text-slate-400 px-1 py-4">No products match that filter.</p>
             ) : null}
           </div>

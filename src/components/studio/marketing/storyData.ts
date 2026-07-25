@@ -1,4 +1,5 @@
 import type { ProductCardData } from "@/data/products";
+// Type-only import keeps this module client-safe (no products-storage / fs).
 
 export const STORY_WIDTH = 1080;
 export const STORY_HEIGHT = 1920;
