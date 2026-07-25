@@ -61,18 +61,18 @@ One-click social creatives: pick a battery from stock, pick a visual template, d
 - Badge category-aware (`START/STOP READY`, `FLEET / TRUCK`, …)
 - Phone CTA
 
-### Product templates (5)
+### Product templates (2)
 Registry: `STORY_TEMPLATES` in `storyData.ts`
+
+Brand palette: charcoal `#2b2b2b` / `#1f1f1f`, emergency red `#e61919`, white.
+Fonts: Oswald (Industrial), Montserrat (Modern) via `next/font` on the studio layout.
 
 | id | name | thesis |
 |---|---|---|
-| clean | Clean Special | White card · big price · clear specs |
-| brand | Brand Red | ABM red field · high urgency · phone CTA |
-| cinema | Cinema Dark | Full-bleed product · desire first |
-| specs | Spec Sheet | Technical trust · Ah / CCA / warranty |
-| callout | Mobile Callout | We come to you · Alberton dispatch |
+| industrial | Industrial Beast | Charcoal wedge · Oswald · red footer CTA |
+| modern | Modern Tech | Gradient glass · Montserrat · pill tags |
 
-Components live in `src/components/studio/marketing/templates/`.
+Components: `StoryIndustrial.tsx`, `StoryModern.tsx` in `src/components/studio/marketing/templates/`.
 
 ---
 

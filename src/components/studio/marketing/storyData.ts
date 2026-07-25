@@ -4,12 +4,7 @@ import type { ProductCardData } from "@/data/products";
 export const STORY_WIDTH = 1080;
 export const STORY_HEIGHT = 1920;
 
-export type StoryTemplateId =
-  | "clean"
-  | "brand"
-  | "cinema"
-  | "specs"
-  | "callout";
+export type StoryTemplateId = "industrial" | "modern";
 
 export type StoryProductView = {
   id: number;
@@ -35,29 +30,14 @@ export const STORY_TEMPLATES: Array<{
   thesis: string;
 }> = [
   {
-    id: "clean",
-    name: "Clean Special",
-    thesis: "White card · big price · clear specs",
+    id: "industrial",
+    name: "Industrial Beast",
+    thesis: "Charcoal wedge · Oswald · red footer CTA",
   },
   {
-    id: "brand",
-    name: "Brand Red",
-    thesis: "ABM red field · high urgency · phone CTA",
-  },
-  {
-    id: "cinema",
-    name: "Cinema Dark",
-    thesis: "Full-bleed product · desire first",
-  },
-  {
-    id: "specs",
-    name: "Spec Sheet",
-    thesis: "Technical trust · Ah / CCA / warranty",
-  },
-  {
-    id: "callout",
-    name: "Mobile Callout",
-    thesis: "We come to you · Alberton dispatch",
+    id: "modern",
+    name: "Modern Tech",
+    thesis: "Gradient glass · Montserrat · pill tags",
   },
 ];
 

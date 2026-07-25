@@ -11,29 +11,20 @@ import {
   type StoryTemplateId,
   buildStoryView,
 } from "@/components/studio/marketing/storyData";
-import StoryClean from "@/components/studio/marketing/templates/StoryClean";
-import StoryBrand from "@/components/studio/marketing/templates/StoryBrand";
-import StoryCinema from "@/components/studio/marketing/templates/StoryCinema";
-import StorySpecs from "@/components/studio/marketing/templates/StorySpecs";
-import StoryCallout from "@/components/studio/marketing/templates/StoryCallout";
+import StoryIndustrial from "@/components/studio/marketing/templates/StoryIndustrial";
+import StoryModern from "@/components/studio/marketing/templates/StoryModern";
 
 const PREVIEW_SCALE = 0.38;
 
 function renderTemplate(templateId: StoryTemplateId, product: ProductCardData) {
   const view = buildStoryView(product);
   switch (templateId) {
-    case "clean":
-      return <StoryClean view={view} />;
-    case "brand":
-      return <StoryBrand view={view} />;
-    case "cinema":
-      return <StoryCinema view={view} />;
-    case "specs":
-      return <StorySpecs view={view} />;
-    case "callout":
-      return <StoryCallout view={view} />;
+    case "industrial":
+      return <StoryIndustrial view={view} />;
+    case "modern":
+      return <StoryModern view={view} />;
     default:
-      return <StoryClean view={view} />;
+      return <StoryIndustrial view={view} />;
   }
 }
 
@@ -44,7 +35,7 @@ export default function ProductMarketingStudio() {
   const [query, setQuery] = useState("");
   const [brandFilter, setBrandFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
-  const [templateId, setTemplateId] = useState<StoryTemplateId>("clean");
+  const [templateId, setTemplateId] = useState<StoryTemplateId>("industrial");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [downloading, setDownloading] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
