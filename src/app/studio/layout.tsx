@@ -4,7 +4,7 @@ import StudioGate from "@/components/studio/StudioGate";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["100", "300", "400", "500", "700", "900"],
   style: ["normal", "italic"],
   variable: "--font-montserrat",
   display: "swap",
