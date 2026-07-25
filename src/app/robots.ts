@@ -11,6 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin/',
           '/api/admin/',
+          '/studio/',
           '/private/',
           '/*?sort=*',
           '/*?filter=*',
@@ -24,6 +25,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin/',
           '/api/admin/',
+          '/studio/',
           '/private/',
           '/*?sort=*',
           '/*?filter=*',
@@ -37,6 +39,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin/',
           '/api/admin/',
+          '/studio/',
           '/private/',
           '/*?sort=*',
           '/*?filter=*',
