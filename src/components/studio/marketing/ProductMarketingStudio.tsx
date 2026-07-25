@@ -19,6 +19,9 @@ import StoryPowerCore from "@/components/studio/marketing/templates/StoryPowerCo
 import StoryEssentials from "@/components/studio/marketing/templates/StoryEssentials";
 import StoryDarkUi from "@/components/studio/marketing/templates/StoryDarkUi";
 import StorySpecSheet from "@/components/studio/marketing/templates/StorySpecSheet";
+import StoryAir from "@/components/studio/marketing/templates/StoryAir";
+import StoryPro from "@/components/studio/marketing/templates/StoryPro";
+import StoryWidget from "@/components/studio/marketing/templates/StoryWidget";
 
 const PREVIEW_SCALE = 0.38;
 
@@ -41,6 +44,12 @@ function renderTemplate(templateId: StoryTemplateId, product: ProductCardData) {
       return <StoryDarkUi view={view} />;
     case "spec-sheet":
       return <StorySpecSheet view={view} />;
+    case "air":
+      return <StoryAir view={view} />;
+    case "pro":
+      return <StoryPro view={view} />;
+    case "widget":
+      return <StoryWidget view={view} />;
     default:
       return <StoryIndustrial view={view} />;
   }
