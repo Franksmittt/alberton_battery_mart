@@ -22,6 +22,7 @@ import StorySpecSheet from "@/components/studio/marketing/templates/StorySpecShe
 import StoryAir from "@/components/studio/marketing/templates/StoryAir";
 import StoryPro from "@/components/studio/marketing/templates/StoryPro";
 import StoryWidget from "@/components/studio/marketing/templates/StoryWidget";
+import StoryMesh from "@/components/studio/marketing/templates/StoryMesh";
 
 const PREVIEW_SCALE = 0.38;
 
@@ -50,6 +51,8 @@ function renderTemplate(templateId: StoryTemplateId, product: ProductCardData) {
       return <StoryPro view={view} />;
     case "widget":
       return <StoryWidget view={view} />;
+    case "mesh":
+      return <StoryMesh view={view} />;
     default:
       return <StoryIndustrial view={view} />;
   }

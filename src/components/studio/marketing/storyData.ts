@@ -15,7 +15,8 @@ export type StoryTemplateId =
   | "spec-sheet"
   | "air"
   | "pro"
-  | "widget";
+  | "widget"
+  | "mesh";
 
 export type StoryProductView = {
   id: number;
@@ -94,6 +95,11 @@ export const STORY_TEMPLATES: Array<{
     id: "widget",
     name: "The Widget",
     thesis: "iOS cards · grey canvas · dark action bar",
+  },
+  {
+    id: "mesh",
+    name: "Engineered Mesh",
+    thesis: "Red sidebar · Bebas stats · white mesh",
   },
 ];
 
