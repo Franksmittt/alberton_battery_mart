@@ -28,6 +28,16 @@ Previewing another combo in studio must **not** change the live site until re-lo
 
 ## 2) Marketing Story Templates — Products *(live)*
 
+### Local playground (no full site install)
+If the full repo is too large for a local machine, use the tiny standalone folder:
+
+- Path: `studio-playground/`
+- Open `studio-playground/index.html` (or `python3 -m http.server` inside that folder)
+- Edit `css/templates.css` + `js/templates.js`, refresh to preview
+- When happy, send those files back to port into the React templates under `src/components/studio/marketing/templates/`
+
+See `studio-playground/README.md` for sparse-checkout / download-directory instructions.
+
 ### Purpose
 One-click social creatives: pick a battery from stock, pick a visual template, download a
 **1080×1920 PNG** for Instagram / WhatsApp Stories.

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABM Story Playground (local)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;800;900&family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100&family=Oswald:wght@500;700&family=Poppins:wght@500;700;800&family=Teko:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/shell.css" />
+  <link rel="stylesheet" href="css/templates.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="panel">
+      <p class="eyebrow">Local playground</p>
+      <h1>Story Templates</h1>
+      <p class="lede">Edit CSS/JS in this folder · refresh to preview · port winners to the site later.</p>
+
+      <label>
+        Template
+        <select id="templateSelect"></select>
+      </label>
+
+      <label>
+        Sample product
+        <select id="productSelect"></select>
+      </label>
+
+      <div class="tips">
+        <p><strong>Edit:</strong> <code>css/templates.css</code> + <code>js/templates.js</code></p>
+        <p><strong>Canvas:</strong> 360×640 (prod is 1080×1920 = 3×)</p>
+        <p><strong>Apply:</strong> send changed files to Cursor when happy</p>
+      </div>
+    </aside>
+
+    <main class="stage-wrap">
+      <div class="stage-meta">
+        <span id="metaLabel">—</span>
+        <button type="button" id="reloadBtn">Reload</button>
+      </div>
+      <div class="stage">
+        <div id="canvas" class="ad-container" aria-live="polite"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
