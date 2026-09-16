@@ -5,24 +5,35 @@ import { getAllLocalAreas } from "@/data/local-areas";
 import { Separator } from "@/components/ui/separator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { POPULAR_SIZE_CODES, sizeHubPath } from "@/lib/battery-sizes/types";
+import {
+  PRIORITY_RESIDENTIAL_LINKS,
+  TECH_HUB_NAV_LINKS,
+} from "@/lib/battery-sizes/tech-hubs";
 
 export const metadata = buildPageMetadata({
   title: "Alberton Suburb Battery Services | Alberton Battery Mart",
   description:
-    "Browse mobile battery replacement coverage across Alberton suburbs including Brackenhurst, Brackendowns, Randhart, Verwoerdpark, and Alrode.",
+    "Car batteries for Alberton North, Meyersdal, Brackenhurst, Brackendowns, Randhart, Alberante, and Albertsdal. Drive in to New Redruth or request mobile fitment.",
   path: "/local",
   keywords: [
     "battery replacement Alberton suburbs",
     "mobile battery service Alberton",
+    "car battery Alberton North",
     "car battery Brackenhurst",
     "battery fitment Meyersdal",
-    "battery replacement New Redruth",
+    "car battery Albertsdal",
+    "car battery Alberante",
   ],
   imageAlt: "Alberton suburb mobile battery service coverage",
 });
 
 export default function LocalAreasHubPage() {
   const areas = getAllLocalAreas();
+  const featuredSlugs = new Set(
+    PRIORITY_RESIDENTIAL_LINKS.map((link) => link.href.replace("/local/", ""))
+  );
+  const remainingAreas = areas.filter((area) => !featuredSlugs.has(area.slug));
   const baseUrl = "https://www.albertonbatterymart.co.za";
 
   const breadcrumbSchema = {
@@ -85,18 +96,79 @@ export default function LocalAreasHubPage() {
           Alberton Coverage Hub
         </p>
         <h1 className="text-4xl md:text-5xl font-extrabold text-foreground">
-          Mobile battery replacement by suburb
+          Car batteries for Alberton suburbs
         </h1>
         <p className="text-lg text-muted-foreground">
-          Find the dedicated page for your suburb to see local response windows,
-          service focus, and direct callout options.
+          Alberton North, Meyersdal, Brackenhurst, Brackendowns, Randhart,
+          Alberante, Albertsdal, and the other established Alberton suburbs.
+          Popular sizes 616, 619, 628, 646, 652, 658, and 668 plus AGM/EFB
+          start-stop batteries.
         </p>
       </section>
 
       <Separator />
 
-      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {areas.map((area) => (
+      <section className="space-y-5">
+        <h2 className="text-2xl font-bold text-foreground text-center">
+          Priority residential suburbs
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {PRIORITY_RESIDENTIAL_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-lg border border-battery/40 bg-card p-5 hover:border-battery transition-colors"
+            >
+              <div className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-battery mt-1" />
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">{link.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {link.label} car batteries, mobile fitment, and start-stop AGM/EFB
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <h2 className="text-2xl font-bold text-foreground text-center">
+          Popular battery sizes
+        </h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          {POPULAR_SIZE_CODES.map((code) => (
+            <Link
+              key={code}
+              href={sizeHubPath(code)}
+              className="rounded-lg border border-border bg-card px-5 py-3 text-lg font-black text-battery hover:border-battery"
+            >
+              {code}
+            </Link>
+          ))}
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {TECH_HUB_NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-battery font-semibold underline underline-offset-2"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <Separator />
+
+      <section className="space-y-5">
+        <h2 className="text-2xl font-bold text-foreground text-center">
+          More Alberton coverage
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {remainingAreas.map((area) => (
           <Link
             key={area.slug}
             href={`/local/${area.slug}`}
@@ -105,7 +177,7 @@ export default function LocalAreasHubPage() {
             <div className="flex items-start gap-3">
               <MapPin className="h-5 w-5 text-battery mt-1" />
               <div>
-                <h2 className="text-xl font-bold text-foreground">{area.name}</h2>
+                <h3 className="text-xl font-bold text-foreground">{area.name}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{area.areaSummary}</p>
                 <p className="text-sm text-battery mt-3">
                   Typical response: {area.responseWindow}
@@ -121,7 +193,7 @@ export default function LocalAreasHubPage() {
           <div className="flex items-start gap-3">
             <MapPin className="h-5 w-5 text-battery mt-1" />
             <div>
-              <h2 className="text-xl font-bold text-foreground">Alberton Central</h2>
+              <h3 className="text-xl font-bold text-foreground">Alberton Central</h3>
               <p className="text-sm text-muted-foreground mt-2">
                 Core CBD page with walk-in and rapid nearby dispatch focus.
               </p>
@@ -129,36 +201,7 @@ export default function LocalAreasHubPage() {
             </div>
           </div>
         </Link>
-        <Link
-          href="/local/meyersdal"
-          className="rounded-lg border border-border bg-card p-5 hover:border-battery transition-colors"
-        >
-          <div className="flex items-start gap-3">
-            <MapPin className="h-5 w-5 text-battery mt-1" />
-            <div>
-              <h2 className="text-xl font-bold text-foreground">Meyersdal</h2>
-              <p className="text-sm text-muted-foreground mt-2">
-                Premium-area page focused on AGM fitment and BMS-sensitive vehicles.
-              </p>
-              <p className="text-sm text-battery mt-3">Typical response: 45-60 minutes</p>
-            </div>
-          </div>
-        </Link>
-        <Link
-          href="/local/new-redruth"
-          className="rounded-lg border border-border bg-card p-5 hover:border-battery transition-colors"
-        >
-          <div className="flex items-start gap-3">
-            <MapPin className="h-5 w-5 text-battery mt-1" />
-            <div>
-              <h2 className="text-xl font-bold text-foreground">New Redruth</h2>
-              <p className="text-sm text-muted-foreground mt-2">
-                HQ-adjacent page with fastest dispatch and walk-in conversion coverage.
-              </p>
-              <p className="text-sm text-battery mt-3">Typical response: 30-45 minutes</p>
-            </div>
-          </div>
-        </Link>
+        </div>
       </section>
 
       <Separator />

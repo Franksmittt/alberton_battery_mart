@@ -90,6 +90,30 @@ export const HUB_PAGES: HubPageConfig[] = [
       schemaType: "WebPage",
     })
   ),
+  {
+    path: "/agm-battery",
+    title: "AGM Battery Alberton | Start-Stop Fitment & BMS Coding",
+    description:
+      "AGM batteries in Alberton for BMW, Mercedes and start-stop cars. Stock, BMS coding, and same-day fitment at 28 St Columb Rd, New Redruth.",
+    hasFaq: true,
+    schemaType: "WebPage",
+  },
+  {
+    path: "/efb-battery",
+    title: "EFB Battery Alberton | Start-Stop Fitment",
+    description:
+      "EFB batteries in Alberton for Polo, Ranger, Tucson and other start-stop cars. Same-day fitment and testing at 28 St Columb Rd, New Redruth.",
+    hasFaq: true,
+    schemaType: "WebPage",
+  },
+  {
+    path: "/start-stop-battery",
+    title: "Start-Stop Battery Alberton | AGM & EFB",
+    description:
+      "Start-stop battery replacement in Alberton. AGM and EFB in stock with BMS coding for BMW, Mercedes, VW, and SUVs. Drive in to New Redruth.",
+    hasFaq: true,
+    schemaType: "WebPage",
+  },
 ];
 
 export const HUB_PATHS = HUB_PAGES.map((h) => h.path);
@@ -100,6 +124,8 @@ export const DEFAULT_HUB_RELATED_LINKS = [
   { href: "/products", label: "Browse All Batteries", description: "Car, truck, motorcycle, and solar batteries." },
   { href: "/658-car-battery", label: "658 Car Battery Hub", description: "Popular heavy-duty size — in stock with fitment." },
   { href: "/646-car-battery", label: "646 Car Battery Hub", description: "AGM/EFB options for Start/Stop vehicles." },
+  { href: "/agm-battery", label: "AGM Batteries", description: "BMW, Mercedes, and start-stop AGM with BMS coding." },
+  { href: "/start-stop-battery", label: "Start-Stop Batteries", description: "AGM vs EFB for idle-stop cars in Alberton." },
   { href: "/faq", label: "Battery FAQs", description: "Warranty, fitment, and testing answers." },
 ];
 

@@ -111,6 +111,51 @@ const nextConfig = {
         destination: '/contact#hours',
         permanent: false,
       },
+      {
+        source: '/agm-battery-alberton',
+        destination: '/agm-battery',
+        permanent: true,
+      },
+      {
+        source: '/agm',
+        destination: '/agm-battery',
+        permanent: true,
+      },
+      {
+        source: '/efb-battery-alberton',
+        destination: '/efb-battery',
+        permanent: true,
+      },
+      {
+        source: '/efb',
+        destination: '/efb-battery',
+        permanent: true,
+      },
+      {
+        source: '/start-stop-battery-alberton',
+        destination: '/start-stop-battery',
+        permanent: true,
+      },
+      {
+        source: '/stop-start-battery',
+        destination: '/start-stop-battery',
+        permanent: true,
+      },
+      {
+        source: '/start-stop',
+        destination: '/start-stop-battery',
+        permanent: true,
+      },
+      {
+        source: '/bmw-battery',
+        destination: '/vehicles/bmw',
+        permanent: true,
+      },
+      {
+        source: '/mercedes-battery',
+        destination: '/vehicles/mercedes',
+        permanent: true,
+      },
     ]
   },
   

@@ -35,4 +35,7 @@ export const MARKDOWN_ALTERNATES: Record<string, string> = {
   "/faq": "/faq.md",
   "/services": "/services.md",
   "/testing": "/testing.md",
+  "/agm-battery": "/agm-battery.md",
+  "/efb-battery": "/efb-battery.md",
+  "/start-stop-battery": "/start-stop-battery.md",
 };

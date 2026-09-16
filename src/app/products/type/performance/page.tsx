@@ -107,6 +107,17 @@ export default async function PerformanceBatteriesPage() {
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
                  The specialized, high-capacity AGM/EFB solutions required for modern vehicles with Start/Stop systems. Longest warranties available.
             </p>
+            <div className="flex flex-wrap justify-center gap-3 pt-2">
+              <Link href="/agm-battery" className="text-battery font-semibold underline underline-offset-2">
+                AGM battery hub
+              </Link>
+              <Link href="/efb-battery" className="text-battery font-semibold underline underline-offset-2">
+                EFB battery hub
+              </Link>
+              <Link href="/start-stop-battery" className="text-battery font-semibold underline underline-offset-2">
+                Start-stop battery hub
+              </Link>
+            </div>
             <Separator className="pt-4" />
         </div>
 

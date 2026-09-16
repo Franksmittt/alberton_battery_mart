@@ -95,6 +95,11 @@ export const STRUCTURED_AREA_SERVED = [
   { "@type": "Place", name: "New Redruth" },
   { "@type": "Place", name: "Meyersdal" },
   { "@type": "Place", name: "Brackenhurst" },
+  { "@type": "Place", name: "Brackendowns" },
+  { "@type": "Place", name: "Randhart" },
+  { "@type": "Place", name: "Alberante" },
+  { "@type": "Place", name: "Albertsdal" },
+  { "@type": "Place", name: "Alberton North" },
   { "@type": "Place", name: "Raceview" },
 ];
 

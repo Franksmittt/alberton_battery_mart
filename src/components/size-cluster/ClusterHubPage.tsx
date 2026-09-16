@@ -25,6 +25,7 @@ import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
 import { RelatedContent } from "@/components/seo/RelatedContent";
 import {
+  BatterySizeAgmBlock,
   BatterySizeFaqSection,
   BatterySizeIntentLinks,
   BatterySizeProductCards,
@@ -122,6 +123,7 @@ export async function renderClusterHub(code: string) {
       <HubSection>
         <BatterySizeSpecTable cluster={cluster} />
         <BatterySizeVehicleList cluster={cluster} />
+        <BatterySizeAgmBlock cluster={cluster} />
         <BatterySizeSuburbGrid cluster={cluster} />
         <BatterySizeFaqSection items={hubFaq} title={`${cluster.code} Battery FAQs`} />
         <BatterySizeSiblingLinks />
@@ -135,6 +137,8 @@ export async function renderClusterHub(code: string) {
           { href: "/testing", label: "Free battery testing", description: "Drive in for a free diagnostic before you buy." },
           { href: "/products", label: "All batteries", description: "Browse car, truck, and solar batteries." },
           { href: cluster.hubPath + "-price", label: `${cluster.code} price guide`, description: `Compare ${cluster.code} battery prices in Alberton.` },
+          { href: "/agm-battery", label: "AGM batteries", description: "Start-stop AGM stock and BMW/Mercedes BMS coding." },
+          { href: "/start-stop-battery", label: "Start-stop batteries", description: "AGM vs EFB for idle-stop vehicles." },
         ]}
       />
     </div>
@@ -159,6 +163,9 @@ export async function clusterHubMetadata(code: string) {
       `${cluster.code} car battery Alberton`,
       `${cluster.code} battery near me`,
       `${cluster.code} battery for sale`,
+      `${cluster.code} battery Alberton North`,
+      `${cluster.code} battery Meyersdal`,
+      `${cluster.code} battery Brackenhurst`,
     ],
     imageAlt: `${cluster.code} car battery Alberton - Alberton Battery Mart`,
   });

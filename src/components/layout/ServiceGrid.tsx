@@ -18,7 +18,7 @@ const SERVICE_FEATURES = [
         title: "Car Batteries (AGM/EFB)",
         description: "Compare Willard 652 vs. Exide 668P for Hilux, Ranger, and BMW Start/Stop vehicles.",
         icon: Car,
-        href: "/products/type/performance",
+        href: "/agm-battery",
     },
     {
         title: "Truck & Commercial",

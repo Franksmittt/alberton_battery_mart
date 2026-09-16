@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
+import { LocalDemandLinks } from '@/components/content/LocalDemandLinks';
 import FaqSection from '@/components/layout/FaqSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import AtomicAnswers from '@/components/seo/AtomicAnswers';
@@ -208,6 +209,10 @@ export default function AlbertonCentralPage() {
           </Link>
         </div>
       </section>
+
+      <Separator />
+
+      <LocalDemandLinks areaName="Alberton Central" areaSlug="alberton-central" />
 
       <Separator />
 

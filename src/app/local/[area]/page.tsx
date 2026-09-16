@@ -25,6 +25,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import FaqSchema from "@/components/seo/FaqSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import IntentLinks from "@/components/seo/IntentLinks";
+import { LocalDemandLinks } from "@/components/content/LocalDemandLinks";
 
 type Params = {
   area: string;
@@ -55,7 +56,7 @@ export async function generateMetadata({
     title,
     description,
     path: `/local/${area.slug}`,
-    keywords: [...area.focusKeywords, `${area.name} car battery`, `battery service ${area.name}`],
+    keywords: [...area.focusKeywords, `${area.name} car battery`, `battery service ${area.name}`, `616 battery ${area.name}`, `652 battery ${area.name}`, `AGM battery ${area.name}`],
     imageAlt: `Battery replacement ${area.name}`,
   });
 }
@@ -275,6 +276,10 @@ export default function LocalAreaPage({ params }: { params: Params }) {
           ]}
         />
       </section>
+
+      <Separator />
+
+      <LocalDemandLinks areaName={area.name} areaSlug={area.slug} />
 
       {nearbyAreas.length > 0 && (
         <>

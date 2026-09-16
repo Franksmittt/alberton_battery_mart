@@ -31,6 +31,15 @@ export type {
   ClusterSuburb,
 } from "@/lib/battery-sizes/types";
 
+export {
+  CLUSTER_SUBURB_SLUGS,
+  POPULAR_SIZE_CODES,
+  START_STOP_SIZE_CODES,
+  isClusterSuburbSlug,
+  sizeHubPath,
+  sizeSuburbPath,
+} from "@/lib/battery-sizes/types";
+
 export { BATTERY_SIZE_CONFIGS } from "@/lib/battery-sizes/legacy-config";
 
 export function getBatterySizeConfig(code: string) {

@@ -19,6 +19,7 @@ import type {
 import {
   getPrimaryProductForBrand,
 } from "@/lib/battery-sizes/content";
+import { localPathFromClusterSlug } from "@/lib/battery-sizes/tech-hubs";
 import { getAllProductsSync } from "@/lib/battery-sizes/products-sync";
 import { getProductsBySizeCodeSync } from "@/lib/products/by-size";
 import {
@@ -168,15 +169,17 @@ export function BatterySizeSpecTable({
 export function BatterySizeProductCards({
   cluster,
   products,
+  heading,
 }: {
   cluster: BatterySizeClusterConfig;
   products: ProductCardData[];
+  heading?: string;
 }) {
   if (!products.length) return null;
   return (
     <section className="container py-10 space-y-6">
       <h2 className="text-3xl font-bold text-foreground">
-        {cluster.code} Batteries In Stock
+        {heading || `${cluster.code} Batteries In Stock`}
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product) => (
@@ -367,6 +370,9 @@ export function BatterySizeIntentLinks({
         { href: "/mobile-battery-fitment-alberton", label: `Mobile ${cluster.code} battery fitment Alberton` },
         { href: "/emergency-battery-replacement-alberton", label: `Emergency ${cluster.code} battery replacement` },
         { href: `/${cluster.code}-car-battery-price`, label: `${cluster.code} battery price comparison` },
+        { href: "/agm-battery", label: "AGM battery Alberton" },
+        { href: "/efb-battery", label: "EFB battery Alberton" },
+        { href: "/start-stop-battery", label: "Start-stop battery Alberton" },
         ...brandLinks,
         { href: "/services/mobile-battery-replacement/alberton", label: "Mobile battery replacement Alberton" },
         { href: "/services/free-battery-testing/alberton", label: "Free battery testing Alberton" },
@@ -392,6 +398,12 @@ export function BatterySizeSuburbDetails({
         <p className="text-sm font-semibold text-foreground">
           Typical mobile response: {suburb.responseWindow}
         </p>
+        <Link
+          href={localPathFromClusterSlug(suburb.slug)}
+          className="inline-block text-battery font-semibold underline underline-offset-2"
+        >
+          {suburb.name} battery service page
+        </Link>
       </div>
       <div className="rounded-2xl border border-border bg-card/40 p-6 space-y-4 text-sm">
         <div>
@@ -407,6 +419,61 @@ export function BatterySizeSuburbDetails({
             Common {cluster.code} vehicles
           </p>
           <p className="text-muted-foreground">{suburb.vehicles.join(", ")}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function BatterySizeAgmBlock({
+  cluster,
+}: {
+  cluster: BatterySizeClusterConfig;
+}) {
+  if (!["646", "652", "658", "668"].includes(cluster.code)) return null;
+  return (
+    <section className="container py-10">
+      <div className="rounded-2xl border border-border bg-card/40 p-6 md:p-8 space-y-4">
+        <h2 className="text-2xl font-bold text-foreground">
+          {cluster.code} AGM &amp; EFB start-stop options
+        </h2>
+        <p className="text-muted-foreground">
+          Many {cluster.code} trays in Alberton are start-stop. BMW, Mercedes,
+          Audi, VW, and late-model SUVs usually need AGM or EFB in this size —
+          plus BMS coding on German cars. Do not drop a standard flooded{" "}
+          {cluster.code} into a start-stop vehicle.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/agm-battery"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery hover:text-battery"
+          >
+            AGM batteries
+          </Link>
+          <Link
+            href="/efb-battery"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery hover:text-battery"
+          >
+            EFB batteries
+          </Link>
+          <Link
+            href="/start-stop-battery"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery hover:text-battery"
+          >
+            Start-stop guide
+          </Link>
+          <Link
+            href="/vehicles/bmw"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery hover:text-battery"
+          >
+            BMW {cluster.code} AGM
+          </Link>
+          <Link
+            href="/vehicles/mercedes"
+            className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery hover:text-battery"
+          >
+            Mercedes {cluster.code} AGM
+          </Link>
         </div>
       </div>
     </section>
