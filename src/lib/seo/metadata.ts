@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { canonicalFor, toAbsoluteUrl } from "@/lib/seo/canonical";
+import { metadataTitle, normalizeDocumentTitle } from "@/lib/seo/page-title";
 
 type BuildPageMetadataInput = {
   title: string;
@@ -31,13 +32,15 @@ export function buildPageMetadata({
   const url = toAbsoluteUrl(path);
   const imageUrl = toAbsoluteUrl(imagePath);
 
+  const documentTitle = normalizeDocumentTitle(title);
+
   return {
-    title,
+    title: metadataTitle(title),
     description,
     keywords,
     robots,
     openGraph: {
-      title,
+      title: documentTitle,
       description,
       url,
       type,
@@ -54,7 +57,7 @@ export function buildPageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: documentTitle,
       description,
       images: [imageUrl],
     },

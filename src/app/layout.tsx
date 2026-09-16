@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   title: {
     default:
       "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
-    template: "%s | Alberton Battery Mart",
+    template: "%s",
   },
   description:
     "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
