@@ -148,7 +148,7 @@ export default function LocalAreaPage({ params }: { params: Params }) {
           </span>
           <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
             Car Batteries in{" "}
-            <span className="text-battery">{area.name}</span> — Visit Alberton
+            <span className="text-battery">{area.name}</span>. Visit Alberton
             Battery Mart
           </h1>
           <p className="text-xl text-muted-foreground">
@@ -230,7 +230,7 @@ export default function LocalAreaPage({ params }: { params: Params }) {
           </ul>
           <p className="text-sm text-muted-foreground">
             Need a mobile callout? We also dispatch to {area.name} in{" "}
-            {area.responseWindow} —{" "}
+            {area.responseWindow}.{" "}
             <Link
               href="/services/mobile-battery-replacement/alberton"
               className="text-battery underline"

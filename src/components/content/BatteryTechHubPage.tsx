@@ -89,7 +89,7 @@ function techFaqs(kind: BatteryTechKind) {
       {
         question: "Which EFB sizes are most popular in Alberton?",
         answer:
-          "646, 652, 658, and 668 EFB cover most Alberton hatchbacks, bakkies, and SUVs. Compact start-stop cars sometimes use 612 or 619 EFB — we confirm from the tray and VIN.",
+          "646, 652, 658, and 668 EFB cover most Alberton hatchbacks, bakkies, and SUVs. Compact start-stop cars sometimes use 612 or 619 EFB. We confirm from the tray and VIN.",
       },
       {
         question: "Do you fit EFB batteries in Meyersdal and Brackenhurst?",
@@ -106,7 +106,7 @@ function techFaqs(kind: BatteryTechKind) {
         "Start-stop (also written stop-start) cars need AGM or EFB. A standard flooded battery is the wrong spec and typically causes dashboard warnings and early failure.",
     },
     {
-      question: "AGM vs EFB — which start-stop battery do I need?",
+      question: "AGM vs EFB: which start-stop battery do I need?",
       answer:
         "AGM is usual on BMW, Mercedes, Audi, and higher-spec SUVs. EFB is usual on Polo, Ranger, Tucson, and many mass-market start-stop cars. We confirm before fitment.",
     },
@@ -212,7 +212,7 @@ export async function renderTechHub(kind: BatteryTechKind) {
         : [
             {
               icon: Zap,
-              title: "AGM or EFB — confirmed on the car",
+              title: "AGM or EFB, confirmed on the car",
               text: "We read the tray, VIN, and start-stop spec instead of guessing from the old battery brand.",
             },
             {
@@ -329,7 +329,7 @@ export async function renderTechHub(kind: BatteryTechKind) {
             Fitted in Alberton residential suburbs
           </h2>
           <p className="text-muted-foreground max-w-3xl">
-            We cover established Alberton suburbs — not a generic “greater
+            We cover established Alberton suburbs, not a generic “greater
             Ekurhuleni” page. Drive in from these areas or request mobile
             fitment.
           </p>

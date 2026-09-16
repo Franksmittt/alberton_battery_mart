@@ -23,7 +23,7 @@ export const REVIEW_REQUEST_STEPS = [
   {
     title: "Reply within 24 hours",
     description:
-      "Every review gets a human reply that names the service and the area — no canned one-liners.",
+      "Every review gets a human reply that names the service and the area. No canned one-liners.",
   },
 ];
 

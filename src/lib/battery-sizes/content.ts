@@ -247,7 +247,7 @@ export function getHubFaq(
     {
       question: `${code} battery trade-in discounts?`,
       answer:
-        "Our listed prices include scrap exchange. Bring your old battery and we handle core disposal as part of the replacement — no hidden environmental fees.",
+        "Our listed prices include scrap exchange. Bring your old battery and we handle core disposal as part of the replacement. No hidden environmental fees.",
     },
   ];
 }
@@ -328,7 +328,7 @@ export function getPriceRows(
         col2: ranges?.midas || "Varies",
         col1Label: "Eco Plus",
         col2Label: "Power Plus",
-        notes: "Battery only — fitment and testing extra",
+        notes: "Battery only. Fitment and testing extra",
       },
       {
         retailer: "Goldwagen (battery only, shelf)",
@@ -356,7 +356,7 @@ export function getPriceRows(
       col2: ranges?.midas || "Varies",
       col1Label: `Willard ${cluster.code}`,
       col2Label: `Exide ${cluster.code}`,
-      notes: "Battery only — fitment, testing, and warranty registration extra",
+      notes: "Battery only. Fitment, testing, and warranty registration extra",
     },
     {
       retailer: "Goldwagen (battery only, shelf)",

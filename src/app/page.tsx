@@ -74,7 +74,7 @@ export default function Home() {
         "Walk in at 28 St Columb Rd, New Redruth. Check live Alberton stock, get a free Midtronics test, and leave with a fitted battery.",
     },
     urgency: {
-      heading: "Dead battery? Drive in — we test first.",
+      heading: "Dead battery? Drive in. We test first.",
       subheading:
         "Search by vehicle, size, or brand, then pull in at New Redruth. Same-day fitment when the test says you need one.",
     },
@@ -104,69 +104,71 @@ export default function Home() {
         description={PAGE_COPY.home.description}
         path="/"
       />
-      <HubSection className="min-h-[60vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] text-white flex items-center">
-        <div className="container px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-[clamp(2.2rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.08] mb-4">
-              <span className="mb-3 block text-[0.78rem] sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--brand-accent)]">
-                Alberton Battery Mart · 28 St Columb Rd
+      <HubSection className="flex min-h-[calc(100svh-9rem)] items-center overflow-visible bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] py-4 text-white md:min-h-[calc(100svh-4rem)] md:py-6 lg:min-h-[calc(100svh-7rem)]">
+        <div className="container w-full px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+            <h1 className="mb-3 text-[clamp(1.85rem,5vw,3.5rem)] font-extrabold leading-[1.12] tracking-tight sm:mb-4">
+              <span className="mb-2 block px-1 text-[0.7rem] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--brand-accent)] sm:mb-3 sm:text-sm sm:tracking-[0.16em]">
+                <span className="block sm:inline">Alberton Battery Mart</span>
+                <span className="hidden sm:inline"> · </span>
+                <span className="mt-0.5 block sm:mt-0 sm:inline">28 St Columb Rd</span>
               </span>
-              <span className="block md:whitespace-nowrap">{heroCopy.heading}</span>
+              <span className="block text-balance">{heroCopy.heading}</span>
             </h1>
-            <p className="text-[clamp(1rem,2vw,1.2rem)] text-[var(--brand-muted)] max-w-2xl mx-auto leading-relaxed mb-6">
+            <p className="mb-4 max-w-2xl text-[clamp(0.95rem,2vw,1.2rem)] leading-relaxed text-[var(--brand-muted)] sm:mb-5">
               {heroCopy.subheading}
             </p>
-            <div className="mb-8 flex justify-center">
+            <div className="mb-5 flex justify-center sm:mb-6">
               <OpenNowBadge />
             </div>
 
             <form
               action="/products/results"
               method="get"
-              className="w-full max-w-3xl mx-auto bg-white rounded-[50px] p-1.5 shadow-[0_15px_35px_rgba(0,0,0,0.4)] transition-all duration-300 focus-within:-translate-y-0.5 focus-within:shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_0_4px_rgba(46,125,50,0.3)] max-[600px]:rounded-xl max-[600px]:p-3 max-[600px]:bg-white/5 max-[600px]:border max-[600px]:border-white/10"
+              className="w-full max-w-3xl rounded-2xl border border-white/15 bg-white/10 p-3 shadow-[0_15px_35px_rgba(0,0,0,0.4)] transition-all duration-300 focus-within:-translate-y-0.5 focus-within:shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_0_4px_rgba(46,125,50,0.3)] md:rounded-[50px] md:border-0 md:bg-white md:p-1.5"
             >
-              <div className="flex items-center max-[600px]:flex-col max-[600px]:items-stretch max-[600px]:gap-2.5">
-                <div className="flex items-center justify-center pl-5 pr-2 text-[var(--brand-muted-2)] max-[600px]:hidden">
+              <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-0">
+                <div className="hidden items-center justify-center pl-5 pr-2 text-[var(--brand-muted-2)] md:flex">
                   <Search className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <input
                   type="text"
                   name="q"
-                  placeholder="e.g., 'Ford Ranger battery' or '652 AGM'"
-                  className="flex-1 h-[4.25rem] px-4 text-[1.05rem] text-zinc-900 bg-transparent border-0 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal max-[600px]:h-[5rem] max-[600px]:px-4 max-[600px]:text-base max-[600px]:bg-white max-[600px]:rounded-md"
+                  placeholder="e.g., Ford Ranger battery or 652 AGM"
+                  className="min-h-16 w-full rounded-xl border-0 bg-white px-5 text-lg text-zinc-900 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal md:h-[4.25rem] md:min-h-0 md:flex-1 md:rounded-none md:bg-transparent md:px-4 md:text-[1.05rem]"
                 />
                 <button
                   type="submit"
-                  className="h-12 px-8 rounded-[40px] bg-[var(--brand-accent-solid)] hover:bg-[var(--brand-accent-hover)] text-white font-bold text-base transition-colors max-[600px]:w-full max-[600px]:rounded-md max-[600px]:h-12"
+                  className="min-h-16 w-full rounded-xl bg-[var(--brand-accent-solid)] px-8 text-lg font-bold text-white transition-colors hover:bg-[var(--brand-accent-hover)] md:h-12 md:min-h-0 md:w-auto md:rounded-[40px] md:text-base"
                 >
                   Search
                 </button>
               </div>
             </form>
 
-            <StoreVisitCtas trackingPrefix="home-hero" className="mt-8 justify-center" />
+            <StoreVisitCtas trackingPrefix="home-hero" className="mt-4 justify-center sm:mt-6" />
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-              <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
+            <div className="mt-4 grid w-full grid-cols-3 gap-1.5 text-[0.65rem] leading-snug sm:mt-6 sm:gap-3 sm:text-sm">
+              <div className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-2 font-semibold text-white/90 sm:px-3">
                 Walk-ins · no appointment
               </div>
-              <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
+              <div className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-2 font-semibold text-white/90 sm:px-3">
                 Free diagnostics before replacement
               </div>
-              <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
+              <div className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-2 font-semibold text-white/90 sm:px-3">
                 Up to 36-month named-brand warranty
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-3 items-center">
-              <span className="uppercase tracking-[1px] text-xs font-bold text-[var(--brand-muted-2)] mr-1">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-3">
+              <span className="mr-1 text-xs font-bold uppercase tracking-[1px] text-[var(--brand-muted-2)]">
                 Trending:
               </span>
               {trendingSearches.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-[var(--brand-muted)] text-sm border border-white/10 bg-white/5 px-4 py-2 rounded-[20px] transition-all hover:text-white hover:bg-white/10 hover:border-white/30 hover:-translate-y-0.5"
+                  className="shrink-0 rounded-[20px] border border-white/10 bg-white/5 px-4 py-2 text-sm text-[var(--brand-muted)] transition-all hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 hover:text-white"
                 >
                   {item.label}
                 </Link>
@@ -218,7 +220,7 @@ export default function Home() {
           <Link href="/services" className="underline decoration-white/30 hover:text-white">
             Mobile callouts
           </Link>{" "}
-          are still available — the counter remains the fastest option.
+          are still available. The counter remains the fastest option.
         </p>
       </section>
 
@@ -229,7 +231,7 @@ export default function Home() {
           <div className="text-center mb-10">
             <h2 className="text-3xl font-extrabold text-[var(--brand-bg)]">Named brands on the shelf</h2>
             <p className="mt-3 text-zinc-600 max-w-2xl mx-auto">
-              Independent stock — Willard, Exide, and Enertec — so the recommendation matches the car, not a house brand we have to move. Warranty months are on the invoice.
+              Independent stock: Willard, Exide, and Enertec, so the recommendation matches the car, not a house brand we have to move. Warranty months are on the invoice.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -318,7 +320,7 @@ export default function Home() {
               Honest testing, then the right fitment
             </h2>
             <p className="text-[var(--brand-muted)] text-[1.1rem] leading-relaxed max-w-3xl mx-auto">
-              Counter jobs and callouts across Alberton suburbs — same Midtronics process either way.
+              Counter jobs and callouts across Alberton suburbs, with the same Midtronics process either way.
             </p>
           </div>
 

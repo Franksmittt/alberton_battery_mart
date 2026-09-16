@@ -3,7 +3,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { AuthorityPageShell } from "@/components/store/AuthorityPageShell";
-import { ARRIVAL_ROUTES, DRIVE_IN_STEPS, PARKING_COPY, WHAT_TO_BRING } from "@/data/drive-in";
+import { ARRIVAL_ROUTES, DRIVE_IN_STEPS, PARKING_COPY, WHAT_TO_BRING, driveInStepTitle } from "@/data/drive-in";
 import { PAGE_COPY } from "@/lib/store-positioning";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { createFaqSchema, createHowToSchema } from "@/lib/seo/schema";
@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "What if my car will not start?",
     answer:
-      "Call 010 109 6211. If the car can be nursed to New Redruth, drive in — that is still the fastest fitment. If it cannot move, we can dispatch a mobile callout.",
+      "Call 010 109 6211. If the car can be nursed to New Redruth, drive in. That is still the fastest fitment. If it cannot move, we can dispatch a mobile callout.",
   },
 ];
 
@@ -60,14 +60,14 @@ export default function VisitPage() {
           name: "Drive in for a car battery in Alberton",
           description: `Walk in at ${STORE_ADDRESS_LINE} for a free test and same-day fitment.`,
           url: "/visit",
-          steps: DRIVE_IN_STEPS.map((step) => ({ name: step.title, text: step.body })),
+          steps: DRIVE_IN_STEPS.map((step) => ({ name: driveInStepTitle(step), text: step.body })),
         })}
         id="visit-howto-schema"
       />
       <JsonLd data={createFaqSchema(faqs)} id="visit-faq-schema" />
       <AuthorityPageShell
         title="Visit the shop at 28 St Columb Rd"
-        intro="Alberton Battery Mart is a walk-in battery shop in New Redruth — not a main-road queue and not a mobile-only van. One turn off Voortrekker Road, park at the door, and we test before we sell."
+        intro="Alberton Battery Mart is a walk-in battery shop in New Redruth, not a main-road queue and not a mobile-only van. One turn off Voortrekker Road, park at the door, and we test before we sell."
         trackingPrefix="visit"
         relatedTitle="Stock, suburbs, and warranty"
       >
@@ -111,8 +111,8 @@ export default function VisitPage() {
           <h2 className="text-3xl font-extrabold text-foreground">On the shop floor</h2>
           <ol className="list-decimal space-y-3 pl-6 text-lg text-muted-foreground">
             {DRIVE_IN_STEPS.map((step) => (
-              <li key={step.title}>
-                <span className="font-semibold text-foreground">{step.title}.</span> {step.body}
+              <li key={driveInStepTitle(step)}>
+                <span className="font-semibold text-foreground">{driveInStepTitle(step)}.</span> {step.body}
               </li>
             ))}
           </ol>

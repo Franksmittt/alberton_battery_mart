@@ -84,7 +84,7 @@ export async function renderClusterSuburb(code: string, suburbSlug: string) {
 
       <BatterySizeHero
         cluster={cluster}
-        title={`${cluster.code} Car Battery ${suburb.name} — Mobile Fitment`}
+          title={`${cluster.code} Car Battery ${suburb.name}: Mobile Fitment`}
         subtitle={`${cluster.code} batteries in stock from ${fittedFromPrice}. Mobile dispatch to ${suburb.name} in ${suburb.responseWindow} with free alternator testing. ${brandSummary}.`}
         trackingId={`${code}-suburb-${suburb.slug}-call`}
       />
@@ -93,7 +93,7 @@ export async function renderClusterSuburb(code: string, suburbSlug: string) {
       <BatterySizeProductCards cluster={cluster} products={products} />
       <BatterySizeFaqSection
         items={faqs}
-        title={`${cluster.code} Battery FAQs — ${suburb.name}`}
+        title={`${cluster.code} Battery FAQs: ${suburb.name}`}
       />
       <div className="container">
         <BatterySizeIntentLinks cluster={cluster} />

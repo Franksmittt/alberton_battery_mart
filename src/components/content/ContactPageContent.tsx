@@ -52,7 +52,7 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                     <div className="flex items-center space-x-3">
                       <MapPin className="h-6 w-6 text-battery" />
                       <h3 className="text-xl font-bold text-foreground">
-                        Storefront — Walk Ins Welcome
+                        Storefront. Walk ins welcome
                       </h3>
                     </div>
                     <p className="text-lg text-foreground">{STORE_ADDRESS_LINE}</p>
@@ -156,7 +156,7 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                         {STORE_HOURS_DISPLAY_LONG}
                       </p>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Staff answer the shop line from 07:30 weekdays — store opens to the public at 08:00.
+                        Staff answer the shop line from 07:30 weekdays. Store opens to the public at 08:00.
                       </p>
                     </div>
                   </div>
@@ -173,8 +173,8 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                   </div>
 
                   <p className="text-sm text-muted-foreground">
-                    Mobile battery replacement is also available across Alberton —
-                    call us to check dispatch availability.
+                    Mobile battery replacement is also available across Alberton.
+                    Call us to check dispatch availability.
                   </p>
                 </div>
               </div>

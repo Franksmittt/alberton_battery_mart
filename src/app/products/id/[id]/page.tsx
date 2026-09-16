@@ -187,7 +187,7 @@ export default async function ProductDetailPage({
               {product.brandName} · {product.category}
             </p>
             <h1 className="text-4xl font-extrabold text-foreground">
-              {product.name} — {product.seoSubtitle}
+              {product.name}: {product.seoSubtitle}
             </h1>
             {product.popularFits && (
               <p className="text-muted-foreground">
@@ -202,7 +202,7 @@ export default async function ProductDetailPage({
             </p>
             {isPriceOnApplication(product.sellingPrice_OUTPUT) && (
               <p className="text-sm text-muted-foreground">
-                Price on application — call or WhatsApp for a live quote.
+                Price on application. Call or WhatsApp for a live quote.
               </p>
             )}
             <div className="flex flex-wrap gap-4">

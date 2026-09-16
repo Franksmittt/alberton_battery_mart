@@ -2,7 +2,7 @@
 
 > Up to 36 months on Willard EFB and Enertec AGM, registered at fitment.
 
-Named manufacturer cover on the invoice. Independent stock — Willard, Exide, Enertec — not a house-brand slogan.
+Named manufacturer cover on the invoice. Independent stock: Willard, Exide, Enertec. Not a house-brand slogan.
 
 - Phone: 010 109 6211
 - Address: 28 St Columb Rd, New Redruth, Alberton, 1450

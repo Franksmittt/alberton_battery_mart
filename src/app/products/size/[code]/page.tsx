@@ -253,7 +253,7 @@ export default async function SizePage({ params }: SizePageProps) {
         links={[
           ...(cluster
             ? [
-                { href: cluster.hubPath, label: `${code} car battery hub — Alberton` },
+                { href: cluster.hubPath, label: `${code} car battery hub, Alberton` },
                 { href: `/${code}-car-battery-price`, label: `${code} battery price comparison` },
                 { href: `/${code}-battery-specs`, label: `${code} battery specifications` },
               ]

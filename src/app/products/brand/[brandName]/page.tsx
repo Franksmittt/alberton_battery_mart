@@ -170,13 +170,13 @@ const BRAND_VEHICLE_LINKS: Record<
 
 const BRAND_POSITIONING: Record<string, string> = {
   willard:
-    "Willard passenger, bakkie, and EFB batteries fitted at 28 St Columb Rd. Independent stock — we put Willard on the car when it is the right spec, with warranty months on the invoice.",
+    "Willard passenger, bakkie, and EFB batteries fitted at 28 St Columb Rd. Independent stock: we put Willard on the car when it is the right spec, with warranty months on the invoice.",
   exide:
     "Exide Gold and AGM sizes for everyday and start-stop cars. Drive in to New Redruth for a Midtronics test and same-day fitment.",
   enertec:
     "Enertec AGM automotive and motorcycle batteries, including premium lines with up to 36 months. Fitted and registered at the New Redruth counter.",
   "power-plus":
-    "Power Plus batteries in stock at our New Redruth storefront. Drive in for free testing, same-day fitment, and honest advice — no upselling.",
+    "Power Plus batteries in stock at our New Redruth storefront. Drive in for free testing, same-day fitment, and honest advice. No upselling.",
   "eco-plus":
     "Eco Plus value batteries available in-store at Alberton Battery Mart. Walk in for a free test and fitted pricing from R1,050.",
 };

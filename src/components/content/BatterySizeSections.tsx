@@ -439,7 +439,7 @@ export function BatterySizeAgmBlock({
         </h2>
         <p className="text-muted-foreground">
           Many {cluster.code} trays in Alberton are start-stop. BMW, Mercedes,
-          Audi, VW, and late-model SUVs usually need AGM or EFB in this size —
+          Audi, VW, and late-model SUVs usually need AGM or EFB in this size,
           plus BMS coding on German cars. Do not drop a standard flooded{" "}
           {cluster.code} into a start-stop vehicle.
         </p>

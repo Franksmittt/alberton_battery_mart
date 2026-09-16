@@ -194,7 +194,7 @@ export const BATTERY_SIZE_CLUSTERS: BatterySizeClusterConfig[] = [
     brands: ["eco_plus", "power_plus"],
     valueTierOnly: true,
     hubIntro:
-      "Value-tier 657 batteries from Eco Plus and Power Plus — ideal when you need reliable fitment without premium-brand pricing.",
+      "Value-tier 657 batteries from Eco Plus and Power Plus, ideal when you need reliable fitment without premium-brand pricing.",
     specs: {
       voltage: "12V",
       ahRange: "72Ah",
@@ -225,7 +225,7 @@ export const BATTERY_SIZE_CLUSTERS: BatterySizeClusterConfig[] = [
     brands: ["eco_plus", "power_plus"],
     valueTierOnly: true,
     hubIntro:
-      "Affordable 616 compact-car batteries from Eco Plus and Power Plus — perfect for older city cars and budget commuters.",
+      "Affordable 616 compact-car batteries from Eco Plus and Power Plus, perfect for older city cars and budget commuters.",
     specs: {
       voltage: "12V",
       ahRange: "36Ah",

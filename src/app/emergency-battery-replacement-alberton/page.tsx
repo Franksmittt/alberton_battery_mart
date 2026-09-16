@@ -30,7 +30,7 @@ const FAQ = [
   {
     question: "How much does emergency battery replacement cost?",
     answer:
-      "Price depends on battery size and brand. We confirm fitted pricing before dispatch — no surprise charges after the job is done.",
+      "Price depends on battery size and brand. We confirm fitted pricing before dispatch. No surprise charges after the job is done.",
   },
 ];
 
@@ -83,7 +83,7 @@ export default async function EmergencyAlbertonPage() {
         <div className="container max-w-4xl text-center space-y-6">
           <AlertCircle className="h-12 w-12 text-battery mx-auto" />
           <h1 className="text-4xl md:text-5xl font-black text-foreground">
-            Emergency Battery Replacement — Alberton
+            Emergency Battery Replacement in Alberton
           </h1>
           <p className="text-lg text-muted-foreground">
             Dead battery? We dispatch with popular sizes in stock, test before we sell, and fit on-site across Alberton.
@@ -105,7 +105,7 @@ export default async function EmergencyAlbertonPage() {
       <section className="container grid md:grid-cols-3 gap-6 max-w-5xl">
         {[
           { icon: Zap, title: "Popular sizes in stock", text: "619, 628, 646, 652, 668, 658 & more" },
-          { icon: Clock3, title: "Fast local response", text: "Alberton-based — not a national call centre" },
+          { icon: Clock3, title: "Fast local response", text: "Alberton-based, not a national call centre" },
           { icon: AlertCircle, title: "Test first", text: "Free diagnostics before replacement" },
         ].map((item) => (
           <div key={item.title} className="rounded-xl border border-border bg-card/50 p-6 space-y-2 text-center">

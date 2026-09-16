@@ -21,7 +21,7 @@ const FAQ = [
   {
     question: "Mobile battery fitment price in Alberton?",
     answer:
-      "Fitted prices depend on battery size and brand. Popular sizes like 619 start from our live catalog price with scrap exchange. Mobile call-out includes free alternator and starter testing — we quote upfront before dispatch.",
+      "Fitted prices depend on battery size and brand. Popular sizes like 619 start from our live catalog price with scrap exchange. Mobile call-out includes free alternator and starter testing. We quote upfront before dispatch.",
   },
   {
     question: "How fast is mobile battery fitment?",
@@ -29,7 +29,7 @@ const FAQ = [
       "Average response across Alberton is 45–60 minutes during operating hours. New Redruth and Alberton Central are typically fastest from our St Columb Rd storefront.",
   },
   {
-    question: "On-site battery fitment — what is included?",
+    question: "On-site battery fitment: what is included?",
     answer:
       "We bring the correct battery, test your charging system, professionally install with torque-checked clamps, register warranty, and dispose of your old battery.",
   },
@@ -92,7 +92,7 @@ export default async function MobileBatteryFitmentAlbertonPage() {
             Mobile Battery Fitment in <span className="text-battery">Alberton</span>
           </h1>
           <p className="text-lg text-muted-foreground">
-            On-site delivery, installation, and diagnostics for all popular battery sizes — 619, 628, 646, 652, 668, 658, and more.
+            On-site delivery, installation, and diagnostics for all popular battery sizes: 619, 628, 646, 652, 668, 658, and more.
           </p>
           <Button asChild size="xl" variant="battery">
             <a href="tel:0101096211" className="flex items-center gap-2 mx-auto">

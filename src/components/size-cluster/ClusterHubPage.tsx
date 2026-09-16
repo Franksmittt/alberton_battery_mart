@@ -111,7 +111,7 @@ export async function renderClusterHub(code: string) {
 
       <HubSection>
         <AdLandingHero
-          title={`${cluster.code} Car Battery — In Stock at Alberton Battery Mart`}
+          title={`${cluster.code} Car Battery: In Stock at Alberton Battery Mart`}
           subtitle={buildHubSubtitle(cluster, fittedFromPrice, brandSummary)}
           trackingPrefix={`${code}-hub`}
         />
