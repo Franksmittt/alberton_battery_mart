@@ -43,7 +43,7 @@ const MobileNav = () => {
               </Link>
             </SheetTitle>
             <p className="pt-2 text-xs font-semibold uppercase tracking-[0.1em] text-[var(--brand-muted)]">
-              Mobile Fitment. Honest Testing.
+              Drive in. Honest testing.
             </p>
           </SheetHeader>
 

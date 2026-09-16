@@ -1,5 +1,5 @@
 // src/app/about/page.tsx
-import { Battery, MapPin, ShieldCheck, Users } from "lucide-react";
+import { MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
@@ -7,12 +7,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
 import { RelatedContent } from "@/components/seo/RelatedContent";
+import { PAGE_COPY } from "@/lib/store-positioning";
 import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
-  title: "About Alberton Battery Mart | Your Local Battery Experts",
-  description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts in Alberton.",
+  title: PAGE_COPY.about.title,
+  description: PAGE_COPY.about.description,
   keywords: [
     'about Alberton Battery Mart',
     'battery experts Alberton',
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
     'local battery shop'
   ],
   openGraph: {
-    title: "About Alberton Battery Mart | Your Local Battery Experts",
-    description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
+    title: PAGE_COPY.about.title,
+    description: PAGE_COPY.about.description,
     url: 'https://www.albertonbatterymart.co.za/about',
     type: 'website',
     locale: 'en_ZA',
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "About Alberton Battery Mart | Your Local Battery Experts",
-    description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
+    title: PAGE_COPY.about.title,
+    description: PAGE_COPY.about.description,
     images: ['/images/og-image.jpg'],
   },
   alternates: {
@@ -73,8 +74,8 @@ export default function AboutPage() {
   return (
     <>
       <PageJsonLd
-        title="About Alberton Battery Mart | Your Local Battery Experts"
-        description="Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts in Alberton."
+        title={PAGE_COPY.about.title}
+        description={PAGE_COPY.about.description}
         path="/about"
       />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
@@ -104,7 +105,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-foreground">Our Local Mission</h2>
           </div>
           <p className="text-lg text-muted-foreground">
-            Our mission is simple: to be the #1 trusted battery expert in Alberton. We win by providing value that online-only stores and generic fitment chains can't match. We are physically here at <strong>28 St Columb Rd</strong>, ready to provide free on-site diagnostics, alternator testing, and professional fitment while you wait.
+            Our mission is to be the battery shop Alberton drivers actually drive to. The counter is at <strong>28 St Columb Rd, New Redruth</strong> — one quiet turn off Voortrekker Road. Walk in, get a free Midtronics test, and leave with a fitted battery when you need one. Mobile callouts exist if the car cannot reach us.
           </p>
         </div>
 
@@ -115,15 +116,15 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-foreground">Our Expert Advantage</h2>
           </div>
           <p className="text-lg text-muted-foreground">
-            We are not locked into one brand. As official stockists of Willard, Exide, and Enertec, our loyalty is to you, the customer. We provide unbiased, expert advice to ensure you get the <em>correct</em> battery for your specific vehicle (Car, Truck, or Motorcycle) and budget, all backed by a full manufacturer warranty.
+            We are not locked into one brand. As stockists of Willard, Exide, and Enertec, the recommendation matches the tray and the budget. Premium lines carry up to 36 months, registered at fitment — named manufacturer cover, not a house-brand slogan.
           </p>
         </div>
       </div>
 
       <div className="pt-8 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-foreground">Ready to Get the Right Battery, First Time?</h2>
+        <h2 className="text-2xl font-bold text-foreground">Drive in to 28 St Columb Rd</h2>
         <Button asChild size="xl" variant="battery" className="shadow-lg">
-          <Link href="/products">View Our Full Product Range</Link>
+          <Link href="/visit">How to find the shop</Link>
         </Button>
       </div>
     </HubSection>

@@ -1,27 +1,28 @@
-# Google Business Profile Post Snippets – Alberton Battery Mart
+# Google Business Profile posts — Alberton Battery Mart
 
-## Mobile Battery Callout – Alberton CBD
-- **Post:** “Stranded in Alberton CBD? Our mobile techs arrive in ±60 min with the exact Willard/Exide spec and run full diagnostics before fitting. Call 010 109 6211 for a guaranteed, warrantied swap.”
-- **CTA:** “Book a mobile callout”
-- **Link:** https://www.albertonbatterymart.co.za/services/mobile-battery-replacement/alberton
+Store-first posts. Paste into GBP. Do not copy competitor wording. Ask for a Google review after every counter job.
 
-## Free Battery Testing – New Redruth Store
-- **Post:** “Lights dimming or car battling to start? Swing past 28 St Columb Rd for FREE Midtronics testing on battery, alternator, and starter. No purchase until we prove the fault.”
-- **CTA:** “Book a diagnostic slot”
-- **Link:** https://www.albertonbatterymart.co.za/services/free-battery-testing/alberton
+## Walk-in test — New Redruth
+- **Post:** Slow to crank this morning? Drive in to 28 St Columb Rd, New Redruth. Free Midtronics test on the battery, starter, and alternator. If you need a replacement, we fit it while you wait. Willard, Exide, and Enertec in stock.
+- **CTA:** Get directions
+- **Link:** https://www.albertonbatterymart.co.za/visit
 
-## Meyersdal Premium Fitment (AGM/Start-Stop)
-- **Post:** “Driving a BMW, Audi, or Mercedes with Start/Stop? We stock OEM-spec AGM batteries and code the new unit to your BMS from our Meyersdal crew. Stop warning lights before they start.”
-- **CTA:** “Schedule premium fitment”
-- **Link:** https://www.albertonbatterymart.co.za/services/battery-fitment/meyersdal
+## Saturday morning hours
+- **Post:** Shop floor Saturday 08:00–12:00. Phones from 07:30 on weekdays. Park on St Columb — one turn off Voortrekker Road. No appointment.
+- **CTA:** Call
+- **Link:** https://www.albertonbatterymart.co.za/contact
 
-## Fleet & Truck Battery Rotation – Alrode
-- **Post:** “Keep your Alrode fleet moving. We rotate, test, and replace Willard 658/689 truck batteries on-site, recycle the old units, and keep warranties intact.”
-- **CTA:** “Request a fleet quote”
-- **Link:** https://www.albertonbatterymart.co.za/services/truck-battery-fitment/alrode
+## 36-month named-brand warranty
+- **Post:** Premium Willard EFB and Enertec AGM carry up to 36 months, registered at fitment on the invoice. Independent stock — we match the car, not a house brand.
+- **CTA:** Learn more
+- **Link:** https://www.albertonbatterymart.co.za/warranty
 
-## Emergency Jump-Start / Estate Access
-- **Post:** “Estate access? No problem. Our jump-start van clears security quickly, tests the battery, and fits a new unit if needed—Meyersdal, Brackenhurst, Randhart covered daily.”
-- **CTA:** “WhatsApp 24/7 help”
-- **Link:** https://wa.me/27823046926
+## AGM / start-stop at the counter
+- **Post:** BMW, Mercedes, and other start-stop cars need AGM or EFB, not a cheap flooded substitute. We keep 646, 652, 658, and 668 AGM in New Redruth and code the BMS when the car requires it.
+- **CTA:** Learn more
+- **Link:** https://www.albertonbatterymart.co.za/agm-battery
 
+## Meyersdal / Brackenhurst drive-in
+- **Post:** Coming from Meyersdal or Brackenhurst? 10–15 minutes to 28 St Columb Rd. Street-front parking, walk in, fitted while you wait. Call 010 109 6211 if the car will not start — we can still dispatch.
+- **CTA:** Get directions
+- **Link:** https://www.albertonbatterymart.co.za/visit

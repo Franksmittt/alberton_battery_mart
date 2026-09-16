@@ -2,10 +2,21 @@
 import dynamicImport from "next/dynamic";
 import { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, Clock3, MapPin, Navigation, Phone, Search, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Clock3, MapPin, Search, ShieldCheck } from "lucide-react";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
+import { OpenNowBadge } from "@/components/store/OpenNowBadge";
+import { StoreVisitCtas } from "@/components/store/StoreVisitCtas";
+import { DriveInProcess } from "@/components/store/DriveInProcess";
+import { PAGE_COPY } from "@/lib/store-positioning";
+import { PARKING_COPY } from "@/data/drive-in";
+import {
+  SITE_TAGLINE,
+  STORE_ADDRESS_LINE,
+  STORE_HOURS_DISPLAY,
+  STORE_PHONE_HOURS_DISPLAY,
+} from "@/lib/seo-constants";
 
 export const dynamic = "auto";
 
@@ -34,26 +45,24 @@ const RelatedContent = dynamicImport(
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
-    title: "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
-    description:
-      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
+    title: PAGE_COPY.home.title,
+    description: PAGE_COPY.home.description,
     path: "/",
     markdownPath: "/index.md",
     keywords: [
-      "battery replacement Alberton",
       "car battery Alberton",
-      "mobile battery service",
+      "battery shop Alberton",
+      "battery testing Alberton",
       "Willard batteries Alberton",
       "Exide batteries Alberton",
       "battery fitment Alberton",
       "car battery New Redruth",
-      "battery testing Alberton",
       "AGM battery Alberton",
       "EFB battery Alberton",
-      "mobile callout Alberton",
+      "drive in battery Alberton",
       "battery specialist Alberton",
     ],
-    imageAlt: "Alberton Battery Mart - Mobile Battery Replacement Service",
+    imageAlt: "Alberton Battery Mart drive-in battery shop at 28 St Columb Rd",
   }),
 };
 
@@ -62,17 +71,17 @@ export default function Home() {
     control: {
       heading: "What battery are you looking for?",
       subheading:
-        "Enter your vehicle model, battery code (e.g., 652), or brand to instantly check our live Alberton inventory.",
+        "Walk in at 28 St Columb Rd, New Redruth. Check live Alberton stock, get a free Midtronics test, and leave with a fitted battery.",
     },
     urgency: {
-      heading: "Dead battery? Find your exact replacement fast.",
+      heading: "Dead battery? Drive in — we test first.",
       subheading:
-        "Search by vehicle, battery code, or brand and get matched options in seconds with local stock and rapid fitment support.",
+        "Search by vehicle, size, or brand, then pull in at New Redruth. Same-day fitment when the test says you need one.",
     },
     trust: {
       heading: "Find a battery that fits right the first time.",
       subheading:
-        "Use live Alberton inventory with diagnostics-first fitment, warranty-backed installs, and trusted local support.",
+        "Named brands on the shelf, warranty months on the invoice, and diagnostics before anyone opens a box.",
     },
   } as const;
 
@@ -83,16 +92,16 @@ export default function Home() {
 
   const trendingSearches = [
     { label: "Willard 652", href: "/products/results?q=Willard+652" },
-    { label: "Toyota Hilux GD-6", href: "/products/results?q=Toyota+Hilux+GD-6+battery" },
     { label: "AGM Start/Stop", href: "/start-stop-battery" },
-    { label: "Commercial Truck Batteries", href: "/products/type/truck-commercial" },
+    { label: "Visit the shop", href: "/visit" },
+    { label: "36-month warranty", href: "/warranty" },
   ];
 
   return (
     <main className="overflow-x-clip">
       <PageJsonLd
-        title="Alberton Battery Mart | Mobile Battery Replacement & Fitment Service"
-        description="Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211."
+        title={PAGE_COPY.home.title}
+        description={PAGE_COPY.home.description}
         path="/"
       />
       <HubSection className="min-h-[60vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] text-white flex items-center">
@@ -104,9 +113,12 @@ export default function Home() {
               </span>
               <span className="block md:whitespace-nowrap">{heroCopy.heading}</span>
             </h1>
-            <p className="text-[clamp(1rem,2vw,1.2rem)] text-[var(--brand-muted)] max-w-2xl mx-auto leading-relaxed mb-10">
+            <p className="text-[clamp(1rem,2vw,1.2rem)] text-[var(--brand-muted)] max-w-2xl mx-auto leading-relaxed mb-6">
               {heroCopy.subheading}
             </p>
+            <div className="mb-8 flex justify-center">
+              <OpenNowBadge />
+            </div>
 
             <form
               action="/products/results"
@@ -120,7 +132,7 @@ export default function Home() {
                 <input
                   type="text"
                   name="q"
-                  placeholder="e.g., 'Ford Ranger battery' or 'Varta 652 AGM'"
+                  placeholder="e.g., 'Ford Ranger battery' or '652 AGM'"
                   className="flex-1 h-[4.25rem] px-4 text-[1.05rem] text-zinc-900 bg-transparent border-0 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal max-[600px]:h-[5rem] max-[600px]:px-4 max-[600px]:text-base max-[600px]:bg-white max-[600px]:rounded-md"
                 />
                 <button
@@ -132,15 +144,17 @@ export default function Home() {
               </div>
             </form>
 
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+            <StoreVisitCtas trackingPrefix="home-hero" className="mt-8 justify-center" />
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
               <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
-                4.8/5 local customer rating
+                Walk-ins · no appointment
               </div>
               <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
                 Free diagnostics before replacement
               </div>
               <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
-                Warranty registered on every fitment
+                Up to 36-month named-brand warranty
               </div>
             </div>
 
@@ -171,11 +185,11 @@ export default function Home() {
             </div>
             <div className="inline-flex items-center gap-3 text-zinc-700 font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
               <Clock3 className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
-              60-Minute Average Response
+              Fitted While You Wait
             </div>
             <div className="inline-flex items-center gap-3 text-zinc-700 font-semibold text-[0.95rem] tracking-[0.3px] whitespace-nowrap">
               <CheckCircle2 className="h-6 w-6 text-[var(--brand-success)] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
-              Free On-Site Midtronics Diagnostics
+              Free Midtronics Diagnostics
             </div>
           </div>
           <MobileTrustRotator />
@@ -198,53 +212,49 @@ export default function Home() {
       </section>
 
       <section className="bg-[var(--brand-bg)] text-white py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-extrabold tracking-tight mb-3">Drive In — Fastest Service</h2>
-            <p className="text-[var(--brand-muted)] text-lg max-w-2xl mx-auto leading-relaxed">
-              Visit our New Redruth storefront for free testing and same-day fitment. Mobile service is available on request if you cannot reach the shop.
-            </p>
-          </div>
-
-          <div className="relative flex justify-between max-[800px]:flex-col max-[800px]:gap-12">
-            <div className="absolute top-[30px] left-[15%] right-[15%] h-[2px] bg-[var(--brand-border)] z-0 max-[800px]:top-0 max-[800px]:bottom-0 max-[800px]:left-1/2 max-[800px]:right-auto max-[800px]:h-full max-[800px]:w-[2px] max-[800px]:-translate-x-1/2" />
-
-            <div className="flex-1 text-center px-4 relative z-10">
-              <div className="w-[60px] h-[60px] rounded-full border-2 border-[var(--brand-accent)] bg-[var(--brand-bg)] text-white text-2xl font-extrabold flex items-center justify-center mx-auto mb-6 shadow-[0_0_0_10px_var(--brand-bg)]">
-                1
-              </div>
-              <h3 className="text-xl font-bold mb-3">WhatsApp Location</h3>
-              <p className="text-[var(--brand-muted)] text-[0.95rem] leading-relaxed">
-                Send your GPS pin. We dispatch a vetted technician directly to your breakdown site in Alberton.
-              </p>
-            </div>
-
-            <div className="flex-1 text-center px-4 relative z-10">
-              <div className="w-[60px] h-[60px] rounded-full border-2 border-[var(--brand-accent)] bg-[var(--brand-bg)] text-white text-2xl font-extrabold flex items-center justify-center mx-auto mb-6 shadow-[0_0_0_10px_var(--brand-bg)]">
-                2
-              </div>
-              <h3 className="text-xl font-bold mb-3">Midtronics Testing</h3>
-              <p className="text-[var(--brand-muted)] text-[0.95rem] leading-relaxed">
-                Free diagnostic checks on your alternator and starter to ensure you actually need a new battery.
-              </p>
-            </div>
-
-            <div className="flex-1 text-center px-4 relative z-10">
-              <div className="w-[60px] h-[60px] rounded-full border-2 border-[var(--brand-accent)] bg-[var(--brand-bg)] text-white text-2xl font-extrabold flex items-center justify-center mx-auto mb-6 shadow-[0_0_0_10px_var(--brand-bg)]">
-                3
-              </div>
-              <h3 className="text-xl font-bold mb-3">Pay on Success</h3>
-              <p className="text-[var(--brand-muted)] text-[0.95rem] leading-relaxed">
-                Secure mobile payments are processed only after the battery is coded and your engine successfully starts.
-              </p>
-            </div>
-          </div>
-        </div>
+        <DriveInProcess />
+        <p className="mt-10 text-center text-sm text-[var(--brand-muted-2)]">
+          Car cannot reach the shop?{" "}
+          <Link href="/services" className="underline decoration-white/30 hover:text-white">
+            Mobile callouts
+          </Link>{" "}
+          are still available — the counter remains the fastest option.
+        </p>
       </section>
 
       <HomeProductGrid />
 
       <section className="bg-white py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-extrabold text-[var(--brand-bg)]">Named brands on the shelf</h2>
+            <p className="mt-3 text-zinc-600 max-w-2xl mx-auto">
+              Independent stock — Willard, Exide, and Enertec — so the recommendation matches the car, not a house brand we have to move. Warranty months are on the invoice.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Link href="/products/brand/willard" className="rounded-xl border border-zinc-200 p-6 hover:border-[var(--brand-accent)]">
+              <h3 className="text-xl font-bold text-[var(--brand-bg)]">Willard</h3>
+              <p className="mt-2 text-zinc-600">Passenger, bakkie, and EFB lines fitted in New Redruth.</p>
+            </Link>
+            <Link href="/products/brand/exide" className="rounded-xl border border-zinc-200 p-6 hover:border-[var(--brand-accent)]">
+              <h3 className="text-xl font-bold text-[var(--brand-bg)]">Exide</h3>
+              <p className="mt-2 text-zinc-600">Gold and AGM sizes for start-stop and everyday cars.</p>
+            </Link>
+            <Link href="/products/brand/enertec" className="rounded-xl border border-zinc-200 p-6 hover:border-[var(--brand-accent)]">
+              <h3 className="text-xl font-bold text-[var(--brand-bg)]">Enertec</h3>
+              <p className="mt-2 text-zinc-600">AGM automotive and motorcycle batteries, up to 36 months.</p>
+            </Link>
+          </div>
+          <p className="mt-6 text-center">
+            <Link href="/warranty" className="font-semibold text-[var(--brand-accent-solid)] hover:underline">
+              How the 36-month cover is registered →
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-white py-16 px-6 border-t border-zinc-200">
         <div className="max-w-6xl mx-auto">
           <div className="flex border border-zinc-200 rounded-lg overflow-hidden max-[900px]:flex-col">
             <div className="flex-1 bg-white px-16 py-16 flex flex-col justify-center items-start max-[900px]:px-10 max-[900px]:py-10">
@@ -305,10 +315,10 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-[2.2rem] font-extrabold tracking-tight text-white mb-3">
-              The Standard for Mobile Fitment
+              Honest testing, then the right fitment
             </h2>
             <p className="text-[var(--brand-muted)] text-[1.1rem] leading-relaxed max-w-3xl mx-auto">
-              Real reviews matched directly to our specialized automotive services across Ekurhuleni.
+              Counter jobs and callouts across Alberton suburbs — same Midtronics process either way.
             </p>
           </div>
 
@@ -382,6 +392,11 @@ export default function Home() {
               </div>
             </article>
           </div>
+          <p className="mt-8 text-center">
+            <Link href="/reviews" className="text-[var(--brand-muted)] underline decoration-white/25 hover:text-white">
+              Leave a Google review after your visit
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -389,15 +404,17 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex bg-[var(--brand-bg-elevated)] border border-[var(--brand-border)] rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)] max-[950px]:flex-col">
             <div className="flex-1 px-[4.5rem] py-[4.5rem] flex flex-col justify-center max-[950px]:px-8 max-[950px]:py-12">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--brand-accent)] mb-3">
+                {SITE_TAGLINE}
+              </p>
               <h2 className="text-[2.4rem] leading-[1.1] tracking-tight font-extrabold mb-4 max-[950px]:text-[2rem]">
-                Visit Our Storefront or Talk to an Expert
+                One turn off Voortrekker Road
               </h2>
-              <p className="text-[var(--brand-muted)] text-[1.15rem] leading-relaxed mb-12 max-w-[90%]">
-                Need counter service or a large commercial order? Find us in Alberton Central.
-                We have the area&apos;s widest selection in stock, ready to go.
+              <p className="text-[var(--brand-muted)] text-[1.15rem] leading-relaxed mb-8 max-w-[90%]">
+                {PARKING_COPY} {STORE_ADDRESS_LINE}.
               </p>
 
-              <div className="grid gap-8 mb-14">
+              <div className="grid gap-8 mb-10">
                 <div className="flex items-start gap-5">
                   <div className="text-[var(--brand-accent)] bg-[var(--brand-accent)]/10 p-3 rounded-lg">
                     <MapPin className="h-6 w-6" aria-hidden="true" />
@@ -407,10 +424,11 @@ export default function Home() {
                       Store Location
                     </h4>
                     <p className="m-0 text-[var(--brand-muted)] text-base leading-relaxed">
-                      28 St Columb Rd, New Redruth
-                      <br />
-                      Alberton, 1450
+                      {STORE_ADDRESS_LINE}
                     </p>
+                    <Link href="/visit" className="mt-2 inline-block text-sm text-[var(--brand-accent)] hover:underline">
+                      Directions from Meyersdal, Brackenhurst, Randhart →
+                    </Link>
                   </div>
                 </div>
 
@@ -423,34 +441,15 @@ export default function Home() {
                       Trading Hours
                     </h4>
                     <p className="m-0 text-[var(--brand-muted)] text-base leading-relaxed">
-                      Mon - Fri: 08:00 AM - 5:00 PM
+                      {STORE_HOURS_DISPLAY}
                       <br />
-                      Sat: 08:00 AM - 12:00 PM
-                      <br />
-                      Sun: Closed
+                      {STORE_PHONE_HOURS_DISPLAY}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex gap-4 flex-wrap">
-                <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=28+St+Columb+Rd,+New+Redruth,+Alberton,+1450"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded font-bold uppercase text-[0.85rem] tracking-[0.5px] bg-[var(--brand-accent-solid)] text-white transition-all hover:bg-[var(--brand-accent-hover)] hover:-translate-y-0.5"
-                >
-                  <Navigation className="h-4 w-4" aria-hidden="true" />
-                  Get Directions
-                </a>
-                <a
-                  href="tel:0101096211"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded font-bold uppercase text-[0.85rem] tracking-[0.5px] border-2 border-[var(--brand-border)] text-white transition-all hover:border-[var(--brand-muted)] hover:bg-white/5 hover:-translate-y-0.5"
-                >
-                  <Phone className="h-4 w-4" aria-hidden="true" />
-                  Call: 010 109 6211
-                </a>
-              </div>
+              <StoreVisitCtas trackingPrefix="home-map" />
             </div>
 
             <HomeMapEmbed />

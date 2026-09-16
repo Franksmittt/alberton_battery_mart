@@ -48,12 +48,11 @@ const ADS_CONVERSION_SEND_TOS = getInlineConversionSendTos();
 // --- SEO: Root Metadata with Open Graph & Twitter Cards ---
 export const metadata: Metadata = {
   title: {
-    default:
-      "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
+    default: "Alberton Battery Mart | Car Batteries, Testing & Fitment",
     template: "%s",
   },
   description:
-    "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
+    "Drive in to 28 St Columb Rd, New Redruth. Free Midtronics test, same-day fitment, Willard, Exide & Enertec in stock. Call 010 109 6211.",
   metadataBase: new URL(BASE_URL),
   icons: {
     icon: [
@@ -64,16 +63,17 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   keywords: [
-    "battery replacement Alberton",
     "car battery Alberton",
-    "mobile battery service",
+    "battery shop Alberton",
     "Willard batteries",
     "Exide batteries",
+    "Enertec batteries",
     "battery fitment Alberton",
     "car battery New Redruth",
     "battery testing Alberton",
     "AGM battery Alberton",
     "EFB battery Alberton",
+    "battery warranty Alberton",
   ],
   authors: [{ name: "Alberton Battery Mart" }],
   creator: "Alberton Battery Mart",
@@ -89,24 +89,24 @@ export const metadata: Metadata = {
     url: BASE_URL,
     siteName: "Alberton Battery Mart",
     title:
-      "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
+      "Alberton Battery Mart | Car Batteries, Testing & Fitment",
     description:
-      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
+      "Drive in to 28 St Columb Rd, New Redruth. Free Midtronics test, same-day fitment, Willard, Exide & Enertec in stock. Call 010 109 6211.",
     images: [
       {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Alberton Battery Mart - Mobile Battery Replacement Service",
+        alt: "Alberton Battery Mart - Drive-in battery shop in New Redruth",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
+      "Alberton Battery Mart | Car Batteries, Testing & Fitment",
     description:
-      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Call 010 109 6211.",
+      "Drive in to 28 St Columb Rd, New Redruth. Free Midtronics test and same-day fitment. Call 010 109 6211.",
     images: ["/images/og-image.jpg"],
   },
   robots: {
@@ -177,8 +177,10 @@ const localBusinessSchema = {
     "668 car battery",
     "Willard batteries",
     "Exide batteries",
-    "Mobile battery fitment",
+    "Enertec batteries",
     "Battery testing",
+    "Battery warranty",
+    "Car battery recycling",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -189,6 +191,20 @@ const localBusinessSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Drive-in battery testing and fitment",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Car battery warranty registration",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Scrap battery recycling",
         },
       },
       {
@@ -237,6 +253,20 @@ const organizationSchema = {
       contactType: "customer service",
       areaServed: SERVICE_AREAS,
       availableLanguage: ["English"],
+      hoursAvailable: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "07:30",
+          closes: "17:00",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Saturday",
+          opens: "08:00",
+          closes: "12:00",
+        },
+      ],
     },
     {
       "@type": "ContactPoint",

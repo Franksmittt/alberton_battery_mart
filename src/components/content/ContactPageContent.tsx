@@ -58,7 +58,11 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                     <p className="text-lg text-foreground">{STORE_ADDRESS_LINE}</p>
                     <p className="text-muted-foreground">
                       Free battery, alternator, and starter testing in-store. No
-                      appointment needed during trading hours.
+                      appointment needed during trading hours.{" "}
+                      <Link href="/visit" className="underline hover:text-battery">
+                        How to find 28 St Columb Rd
+                      </Link>
+                      .
                     </p>
                     <Button asChild variant="battery" className="w-full">
                       <a
@@ -145,14 +149,16 @@ export default function ContactPageContent({ bucket }: ContactPageContentProps) 
                     </p>
                   </div>
 
-                  <div id="hours" className="flex items-center space-x-4 scroll-mt-28">
-                    <Clock className="h-6 w-6 text-battery" />
-                    <p className="text-lg text-foreground">
-                      {STORE_HOURS_DISPLAY_LONG}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Staff answer the shop line from 07:30 — store opens to the public at 08:00.
-                    </p>
+                  <div id="hours" className="flex items-start space-x-4 scroll-mt-28">
+                    <Clock className="h-6 w-6 text-battery mt-1" />
+                    <div>
+                      <p className="text-lg text-foreground">
+                        {STORE_HOURS_DISPLAY_LONG}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Staff answer the shop line from 07:30 weekdays — store opens to the public at 08:00.
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex items-center space-x-4">

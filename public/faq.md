@@ -2,17 +2,17 @@
 
 > Warranty, fitment, testing, and AGM/EFB answers for Alberton drivers.
 
-## Is the mobile callout service free?
+## Can I walk in without an appointment?
 
-Callout includes a travel fee. Battery testing and fitment are free. You pay for the battery plus the callout fee.
+Yes. Walk in at 28 St Columb Rd during trading hours. Phones from 07:30 weekdays; shop floor opens 08:00. Saturday 08:00–12:00.
 
 ## How long is the warranty?
 
 Up to 36 months on premium batteries (Willard EFB, Enertec AGM) and at least 12 months on standard automotive batteries. The period is on the invoice.
 
-## Can I get a battery without an appointment?
+## Is the mobile callout service free?
 
-Yes. Walk in at 28 St Columb Rd during trading hours for counter sales. Call first for mobile dispatch.
+Callout includes a travel fee. Battery testing and fitment are free. You pay for the battery plus the callout fee. Drive-in is faster if the car can reach New Redruth.
 
 ## Do you only sell car batteries?
 
@@ -20,7 +20,7 @@ No. Cars, trucks, 4x4s, motorcycles, golf carts, and deep-cycle / lithium batter
 
 ## Where is the store?
 
-28 St Columb Rd, New Redruth, Alberton, 1450
+28 St Columb Rd, New Redruth, Alberton, 1450 — one turn off Voortrekker Road. Park at the shopfront.
 
 - Phone: 010 109 6211
 - Address: 28 St Columb Rd, New Redruth, Alberton, 1450

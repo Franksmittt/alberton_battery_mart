@@ -30,7 +30,7 @@ const Header = () => {
             </Link>
 
             <p className="hidden xl:block justify-self-center text-white/85 text-sm xl:text-base font-extrabold uppercase tracking-[0.12em] whitespace-nowrap">
-              Drive-In Stock. Honest Testing. Warranty Backed.
+              Drive In. Tested. Fitted Today.
             </p>
 
             <div className="justify-self-end flex items-center gap-2 relative">
@@ -138,10 +138,11 @@ const Header = () => {
                     <Link href="/products/size/621" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Size 621 (catalog)</Link>
                   </div>
                   <div className="space-y-2">
-                    <p className="font-black text-white uppercase text-xs tracking-wide">Services</p>
+                    <p className="font-black text-white uppercase text-xs tracking-wide">Visit &amp; services</p>
+                    <Link href="/visit" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Visit the shop</Link>
+                    <Link href="/testing" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Free Battery Testing</Link>
+                    <Link href="/warranty" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Warranty</Link>
                     <Link href="/services/mobile-battery-replacement/alberton" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Mobile Replacement</Link>
-                    <Link href="/services/free-battery-testing/alberton" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Free Battery Testing</Link>
-                    <Link href="/services/emergency-jump-start/alberton" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Emergency Jump Start</Link>
                     <Link href="/local" className="block text-[var(--brand-muted)] hover:text-[var(--brand-accent)]">Service Areas</Link>
                     <Link href="/products" className="block font-bold text-[var(--brand-accent)] hover:text-[var(--brand-accent-hover)]">View Full Catalog</Link>
                   </div>
@@ -150,10 +151,10 @@ const Header = () => {
             </div>
 
             <nav className="justify-self-center flex items-center gap-6 text-sm font-medium text-[var(--brand-muted)]">
+              <Link href="/visit" className="hover:text-[var(--brand-accent)]">Visit the shop</Link>
               <Link href="/products/type/automotive" className="hover:text-[var(--brand-accent)]">Automotive Batteries</Link>
-              <Link href="/products/type/truck-commercial" className="hover:text-[var(--brand-accent)]">Commercial & Fleet</Link>
               <Link href="/products/type/performance" className="hover:text-[var(--brand-accent)]">Start/Stop (AGM)</Link>
-              <Link href="/products" className="hover:text-[var(--brand-accent)]">Accessories</Link>
+              <Link href="/warranty" className="hover:text-[var(--brand-accent)]">Warranty</Link>
             </nav>
 
             <div className="justify-self-end flex items-center gap-4 text-sm font-semibold text-[var(--brand-muted)]">

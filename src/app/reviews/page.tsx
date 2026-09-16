@@ -74,8 +74,7 @@ export default function ReviewsPage() {
           Review Alberton Battery Mart
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Google reviews are one of the strongest local ranking signals. Use
-          this page after every fitment, test, callout, and fleet visit.
+          Google reviews after a counter visit are how other Alberton drivers find the shop. Use this page after every in-store test, fitment, and (if needed) callout.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <Button asChild size="xl" variant="battery" trackingId="reviews-google-review-click">

@@ -5,8 +5,8 @@ import { CheckCircle2, Clock3, ShieldCheck } from "lucide-react";
 
 const trustSignals = [
   { icon: ShieldCheck, title: "Up to 36-Month Warranty" },
-  { icon: Clock3, title: "60-Minute Average Response" },
-  { icon: CheckCircle2, title: "Free On-Site Midtronics Diagnostics" },
+  { icon: Clock3, title: "Fitted While You Wait" },
+  { icon: CheckCircle2, title: "Free Midtronics Diagnostics" },
 ];
 
 export default function MobileTrustRotator() {

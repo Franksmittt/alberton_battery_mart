@@ -9,12 +9,13 @@ import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
 import { RelatedContent } from "@/components/seo/RelatedContent";
 import AtomicAnswers from "@/components/seo/AtomicAnswers";
-import { SERVICE_AREAS, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/seo-constants";
+import { PAGE_COPY } from "@/lib/store-positioning";
+import { SERVICE_AREAS, PHONE_DISPLAY, PHONE_TEL, STORE_DIRECTIONS_URL, WHATSAPP_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
-  title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
-  description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout.",
+  title: PAGE_COPY.services.title,
+  description: PAGE_COPY.services.description,
   keywords: [
     'mobile battery service Alberton',
     'battery callout Alberton',
@@ -25,8 +26,8 @@ export const metadata: Metadata = {
     'battery service Meyersdal'
   ],
   openGraph: {
-    title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
-    description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing.",
+    title: PAGE_COPY.services.title,
+    description: PAGE_COPY.services.description,
     url: 'https://www.albertonbatterymart.co.za/services',
     type: 'website',
     images: [
@@ -42,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
-    description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout.",
+    title: PAGE_COPY.services.title,
+    description: PAGE_COPY.services.description,
     images: ['/images/og-image.jpg'],
   },
   alternates: {
@@ -89,25 +90,23 @@ export default function ServicesPage() {
   return (
     <div className="container py-16 space-y-16">
       <PageJsonLd
-        title="Mobile Battery Replacement Service in Alberton | Alberton Battery Mart"
-        description="Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout."
+        title={PAGE_COPY.services.title}
+        description={PAGE_COPY.services.description}
         path="/services"
       />
       <JsonLd data={serviceSchema} id="services-landing-schema" />
       
       <HubSection className="text-center space-y-4 border-b border-border pb-10">
         <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
-          Mobile Battery <span className="text-battery">Replacement</span> in Alberton
+          Battery Testing &amp; <span className="text-battery">Fitment</span> in Alberton
         </h1>
-        {/* --- SYNTAX FIX WAS HERE --- */}
          <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-          We are the local, certified experts providing complete battery solutions: Fitment, Diagnostics, and Convenient Mobile Service for all vehicle types.
+          Drive in to 28 St Columb Rd, New Redruth for a free three-point test and same-day fitment. Mobile callouts if the car cannot reach the shop.
         </p>
-        {/* --- It was </pre>, now it's </p> --- */}
         <Button asChild size="xl" variant="battery" className="mt-6 shadow-lg">
-          <a href={`tel:${PHONE_TEL}`} className="flex items-center space-x-3 mx-auto">
-            <Phone className="h-6 w-6" />
-            <span>Call Us: {PHONE_DISPLAY}</span> 
+          <a href={STORE_DIRECTIONS_URL} className="flex items-center space-x-3 mx-auto">
+            <MapPin className="h-6 w-6" />
+            <span>Get Directions</span> 
           </a>
         </Button>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto pt-3">
@@ -132,11 +131,11 @@ export default function ServicesPage() {
         <div className="lg:col-span-5 space-y-6">
           <Zap className="h-12 w-12 text-battery" />
            <h2 className="text-4xl font-bold text-foreground">
-            Fast Mobile Battery Callout & Fitment
+            Drive-in first. Callout if you cannot.
           </h2>
           <p className="text-lg text-muted-foreground">
-            Our specialized callout service ensures minimal vehicle downtime.
- We bring the exact battery your vehicle requires, perform the swap, and get you back on the road—wherever you are in the Alberton area.
+            The shop floor at 28 St Columb Rd is the fastest path: walk in, test, price, fit while you wait.
+            If the car will not move, we still dispatch a mobile unit across Alberton during trading hours.
           </p>
           
           {/* FINAL CORRECTED HOURS LAYOUT */}

@@ -11,16 +11,16 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { href: "/", label: "Home" },
+  { href: "/visit", label: "Visit the shop" },
   { href: "/products", label: "Batteries" },
-  { href: "/local", label: "Service Areas" },
-  { href: "/golf-cart-batteries", label: "Golf Cart Batteries" },
+  { href: "/warranty", label: "Warranty" },
   { href: "/services", label: "Fitment & Testing" },
   { href: "/contact", label: "Contact Us" },
 ];
 
 // This is a separate array for the mobile menu's CTA button
 export const mobileCtaItem: NavItem = { 
-  href: "/quote", 
-  label: "Get A Quote", 
+  href: "/visit", 
+  label: "Get Directions", 
   isCta: true 
 };

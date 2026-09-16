@@ -156,6 +156,46 @@ const nextConfig = {
         destination: '/vehicles/mercedes',
         permanent: true,
       },
+      {
+        source: '/drive-in',
+        destination: '/visit',
+        permanent: true,
+      },
+      {
+        source: '/store',
+        destination: '/visit',
+        permanent: true,
+      },
+      {
+        source: '/how-to-find-us',
+        destination: '/visit',
+        permanent: true,
+      },
+      {
+        source: '/warranty-info',
+        destination: '/warranty',
+        permanent: true,
+      },
+      {
+        source: '/willard-batteries',
+        destination: '/products/brand/willard',
+        permanent: true,
+      },
+      {
+        source: '/exide-batteries',
+        destination: '/products/brand/exide',
+        permanent: true,
+      },
+      {
+        source: '/enertec-batteries',
+        destination: '/products/brand/enertec',
+        permanent: true,
+      },
+      {
+        source: '/battery-recycling',
+        destination: '/recycle-battery',
+        permanent: true,
+      },
     ]
   },
   
