@@ -1077,7 +1077,7 @@ const RAW_SERVICES: ServicePageContent[] = [
       "Audi battery fitment Alberton",
     ],
     intro:
-      "High-end vehicles need more than a quick swap. We stock OEM-spec AGM/EFB batteries (Willard, VARTA, Exide EFB) and include battery registration, IBS/BMS resets, and auxiliary battery replacements for Mercedes and Range Rover models.",
+      "High-end vehicles need more than a quick swap. We stock OEM-spec AGM/EFB batteries (Willard, VARTA, Exide EFB) and include battery registration and IBS/BMS resets for Mercedes, BMW, Audi, and Range Rover models.",
     coverage: [
       "On-site service for Meyersdal Ridge, Nature Estate, and Brackenhurst",
       "Workshop appointments at New Redruth with shuttle options",
@@ -1090,9 +1090,9 @@ const RAW_SERVICES: ServicePageContent[] = [
           "We match the battery chemistry your vehicle requires—no downgrades that void warranties.",
       },
       {
-        title: "Auxiliary Battery Replacement",
+        title: "Start/Stop Diagnostics",
         description:
-          "Mercedes and Range Rover models often have secondary batteries; we test and replace both to clear dashboard errors.",
+          "We test the main starter battery and charging system before replacement so Start/Stop issues caused by a weak battery can be fixed correctly.",
       },
       {
         title: "BMS/IBS Coding",
@@ -1104,7 +1104,7 @@ const RAW_SERVICES: ServicePageContent[] = [
       {
         title: "01 / VIN & Spec Verification",
         description:
-          "We confirm your battery code, IBS requirements, and any auxiliary batteries before arrival.",
+          "We confirm your battery code, chemistry, and IBS/BMS coding requirements before arrival.",
       },
       {
         title: "02 / Fitment & Coding",
@@ -1129,9 +1129,9 @@ const RAW_SERVICES: ServicePageContent[] = [
           "Yes. Our equipment is portable and designed for estate/complex environments. Please arrange access with security ahead of time.",
       },
       {
-        question: "Do you handle hybrid auxiliary batteries?",
+        question: "Do you replace Mercedes voltage converter modules?",
         answer:
-          "We stock auxiliary batteries for Mercedes S/CLS, Range Rover, and some Toyota/Lexus hybrids. If not in stock we can source within 24 hours.",
+          "No. We replace and code the main starter battery. Voltage converter modules and similar auxiliary electronics parts need a Mercedes workshop.",
       },
     ],
     ctas: [

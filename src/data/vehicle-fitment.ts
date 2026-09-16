@@ -203,12 +203,11 @@ export const VEHICLE_FITMENT: VehicleFitment[] = [
     slug: "mercedes/c-class-w205",
     years: "2014 – 2021",
     engines: ["C180", "C200", "C220d", "C300"],
-    headline: "Mercedes-Benz C-Class Battery & Auxiliary Replacement (W205)",
+    headline: "Mercedes-Benz C-Class Battery Replacement & Coding (W205)",
     description:
-      "Modern Mercedes models use an AGM main battery plus an auxiliary battery for the electronics. Replacements must include coding, IBS reset, and optional auxiliary swap to clear warning lights.",
+      "Modern Mercedes models use an AGM or EFB main battery with a Battery Management System. Replacements must include coding and an IBS reset so charging and Start/Stop keep working.",
     painPoints: [
       "“Stop vehicle leave engine running” warning after battery swap",
-      "Auxiliary battery malfunction light",
       "Start/Stop disabled due to aged AGM battery",
     ],
     recommendedProducts: [
@@ -227,7 +226,7 @@ export const VEHICLE_FITMENT: VehicleFitment[] = [
       {
         label: "Premium Meyersdal Fitment",
         href: "/services/battery-fitment/meyersdal",
-        description: "Includes IBS reset, auxiliary battery testing, and code clearing.",
+        description: "Includes IBS reset, main-battery testing, and code clearing.",
       },
       {
         label: "Emergency Jump-Start",
@@ -242,14 +241,13 @@ export const VEHICLE_FITMENT: VehicleFitment[] = [
           "Yes. Every AGM/EFB battery installed in a Mercedes must be registered with the Battery Management System, otherwise charging is incorrect. We include coding in our service.",
       },
       {
-        question: "Do you replace auxiliary batteries?",
+        question: "Do you replace Mercedes voltage converter or auxiliary modules?",
         answer:
-          "Yes. We stock auxiliary batteries and can replace them during the same visit to clear the warning.",
+          "No. We replace and code the main starter battery. Voltage converter modules and auxiliary electronics parts are not stocked here and need a Mercedes workshop.",
       },
     ],
     keywords: [
       "Mercedes C-Class battery Alberton",
-      "Mercedes auxiliary battery replacement",
       "Mercedes battery coding Alberton",
     ],
   },
