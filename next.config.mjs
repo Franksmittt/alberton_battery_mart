@@ -196,6 +196,16 @@ const nextConfig = {
         destination: '/recycle-battery',
         permanent: true,
       },
+      {
+        source: '/blog/fix-mercedes-auxiliary-battery-malfunction-alberton',
+        destination: '/vehicles/mercedes',
+        permanent: true,
+      },
+      {
+        source: '/blog/mercedes-auxiliary-battery-malfunction-alberton',
+        destination: '/vehicles/mercedes',
+        permanent: true,
+      },
     ]
   },
   

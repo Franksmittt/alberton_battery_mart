@@ -354,10 +354,6 @@ export default function ServicesPage() {
                 <Zap className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
                 <span>**Ensure Performance:** Our tools correctly calibrate your car's charging profile and ensure all Start/Stop and electronic functions work perfectly from day one.</span>
               </li>
-              <li className="flex items-start space-x-3">
-                <Gauge className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
-                <span>**Auxiliary Battery Faults:** We can also diagnose and replace failing auxiliary batteries that cause "Auxiliary Battery Malfunction" warnings on Mercedes dashboards.</span>
-              </li>
             </ul>
           </div>
         </div>

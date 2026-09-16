@@ -440,60 +440,6 @@ export const ALL_POSTS: BlogPost[] = [
     ),
   },
 
-  // --- POST 9: Mercedes Auxiliary Battery Malfunction ---
-  {
-    slug: 'fix-mercedes-auxiliary-battery-malfunction-alberton',
-    title: 'Fix: "Auxiliary Battery Malfunction" Mercedes',
-    description: 'Seeing this warning on your Mercedes? We explain what it means (it\'s not your main battery!) and how our Alberton specialists can fix it today.',
-    date: '2025-11-21',
-    category: 'Technical Guide',
-    content: (
-      <>
-        <p className="text-xl">
-          A warning light on your Mercedes-Benz dashboard is always stressful. If you're seeing "Auxiliary Battery Malfunction," take a breath. It's not your main battery, and your car is not about to die on the side of the road.
-        </p>
-        <p>
-          This is a very common, and very specific, fault that our specialists in Alberton fix every week.
-        </p>
-
-        <h2 className="text-3xl font-bold">What is the "Auxiliary Battery"?</h2>
-        <p>
-          On most modern Mercedes (like the C-Class, E-Class, and GLC), this is not a second battery. It is a <strong>small voltage converter or capacitor module</strong>.
-        </p>
-        <p>
-          Its primary job is to manage the Start/Stop (ECO) system and ensure that sensitive electronics (like the electronic gear selector) have a stable power supply when the engine restarts.
-        </p>
-
-        <h2 className="text-3xl font-bold">Signs of a Failing Auxiliary Module</h2>
-        <p>
-          When this small module fails, the car's main functions are fine, but its "eco" and luxury features will stop working. You will notice:
-        </p>
-        <ul className="list-disc space-y-2 pl-6">
-          <li>The <strong>"Auxiliary Battery Malfunction"</strong> warning on your dash.</li>
-          <li>Your <strong>Start/Stop (ECO) system stops working</strong> (the button light may stay yellow).</li>
-          <li>The "Hold" function on your brake pedal might become erratic.</li>
-        </ul>
-
-        <h2 className="text-3xl font-bold">The Alberton Solution</h2>
-        <p>
-          Do not take your car to the dealership for this. That is a slow, complex, and extremely expensive process for a simple part.
-        </p>
-        <p>
-          As Alberton's battery and electronics specialists, we can solve this for you today.
-        </p>
-        <ul className="list-disc space-y-2 pl-6">
-          <li>We stock the specific, OEM-quality voltage converter modules.</li>
-          <li>The replacement is fast and can often be done while you wait.</li>
-          <li>Our price is a fraction of what a dealership will charge for the same result.</li>
-        </ul>
-
-        <blockquote className="border-l-4 border-battery bg-card p-4 italic text-foreground">
-          "Seeing that warning? Call us. We'll confirm the part, give you an instant quote, and get this annoying fault fixed today at our New Redruth store."
-        </blockquote>
-      </>
-    ),
-  },
-
   // --- POST 10: Why You Can't Put a Cheap Battery in a BMW ---
   {
     slug: 'why-you-cant-put-a-cheap-battery-in-a-bmw',
@@ -2918,57 +2864,6 @@ export const ALL_POSTS: BlogPost[] = [
 
         <blockquote className="border-l-4 border-battery bg-card p-4 italic text-foreground">
            "Don't guess. Before you buy a new battery, drive to Alberton Battery Mart. We will run a **100% FREE, no-obligation diagnostic test** on your entire starting system—the battery, the starter, and the alternator. We will tell you *exactly* what the problem is."
-        </blockquote>
-      </>
-    ),
-  },
-
-  // --- NEW POST 4: "MERCEDES SPECIALIST" ---
-  {
-    slug: 'mercedes-auxiliary-battery-malfunction-alberton',
-    title: '"Auxiliary Battery Malfunction" on Your Mercedes? An Alberton Expert Explains',
-    description: 'Seeing that "Auxiliary Battery Malfunction" warning in your Mercedes? We explain what it means and how our Alberton specialists can fix it fast.',
-    date: '2025-11-16',
-    category: 'Technical Guide',
-    content: (
-      <>
-        <p className="text-xl">
-          A warning light on a Mercedes dashboard is stressful. If you're seeing "Auxiliary Battery Malfunction," don't panic. You are not stranded, but you should get it checked.
-        </p>
-        <p>
-          This is a very common issue we fix for Mercedes owners in Alberton, and it's not what you think.
-        </p>
-
-        <h2 className="text-3xl font-bold">What is the Auxiliary Battery?</h2>
-        <p>
-          On most modern Mercedes-Benz vehicles (like the C-Class, E-Class, and GLC), this is not a second battery. It is a **voltage converter module**[cite: 261].
-        </p>
-        <p>
-          This small part is responsible for managing the electrical load for the Start/Stop system and ensuring power to critical electronics (like the electronic gear selector) is stable.
-        </p>
-        
-        <h2 className="text-3xl font-bold">Symptoms of a Failing Auxiliary Battery</h2>
-        <p>
-          When this module fails, the car's main systems are fine, but the "non-essential" luxury and eco-friendly features will stop working. You will notice:
-        </p>
-        <ul className="list-disc space-y-2 pl-6">
-          <li>The **Start/Stop feature no longer works** (the 'ECO' button stays yellow).</li>
-          <li>The "Auxiliary Battery Malfunction" message appears on your dash.</li>
-          <li>In rare cases, you may have issues with your infotainment system or gear selector.</li>
-        </ul>
-
-        <h2 className="text-3xl font-bold">The Solution in Alberton</h2>
-        <p>
-          Do not take your car to the dealership for this. That is a costly and slow process. As Alberton's local battery and electronics specialists, we can solve this for you.
-        </p>
-        <ul className="list-disc space-y-2 pl-6">
-          <li>We stock the specific, OEM-quality voltage converter modules.</li>
-          <li>The replacement is fast—often done in under 30 minutes.</li>
-          <li>Our price is a fraction of what a dealership will charge.</li>
-        </ul>
-
-        <blockquote className="border-l-4 border-battery bg-card p-4 italic text-foreground">
-           "Seeing that warning? Call us. We'll confirm the part, give you an instant quote, and schedule you for a quick replacement at our New Redruth store."
         </blockquote>
       </>
     ),
