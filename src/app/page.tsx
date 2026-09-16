@@ -104,30 +104,30 @@ export default function Home() {
         description={PAGE_COPY.home.description}
         path="/"
       />
-      <HubSection className="flex min-h-[calc(100svh-9rem)] items-center overflow-visible bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] py-4 text-white md:min-h-[calc(100svh-4rem)] md:py-6 lg:min-h-[calc(100svh-7rem)]">
+      <HubSection className="flex min-h-[calc(100svh-9rem)] items-start overflow-visible bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] py-3 text-white md:min-h-[calc(100svh-4rem)] md:items-center md:py-6 lg:min-h-[calc(100svh-7rem)]">
         <div className="container w-full px-4 sm:px-6 lg:px-8">
           <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-            <h1 className="mb-3 text-[clamp(1.85rem,5vw,3.5rem)] font-extrabold leading-[1.12] tracking-tight sm:mb-4">
-              <span className="mb-2 block px-1 text-[0.7rem] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--brand-accent)] sm:mb-3 sm:text-sm sm:tracking-[0.16em]">
+            <h1 className="mb-2 text-[clamp(1.7rem,6.2vw,3.5rem)] font-extrabold leading-[1.12] tracking-tight sm:mb-4">
+              <span className="mb-1.5 block px-1 text-[0.7rem] font-semibold uppercase leading-snug tracking-[0.12em] text-[var(--brand-accent)] sm:mb-3 sm:text-sm sm:tracking-[0.16em]">
                 <span className="block sm:inline">Alberton Battery Mart</span>
                 <span className="hidden sm:inline"> · </span>
                 <span className="mt-0.5 block sm:mt-0 sm:inline">28 St Columb Rd</span>
               </span>
               <span className="block text-balance">{heroCopy.heading}</span>
             </h1>
-            <p className="mb-4 max-w-2xl text-[clamp(0.95rem,2vw,1.2rem)] leading-relaxed text-[var(--brand-muted)] sm:mb-5">
+            <p className="mb-3 max-w-2xl text-[0.95rem] leading-snug text-[var(--brand-muted)] sm:mb-5 sm:text-[clamp(0.95rem,2vw,1.2rem)] sm:leading-relaxed">
               {heroCopy.subheading}
             </p>
-            <div className="mb-5 flex justify-center sm:mb-6">
+            <div className="mb-3 flex justify-center sm:mb-6">
               <OpenNowBadge />
             </div>
 
             <form
               action="/products/results"
               method="get"
-              className="w-full max-w-3xl rounded-2xl border border-white/15 bg-white/10 p-3 shadow-[0_15px_35px_rgba(0,0,0,0.4)] transition-all duration-300 focus-within:-translate-y-0.5 focus-within:shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_0_4px_rgba(46,125,50,0.3)] md:rounded-[50px] md:border-0 md:bg-white md:p-1.5"
+              className="w-full max-w-3xl rounded-2xl border border-white/15 bg-white/10 p-2.5 shadow-[0_15px_35px_rgba(0,0,0,0.4)] transition-all duration-300 focus-within:-translate-y-0.5 focus-within:shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_0_4px_rgba(46,125,50,0.3)] md:rounded-[50px] md:border-0 md:bg-white md:p-1.5"
             >
-              <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-0">
+              <div className="flex flex-col items-stretch gap-2.5 md:flex-row md:items-center md:gap-0">
                 <div className="hidden items-center justify-center pl-5 pr-2 text-[var(--brand-muted-2)] md:flex">
                   <Search className="h-5 w-5" aria-hidden="true" />
                 </div>
@@ -135,32 +135,35 @@ export default function Home() {
                   type="text"
                   name="q"
                   placeholder="e.g., Ford Ranger battery or 652 AGM"
-                  className="min-h-16 w-full rounded-xl border-0 bg-white px-5 text-lg text-zinc-900 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal md:h-[4.25rem] md:min-h-0 md:flex-1 md:rounded-none md:bg-transparent md:px-4 md:text-[1.05rem]"
+                  className="min-h-14 w-full rounded-xl border-0 bg-white px-4 text-base text-zinc-900 outline-none placeholder:text-[var(--brand-muted)] placeholder:font-normal sm:min-h-16 sm:px-5 sm:text-lg md:h-[4.25rem] md:min-h-0 md:flex-1 md:rounded-none md:bg-transparent md:px-4 md:text-[1.05rem]"
                 />
                 <button
                   type="submit"
-                  className="min-h-16 w-full rounded-xl bg-[var(--brand-accent-solid)] px-8 text-lg font-bold text-white transition-colors hover:bg-[var(--brand-accent-hover)] md:h-12 md:min-h-0 md:w-auto md:rounded-[40px] md:text-base"
+                  className="min-h-14 w-full rounded-xl bg-[var(--brand-accent-solid)] px-8 text-base font-bold text-white transition-colors hover:bg-[var(--brand-accent-hover)] sm:min-h-16 sm:text-lg md:h-12 md:min-h-0 md:w-auto md:rounded-[40px] md:text-base"
                 >
                   Search
                 </button>
               </div>
             </form>
 
-            <StoreVisitCtas trackingPrefix="home-hero" className="mt-4 justify-center sm:mt-6" />
+            <StoreVisitCtas trackingPrefix="home-hero" className="mt-3 justify-center sm:mt-6" />
 
-            <div className="mt-4 grid w-full grid-cols-3 gap-1.5 text-[0.65rem] leading-snug sm:mt-6 sm:gap-3 sm:text-sm">
-              <div className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-2 font-semibold text-white/90 sm:px-3">
+            <p className="mt-3 text-xs font-semibold text-white/85 sm:hidden">
+              Walk-ins · Free diagnostics · 36-month warranty
+            </p>
+            <div className="mt-6 hidden w-full grid-cols-3 gap-3 text-sm sm:grid">
+              <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
                 Walk-ins · no appointment
               </div>
-              <div className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-2 font-semibold text-white/90 sm:px-3">
+              <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
                 Free diagnostics before replacement
               </div>
-              <div className="rounded-lg border border-white/10 bg-white/5 px-1.5 py-2 font-semibold text-white/90 sm:px-3">
+              <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 font-semibold text-white/90">
                 Up to 36-month named-brand warranty
               </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-3">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-3">
               <span className="mr-1 text-xs font-bold uppercase tracking-[1px] text-[var(--brand-muted-2)]">
                 Trending:
               </span>
@@ -168,7 +171,7 @@ export default function Home() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="shrink-0 rounded-[20px] border border-white/10 bg-white/5 px-4 py-2 text-sm text-[var(--brand-muted)] transition-all hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                  className="shrink-0 rounded-[20px] border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-[var(--brand-muted)] transition-all hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10 hover:text-white sm:px-4 sm:py-2"
                 >
                   {item.label}
                 </Link>
