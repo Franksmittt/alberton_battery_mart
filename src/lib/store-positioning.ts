@@ -22,7 +22,7 @@ export const PAGE_COPY = {
       "Drive-in battery testing and same-day fitment at 28 St Columb Rd. Free diagnostics, AGM coding, mobile callouts on request. Call 010 109 6211.",
   },
   visit: {
-    title: "Visit the Alberton Battery Shop | 28 St Columb Rd",
+    title: "Visit Alberton Battery Mart | 28 St Columb Rd",
     description:
       "How to reach 28 St Columb Rd from Voortrekker, Meyersdal, and Brackenhurst. Park, walk in, free test, fitted while you wait. Call 010 109 6211.",
   },
