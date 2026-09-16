@@ -13,7 +13,7 @@ import {
 } from "../src/lib/hub-pages";
 import { isAiOrSearchCrawler } from "../src/lib/ai-crawlers";
 import { getStaticSitemapEntries } from "../src/lib/seo/sitemap-data";
-import { pageTitleForSchema } from "../src/lib/seo/page-title";
+import { pageTitleForSchema, normalizeDocumentTitle } from "../src/lib/seo/page-title";
 
 const BASE = process.argv[2]?.replace(/\/$/, "") || "http://127.0.0.1:3000";
 const MIN_DESC = 120;
@@ -165,6 +165,27 @@ async function main() {
     fail("/middleware", "human-ua", "Normal Chrome UA should not be classified as a crawler");
   }
 
+  const titleCases: Array<[string, string]> = [
+    [
+      "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart | Alberton Battery Mart",
+      "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
+    ],
+    [
+      "About Alberton Battery Mart | Your Local Battery Experts",
+      "About Alberton Battery Mart | Your Local Battery Experts",
+    ],
+    [
+      "Solar, Inverter & Deep Cycle Batteries in Alberton",
+      "Solar, Inverter & Deep Cycle Batteries in Alberton | Alberton Battery Mart",
+    ],
+  ];
+  for (const [input, expected] of titleCases) {
+    const got = normalizeDocumentTitle(input);
+    if (got !== expected) {
+      fail("/title", "normalize-document-title", `Got "${got}", want "${expected}"`);
+    }
+  }
+
   console.log(`\n🔍 Hub GSC static gate — ${BASE}\n`);
 
   // llms.txt / llms-full.txt / markdown briefs
@@ -259,14 +280,20 @@ async function main() {
     const expectedTitle = pageTitleForSchema(hub.title);
     if (!title) {
       fail(hub.path, "title", "No <title> found");
-    } else if (!title.includes(expectedTitle.split("|")[0].trim().slice(0, 20))) {
+    } else {
+      if (/Alberton Battery Mart\s*\|\s*Alberton Battery Mart/i.test(title)) {
+        fail(hub.path, "title-duplicate-brand", `Duplicated brand in <title>: "${title}"`);
+      }
+      if (!title.includes(expectedTitle.split("|")[0].trim().slice(0, 20))) {
       // Flexible match — size hubs use generateMetadata title
       const titleOk =
         title === hub.title ||
+        title === expectedTitle ||
         title.includes(hub.title.split("|")[0].trim()) ||
         (hub.path.includes("-car-battery") && title.includes(hub.path.replace("/", "").replace("-car-battery", "")));
       if (!titleOk) {
         fail(hub.path, "title-parity", `Got "${title}", expected parity with "${hub.title}"`);
+      }
       }
     }
 
