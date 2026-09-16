@@ -504,7 +504,7 @@ export default function RootLayout({
           enableSystem
         >
           <Header />
-          <div className="pt-16 md:pt-28 pb-20 md:pb-0 overflow-x-clip">
+          <div className="overflow-x-clip pt-16 pb-20 md:pb-0 lg:pt-28">
             {children}
           </div>
           <Footer />

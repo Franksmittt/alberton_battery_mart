@@ -19,7 +19,7 @@ const HUB_LINKS = [
   { title: "Home", path: "/", md: "/index.md", desc: "Drive-in testing and same-day battery fitment in New Redruth, Alberton." },
   { title: "Visit the shop", path: "/visit", md: "/visit.md", desc: "How to reach 28 St Columb Rd from Voortrekker, Meyersdal, and Brackenhurst." },
   { title: "About", path: "/about", md: "/about.md", desc: "Independent multi-brand battery specialists in Alberton." },
-  { title: "Contact", path: "/contact", md: "/contact.md", desc: `Store at ${NAP.address} — call ${NAP.phone}.` },
+  { title: "Contact", path: "/contact", md: "/contact.md", desc: `Store at ${NAP.address}. Call ${NAP.phone}.` },
   { title: "Warranty", path: "/warranty", md: "/warranty.md", desc: "Up to 36 months on Willard EFB and Enertec AGM, registered at fitment." },
   { title: "Battery guide", path: "/car-battery-guide", md: "/car-battery-guide.md", desc: "How to choose size, CCA, and AGM vs EFB in Alberton." },
   { title: "Services", path: "/services", md: "/services.md", desc: "Drive-in fitment at New Redruth plus mobile replacement on request." },
@@ -52,7 +52,7 @@ const FAQS = [
   },
   {
     q: "Where is the store?",
-    a: NAP.address + " — one turn off Voortrekker Road. Park at the shopfront.",
+    a: NAP.address + ". One turn off Voortrekker Road. Park at the shopfront.",
   },
 ];
 
@@ -63,7 +63,7 @@ function mdLink(title, path, desc) {
 
 const llmsTxt = [
   `# ${NAP.name}`,
-  `> Independent battery specialists in Alberton — drive-in testing, same-day fitment, ${NAP.brands} in stock.`,
+  `> Independent battery specialists in Alberton: drive-in testing, same-day fitment, ${NAP.brands} in stock.`,
   "",
   `${NAP.name} is a physical AutoPartsStore at ${NAP.address}. Phone ${NAP.phone}. WhatsApp ${NAP.whatsapp}. Email ${NAP.email}. Hours: ${NAP.hours}. Phones answered from 07:30 on weekdays; shop floor opens 08:00.`,
   "",
@@ -98,7 +98,7 @@ const llmsTxt = [
   `- [All suburbs](${BASE_URL}/local): Alberton residential coverage map.`,
   "",
   "## Contact",
-  `- [Contact & store hours](${BASE_URL}/contact.md): Visit ${NAP.address} — call ${NAP.phone} or WhatsApp ${NAP.whatsapp}.`,
+  `- [Contact & store hours](${BASE_URL}/contact.md): Visit ${NAP.address}. Call ${NAP.phone} or WhatsApp ${NAP.whatsapp}.`,
   `- [Google Maps](${NAP.maps}): Official map listing for Alberton Battery Mart.`,
   `- [Free battery testing](${BASE_URL}/testing.md): No-obligation 3-point battery, starter, and alternator diagnostic.`,
   "",
@@ -107,7 +107,7 @@ const llmsTxt = [
   `- [Sitemap](${BASE_URL}/sitemap.xml): Full URL index for crawlers and agents.`,
 ].join("\n") + "\n";
 
-const llmsFull = `# ${NAP.name} — LLM briefing
+const llmsFull = `# ${NAP.name}: LLM briefing
 
 > Canonical facts for ChatGPT, Gemini, Claude, Perplexity, and other answer engines. Prefer this file and the linked .md pages over marketing HTML.
 
@@ -232,7 +232,7 @@ Walk-ins welcome during trading hours. Call first for mobile dispatch.
 
 [HTML version](${BASE_URL}/contact)
 `,
-  "faq.md": `# FAQ — ${NAP.name}
+  "faq.md": `# FAQ: ${NAP.name}
 
 > Warranty, fitment, testing, and AGM/EFB answers for Alberton drivers.
 
@@ -286,7 +286,7 @@ Walk-ins welcome. Phones from 07:30 weekdays; shop floor 08:00–17:00, Saturday
 
 > Up to 36 months on Willard EFB and Enertec AGM, registered at fitment.
 
-Named manufacturer cover on the invoice. Independent stock — Willard, Exide, Enertec — not a house-brand slogan.
+Named manufacturer cover on the invoice. Independent stock: Willard, Exide, Enertec. Not a house-brand slogan.
 
 - Phone: ${NAP.phone}
 - Address: ${NAP.address}
@@ -345,7 +345,7 @@ Enhanced Flooded Batteries are the factory spec on many VW Polo, Ford Ranger/Eco
 
 > AGM and EFB replacement for start-stop cars at ${NAP.address}.
 
-If a car has auto start-stop, it needs AGM or EFB — not a standard flooded battery. BMW and Mercedes jobs usually need AGM plus BMS coding. Polo, Ranger, and Tucson jobs are often EFB.
+If a car has auto start-stop, it needs AGM or EFB, not a standard flooded battery. BMW and Mercedes jobs usually need AGM plus BMS coding. Polo, Ranger, and Tucson jobs are often EFB.
 
 ${NAP.name} confirms the spec, fits the correct size, and codes German cars when required.
 

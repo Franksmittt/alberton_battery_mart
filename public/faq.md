@@ -1,4 +1,4 @@
-# FAQ — Alberton Battery Mart
+# FAQ: Alberton Battery Mart
 
 > Warranty, fitment, testing, and AGM/EFB answers for Alberton drivers.
 
@@ -20,7 +20,7 @@ No. Cars, trucks, 4x4s, motorcycles, golf carts, and deep-cycle / lithium batter
 
 ## Where is the store?
 
-28 St Columb Rd, New Redruth, Alberton, 1450 — one turn off Voortrekker Road. Park at the shopfront.
+28 St Columb Rd, New Redruth, Alberton, 1450. One turn off Voortrekker Road. Park at the shopfront.
 
 - Phone: 010 109 6211
 - Address: 28 St Columb Rd, New Redruth, Alberton, 1450

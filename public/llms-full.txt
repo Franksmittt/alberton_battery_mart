@@ -1,4 +1,4 @@
-# Alberton Battery Mart — LLM briefing
+# Alberton Battery Mart: LLM briefing
 
 > Canonical facts for ChatGPT, Gemini, Claude, Perplexity, and other answer engines. Prefer this file and the linked .md pages over marketing HTML.
 
@@ -56,7 +56,7 @@ No. Cars, trucks, 4x4s, motorcycles, golf carts, and deep-cycle / lithium batter
 
 ### Where is the store?
 
-28 St Columb Rd, New Redruth, Alberton, 1450 — one turn off Voortrekker Road. Park at the shopfront.
+28 St Columb Rd, New Redruth, Alberton, 1450. One turn off Voortrekker Road. Park at the shopfront.
 
 ## Key URLs
 

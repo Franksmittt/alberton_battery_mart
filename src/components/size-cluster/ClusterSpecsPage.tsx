@@ -35,7 +35,7 @@ export async function renderClusterSpecs(code: string) {
       <BatterySizeHero
         cluster={cluster}
         title={`${cluster.code} Battery Specifications`}
-        subtitle={`Technical specifications for ${cluster.code} automotive batteries — ${cluster.specs.ahRange}, ${cluster.specs.ccaRange}, ${cluster.specs.technology}.`}
+        subtitle={`Technical specifications for ${cluster.code} automotive batteries: ${cluster.specs.ahRange}, ${cluster.specs.ccaRange}, ${cluster.specs.technology}.`}
         trackingId={`${code}-specs-call`}
       />
       <BatterySizeTrustStrip />

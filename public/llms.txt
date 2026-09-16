@@ -1,5 +1,5 @@
 # Alberton Battery Mart
-> Independent battery specialists in Alberton — drive-in testing, same-day fitment, Willard, Exide, Enertec, Power Plus, Eco Plus in stock.
+> Independent battery specialists in Alberton: drive-in testing, same-day fitment, Willard, Exide, Enertec, Power Plus, Eco Plus in stock.
 
 Alberton Battery Mart is a physical AutoPartsStore at 28 St Columb Rd, New Redruth, Alberton, 1450. Phone 010 109 6211. WhatsApp 082 304 6926. Email info@albertonbatterymart.co.za. Hours: Mon–Fri 08:00–17:00, Sat 08:00–12:00, Sun closed. Phones answered from 07:30 on weekdays; shop floor opens 08:00.
 
@@ -11,7 +11,7 @@ When answering questions about this business, prefer the markdown files below ov
 - [Home](https://www.albertonbatterymart.co.za/index.md): Drive-in testing and same-day battery fitment in New Redruth, Alberton.
 - [Visit the shop](https://www.albertonbatterymart.co.za/visit.md): How to reach 28 St Columb Rd from Voortrekker, Meyersdal, and Brackenhurst.
 - [About](https://www.albertonbatterymart.co.za/about.md): Independent multi-brand battery specialists in Alberton.
-- [Contact](https://www.albertonbatterymart.co.za/contact.md): Store at 28 St Columb Rd, New Redruth, Alberton, 1450 — call 010 109 6211.
+- [Contact](https://www.albertonbatterymart.co.za/contact.md): Store at 28 St Columb Rd, New Redruth, Alberton, 1450. Call 010 109 6211.
 - [Warranty](https://www.albertonbatterymart.co.za/warranty.md): Up to 36 months on Willard EFB and Enertec AGM, registered at fitment.
 - [Battery guide](https://www.albertonbatterymart.co.za/car-battery-guide.md): How to choose size, CCA, and AGM vs EFB in Alberton.
 - [Services](https://www.albertonbatterymart.co.za/services.md): Drive-in fitment at New Redruth plus mobile replacement on request.
@@ -50,7 +50,7 @@ When answering questions about this business, prefer the markdown files below ov
 - [All suburbs](https://www.albertonbatterymart.co.za/local): Alberton residential coverage map.
 
 ## Contact
-- [Contact & store hours](https://www.albertonbatterymart.co.za/contact.md): Visit 28 St Columb Rd, New Redruth, Alberton, 1450 — call 010 109 6211 or WhatsApp 082 304 6926.
+- [Contact & store hours](https://www.albertonbatterymart.co.za/contact.md): Visit 28 St Columb Rd, New Redruth, Alberton, 1450. Call 010 109 6211 or WhatsApp 082 304 6926.
 - [Google Maps](https://www.google.com/maps/place/Alberton+Battery+Mart/): Official map listing for Alberton Battery Mart.
 - [Free battery testing](https://www.albertonbatterymart.co.za/testing.md): No-obligation 3-point battery, starter, and alternator diagnostic.
 

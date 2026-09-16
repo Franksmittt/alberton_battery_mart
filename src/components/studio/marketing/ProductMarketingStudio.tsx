@@ -234,7 +234,7 @@ export default function ProductMarketingStudio() {
             >
               {STORY_TEMPLATES.map((template) => (
                 <option key={template.id} value={template.id}>
-                  {template.name} — {template.thesis}
+                  {template.name}: {template.thesis}
                 </option>
               ))}
             </select>

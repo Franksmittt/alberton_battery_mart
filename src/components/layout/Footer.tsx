@@ -170,7 +170,7 @@ const Footer = () => {
           </span>
           <div className="flex flex-col items-center gap-2 md:items-end">
             <p className="text-[var(--brand-muted-3)]">
-              Independent retailer — see{" "}
+              Independent retailer. See{" "}
               <Link href="/disclosure" className={footerLinkClass}>
                 Disclosure
               </Link>

@@ -63,7 +63,7 @@ export const TECH_HUBS: BatteryTechHubConfig[] = [
       "Start-stop battery replacement in Alberton. AGM and EFB in stock with BMS coding for BMW, Mercedes, VW, and SUVs. Drive in to New Redruth.",
     h1: "Start-Stop Batteries in Alberton",
     intro:
-      "If your car has auto start-stop, idle-stop, or a battery warning after a cheap replacement, you almost certainly need AGM or EFB — not a standard flooded battery. We confirm the spec, fit the correct size (often 646, 652, 658, or 668), and code BMW/Mercedes systems when required.",
+      "If your car has auto start-stop, idle-stop, or a battery warning after a cheap replacement, you almost certainly need AGM or EFB, not a standard flooded battery. We confirm the spec, fit the correct size (often 646, 652, 658, or 668), and code BMW/Mercedes systems when required.",
     keywords: [
       "start stop battery Alberton",
       "stop start battery",

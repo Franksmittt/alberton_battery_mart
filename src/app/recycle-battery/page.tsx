@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "Do you take old car batteries in Alberton?",
     answer:
-      "Yes. Scrap exchange is part of a fitted replacement at 28 St Columb Rd, New Redruth. We recycle the old unit — you do not leave with a lead-acid case in the boot.",
+      "Yes. Scrap exchange is part of a fitted replacement at 28 St Columb Rd, New Redruth. We recycle the old unit. You do not leave with a lead-acid case in the boot.",
   },
   {
     question: "Is there a dumping fee?",
@@ -60,7 +60,7 @@ export default function RecycleBatteryPage() {
             <Link href="/652-car-battery" className="underline">
               652
             </Link>
-            . We send scrap through proper recycling — not landfill.
+            . We send scrap through proper recycling, not landfill.
           </p>
         </section>
 

@@ -139,9 +139,9 @@ export const DEFAULT_HUB_RELATED_LINKS = [
   { href: "/visit", label: "Visit the shop", description: "Directions to 28 St Columb Rd, parking, walk-in hours." },
   { href: "/testing", label: "Free Battery Testing", description: "Drive in for a free 3-point diagnostic test." },
   { href: "/warranty", label: "Warranty", description: "Up to 36 months on named premium brands." },
-  { href: "/car-battery-guide", label: "Battery guide", description: "Size, CCA, AGM vs EFB — how to choose." },
+  { href: "/car-battery-guide", label: "Battery guide", description: "Size, CCA, AGM vs EFB, and how to choose." },
   { href: "/agm-battery", label: "AGM Batteries", description: "BMW, Mercedes, and start-stop AGM with BMS coding." },
-  { href: "/652-car-battery", label: "652 Car Battery Hub", description: "Popular size — live fitted prices." },
+  { href: "/652-car-battery", label: "652 Car Battery Hub", description: "Popular size with live fitted prices." },
   { href: "/products", label: "Browse All Batteries", description: "Willard, Exide, Enertec, and more." },
   { href: "/faq", label: "Battery FAQs", description: "Walk-ins, warranty, and testing answers." },
 ];

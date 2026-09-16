@@ -34,7 +34,7 @@ const faqItems = [
   },
   {
     question: "Which brands do you stock, and why?",
-    answer: "Willard, Exide, and Enertec — named manufacturers — plus Power Plus and Eco Plus. We are independent, so the recommendation can match the car instead of a single house brand.",
+    answer: "Willard, Exide, and Enertec (named manufacturers) plus Power Plus and Eco Plus. We are independent, so the recommendation can match the car instead of a single house brand.",
   },
   {
     question: "Do you take the old battery?",

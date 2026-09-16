@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "Are website prices fitted prices?",
     answer:
-      "Yes — Alberton Battery Mart shows fitted prices with scrap exchange. Confirm live stock when you walk in or call 010 109 6211.",
+      "Yes. Alberton Battery Mart shows fitted prices with scrap exchange. Confirm live stock when you walk in or call 010 109 6211.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function CarBatteryGuidePage() {
       <JsonLd data={createFaqSchema(faqs)} id="guide-faq-schema" />
       <AuthorityPageShell
         title="How to choose a car battery in Alberton"
-        intro="Ignore the loudest warranty sticker. Match the tray, the technology, and the cranking figure — then fit it somewhere that will test the charging system first."
+        intro="Ignore the loudest warranty sticker. Match the tray, the technology, and the cranking figure, then fit it somewhere that will test the charging system first."
         trackingPrefix="battery-guide"
       >
         <section className="space-y-4">
@@ -103,13 +103,13 @@ export default function CarBatteryGuidePage() {
           <p className="text-lg text-muted-foreground leading-relaxed">
             A new battery in a car with a weak alternator is a repeat job. Drive in for a free
             three-point test at{" "}
-            <Link href="/visit" className="underline">28 St Columb Rd</Link> — battery, starter,
-            alternator — before you pay.
+            <Link href="/visit" className="underline">28 St Columb Rd</Link>: battery, starter,
+            and alternator, before you pay.
           </p>
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-3xl font-extrabold text-foreground">Choosing a battery — questions</h2>
+          <h2 className="text-3xl font-extrabold text-foreground">Choosing a battery: questions</h2>
           {faqs.map((faq) => (
             <details key={faq.question} className="border-b border-border py-4">
               <summary className="cursor-pointer text-lg font-semibold text-foreground">

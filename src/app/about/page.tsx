@@ -105,7 +105,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-foreground">Our Local Mission</h2>
           </div>
           <p className="text-lg text-muted-foreground">
-            Our mission is to be the battery shop Alberton drivers actually drive to. The counter is at <strong>28 St Columb Rd, New Redruth</strong> — one quiet turn off Voortrekker Road. Walk in, get a free Midtronics test, and leave with a fitted battery when you need one. Mobile callouts exist if the car cannot reach us.
+            Our mission is to be the battery shop Alberton drivers actually drive to. The counter is at <strong>28 St Columb Rd, New Redruth</strong>, one quiet turn off Voortrekker Road. Walk in, get a free Midtronics test, and leave with a fitted battery when you need one. Mobile callouts exist if the car cannot reach us.
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-foreground">Our Expert Advantage</h2>
           </div>
           <p className="text-lg text-muted-foreground">
-            We are not locked into one brand. As stockists of Willard, Exide, and Enertec, the recommendation matches the tray and the budget. Premium lines carry up to 36 months, registered at fitment — named manufacturer cover, not a house-brand slogan.
+            We are not locked into one brand. As stockists of Willard, Exide, and Enertec, the recommendation matches the tray and the budget. Premium lines carry up to 36 months, registered at fitment. Named manufacturer cover, not a house-brand slogan.
           </p>
         </div>
       </div>

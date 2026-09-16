@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "Is a jump-start a fix?",
     answer:
-      "No. It gets you to the shop. If the plates will not hold charge, you need a replacement — and a charging-system test so the next one lasts.",
+      "No. It gets you to the shop. If the plates will not hold charge, you need a replacement, and a charging-system test so the next one lasts.",
   },
 ];
 

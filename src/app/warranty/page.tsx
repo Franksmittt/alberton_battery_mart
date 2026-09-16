@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "Do you sell a house-brand battery with a long sticker warranty?",
     answer:
-      "We stock named manufacturers — Willard, Exide, and Enertec — plus Power Plus and Eco Plus with the months shown on each product. Cover is registered at fitment, not promised as a slogan.",
+      "We stock named manufacturers (Willard, Exide, and Enertec) plus Power Plus and Eco Plus with the months shown on each product. Cover is registered at fitment, not promised as a slogan.",
   },
   {
     question: "What voids a car battery warranty?",
@@ -54,8 +54,8 @@ export default function WarrantyPage() {
       />
       <JsonLd data={createFaqSchema(faqs)} id="warranty-faq-schema" />
       <AuthorityPageShell
-        title={`Battery warranty in Alberton — up to ${WARRANTY_PREMIUM_MONTHS} months`}
-        intro="Cover is a manufacturer period on a named battery, registered when we fit it — not a marketing number on an unnamed cell. Drive in with the invoice if you ever need a claim."
+        title={`Battery warranty in Alberton: up to ${WARRANTY_PREMIUM_MONTHS} months`}
+        intro="Cover is a manufacturer period on a named battery, registered when we fit it, not a marketing number on an unnamed cell. Drive in with the invoice if you ever need a claim."
         trackingPrefix="warranty"
       >
         <section className="space-y-4">
@@ -67,7 +67,7 @@ export default function WarrantyPage() {
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
             We are an independent stockist. That means the recommendation can be Willard, Exide, or
-            Enertec for the tray in front of us — not a single house brand we have to push because
+            Enertec for the tray in front of us, not a single house brand we have to push because
             it is the only thing on the shelf.
           </p>
         </section>
@@ -86,7 +86,7 @@ export default function WarrantyPage() {
           <ul className="list-disc space-y-2 pl-6 text-lg text-muted-foreground">
             <li>Correct technology: AGM or EFB on start-stop cars, never a cheap flooded substitute.</li>
             <li>BMS coding on BMW, Mercedes-Benz, Audi, and other cars that require registration.</li>
-            <li>A healthy alternator — we test it so a charging fault does not eat the new battery.</li>
+            <li>A healthy alternator. We test it so a charging fault does not eat the new battery.</li>
             <li>
               Drive in for a retest if the car is slow to crank again. Do not jump-start it for weeks
               and hope.

@@ -36,7 +36,7 @@ export async function renderClusterDimensions(code: string) {
       <BatterySizeHero
         cluster={cluster}
         title={`${cluster.code} Battery Dimensions & Terminal Layout`}
-        subtitle={`Physical size guide for ${cluster.code} batteries — tray dimensions, terminal orientation, and fitment checks before replacement.`}
+        subtitle={`Physical size guide for ${cluster.code} batteries: tray dimensions, terminal orientation, and fitment checks before replacement.`}
         trackingId={`${code}-dimensions-call`}
       />
       <BatterySizeTrustStrip />

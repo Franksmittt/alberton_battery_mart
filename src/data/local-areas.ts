@@ -375,7 +375,7 @@ export const LOCAL_AREAS: LocalArea[] = [
       {
         question: "Do you offer mobile service to Alberton North?",
         answer:
-          "Yes. Mobile callouts are available on request — call 010 109 6211 to check dispatch availability.",
+          "Yes. Mobile callouts are available on request. Call 010 109 6211 to check dispatch availability.",
       },
     ],
   },
@@ -398,7 +398,7 @@ export const LOCAL_AREAS: LocalArea[] = [
       {
         question: "Where is the nearest battery shop to Newmarket Park?",
         answer:
-          "Alberton Battery Mart is at 28 St Columb Rd, New Redruth — a short drive from Newmarket Park with free parking.",
+          "Alberton Battery Mart is at 28 St Columb Rd, New Redruth, a short drive from Newmarket Park with free parking.",
       },
       {
         question: "Can you test my battery before selling a replacement?",
@@ -426,7 +426,7 @@ export const LOCAL_AREAS: LocalArea[] = [
       {
         question: "Do you welcome walk-ins from Elandshaven?",
         answer:
-          "Yes. Drive in during trading hours for a free 5-minute diagnostic test — no appointment needed.",
+          "Yes. Drive in during trading hours for a free 5-minute diagnostic test. No appointment needed.",
       },
       {
         question: "Is mobile battery replacement available in Elandshaven?",

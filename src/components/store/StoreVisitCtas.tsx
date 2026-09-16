@@ -29,7 +29,7 @@ export function StoreVisitCtas({
         target="_blank"
         rel="noopener noreferrer"
         data-track-event={`${trackingPrefix}-directions`}
-        className="inline-flex items-center justify-center gap-2 rounded px-7 py-3.5 text-[0.85rem] font-bold uppercase tracking-[0.5px] bg-[var(--brand-accent-solid)] text-white transition-all hover:bg-[var(--brand-accent-hover)] hover:-translate-y-0.5"
+        className="inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-[0.8rem] font-bold uppercase tracking-[0.5px] bg-[var(--brand-accent-solid)] text-white transition-all hover:bg-[var(--brand-accent-hover)] hover:-translate-y-0.5 sm:px-7 sm:py-3.5 sm:text-[0.85rem]"
       >
         <Navigation className="h-4 w-4" aria-hidden="true" />
         Get Directions
@@ -37,7 +37,7 @@ export function StoreVisitCtas({
       <a
         href={`tel:${PHONE_TEL}`}
         data-track-event={`${trackingPrefix}-call`}
-        className={`inline-flex items-center justify-center gap-2 rounded px-7 py-3.5 text-[0.85rem] font-bold uppercase tracking-[0.5px] transition-all hover:-translate-y-0.5 ${secondary}`}
+        className={`inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-[0.8rem] font-bold uppercase tracking-[0.5px] transition-all hover:-translate-y-0.5 sm:px-7 sm:py-3.5 sm:text-[0.85rem] ${secondary}`}
       >
         <Phone className="h-4 w-4" aria-hidden="true" />
         Call {PHONE_DISPLAY}
@@ -47,7 +47,7 @@ export function StoreVisitCtas({
         target="_blank"
         rel="noopener noreferrer"
         data-track-event={`${trackingPrefix}-whatsapp`}
-        className="inline-flex items-center justify-center gap-2 rounded px-7 py-3.5 text-[0.85rem] font-bold uppercase tracking-[0.5px] bg-[var(--brand-success)] text-white transition-all hover:bg-[var(--brand-success-hover)] hover:-translate-y-0.5"
+        className="inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-[0.8rem] font-bold uppercase tracking-[0.5px] bg-[var(--brand-success)] text-white transition-all hover:bg-[var(--brand-success-hover)] hover:-translate-y-0.5 sm:px-7 sm:py-3.5 sm:text-[0.85rem]"
       >
         <MessageSquare className="h-4 w-4" aria-hidden="true" />
         WhatsApp

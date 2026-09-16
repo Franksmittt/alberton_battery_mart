@@ -47,7 +47,7 @@ export async function renderClusterPrice(code: string) {
 
       <BatterySizeHero
         cluster={cluster}
-        title={`${cluster.code} Battery Price Guide — Alberton`}
+        title={`${cluster.code} Battery Price Guide: Alberton`}
         subtitle="Honest comparison of fitted prices vs Midas, Goldwagen, and online shelf prices. Includes what you get with mobile fitment and free diagnostics."
         trackingId={`${code}-price-call`}
       />
