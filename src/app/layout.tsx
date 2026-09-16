@@ -20,11 +20,15 @@ import {
   BASE_URL,
   BUSINESS_ADDRESS,
   BUSINESS_CONTACT,
+  BUSINESS_SAME_AS,
   DEFAULT_HERO_IMAGE,
   DEFAULT_LOGO,
   DEFAULT_OPENING_HOURS,
+  EMAIL_ADMIN,
+  GOOGLE_BUSINESS_PROFILE_URL,
   LOCAL_BUSINESS_ID,
   ORG_ID,
+  PRICE_RANGE,
   SERVICE_AREAS,
   STORE_COORDINATES,
   STRUCTURED_AREA_SERVED,
@@ -49,7 +53,7 @@ export const metadata: Metadata = {
     template: "%s | Alberton Battery Mart",
   },
   description:
-    "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!",
+    "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
   metadataBase: new URL(BASE_URL),
   icons: {
     icon: [
@@ -87,7 +91,7 @@ export const metadata: Metadata = {
     title:
       "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
     description:
-      "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!",
+      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -102,7 +106,7 @@ export const metadata: Metadata = {
     title:
       "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
     description:
-      "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal.",
+      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Call 010 109 6211.",
     images: ["/images/og-image.jpg"],
   },
   robots: {
@@ -118,6 +122,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: BASE_URL,
+    types: {
+      "text/markdown": `${BASE_URL}/index.md`,
+    },
   },
   verification: {
     // Add Google Search Console verification when available
@@ -134,7 +141,12 @@ const localBusinessSchema = {
   image: DEFAULT_LOGO,
   url: BASE_URL,
   telephone: BUSINESS_CONTACT.telephone,
-  priceRange: "R R R",
+  email: BUSINESS_CONTACT.email,
+  priceRange: PRICE_RANGE,
+  currenciesAccepted: "ZAR",
+  paymentAccepted: "Cash, Card, EFT",
+  hasMap: GOOGLE_BUSINESS_PROFILE_URL,
+  parentOrganization: { "@id": ORG_ID },
   address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
   geo: {
     "@type": "GeoCoordinates",
@@ -146,12 +158,50 @@ const localBusinessSchema = {
     { "@type": "Brand", name: "Willard" },
     { "@type": "Brand", name: "Exide" },
     { "@type": "Brand", name: "Enertec" },
+    { "@type": "Brand", name: "Power Plus" },
+    { "@type": "Brand", name: "Eco Plus" },
   ],
+  knowsAbout: [
+    "Car battery replacement",
+    "AGM batteries",
+    "EFB batteries",
+    "Willard batteries",
+    "Exide batteries",
+    "Mobile battery fitment",
+    "Battery testing",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Battery services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Drive-in battery testing and fitment",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Mobile battery replacement",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AGM battery coding",
+        },
+      },
+    ],
+  },
   openingHoursSpecification: DEFAULT_OPENING_HOURS.map((entry) => ({
     "@type": "OpeningHoursSpecification",
     ...entry,
   })),
-  sameAs: [BUSINESS_CONTACT.whatsapp].filter(Boolean),
+  sameAs: BUSINESS_SAME_AS,
 };
 
 const organizationSchema = {
@@ -160,18 +210,50 @@ const organizationSchema = {
   "@id": ORG_ID,
   name: "Alberton Battery Mart",
   url: BASE_URL,
-  logo: DEFAULT_LOGO,
+  logo: {
+    "@type": "ImageObject",
+    url: DEFAULT_LOGO,
+  },
   image: DEFAULT_HERO_IMAGE,
+  email: BUSINESS_CONTACT.email,
   address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
+  location: { "@id": LOCAL_BUSINESS_ID },
+  sameAs: BUSINESS_SAME_AS,
   contactPoint: [
     {
       "@type": "ContactPoint",
       telephone: BUSINESS_CONTACT.telephone,
+      email: BUSINESS_CONTACT.email,
       contactType: "customer service",
       areaServed: SERVICE_AREAS,
       availableLanguage: ["English"],
     },
+    {
+      "@type": "ContactPoint",
+      email: EMAIL_ADMIN,
+      contactType: "customer support",
+      areaServed: SERVICE_AREAS,
+      availableLanguage: ["English"],
+    },
   ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${BASE_URL}/#website`,
+  name: "Alberton Battery Mart",
+  url: BASE_URL,
+  inLanguage: "en-ZA",
+  publisher: { "@id": ORG_ID },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${BASE_URL}/products/results?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({
@@ -188,8 +270,10 @@ export default function RootLayout({
         {/* --- MODIFIED: Removed the manual <script> tag for GTM --- */}
 
         {/* --- Add LocalBusiness Schema to HEAD --- */}
+        <link rel="describedby" href={`${BASE_URL}/llms.txt`} />
         <JsonLd data={localBusinessSchema} id="local-business-schema" />
         <JsonLd data={organizationSchema} id="organization-schema" />
+        <JsonLd data={websiteSchema} id="website-schema" />
       </head>
 
       <body className={`${inter.className} overflow-x-clip`}>

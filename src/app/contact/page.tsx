@@ -5,7 +5,7 @@ import ContactPageContent from "@/components/content/ContactPageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { RelatedContent } from "@/components/seo/RelatedContent";
-import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT, EMAIL_ADMIN } from "@/lib/seo-constants";
 
 // Mark route as dynamic since we're using headers()
 export const dynamic = 'force-dynamic';
@@ -45,6 +45,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/contact',
+    types: {
+      'text/markdown': 'https://www.albertonbatterymart.co.za/contact.md',
+    },
   },
 };
 
@@ -59,7 +62,7 @@ const CONTACT_SCHEMA = {
       ...BUSINESS_ADDRESS,
     },
     telephone: BUSINESS_CONTACT.telephone,
-    email: "admin@albertonbatterymart.co.za",
+    email: EMAIL_ADMIN,
     url: BASE_URL,
     openingHoursSpecification: [
       {

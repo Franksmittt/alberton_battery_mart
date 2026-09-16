@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { HubSection } from "@/components/seo/HubSection";
 import { RelatedContent } from "@/components/seo/RelatedContent";
-import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
+import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -44,35 +44,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/about',
-  },
-};
-
-const ORGANIZATION_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Alberton Battery Mart",
-  description: "Alberton's independent, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
-  url: BASE_URL,
-  address: {
-    "@type": "PostalAddress",
-    ...BUSINESS_ADDRESS,
-  },
-  telephone: BUSINESS_CONTACT.telephone,
-  email: "admin@albertonbatterymart.co.za",
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "08:00",
-      closes: "17:00",
+    types: {
+      'text/markdown': 'https://www.albertonbatterymart.co.za/about.md',
     },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "08:00",
-      closes: "13:00",
-    },
-  ],
+  },
 };
 
 const BREADCRUMB_SCHEMA = {
@@ -102,7 +77,6 @@ export default function AboutPage() {
         description="Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts in Alberton."
         path="/about"
       />
-      <JsonLd data={ORGANIZATION_SCHEMA} id="organization-schema" />
       <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
       <HubSection className="container py-16 space-y-12 max-w-5xl">
       
@@ -117,7 +91,7 @@ export default function AboutPage() {
       </div>
       
       <p className="text-xl text-foreground text-center max-w-3xl mx-auto">
-        Founded on the principle of providing **honest advice and reliable power**, Alberton Battery Mart is not just another parts store. We are a dedicated, local business focused on solving your battery problems with the right solution, not just the most expensive one.
+        Founded on the principle of providing honest advice and reliable power, Alberton Battery Mart is not just another parts store. We are a dedicated, local business focused on solving your battery problems with the right solution, not just the most expensive one.
       </p>
 
       {/* --- NEW: Rewritten Content Blocks (SEO & Authority) --- */}
@@ -130,7 +104,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-foreground">Our Local Mission</h2>
           </div>
           <p className="text-lg text-muted-foreground">
-            Our mission is simple: to be the **#1 trusted battery expert in Alberton**. We win by providing value that online-only stores and generic fitment chains can't match. We are physically here at <strong>28 St Columb Rd</strong>, ready to provide free on-site diagnostics, alternator testing, and professional fitment while you wait.
+            Our mission is simple: to be the #1 trusted battery expert in Alberton. We win by providing value that online-only stores and generic fitment chains can't match. We are physically here at <strong>28 St Columb Rd</strong>, ready to provide free on-site diagnostics, alternator testing, and professional fitment while you wait.
           </p>
         </div>
 
@@ -141,7 +115,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-foreground">Our Expert Advantage</h2>
           </div>
           <p className="text-lg text-muted-foreground">
-            We are not locked into one brand. As official stockists of **Willard, Exide, and Enertec**, our loyalty is to you, the customer. We provide unbiased, expert advice to ensure you get the *correct* battery for your specific vehicle (Car, Truck, or Motorcycle) and budget, all backed by a full manufacturer warranty.
+            We are not locked into one brand. As official stockists of Willard, Exide, and Enertec, our loyalty is to you, the customer. We provide unbiased, expert advice to ensure you get the <em>correct</em> battery for your specific vehicle (Car, Truck, or Motorcycle) and budget, all backed by a full manufacturer warranty.
           </p>
         </div>
       </div>

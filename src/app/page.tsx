@@ -36,8 +36,9 @@ export const metadata: Metadata = {
   ...buildPageMetadata({
     title: "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
     description:
-      "Fast mobile battery replacement in Alberton, New Redruth, and Meyersdal. Willard & Exide in stock. Free fitment, testing, and warranty. Call 010 109 6211.",
+      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
     path: "/",
+    markdownPath: "/index.md",
     keywords: [
       "battery replacement Alberton",
       "car battery Alberton",
@@ -91,14 +92,17 @@ export default function Home() {
     <main className="overflow-x-clip">
       <PageJsonLd
         title="Alberton Battery Mart | Mobile Battery Replacement & Fitment Service"
-        description="Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Free fitment, testing, and 24-month warranty. Call 010 109 6211."
+        description="Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211."
         path="/"
       />
       <HubSection className="min-h-[60vh] lg:min-h-[calc(100vh-182px)] bg-[var(--brand-bg)] bg-[radial-gradient(circle_at_50%_0%,rgba(15,118,110,0.12)_0%,transparent_70%)] text-white flex items-center">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-[clamp(2.2rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.08] mb-4 md:whitespace-nowrap">
-              {heroCopy.heading}
+            <h1 className="text-[clamp(2.2rem,4.3vw,3.5rem)] font-extrabold tracking-tight leading-[1.08] mb-4">
+              <span className="mb-3 block text-[0.78rem] sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--brand-accent)]">
+                Alberton Battery Mart · 28 St Columb Rd
+              </span>
+              <span className="block md:whitespace-nowrap">{heroCopy.heading}</span>
             </h1>
             <p className="text-[clamp(1rem,2vw,1.2rem)] text-[var(--brand-muted)] max-w-2xl mx-auto leading-relaxed mb-10">
               {heroCopy.subheading}

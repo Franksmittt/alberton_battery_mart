@@ -43,6 +43,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/faq',
+    types: {
+      'text/markdown': 'https://www.albertonbatterymart.co.za/faq.md',
+    },
   },
 };
 

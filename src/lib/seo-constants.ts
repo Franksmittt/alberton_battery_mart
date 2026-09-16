@@ -22,6 +22,10 @@ export const STORE_ADDRESS_LINE =
   "28 St Columb Rd, New Redruth, Alberton, 1450";
 export const STORE_ADDRESS_SHORT = "28 St Columb Rd, New Redruth, Alberton";
 export const STORE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE_ADDRESS_LINE)}`;
+export const GOOGLE_BUSINESS_PROFILE_URL =
+  "https://www.google.com/maps/place/Alberton+Battery+Mart/";
+export const WIKIPEDIA_ALBERTON_URL =
+  "https://en.wikipedia.org/wiki/Alberton,_South_Africa";
 export const STORE_MAPS_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.340005537548!2d28.12132331503201!3d-26.28291418340356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950ab84596b6ab%3A0x60c03f02e6f6634!2s28%20St%20Columb%20Rd%2C%20New%20Redruth%2C%20Alberton%2C%201450!5e0!3m2!1sen!2sza!4v1671234567890!5m2!1sen!2sza";
 
@@ -49,12 +53,23 @@ export const AD_PRICE_ANCHORS_LINE =
   "Power Plus from R1,150 | Eco Plus from R1,050";
 export const PRICE_ANCHOR_POWER_PLUS = "R1,150";
 export const PRICE_ANCHOR_ECO_PLUS = "R1,050";
+export const PRICE_RANGE = "RR";
+
+export const EMAIL_PUBLIC = "info@albertonbatterymart.co.za";
+export const EMAIL_ADMIN = "admin@albertonbatterymart.co.za";
 
 export const BUSINESS_CONTACT = {
   telephone: "+27101096211",
   whatsapp: WHATSAPP_URL,
-  email: "info@albertonbatterymart.co.za",
+  email: EMAIL_PUBLIC,
+  emailAdmin: EMAIL_ADMIN,
 };
+
+export const BUSINESS_SAME_AS = [
+  GOOGLE_BUSINESS_PROFILE_URL,
+  STORE_MAPS_URL,
+  WHATSAPP_URL,
+];
 
 export const STORE_COORDINATES = {
   latitude: -26.28291418340356,
@@ -71,7 +86,11 @@ export const STRUCTURED_AREA_SERVED = [
     },
     geoRadius: 12000,
   },
-  { "@type": "Place", name: "Alberton" },
+  {
+    "@type": "City",
+    name: "Alberton",
+    sameAs: WIKIPEDIA_ALBERTON_URL,
+  },
   { "@type": "Place", name: "Alrode" },
   { "@type": "Place", name: "New Redruth" },
   { "@type": "Place", name: "Meyersdal" },

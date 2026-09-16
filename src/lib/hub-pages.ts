@@ -14,7 +14,7 @@ export const HUB_PAGES: HubPageConfig[] = [
     path: "/",
     title: "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
     description:
-      "Fast mobile battery replacement in Alberton, New Redruth, and Meyersdal. Willard & Exide in stock. Free fitment, testing, and warranty. Call 010 109 6211.",
+      "Drive-in battery testing and same-day fitment at 28 St Columb Rd, New Redruth. Willard & Exide in stock. Mobile replacement on request. Call 010 109 6211.",
     schemaType: "WebPage",
   },
   {
@@ -118,4 +118,5 @@ export const EXPLICIT_SCHEMA_ID_PREFIXES = [
   "localbusiness",
   "hub-localbusiness",
   "organization",
+  "website-schema",
 ];

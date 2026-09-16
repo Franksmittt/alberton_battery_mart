@@ -12,6 +12,7 @@ type BuildPageMetadataInput = {
   locale?: string;
   siteName?: string;
   robots?: Metadata["robots"];
+  markdownPath?: string;
 };
 
 export function buildPageMetadata({
@@ -25,6 +26,7 @@ export function buildPageMetadata({
   locale = "en_ZA",
   siteName = "Alberton Battery Mart",
   robots,
+  markdownPath,
 }: BuildPageMetadataInput): Metadata {
   const url = toAbsoluteUrl(path);
   const imageUrl = toAbsoluteUrl(imagePath);
@@ -56,6 +58,11 @@ export function buildPageMetadata({
       description,
       images: [imageUrl],
     },
-    alternates: canonicalFor(path),
+    alternates: {
+      ...canonicalFor(path),
+      ...(markdownPath
+        ? { types: { "text/markdown": toAbsoluteUrl(markdownPath) } }
+        : {}),
+    },
   };
 }
