@@ -21,7 +21,25 @@ const SUBURB_NAMES: Record<string, string> = {
   alberante: "Alberante",
   "new-market": "New Market",
   randhart: "Randhart",
+  "alberton-north": "Alberton North",
+  albertsdal: "Albertsdal",
+  florentia: "Florentia",
+  raceview: "Raceview",
+  "south-crest": "South Crest",
+  elandshaven: "Elandshaven",
+  "newmarket-park": "Newmarket Park",
+  "alberton-central": "Alberton Central",
 };
+
+function suburbDisplayName(slug: string): string {
+  if (SUBURB_NAMES[slug]) return SUBURB_NAMES[slug];
+  const local = getLocalAreaBySlug(slug);
+  if (local?.name) return local.name;
+  return slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
 
 const suburbSizeOverrides: Record<
   string,
@@ -47,6 +65,62 @@ const suburbSizeOverrides: Record<
       "Dense Alberton corridor with strong commuter demand for affordable replacements and fast mobile call-outs.",
     roads: ["Voortrekker Rd", "Du Plessis Rd"],
     landmarks: ["New Market area retail strip", "Alberton CBD access routes"],
+  },
+  "alberton-north": {
+    responseWindow: "35–50 minutes",
+    summary:
+      "Northern Alberton commuter strip. Fastest drive-in from Voortrekker Rd to our New Redruth store, plus mobile call-outs.",
+    roads: ["Voortrekker Rd", "Hennie Alberts Street"],
+    landmarks: ["Alberton North retail nodes", "Voortrekker commuter strip"],
+  },
+  albertsdal: {
+    responseWindow: "45–60 minutes",
+    summary:
+      "Family suburb south of the CBD with bakkie and SUV demand. We stock 616–668 plus AGM/EFB for modern start-stop cars.",
+    roads: ["Albertsdal Avenue", "Hennie Alberts Street"],
+    landmarks: ["Albertsdal schools", "Local retail strip"],
+  },
+  florentia: {
+    responseWindow: "45–60 minutes",
+    summary:
+      "Established suburb next to Alberton CBD. Strong Polo, Corolla, and 619/628 demand with same-day store or mobile fitment.",
+    roads: ["Helston Street", "Voortrekker Road"],
+    landmarks: ["Florentia shopping strip", "CBD access routes"],
+  },
+  raceview: {
+    responseWindow: "40–55 minutes",
+    summary:
+      "Close-in residential suburb where no-start call-outs are common on school-run compact cars.",
+    roads: ["Phantom Street", "Voortrekker Road"],
+    landmarks: ["Raceview retail nodes", "Alberton CBD fringe"],
+  },
+  "south-crest": {
+    responseWindow: "45–60 minutes",
+    summary:
+      "Highway-adjacent suburb with bakkie and EcoSport demand. Mobile units cover feeder roads when access is safe.",
+    roads: ["N17 access roads", "Hennie Alberts Street"],
+    landmarks: ["South Crest residential cluster", "Highway feeder roads"],
+  },
+  elandshaven: {
+    responseWindow: "45–60 minutes",
+    summary:
+      "Quiet estates south of Brackenhurst. Drive-in testing is popular; mobile fitment is available on request.",
+    roads: ["Elandshaven Drive", "Swartkoppies Road links"],
+    landmarks: ["Elandshaven residential estates", "Nearby school routes"],
+  },
+  "newmarket-park": {
+    responseWindow: "40–55 minutes",
+    summary:
+      "Residential pocket on the CBD fringe. Short drive to 28 St Columb Rd for free testing and same-day sizes.",
+    roads: ["Voortrekker Road", "Du Plessis Road"],
+    landmarks: ["Newmarket Park residential cluster", "Alberton CBD fringe"],
+  },
+  "alberton-central": {
+    responseWindow: "30–45 minutes",
+    summary:
+      "Alberton CBD and Alberton City corridor. Walk-in or rapid nearby dispatch for shoppers and office parks.",
+    roads: ["Voortrekker Road", "Ring Road West"],
+    landmarks: ["Alberton City", "Voortrekker Road retail strip"],
   },
 };
 
@@ -88,7 +162,7 @@ export function getClusterSuburbs(
   cluster: BatterySizeClusterConfig
 ): ClusterSuburb[] {
   return CLUSTER_SUBURB_SLUGS.map((slug) =>
-    buildSuburb(cluster, slug, SUBURB_NAMES[slug] || slug)
+    buildSuburb(cluster, slug, suburbDisplayName(slug))
   );
 }
 
@@ -164,7 +238,7 @@ export function getHubFaq(
     },
     {
       question: `Do you stock ${code} batteries near me in Alberton?`,
-      answer: `Yes. We keep ${code} batteries in stock at 28 St Columb Rd, New Redruth, and dispatch mobile fitment to Brackenhurst, Meyersdal, Brackendowns, Verwoerdpark, Randhart, and surrounding suburbs.`,
+      answer: `Yes. We keep ${code} batteries in stock at 28 St Columb Rd, New Redruth, and dispatch mobile fitment to Alberton North, Meyersdal, Brackenhurst, Brackendowns, Randhart, Alberante, Albertsdal, and surrounding Alberton suburbs.`,
     },
     {
       question: `Do you offer mobile ${code} battery fitment?`,

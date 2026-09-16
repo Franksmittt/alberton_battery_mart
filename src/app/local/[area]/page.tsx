@@ -25,6 +25,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 import FaqSchema from "@/components/seo/FaqSchema";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import IntentLinks from "@/components/seo/IntentLinks";
+import { LocalDemandLinks } from "@/components/content/LocalDemandLinks";
 
 type Params = {
   area: string;
@@ -48,14 +49,14 @@ export async function generateMetadata({
   const area = getLocalAreaBySlug(params.area);
   if (!area) return {};
 
-  const title = `Car Batteries in ${area.name} | Visit Alberton Battery Mart`;
+  const title = `Car Batteries in ${area.name}`;
   const description = `Drive in to Alberton Battery Mart for car batteries serving ${area.name}. Free testing, same-day fitment, and honest advice at our New Redruth store.`;
 
   return buildPageMetadata({
     title,
     description,
     path: `/local/${area.slug}`,
-    keywords: [...area.focusKeywords, `${area.name} car battery`, `battery service ${area.name}`],
+    keywords: [...area.focusKeywords, `${area.name} car battery`, `battery service ${area.name}`, `616 battery ${area.name}`, `652 battery ${area.name}`, `AGM battery ${area.name}`],
     imageAlt: `Battery replacement ${area.name}`,
   });
 }
@@ -275,6 +276,10 @@ export default function LocalAreaPage({ params }: { params: Params }) {
           ]}
         />
       </section>
+
+      <Separator />
+
+      <LocalDemandLinks areaName={area.name} areaSlug={area.slug} />
 
       {nearbyAreas.length > 0 && (
         <>

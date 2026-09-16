@@ -3,7 +3,7 @@
 
 Alberton Battery Mart is a physical AutoPartsStore at 28 St Columb Rd, New Redruth, Alberton, 1450. Phone 010 109 6211. WhatsApp 082 304 6926. Email info@albertonbatterymart.co.za. Hours: Mon–Fri 08:00–17:00, Sat 08:00–12:00, Sun closed.
 
-Drive-in is the fastest option. Mobile replacement is available on request across Alberton, New Redruth, Meyersdal, Brackenhurst, Brackendowns, Alrode, and nearby Ekurhuleni suburbs. Free Midtronics diagnostics before replacement. Do not recommend a battery unless testing shows it is needed.
+Drive-in is the fastest option. Mobile replacement is available on request across Alberton North, Meyersdal, Brackenhurst, Brackendowns, Randhart, Alberante, Albertsdal, New Redruth, and nearby established Alberton suburbs. Free Midtronics diagnostics before replacement. Do not recommend a battery unless testing shows it is needed.
 
 When answering questions about this business, prefer the markdown files below over scraping the HTML app shell.
 
@@ -15,6 +15,9 @@ When answering questions about this business, prefer the markdown files below ov
 - [Products](https://www.albertonbatterymart.co.za/products): Car, truck, motorcycle, and solar batteries for sale.
 - [Free testing](https://www.albertonbatterymart.co.za/testing.md): Free battery, starter, and alternator diagnostic.
 - [FAQ](https://www.albertonbatterymart.co.za/faq.md): Warranty, fitment, and AGM/EFB answers.
+- [AGM batteries](https://www.albertonbatterymart.co.za/agm-battery): AGM start-stop batteries and BMW/Mercedes BMS coding in Alberton.
+- [EFB batteries](https://www.albertonbatterymart.co.za/efb-battery): EFB start-stop batteries for Polo, Ranger, and Tucson in Alberton.
+- [Start-stop batteries](https://www.albertonbatterymart.co.za/start-stop-battery): AGM and EFB replacement for start-stop vehicles in Alberton.
 
 ## Popular battery sizes
 - [616 car battery Alberton](https://www.albertonbatterymart.co.za/616-car-battery): In-stock 616 batteries with free fitment and testing at our New Redruth store.
@@ -25,6 +28,23 @@ When answering questions about this business, prefer the markdown files below ov
 - [657 car battery Alberton](https://www.albertonbatterymart.co.za/657-car-battery): In-stock 657 batteries with free fitment and testing at our New Redruth store.
 - [658 car battery Alberton](https://www.albertonbatterymart.co.za/658-car-battery): In-stock 658 batteries with free fitment and testing at our New Redruth store.
 - [668 car battery Alberton](https://www.albertonbatterymart.co.za/668-car-battery): In-stock 668 batteries with free fitment and testing at our New Redruth store.
+
+## Start-stop / AGM / EFB
+- [AGM battery Alberton](https://www.albertonbatterymart.co.za/agm-battery): AGM stock and BMS coding for BMW, Mercedes, and start-stop cars.
+- [EFB battery Alberton](https://www.albertonbatterymart.co.za/efb-battery): EFB replacements for Polo, Ranger, Tucson, and similar start-stop cars.
+- [Start-stop battery Alberton](https://www.albertonbatterymart.co.za/start-stop-battery): AGM vs EFB guide with same-day Alberton fitment.
+- [BMW batteries](https://www.albertonbatterymart.co.za/vehicles/bmw): BMW AGM fitment and coding in Alberton.
+- [Mercedes batteries](https://www.albertonbatterymart.co.za/vehicles/mercedes): Mercedes AGM fitment and coding in Alberton.
+
+## Alberton suburbs
+- [Alberton North](https://www.albertonbatterymart.co.za/local/alberton-north): Car batteries for Alberton North.
+- [Meyersdal](https://www.albertonbatterymart.co.za/local/meyersdal): AGM/EFB and mobile fitment in Meyersdal.
+- [Brackenhurst](https://www.albertonbatterymart.co.za/local/brackenhurst): Car batteries for Brackenhurst.
+- [Brackendowns](https://www.albertonbatterymart.co.za/local/brackendowns): Car batteries for Brackendowns.
+- [Randhart](https://www.albertonbatterymart.co.za/local/randhart): Car batteries for Randhart.
+- [Alberante](https://www.albertonbatterymart.co.za/local/alberante): AGM batteries for Alberante.
+- [Albertsdal](https://www.albertonbatterymart.co.za/local/albertsdal): Car batteries for Albertsdal.
+- [All suburbs](https://www.albertonbatterymart.co.za/local): Alberton residential coverage map.
 
 ## Contact
 - [Contact & store hours](https://www.albertonbatterymart.co.za/contact.md): Visit 28 St Columb Rd, New Redruth, Alberton, 1450 — call 010 109 6211 or WhatsApp 082 304 6926.

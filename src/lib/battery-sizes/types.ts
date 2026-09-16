@@ -42,15 +42,59 @@ export type ClusterSuburb = {
   vehicles: string[];
 };
 
+/** Popular SA battery sizes we need to own in Alberton search. */
+export const POPULAR_SIZE_CODES = [
+  "616",
+  "619",
+  "628",
+  "646",
+  "652",
+  "658",
+  "668",
+] as const;
+
+/** Sizes that commonly have AGM / EFB / start-stop variants. */
+export const START_STOP_SIZE_CODES = ["646", "652", "658", "668"] as const;
+
+/**
+ * Residential Alberton suburbs for size × suburb cluster pages.
+ * Informal settlements (Thokoza, etc.) are intentionally omitted.
+ */
 export const CLUSTER_SUBURB_SLUGS = [
+  "alberton-north",
+  "meyersdal",
   "brackenhurst",
+  "brackendowns",
+  "randhart",
+  "alberante",
+  "albertsdal",
   "new-redruth",
   "verwoerdpark",
-  "brackendowns",
-  "meyersdal",
-  "alberante",
+  "florentia",
+  "raceview",
+  "south-crest",
+  "elandshaven",
+  "newmarket-park",
+  "alberton-central",
   "new-market",
-  "randhart",
 ] as const;
+
+export type ClusterSuburbSlug = (typeof CLUSTER_SUBURB_SLUGS)[number];
+
+const CLUSTER_SUBURB_SLUG_SET = new Set<string>(CLUSTER_SUBURB_SLUGS);
+
+export function isClusterSuburbSlug(slug: string): slug is ClusterSuburbSlug {
+  return CLUSTER_SUBURB_SLUG_SET.has(slug);
+}
+
+export function sizeHubPath(code: string): string {
+  return `/${code}-car-battery`;
+}
+
+export function sizeSuburbPath(code: string, suburbSlug: string): string {
+  return isClusterSuburbSlug(suburbSlug)
+    ? `${sizeHubPath(code)}/${suburbSlug}`
+    : sizeHubPath(code);
+}
 
 export type ClusterPageKind = "hub" | "price" | "specs" | "dimensions";

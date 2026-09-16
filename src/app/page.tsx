@@ -84,7 +84,7 @@ export default function Home() {
   const trendingSearches = [
     { label: "Willard 652", href: "/products/results?q=Willard+652" },
     { label: "Toyota Hilux GD-6", href: "/products/results?q=Toyota+Hilux+GD-6+battery" },
-    { label: "AGM Start/Stop", href: "/products/type/performance" },
+    { label: "AGM Start/Stop", href: "/start-stop-battery" },
     { label: "Commercial Truck Batteries", href: "/products/type/truck-commercial" },
   ];
 

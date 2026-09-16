@@ -14,15 +14,22 @@ const SIZE_HUBS = getAllClusterConfigs();
 
 const SHOP_LINKS = [
   { href: "/products/type/automotive", label: "Car batteries" },
-  { href: "/products/type/performance", label: "AGM / Start-Stop" },
+  { href: "/agm-battery", label: "AGM batteries" },
+  { href: "/efb-battery", label: "EFB batteries" },
+  { href: "/start-stop-battery", label: "Start-stop" },
   { href: "/products/type/truck-commercial", label: "Commercial" },
   { href: "/products", label: "All products" },
 ] as const;
 
 const AREA_LINKS = [
-  { href: "/local/new-redruth", label: "New Redruth" },
+  { href: "/local/alberton-north", label: "Alberton North" },
   { href: "/local/meyersdal", label: "Meyersdal" },
   { href: "/local/brackenhurst", label: "Brackenhurst" },
+  { href: "/local/brackendowns", label: "Brackendowns" },
+  { href: "/local/randhart", label: "Randhart" },
+  { href: "/local/alberante", label: "Alberante" },
+  { href: "/local/albertsdal", label: "Albertsdal" },
+  { href: "/local/new-redruth", label: "New Redruth" },
   { href: "/local", label: "All areas" },
 ] as const;
 
@@ -91,7 +98,7 @@ const Footer = () => {
           </div>
 
           {/* Areas */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-[var(--brand-muted-3)]">
               Areas
             </p>
@@ -103,16 +110,11 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/mobile-battery-fitment-alberton" className={footerLinkClass}>
-                  Mobile fitment
-                </Link>
-              </li>
             </ul>
           </div>
 
           {/* Size guides — compact inline */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-[var(--brand-muted-3)]">
               Battery size guides
             </p>

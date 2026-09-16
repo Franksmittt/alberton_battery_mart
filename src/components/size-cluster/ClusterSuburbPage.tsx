@@ -118,6 +118,7 @@ export async function clusterSuburbMetadata(code: string, suburbSlug: string) {
       `${cluster.code} car battery ${suburb.name.toLowerCase()}`,
       `${cluster.code} battery price ${suburb.name.toLowerCase()}`,
       `mobile battery fitment ${suburb.name.toLowerCase()}`,
+      `car battery ${suburb.name.toLowerCase()}`,
     ],
   });
 }

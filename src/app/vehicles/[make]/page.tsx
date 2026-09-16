@@ -39,7 +39,7 @@ export async function generateMetadata({
   const description = `Find the right battery for your ${make} vehicle. Browse our ${make} battery fitment guides and recommended products. Free fitment and testing in Alberton.`;
 
   return {
-    title: `${make} Battery Replacement in Alberton | Alberton Battery Mart`,
+    title: `${make} Battery Replacement in Alberton`,
     description,
     keywords: [
       `${make} battery`,
@@ -66,7 +66,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${make} Battery Replacement in Alberton | Alberton Battery Mart`,
+      title: `${make} Battery Replacement in Alberton`,
       description,
       images: [`${BASE_URL}/images/og-image.jpg`],
     },
@@ -207,6 +207,46 @@ export default async function VehicleMakePage({ params }: { params: Params }) {
         </div>
         <Separator className="pt-4" />
       </section>
+
+      {(makeSlug === "bmw" || makeSlug === "mercedes" || makeSlug === "audi") && (
+        <section className="rounded-2xl border border-battery/40 bg-card p-6 md:p-8 space-y-4">
+          <h2 className="text-2xl font-bold text-foreground">
+            {make} start-stop batteries need AGM + BMS coding
+          </h2>
+          <p className="text-muted-foreground">
+            Most {make} cars in Meyersdal, Alberante, Alberton North, and
+            Brackenhurst use AGM (often 652, 658, 668, or 660) rather than a
+            standard flooded battery. We stock AGM/EFB and register the battery
+            with the vehicle so start-stop keeps working.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/agm-battery"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery"
+            >
+              AGM battery hub
+            </Link>
+            <Link
+              href="/start-stop-battery"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery"
+            >
+              Start-stop battery hub
+            </Link>
+            <Link
+              href="/658-car-battery"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery"
+            >
+              658 size hub
+            </Link>
+            <Link
+              href="/local/meyersdal"
+              className="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:border-battery"
+            >
+              Meyersdal fitment
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Select Your Model Section */}
       <section className="space-y-6">
@@ -365,7 +405,8 @@ export default async function VehicleMakePage({ params }: { params: Params }) {
         <div className="flex items-center gap-3 pt-4">
           <MapPin className="h-5 w-5 text-battery" />
           <p className="text-sm text-foreground">
-            Service area: Alberton, New Redruth, Meyersdal, Brackenhurst, Alrode
+            Service area: Alberton North, Meyersdal, Brackenhurst, Brackendowns,
+            Randhart, Alberante, Albertsdal, New Redruth
           </p>
         </div>
       </section>
