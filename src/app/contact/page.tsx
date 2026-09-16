@@ -5,6 +5,7 @@ import ContactPageContent from "@/components/content/ContactPageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageJsonLd } from "@/components/seo/PageJsonLd";
 import { RelatedContent } from "@/components/seo/RelatedContent";
+import { PAGE_COPY } from "@/lib/store-positioning";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT, EMAIL_ADMIN } from "@/lib/seo-constants";
 
 // Mark route as dynamic since we're using headers()
@@ -12,8 +13,8 @@ export const dynamic = 'force-dynamic';
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
-  title: "Contact Alberton Battery Mart | Store Location & Hours",
-  description: "Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes.",
+  title: PAGE_COPY.contact.title,
+  description: PAGE_COPY.contact.description,
   keywords: [
     'contact battery service Alberton',
     'battery store Alberton',
@@ -22,8 +23,8 @@ export const metadata: Metadata = {
     'battery testing Alberton'
   ],
   openGraph: {
-    title: "Contact Alberton Battery Mart | Store Location & Hours",
-    description: "Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes.",
+    title: PAGE_COPY.contact.title,
+    description: PAGE_COPY.contact.description,
     url: 'https://www.albertonbatterymart.co.za/contact',
     type: 'website',
     locale: 'en_ZA',
@@ -39,8 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Contact Alberton Battery Mart | Store Location & Hours",
-    description: "Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes.",
+    title: PAGE_COPY.contact.title,
+    description: PAGE_COPY.contact.description,
     images: ['/images/og-image.jpg'],
   },
   alternates: {
@@ -107,8 +108,8 @@ export default function ContactPage() {
   return (
     <>
       <PageJsonLd
-        title="Contact Alberton Battery Mart | Store Location & Hours"
-        description="Visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test. Call 010 109 6211 or WhatsApp for quotes."
+        title={PAGE_COPY.contact.title}
+        description={PAGE_COPY.contact.description}
         path="/contact"
         type="ContactPage"
       />

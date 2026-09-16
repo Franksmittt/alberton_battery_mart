@@ -110,38 +110,38 @@ const BRAND_SERVICE_LINKS: Record<
 > = {
   willard: [
     {
-      label: "Mobile Battery Replacement Alberton",
-      href: "/services/mobile-battery-replacement/alberton",
-      description: "On-site Willard swaps with diagnostics & coding.",
+      label: "Visit the shop",
+      href: "/visit",
+      description: "Drive in to 28 St Columb Rd for Willard testing and fitment.",
     },
     {
-      label: "Truck & Fleet Battery Fitment",
-      href: "/services/truck-battery-fitment/alrode",
-      description: "Pair Willard 658/689 with fleet rotation plans.",
+      label: "Willard warranty",
+      href: "/warranty",
+      description: "How months are registered at fitment.",
     },
   ],
   exide: [
     {
-      label: "Premium Meyersdal Fitment",
-      href: "/services/battery-fitment/meyersdal",
-      description: "Boot-mounted Exide AGM swaps with coding.",
+      label: "Visit the shop",
+      href: "/visit",
+      description: "Walk-in Exide testing and same-day fitment.",
     },
     {
-      label: "Free Battery Testing",
-      href: "/services/free-battery-testing/alberton",
-      description: "Baseline alternator diagnostics for Exide EFB.",
+      label: "AGM batteries",
+      href: "/agm-battery",
+      description: "Start-stop Exide AGM sizes and coding.",
     },
   ],
   enertec: [
     {
-      label: "Deep Cycle & Solar Consult",
-      href: "/deep-cycle",
-      description: "Enertec AGM/Lithium planning for load shedding.",
+      label: "Visit the shop",
+      href: "/visit",
+      description: "Enertec AGM fitted and registered at 28 St Columb Rd.",
     },
     {
-      label: "Quote our inverter specialists",
-      href: "/quote",
-      description: "Design a full Enertec backup solution.",
+      label: "Warranty",
+      href: "/warranty",
+      description: "Up to 36 months on premium Enertec AGM.",
     },
   ],
 };
@@ -170,11 +170,11 @@ const BRAND_VEHICLE_LINKS: Record<
 
 const BRAND_POSITIONING: Record<string, string> = {
   willard:
-    "Willard remains the go-to OE battery for Hilux, Ranger, and heavy-duty African conditions. We stock every DIN/JIS size and deliver across Alberton within 60 minutes.",
+    "Willard passenger, bakkie, and EFB batteries fitted at 28 St Columb Rd. Independent stock — we put Willard on the car when it is the right spec, with warranty months on the invoice.",
   exide:
-    "Exide's AGM and EFB line-up handles Start/Stop vehicles with coding-safe fitment. Ideal for Fortuner, BMW, Mercedes, and premium SUVs needing reserve capacity.",
+    "Exide Gold and AGM sizes for everyday and start-stop cars. Drive in to New Redruth for a Midtronics test and same-day fitment.",
   enertec:
-    "Enertec deep-cycle and lithium batteries power inverter, solar, and expedition builds. Pair them with our inverter design desk for stable backup power.",
+    "Enertec AGM automotive and motorcycle batteries, including premium lines with up to 36 months. Fitted and registered at the New Redruth counter.",
   "power-plus":
     "Power Plus batteries in stock at our New Redruth storefront. Drive in for free testing, same-day fitment, and honest advice — no upselling.",
   "eco-plus":

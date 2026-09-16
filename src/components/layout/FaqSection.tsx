@@ -4,24 +4,20 @@ import FaqSchema from "@/components/seo/FaqSchema";
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [
   {
-    question: "Is the mobile callout service free?",
-    answer: "Our mobile callout includes a service fee for travel time and on-site assistance. **However, the battery testing and fitment service itself are 100% free.** You only pay for the battery and the callout fee, ensuring you get transparent, fixed pricing.",
+    question: "Can I get a new battery without an appointment?",
+    answer: "Yes, walk in at **28 St Columb Rd** during trading hours. Phones from 07:30 weekdays; shop floor opens 08:00. Saturday 08:00–12:00. Call first only if you need a mobile dispatch.",
   },
   {
     question: "How long is your warranty period?",
     answer: "We offer warranties up to 36 months on premium batteries (Willard EFB, Enertec AGM) and a minimum of 12 months on all standard automotive batteries. The specific warranty period is clearly stated on your invoice.",
   },
   {
-    question: "Can I get a new battery without an appointment?",
-    answer: "Yes, you can visit our storefront directly at 28 St Columb Rd during trading hours for immediate counter sales. For mobile service, please call us first to schedule the fastest dispatch time.",
-  },
-  {
-    question: "Do you only do automotive batteries?",
-    answer: "No. We are specialists in both automotive (cars, trucks, 4x4) and deep cycle batteries, including Lithium (LiFePO₄) and AGM models for solar, inverters, and backup power solutions.",
-  },
-  {
     question: "What is an EFB or AGM battery?",
     answer: "EFB (Enhanced Flooded Battery) and AGM (Absorbed Glass Mat) are advanced batteries required for modern vehicles with Start/Stop systems. Using a standard battery in these cars will void the warranty and lead to premature failure.",
+  },
+  {
+    question: "Is the mobile callout service free?",
+    answer: "Our mobile callout includes a service fee for travel time and on-site assistance. **However, the battery testing and fitment service itself are 100% free.** You only pay for the battery and the callout fee. Drive-in is still faster if the car can reach New Redruth.",
   },
   {
     question: "How do I know if my alternator is faulty?",
@@ -29,11 +25,15 @@ const faqItems = [
   },
   {
     question: "Which brands do you stock?",
-    answer: "We are a multi-brand stockist, guaranteeing the best fit for your budget and vehicle. We officially stock Willard, Enertec, Exide, and high-quality generic batteries for all vehicle makes.",
+    answer: "We officially stock Willard, Enertec, Exide, Power Plus, and Eco Plus. Independent stock means we can match the car instead of pushing a single house brand.",
+  },
+  {
+    question: "Do you only do automotive batteries?",
+    answer: "No. We are specialists in both automotive (cars, trucks, 4x4) and deep cycle batteries, including Lithium (LiFePO₄) and AGM models for solar, inverters, and backup power solutions.",
   },
   {
     question: "Where is your physical store located?",
-    answer: "Our physical store is located at **28 St Columb Rd, New Redruth, Alberton, 1450.** We encourage in-store visits for over-the-counter sales and expert service.",
+    answer: "Our physical store is located at **28 St Columb Rd, New Redruth, Alberton, 1450.** One turn off Voortrekker Road. Park at the shopfront.",
   },
 ];
 
@@ -56,7 +56,7 @@ const FaqSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-[var(--brand-muted)] text-[1.05rem] md:text-[1.15rem] leading-relaxed mt-4 max-w-3xl mx-auto">
-            Everything you need to know about our mobile fitment process, warranties, and technical capabilities.
+            Everything you need to know about walking in at 28 St Columb Rd, warranties, and AGM fitment.
           </p>
         </div>
 

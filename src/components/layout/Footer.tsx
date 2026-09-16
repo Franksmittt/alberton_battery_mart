@@ -13,11 +13,11 @@ import {
 const SIZE_HUBS = getAllClusterConfigs();
 
 const SHOP_LINKS = [
+  { href: "/visit", label: "Visit the shop" },
   { href: "/products/type/automotive", label: "Car batteries" },
   { href: "/agm-battery", label: "AGM batteries" },
-  { href: "/efb-battery", label: "EFB batteries" },
-  { href: "/start-stop-battery", label: "Start-stop" },
-  { href: "/products/type/truck-commercial", label: "Commercial" },
+  { href: "/warranty", label: "Warranty" },
+  { href: "/car-battery-guide", label: "Battery guide" },
   { href: "/products", label: "All products" },
 ] as const;
 
@@ -46,7 +46,7 @@ const Footer = () => {
             <div>
               <p className="text-lg font-black tracking-tight">Alberton Battery Mart</p>
               <p className="mt-1 text-sm text-[var(--brand-muted-2)]">
-                Mobile fitment available · Free testing · Warranty backed
+                Drive-in testing · Same-day fitment · Warranty backed
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -77,7 +77,7 @@ const Footer = () => {
               {STORE_ADDRESS_SHORT}
             </a>
             <p className="text-xs text-[var(--brand-muted-3)]">
-              Mon–Fri 08:00–17:00 · Sat 08:00–12:00
+              Mon–Fri 08:00–17:00 · Sat 08:00–12:00 · Phones from 07:30 weekdays
             </p>
           </div>
 
@@ -134,11 +134,14 @@ const Footer = () => {
               ))}
             </div>
             <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--brand-muted-2)]">
-              <Link href="/services" className={footerLinkClass}>
-                Services
+              <Link href="/testing" className={footerLinkClass}>
+                Free testing
               </Link>
-              <Link href="/fitment" className={footerLinkClass}>
-                Fitment lookup
+              <Link href="/recycle-battery" className={footerLinkClass}>
+                Recycle scrap
+              </Link>
+              <Link href="/why-car-batteries-fail" className={footerLinkClass}>
+                Why batteries fail
               </Link>
               <Link
                 href="/reviews"

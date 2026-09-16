@@ -6,32 +6,32 @@ export const REVIEW_WHATSAPP_COPY = `Hi, thank you for trusting Alberton Battery
 
 export const REVIEW_REQUEST_STEPS = [
   {
-    title: "Ask at handover",
+    title: "Ask at the counter",
     description:
-      "After payment and warranty registration, ask while the successful fitment is still fresh.",
+      "After a walk-in test or fitment, ask while they still have the invoice in hand. In-store reviews mention the shop and the suburb they drove from.",
   },
   {
-    title: "Send the link immediately",
+    title: "Send the link before they leave",
     description:
-      "Use WhatsApp or SMS before the customer drives away. Reviews drop sharply if you wait.",
+      "WhatsApp or SMS the Google review link at handover. Waiting until later kills conversion.",
   },
   {
     title: "Prompt useful details",
     description:
-      "Ask customers to mention suburb, vehicle, service type, and whether diagnostics were included.",
+      "Ask them to mention suburb, vehicle, size, and that they visited 28 St Columb Rd (or that it was a callout).",
   },
   {
     title: "Reply within 24 hours",
     description:
-      "Every review should get a human response that naturally references the service and area.",
+      "Every review gets a human reply that names the service and the area — no canned one-liners.",
   },
 ];
 
 export const REVIEW_PROMPTS = [
-  "Mobile battery replacement in Alberton",
-  "Free battery testing in New Redruth",
-  "AGM battery coding in Meyersdal",
-  "Truck battery fitment in Alrode",
+  "Drive-in battery testing at 28 St Columb Rd",
+  "Same-day fitment in New Redruth",
   "Willard or Exide battery fitted",
-  "Toyota Hilux, Ford Ranger, BMW, Mercedes, or VW battery support",
+  "AGM coding for BMW or Mercedes",
+  "Free Midtronics test before buying",
+  "Toyota Hilux, Ford Ranger, or VW battery support",
 ];

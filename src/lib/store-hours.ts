@@ -1,12 +1,14 @@
 import {
   STORE_HOURS_SATURDAY,
   STORE_HOURS_WEEKDAY,
+  STORE_PHONE_FROM,
   STORE_TIMEZONE,
 } from "@/lib/seo-constants";
 
 export type StoreOpenStatus = {
   isOpen: boolean;
   label: "Open now" | "Closed";
+  detail: string;
 };
 
 function parseTime(time: string): { hour: number; minute: number } {
@@ -30,12 +32,22 @@ function getJohannesburgParts(date: Date) {
   };
 }
 
+function formatClock(time: string): string {
+  return time;
+}
+
 export function getStoreOpenStatus(date = new Date()): StoreOpenStatus {
   const { weekday, hour, minute } = getJohannesburgParts(date);
   const nowMinutes = hour * 60 + minute;
+  const phone = parseTime(STORE_PHONE_FROM);
+  const phoneMinutes = phone.hour * 60 + phone.minute;
 
   if (weekday === "Sun") {
-    return { isOpen: false, label: "Closed" };
+    return {
+      isOpen: false,
+      label: "Closed",
+      detail: "Opens Monday 08:00 · phones from 07:30",
+    };
   }
 
   const schedule =
@@ -46,8 +58,40 @@ export function getStoreOpenStatus(date = new Date()): StoreOpenStatus {
   const closeMinutes = close.hour * 60 + close.minute;
 
   if (nowMinutes >= openMinutes && nowMinutes < closeMinutes) {
-    return { isOpen: true, label: "Open now" };
+    return {
+      isOpen: true,
+      label: "Open now",
+      detail: `Shop floor until ${formatClock(schedule.closes)}`,
+    };
   }
 
-  return { isOpen: false, label: "Closed" };
+  if (weekday !== "Sat" && nowMinutes >= phoneMinutes && nowMinutes < openMinutes) {
+    return {
+      isOpen: false,
+      label: "Closed",
+      detail: "Phones on · shop floor opens 08:00",
+    };
+  }
+
+  if (nowMinutes < openMinutes) {
+    return {
+      isOpen: false,
+      label: "Closed",
+      detail: `Opens ${formatClock(schedule.opens)} · phones from ${STORE_PHONE_FROM}`,
+    };
+  }
+
+  if (weekday === "Sat") {
+    return {
+      isOpen: false,
+      label: "Closed",
+      detail: "Opens Monday 08:00 · phones from 07:30",
+    };
+  }
+
+  return {
+    isOpen: false,
+    label: "Closed",
+    detail: "Opens tomorrow 08:00 · phones from 07:30",
+  };
 }

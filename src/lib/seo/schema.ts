@@ -98,6 +98,32 @@ export function createItemListSchema(input: ItemListInput) {
   };
 }
 
+type HowToStepInput = {
+  name: string;
+  text: string;
+};
+
+export function createHowToSchema(input: {
+  name: string;
+  description: string;
+  url: string;
+  steps: HowToStepInput[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: input.name,
+    description: input.description,
+    url: toAbsoluteUrl(input.url),
+    step: input.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+    })),
+  };
+}
+
 export function createProductSchema(input: ProductSchemaInput) {
   return {
     "@context": "https://schema.org",

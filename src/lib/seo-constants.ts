@@ -22,6 +22,7 @@ export const STORE_ADDRESS_LINE =
   "28 St Columb Rd, New Redruth, Alberton, 1450";
 export const STORE_ADDRESS_SHORT = "28 St Columb Rd, New Redruth, Alberton";
 export const STORE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE_ADDRESS_LINE)}`;
+export const STORE_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STORE_ADDRESS_LINE)}`;
 export const GOOGLE_BUSINESS_PROFILE_URL =
   "https://www.google.com/maps/place/Alberton+Battery+Mart/";
 export const WIKIPEDIA_ALBERTON_URL =
@@ -48,6 +49,17 @@ export const STORE_HOURS_DISPLAY =
   "Mon–Fri: 08:00–17:00 | Sat: 08:00–12:00 | Sun: Closed";
 export const STORE_HOURS_DISPLAY_LONG =
   "Mon - Fri: 8:00am - 5:00pm | Sat: 8:00am - 12:00pm | Sun: Closed";
+export const STORE_PHONE_FROM = "07:30";
+export const STORE_PHONE_HOURS_DISPLAY =
+  "Phones answered from 07:30 weekdays. Shop floor opens 08:00.";
+export const WARRANTY_PREMIUM_MONTHS = 36;
+export const WARRANTY_STANDARD_MONTHS = 12;
+export const NAMED_BRANDS = ["Willard", "Exide", "Enertec"] as const;
+export const SITE_TAGLINE = "Drive in. Tested. Fitted today.";
+export const HOME_PAGE_TITLE =
+  "Alberton Battery Mart | Car Batteries, Testing & Fitment";
+export const HOME_PAGE_DESCRIPTION =
+  "Drive in to 28 St Columb Rd, New Redruth. Free Midtronics test, same-day fitment, Willard, Exide & Enertec in stock. Call 010 109 6211.";
 
 export const AD_PRICE_ANCHORS_LINE =
   "Power Plus from R1,150 | Eco Plus from R1,050";

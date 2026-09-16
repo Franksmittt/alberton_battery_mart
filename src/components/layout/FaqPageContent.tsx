@@ -13,36 +13,36 @@ const EMAIL_ADDRESS = "info@albertonbatterymart.co.za";
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [
   {
-    question: "Is the mobile callout service free?",
-    answer: "Our mobile callout includes a service fee for travel time and on-site assistance. However, the **battery testing and fitment service itself are 100% free.** You only pay for the battery and the callout fee, ensuring you receive transparent, fixed pricing.",
+    question: "Can I walk in without an appointment?",
+    answer: "Yes. Drive in to **28 St Columb Rd, New Redruth** during trading hours. Phones are answered from 07:30 on weekdays; the shop floor opens at 08:00. Saturday 08:00–12:00.",
   },
   {
     question: "How long is the warranty period on your batteries?",
-    answer: "We offer warranties ranging from 24 to 36 months on premium batteries. The specific warranty period is clearly displayed on every product and validated with our professional fitment service.",
+    answer: "Up to **36 months** on premium Willard EFB and Enertec AGM. Standard automotive batteries start at 12 months. The period is on the invoice and registered at fitment.",
   },
   {
     question: "Do you stock batteries for Start/Stop (EFB & AGM) vehicles?",
-    answer: "Yes. We stock and specialize in **EFB (Enhanced Flooded Battery) and AGM (Absorbed Glass Mat) technology** required by modern vehicles, eliminating the risk of using an incorrect, warranty-voiding battery.",
+    answer: "Yes. We stock **EFB and AGM** for start-stop cars and code BMW, Mercedes, and Audi systems when the vehicle requires it.",
   },
   {
-    question: "Do I need an appointment for a battery replacement?",
-    answer: "While you can visit our storefront directly during trading hours, we recommend calling first, especially for mobile service, to schedule the fastest dispatch time and ensure immediate availability of your specific battery code.",
+    question: "Is the mobile callout service free?",
+    answer: "Callout includes a travel fee. **Testing and fitment are free.** You pay for the battery plus the callout. The shop floor is still the fastest option if the car can get to New Redruth.",
   },
   {
     question: "How do I know if my alternator is faulty?",
-    answer: "If your battery keeps failing after a recent replacement, your alternator is likely the issue. We offer a **free on-site alternator diagnostic test** with every fitment to identify and solve this problem permanently.",
+    answer: "If a battery keeps dying after replacement, the charging system is the suspect. We run a **free Midtronics alternator test** with every job.",
   },
   {
     question: "Which brands do you stock, and why?",
-    answer: "We are a multi-brand stockist, offering the best options from **Willard, Enertec, and Exide**. This flexibility allows us to guarantee the best fit for your vehicle's specifications and your budget, unlike single-brand centers.",
+    answer: "Willard, Exide, and Enertec — named manufacturers — plus Power Plus and Eco Plus. We are independent, so the recommendation can match the car instead of a single house brand.",
   },
   {
-    question: "Do you sell batteries for solar and backup power?",
-    answer: "Yes. We stock a full range of deep cycle batteries, including high-end Lithium (LiFePO₄) and AGM models, designed specifically for home inverters, solar setups, and load shedding mitigation.",
+    question: "Do you take the old battery?",
+    answer: "Yes. Scrap exchange is part of a fitted replacement. We recycle the old unit. See the recycle page if you only need drop-off.",
   },
   {
     question: "Where is your physical store located?",
-    answer: `Our physical store is located at **28 St Columb Rd, New Redruth, Alberton, 1450.** We encourage in-store visits for expert consultation and over-the-counter sales.`,
+    answer: `**28 St Columb Rd, New Redruth, Alberton, 1450.** One turn off Voortrekker Road. Park at the shopfront.`,
   },
 ];
 
