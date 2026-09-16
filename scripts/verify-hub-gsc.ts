@@ -11,6 +11,7 @@ import {
   HUB_PAGES,
   hubAbsoluteUrl,
 } from "../src/lib/hub-pages";
+import { isAiOrSearchCrawler } from "../src/lib/ai-crawlers";
 import { getStaticSitemapEntries } from "../src/lib/seo/sitemap-data";
 import { pageTitleForSchema } from "../src/lib/seo/page-title";
 
@@ -142,9 +143,31 @@ async function fetchHtml(path: string): Promise<string> {
 }
 
 async function main() {
+  if (
+    !isAiOrSearchCrawler(
+      "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot"
+    )
+  ) {
+    fail("/middleware", "chatgpt-user", "ChatGPT-User must be classified as a crawler");
+  }
+  if (
+    !isAiOrSearchCrawler(
+      "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; Claude-User/1.0;"
+    )
+  ) {
+    fail("/middleware", "claude-user", "Claude-User must be classified as a crawler");
+  }
+  if (
+    isAiOrSearchCrawler(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+    )
+  ) {
+    fail("/middleware", "human-ua", "Normal Chrome UA should not be classified as a crawler");
+  }
+
   console.log(`\n🔍 Hub GSC static gate — ${BASE}\n`);
 
-  // llms.txt check
+  // llms.txt / llms-full.txt / markdown briefs
   try {
     const llmsPath = join(process.cwd(), "public/llms.txt");
     const llms = readFileSync(llmsPath, "utf8");
@@ -156,8 +179,52 @@ async function main() {
     if (/\[https?:\/\/[^\]]+\]:/.test(llms)) {
       fail("/llms.txt", "llms-bad-format", "Found [url]: text format — use [Title](url): desc");
     }
+    if (!llms.includes("28 St Columb Rd")) {
+      fail("/llms.txt", "llms-nap", "Missing street address in llms.txt body");
+    }
+    if (!llms.includes("010 109 6211")) {
+      fail("/llms.txt", "llms-phone", "Missing phone in llms.txt body");
+    }
   } catch {
     fail("/llms.txt", "llms-exists", "public/llms.txt missing — run pnpm compile:llms");
+  }
+
+  const llmFiles = [
+    "llms-full.txt",
+    "index.md",
+    "about.md",
+    "contact.md",
+    "faq.md",
+    "services.md",
+    "testing.md",
+  ];
+  for (const file of llmFiles) {
+    try {
+      const body = readFileSync(join(process.cwd(), "public", file), "utf8");
+      if (!body.includes("Alberton Battery Mart")) {
+        fail(`/${file}`, "llm-brief", "Missing business name");
+      }
+      if (!body.includes("28 St Columb Rd")) {
+        fail(`/${file}`, "llm-nap", "Missing street address");
+      }
+    } catch {
+      fail(`/${file}`, "llm-exists", `public/${file} missing — run pnpm compile:llms`);
+    }
+  }
+
+  try {
+    const crawlerSrc = readFileSync(join(process.cwd(), "src/lib/ai-crawlers.ts"), "utf8");
+    for (const agent of ["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "PerplexityBot", "Google-Extended"]) {
+      if (!crawlerSrc.includes(agent)) {
+        fail("/robots.txt", "ai-crawler", `ai-crawlers.ts does not list ${agent}`);
+      }
+    }
+    const robotsSrc = readFileSync(join(process.cwd(), "src/app/robots.ts"), "utf8");
+    if (!robotsSrc.includes("AI_SEARCH_USER_AGENTS")) {
+      fail("/robots.txt", "robots-src", "src/app/robots.ts does not apply AI_SEARCH_USER_AGENTS");
+    }
+  } catch (e) {
+    fail("/robots.txt", "robots-src", String(e));
   }
 
   // Sitemap coverage
@@ -200,6 +267,18 @@ async function main() {
         (hub.path.includes("-car-battery") && title.includes(hub.path.replace("/", "").replace("-car-battery", "")));
       if (!titleOk) {
         fail(hub.path, "title-parity", `Got "${title}", expected parity with "${hub.title}"`);
+      }
+    }
+
+    if (hub.path === "/") {
+      const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+      const h1Text = h1 ? normalizeFaqText(h1[1]) : "";
+      if (!h1Text.includes("alberton battery mart")) {
+        fail(
+          hub.path,
+          "h1-entity",
+          `Homepage H1 must include the business name, got "${h1Text.slice(0, 80)}"`
+        );
       }
     }
 

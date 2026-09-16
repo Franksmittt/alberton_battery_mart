@@ -1,52 +1,34 @@
 // src/app/robots.ts
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
+import { AI_SEARCH_USER_AGENTS } from "@/lib/ai-crawlers";
 import { BASE_URL } from "@/lib/seo-constants";
- 
+
+const DISALLOW = [
+  "/admin/",
+  "/api/admin/",
+  "/studio/",
+  "/private/",
+  "/*?sort=*",
+  "/*?filter=*",
+  "/*?page=*",
+  "/*?utm_*",
+];
+
+function allowRule(userAgent: string | string[]) {
+  return {
+    userAgent,
+    allow: ["/", "/llms.txt", "/llms-full.txt"],
+    disallow: DISALLOW,
+  };
+}
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/api/admin/',
-          '/studio/',
-          '/private/',
-          '/*?sort=*',
-          '/*?filter=*',
-          '/*?page=*',
-          '/*?utm_*',
-        ],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/api/admin/',
-          '/studio/',
-          '/private/',
-          '/*?sort=*',
-          '/*?filter=*',
-          '/*?page=*',
-          '/*?utm_*',
-        ],
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/api/admin/',
-          '/studio/',
-          '/private/',
-          '/*?sort=*',
-          '/*?filter=*',
-          '/*?page=*',
-          '/*?utm_*',
-        ],
-      },
+      allowRule("*"),
+      allowRule("Googlebot"),
+      allowRule("Bingbot"),
+      ...AI_SEARCH_USER_AGENTS.map((agent) => allowRule(agent)),
     ],
     sitemap: [
       `${BASE_URL}/sitemap.xml`,
@@ -55,5 +37,5 @@ export default function robots(): MetadataRoute.Robots {
       `${BASE_URL}/sitemap-local.xml`,
     ],
     host: BASE_URL,
-  }
+  };
 }
