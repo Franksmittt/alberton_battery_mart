@@ -213,14 +213,18 @@ async function main() {
   }
 
   try {
-    const robotsSrc = readFileSync(join(process.cwd(), "src/app/robots.ts"), "utf8");
+    const crawlerSrc = readFileSync(join(process.cwd(), "src/lib/ai-crawlers.ts"), "utf8");
     for (const agent of ["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "PerplexityBot", "Google-Extended"]) {
-      if (!robotsSrc.includes(agent)) {
-        fail("/robots.txt", "ai-crawler", `robots.ts does not allow ${agent}`);
+      if (!crawlerSrc.includes(agent)) {
+        fail("/robots.txt", "ai-crawler", `ai-crawlers.ts does not list ${agent}`);
       }
     }
-  } catch {
-    fail("/robots.txt", "robots-src", "src/app/robots.ts missing");
+    const robotsSrc = readFileSync(join(process.cwd(), "src/app/robots.ts"), "utf8");
+    if (!robotsSrc.includes("AI_SEARCH_USER_AGENTS")) {
+      fail("/robots.txt", "robots-src", "src/app/robots.ts does not apply AI_SEARCH_USER_AGENTS");
+    }
+  } catch (e) {
+    fail("/robots.txt", "robots-src", String(e));
   }
 
   // Sitemap coverage

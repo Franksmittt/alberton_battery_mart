@@ -198,7 +198,7 @@ ${FAQS.map((item) => `## ${item.q}\n\n${item.a}`).join("\n\n")}
 
 [HTML version](${BASE_URL}/faq)
 `,
-  "services.md": `# Battery services in Alberton
+  "services.md": `# ${NAP.name} services in Alberton
 
 > Drive-in fitment at New Redruth plus mobile replacement across Alberton on request.
 
@@ -216,7 +216,7 @@ Phone ${NAP.phone}. Address ${NAP.address}. Hours ${NAP.hours}.
 
 [HTML version](${BASE_URL}/services)
 `,
-  "testing.md": `# Free battery testing in Alberton
+  "testing.md": `# Free battery testing at ${NAP.name}
 
 > No-obligation 3-point Midtronics diagnostic at ${NAP.address}.
 

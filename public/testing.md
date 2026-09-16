@@ -1,4 +1,4 @@
-# Free battery testing in Alberton
+# Free battery testing at Alberton Battery Mart
 
 > No-obligation 3-point Midtronics diagnostic at 28 St Columb Rd, New Redruth, Alberton, 1450.
 

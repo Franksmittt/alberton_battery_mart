@@ -1,4 +1,4 @@
-# Battery services in Alberton
+# Alberton Battery Mart services in Alberton
 
 > Drive-in fitment at New Redruth plus mobile replacement across Alberton on request.
 

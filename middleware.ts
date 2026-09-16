@@ -51,7 +51,9 @@ function addLlmDiscoveryHeaders(request: NextRequest, response: NextResponse) {
     );
   }
 
-  response.headers.set("Link", links.join(", "));
+  for (const link of links) {
+    response.headers.append("Link", link);
+  }
   return response;
 }
 
