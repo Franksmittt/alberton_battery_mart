@@ -20,7 +20,7 @@ import {
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
-  title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
+  title: 'Mobile Battery Replacement Meyersdal',
   description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you with Willard & Exide batteries. Free fitment & alternator testing.',
   keywords: [
     'battery replacement Meyersdal',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'AGM battery fitment Meyersdal',
   ],
   openGraph: {
-    title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
+    title: 'Mobile Battery Replacement Meyersdal',
     description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you. Free fitment & alternator testing.',
     url: 'https://www.albertonbatterymart.co.za/local/meyersdal',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
+    title: 'Mobile Battery Replacement Meyersdal',
     description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you. Free fitment & alternator testing.',
     images: ['/images/og-image.jpg'],
   },

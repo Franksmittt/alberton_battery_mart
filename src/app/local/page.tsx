@@ -12,7 +12,7 @@ import {
 } from "@/lib/battery-sizes/tech-hubs";
 
 export const metadata = buildPageMetadata({
-  title: "Alberton Suburb Battery Services | Alberton Battery Mart",
+  title: "Alberton Suburb Battery Services",
   description:
     "Car batteries for Alberton North, Meyersdal, Brackenhurst, Brackendowns, Randhart, Alberante, and Albertsdal. Drive in to New Redruth or request mobile fitment.",
   path: "/local",

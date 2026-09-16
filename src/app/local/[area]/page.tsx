@@ -49,7 +49,7 @@ export async function generateMetadata({
   const area = getLocalAreaBySlug(params.area);
   if (!area) return {};
 
-  const title = `Car Batteries in ${area.name} | Visit Alberton Battery Mart`;
+  const title = `Car Batteries in ${area.name}`;
   const description = `Drive in to Alberton Battery Mart for car batteries serving ${area.name}. Free testing, same-day fitment, and honest advice at our New Redruth store.`;
 
   return buildPageMetadata({

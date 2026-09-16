@@ -20,7 +20,7 @@ import {
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
-  title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
+  title: 'Mobile Battery Replacement New Redruth',
   description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you with Willard & Exide batteries. Free fitment & alternator testing.',
   keywords: [
     'battery replacement New Redruth',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'battery shop New Redruth',
   ],
   openGraph: {
-    title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
+    title: 'Mobile Battery Replacement New Redruth',
     description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you. Free fitment & alternator testing.',
     url: 'https://www.albertonbatterymart.co.za/local/new-redruth',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
+    title: 'Mobile Battery Replacement New Redruth',
     description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you. Free fitment & alternator testing.',
     images: ['/images/og-image.jpg'],
   },

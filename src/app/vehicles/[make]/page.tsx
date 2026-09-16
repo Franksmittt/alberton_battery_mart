@@ -39,7 +39,7 @@ export async function generateMetadata({
   const description = `Find the right battery for your ${make} vehicle. Browse our ${make} battery fitment guides and recommended products. Free fitment and testing in Alberton.`;
 
   return {
-    title: `${make} Battery Replacement in Alberton | Alberton Battery Mart`,
+    title: `${make} Battery Replacement in Alberton`,
     description,
     keywords: [
       `${make} battery`,
@@ -66,7 +66,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${make} Battery Replacement in Alberton | Alberton Battery Mart`,
+      title: `${make} Battery Replacement in Alberton`,
       description,
       images: [`${BASE_URL}/images/og-image.jpg`],
     },

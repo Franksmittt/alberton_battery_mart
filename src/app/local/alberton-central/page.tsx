@@ -20,7 +20,7 @@ import {
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
-  title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
+  title: 'Mobile Battery Replacement Alberton Central',
   description: 'Fast, on-site mobile battery replacement for Alberton Central. Stuck at Alberton City? We come to you. Free fitment & alternator testing.',
   keywords: [
     'battery replacement Alberton Central',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'on-site battery fitment Alberton',
   ],
   openGraph: {
-    title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
+    title: 'Mobile Battery Replacement Alberton Central',
     description: 'Fast, on-site mobile battery replacement for Alberton Central. We come to you. Free fitment & alternator testing.',
     url: 'https://www.albertonbatterymart.co.za/local/alberton-central',
     type: 'website',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
+    title: 'Mobile Battery Replacement Alberton Central',
     description: 'Fast, on-site mobile battery replacement for Alberton Central. We come to you. Free fitment & alternator testing.',
     images: ['/images/og-image.jpg'],
   },
