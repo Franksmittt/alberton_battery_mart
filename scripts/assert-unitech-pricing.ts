@@ -5,7 +5,9 @@
  */
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
+import { UNITECH_DATASHEET } from "../src/data/unitech-datasheet";
 import { UNITECH_PRICELIST } from "../src/data/unitech-pricelist";
+import { UNITECH_STAGED_PRODUCTS } from "../src/data/unitech-staged-products";
 import { formatZAR } from "../src/lib/formatting";
 import {
   centsToRands,
@@ -75,7 +77,43 @@ for (const line of UNITECH_PRICELIST) {
   );
 }
 
-const unitechParts = UNITECH_PRICELIST.map((l) => l.partNumber);
+assert(UNITECH_STAGED_PRODUCTS.length === EXPECTED_LINE_COUNT, `${EXPECTED_LINE_COUNT} staged product records`);
+assert(new Set(UNITECH_STAGED_PRODUCTS.map((p) => p.sku)).size === EXPECTED_LINE_COUNT, "Staged SKUs are unique");
+assert(new Set(UNITECH_STAGED_PRODUCTS.map((p) => p.name)).size === EXPECTED_LINE_COUNT, "Staged names are unique");
+
+for (const product of UNITECH_STAGED_PRODUCTS) {
+  const line = UNITECH_PRICELIST.find((l) => l.partNumber === product.pricelistPartNumber)!;
+  const expectedPrice = money(priceUnitechLine(line.price5PlusExVat).sellingPriceCents);
+  const row = UNITECH_DATASHEET.find(
+    (r) => r.partNumber === product.datasheetPartNumber && r.terminalSize === product.terminalSize
+  );
+  const lipClaim = /With lip/.test(product.pricelistPartNumber)
+    ? product.hasHoldDownLip
+    : /Without lip/.test(product.pricelistPartNumber)
+      ? !product.hasHoldDownLip
+      : true;
+  const ok =
+    product.brandName === "Unitech" &&
+    product.sellingPrice_OUTPUT === expectedPrice &&
+    product.imagePath === null &&
+    product.goLiveBlockers.some((b) => /image/i.test(b)) &&
+    !!row &&
+    row.ahCapacity === product.ahCapacity &&
+    row.cca === product.cca &&
+    row.warrantyMonths === product.warrantyMonths &&
+    row.weightKg === product.weightKg &&
+    lipClaim &&
+    product.seoDescription.includes(`${product.ahCapacity}Ah`) &&
+    product.seoDescription.includes(`${product.cca} CCA`) &&
+    product.seoDescription.includes(`${product.warrantyMonths}-month warranty`);
+  assert(ok, `Staged ${product.sku.padEnd(16)} matches datasheet ${product.datasheetPartNumber}, price ${expectedPrice}`);
+}
+
+const unitechParts = [
+  ...UNITECH_PRICELIST.map((l) => l.partNumber),
+  ...UNITECH_DATASHEET.map((r) => r.partNumber),
+  ...UNITECH_STAGED_PRODUCTS.map((p) => p.sku),
+];
 const PUBLIC_SOURCES = ["data", "public", path.join("src", "data", "products.ts"), path.join("src", "app", "sitemap.ts")];
 
 function filesUnder(rel: string): string[] {
@@ -103,17 +141,20 @@ for (const file of publicFiles) {
 }
 assert(leaks.length === 0, `No Unitech parts in public catalogue sources${leaks.length ? `\n  ${leaks.join("\n  ")}` : ""}`);
 
-const allowedImporters = new Set([
-  path.join("src", "components", "admin", "UnitechPricelist.tsx"),
-  path.join("src", "app", "admin", "page.tsx"),
-]);
+const isAllowedImporter = (rel: string) =>
+  rel === path.join("src", "app", "admin", "page.tsx") ||
+  rel.startsWith(path.join("src", "components", "admin") + path.sep) ||
+  /^src[\\/]data[\\/]unitech-[\w-]+\.ts$/.test(rel);
 const importers = filesUnder("src")
   .filter((f) => /\.(ts|tsx)$/.test(f))
   .map((f) => path.relative(ROOT, f))
-  .filter((rel) => rel !== path.join("src", "data", "unitech-pricelist.ts"))
-  .filter((rel) => /unitech-pricelist/.test(readFileSync(path.join(ROOT, rel), "utf-8")));
-const stray = importers.filter((rel) => !allowedImporters.has(rel));
-assert(stray.length === 0, `Only admin code imports the Unitech pricelist${stray.length ? ` (also: ${stray.join(", ")})` : ""}`);
+  .filter((rel) =>
+    /unitech-(pricelist|datasheet|staged-products)|UnitechPricelist|UnitechStagedProducts/.test(
+      readFileSync(path.join(ROOT, rel), "utf-8")
+    )
+  );
+const stray = importers.filter((rel) => !isAllowedImporter(rel));
+assert(stray.length === 0, `Only admin code imports Unitech data${stray.length ? ` (also: ${stray.join(", ")})` : ""}`);
 
 if (failures > 0) {
   console.error(`\n${failures} Unitech pricing assertion(s) failed.`);

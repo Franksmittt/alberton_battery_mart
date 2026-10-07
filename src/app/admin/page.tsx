@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { UnitechPricelist } from '@/components/admin/UnitechPricelist';
+import { UnitechStagedProducts } from '@/components/admin/UnitechStagedProducts';
 import { ProductCardData } from '@/data/products';
 import { UNITECH_PRICELIST } from '@/data/unitech-pricelist';
 import { LogOut, Save, Search } from 'lucide-react';
@@ -230,8 +231,9 @@ export default function AdminPage() {
         </div>
 
         {activeTab === 'unitech' ? (
-          <div role="tabpanel" id="admin-panel-unitech" aria-labelledby="admin-tab-unitech">
+          <div role="tabpanel" id="admin-panel-unitech" aria-labelledby="admin-tab-unitech" className="space-y-6">
             <UnitechPricelist />
+            <UnitechStagedProducts />
           </div>
         ) : (
         <div role="tabpanel" id="admin-panel-catalogue" aria-labelledby="admin-tab-catalogue" className="space-y-6">
