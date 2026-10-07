@@ -5,8 +5,17 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { UnitechPricelist } from '@/components/admin/UnitechPricelist';
 import { ProductCardData } from '@/data/products';
+import { UNITECH_PRICELIST } from '@/data/unitech-pricelist';
 import { LogOut, Save, Search } from 'lucide-react';
+
+type AdminTab = 'catalogue' | 'unitech';
+
+const TABS: { id: AdminTab; label: string }[] = [
+  { id: 'catalogue', label: 'Catalogue' },
+  { id: 'unitech', label: 'Unitech' },
+];
 
 const CATEGORY_ORDER = [
   'Standard Automotive',
@@ -17,6 +26,7 @@ const CATEGORY_ORDER = [
 ] as const;
 
 export default function AdminPage() {
+  const [activeTab, setActiveTab] = useState<AdminTab>('catalogue');
   const [products, setProducts] = useState<ProductCardData[]>([]);
   const [priceDrafts, setPriceDrafts] = useState<Record<number, string>>({});
   const [loading, setLoading] = useState(true);
@@ -176,14 +186,18 @@ export default function AdminPage() {
           <div>
             <h1 className="text-3xl font-bold">Price Manager</h1>
             <p className="text-muted-foreground mt-1">
-              {products.length} products · change a price, then click Save Changes
+              {activeTab === 'catalogue'
+                ? `${products.length} products · change a price, then click Save Changes`
+                : `${UNITECH_PRICELIST.length} Unitech supplier lines · read-only, not on the website`}
             </p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={handleSave} disabled={saving || dirtyUpdates.length === 0}>
-              <Save className="h-4 w-4 mr-2" />
-              {saving ? 'Saving...' : `Save Changes${dirtyUpdates.length ? ` (${dirtyUpdates.length})` : ''}`}
-            </Button>
+            {activeTab === 'catalogue' && (
+              <Button onClick={handleSave} disabled={saving || dirtyUpdates.length === 0}>
+                <Save className="h-4 w-4 mr-2" />
+                {saving ? 'Saving...' : `Save Changes${dirtyUpdates.length ? ` (${dirtyUpdates.length})` : ''}`}
+              </Button>
+            )}
             <Button onClick={handleLogout} variant="outline">
               <LogOut className="h-4 w-4 mr-2" />
               Logout
@@ -191,6 +205,36 @@ export default function AdminPage() {
           </div>
         </div>
 
+        <div role="tablist" aria-label="Back office sections" className="flex gap-1 border-b">
+          {TABS.map((tab) => {
+            const selected = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                id={`admin-tab-${tab.id}`}
+                aria-selected={selected}
+                aria-controls={`admin-panel-${tab.id}`}
+                onClick={() => setActiveTab(tab.id)}
+                className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors ${
+                  selected
+                    ? 'border-primary text-foreground'
+                    : 'border-transparent text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {activeTab === 'unitech' ? (
+          <div role="tabpanel" id="admin-panel-unitech" aria-labelledby="admin-tab-unitech">
+            <UnitechPricelist />
+          </div>
+        ) : (
+        <div role="tabpanel" id="admin-panel-catalogue" aria-labelledby="admin-tab-catalogue" className="space-y-6">
         {statusMessage && (
           <div
             className={`rounded-md p-3 text-sm ${
@@ -287,6 +331,8 @@ export default function AdminPage() {
               No products match your search.
             </CardContent>
           </Card>
+        )}
+        </div>
         )}
       </div>
     </div>
